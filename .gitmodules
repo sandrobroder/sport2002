@@ -13,15 +13,6 @@
 	url = git@github.com:OCA/community-data-files.git
 	branch = 14.0
 
-[submodule "OCA/commission"]
-	path = OCA/commission
-	url = git@github.com:OCA/commission.git
-	branch = 14.0
-
-[submodule "OCA/commission13"]
-	path = OCA/commission13
-	url = git@github.com:OCA/commission.git
-	branch = 13.0
 
 [submodule "OCA/bank-payment"]
 	path = OCA/bank-payment
