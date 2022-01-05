@@ -63,3 +63,8 @@
 	path = OCA/sale-workflow
 	url = git@github.com:OCA/sale-workflow.git
 	branch = 14.0
+
+[submodule "OCA/pos"]
+	path = OCA/pos
+	url = git@github.com:OCA/pos.git
+	branch = 14.0
