@@ -74,3 +74,8 @@
 	path = OCA/e-commerce
 	url = https://github.com/OCA/e-commerce.git
 	branch = 14.0
+
+[submodule "OCA/stock-logistics-warehouse"]
+	path = OCA/stock-logistics-warehouse
+	url = git@github.com:OCA/stock-logistics-warehouse.git
+	branch = 14.0
