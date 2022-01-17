@@ -82,5 +82,5 @@
 
 [submodule "OCA/stock-logistics-reporting"]
 	path = OCA/stock-logistics-reporting
-	url = https://github.com:OCA/stock-logistics-reporting.git
+	url = git@github.com:OCA/stock-logistics-reporting.git
 	branch = 14.0
