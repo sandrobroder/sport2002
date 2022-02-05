@@ -12,6 +12,8 @@
                 ],
     "data": [
         "views/shop.xml",
+        "templates/assets.xml",
+        "templates/product.xml",
     ],
     "demo": [
     ],
