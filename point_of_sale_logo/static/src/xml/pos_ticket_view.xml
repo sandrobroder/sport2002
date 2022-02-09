@@ -12,8 +12,9 @@
 
 
                 </xpath>
-                <xpath expr="//div[class='pos-receipt-contact']" position="replace"/>
-
+ <xpath expr="//div[@class='pos-receipt-contact']" position="replace"/>
         </t>
+
+
 
 </templates>
