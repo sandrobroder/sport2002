@@ -4,7 +4,7 @@
 
         <record id="view_res_country_state_tree_pc" model="ir.ui.view">
 			<field name="name">odoo.res.country.state</field>
-			<field name="model">res.county.state</field>
+			<field name="model">res.country.state</field>
 			<field name="inherit_id" ref="base.view_country_state_tree"/>
              <field name="arch" type="xml">
                          <xpath expr="//field[@name='country_id']" position="after">
