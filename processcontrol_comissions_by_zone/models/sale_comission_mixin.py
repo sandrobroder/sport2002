@@ -7,7 +7,7 @@ class SaleCommissionMixin(models.AbstractModel):
     _inherit = "sale.commission.mixin"
 
     def _prepare_agents_vals_partner(self, partner):
-        if self.partner.state_id:
-            if self.partner.state_id.agent_ids:
-                return [(0, 0, self._prepare_agent_vals(agent)) for agent in self.partner.state_id.agent_ids]
+        if partner.state_id:
+            if partner.state_id.agent_ids:
+                return [(0, 0, self._prepare_agent_vals(agent)) for agent in partner.state_id.agent_ids]
         return [(0, 0, self._prepare_agent_vals(agent)) for agent in partner.agent_ids]
