@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_website_scroll_to_top" inherit_id="web.assets_frontend" name="Scroll to Top Assets">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" href="/gh_scroll_to_top/static/src/scss/website_to_top.scss"/>
+        </xpath>
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/gh_scroll_to_top/static/src/js/website_to_top.js"></script>
+        </xpath>
+    </template>
+</odoo>

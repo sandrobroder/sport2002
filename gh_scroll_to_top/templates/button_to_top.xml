@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <!-- btn to top -->
+        <template id="btn_to_top_view" inherit_id="website.layout">
+            <xpath expr="//div[@id='wrapwrap']" position="inside">
+                <button class="bg-primary" id="btntotop" title="Go to top"></button>
+            </xpath>
+        </template>
+    </data>
+</odoo>
