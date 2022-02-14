@@ -1,0 +1,1 @@
+Website Lazy Loading Module For Odoo 12.0
