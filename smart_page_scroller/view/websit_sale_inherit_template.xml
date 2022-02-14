@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="button_inherit" inherit_id="website_sale.products" active="True" customize_show="True" name="Show Sort by">
+            <xpath expr="//div[hasclass('products_pager')]/t[@t-call]" position="after">
+                <img id="back2top" src="/smart_page_scroller/static/src/img/up1.png" style="right:0%;width:7%;position:fixed;display:none;"/>
+            </xpath>     
+    </template>
+</odoo>

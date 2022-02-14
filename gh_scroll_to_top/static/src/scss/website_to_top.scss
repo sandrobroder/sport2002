@@ -1,0 +1,35 @@
+#wrapwrap {
+
+	#btntotop {
+		display: none;
+		position: fixed;
+		bottom: 30px;
+		right: 30px;
+		z-index: 99;
+		font-size: 25px;
+		border: none;
+		outline: none;
+		color: white;
+		cursor: pointer;
+		padding: 20px;
+		border-radius: 100%;
+	}
+
+	#btntotop:before {
+		font-family: 'FontAwesome';
+		content: "\f0d8";
+		color: #ffffff;
+		font-size: 24px;
+		position: absolute;
+		top: 45%;
+		left: 50%;
+		width: 20px;
+		height: 20px;
+		text-align: center;
+		line-height: 20px;
+		margin-top: -10px;
+		margin-left: -10px;
+		text-indent: 0;
+	}
+
+}
