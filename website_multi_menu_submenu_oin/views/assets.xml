@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_frontend_oin" inherit_id="web.assets_frontend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                href="/website_multi_menu_submenu_oin/static/src/css/menu.css" />
+            <script type="text/javascript"
+                src="/website_multi_menu_submenu_oin/static/src/js/menu.js" />
+        </xpath>
+    </template>
+
+</odoo>
