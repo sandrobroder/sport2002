@@ -8,8 +8,6 @@ class SaleCommissionMixin(models.AbstractModel):
 
     def _prepare_agents_vals_partner(self, partner):
         if partner.state_id:
-            if partner.state_id.agent_ids:
-                return [(0, 0, self._prepare_agent_vals(agent)) for agent in partner.state_id.agent_ids]
         return [(0, 0, self._prepare_agent_vals(agent)) for agent in partner.agent_ids]
 
 
