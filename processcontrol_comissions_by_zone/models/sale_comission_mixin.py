@@ -13,17 +13,26 @@ class SaleCommissionMixin(models.AbstractModel):
         return [(0, 0, self._prepare_agent_vals(agent)) for agent in partner.agent_ids]
 
 
-# class SaleOrderLine(models.Model):
-#     _inherit = "sale.order.line"
-#
-#     @api.depends("order_id.partner_id","product_id")
-#     def _compute_agent_ids(self):
-#         self.agent_ids = False  # for resetting previous agents
-#         for record in self.filtered(lambda x: x.order_id.partner_id):
-#             if not record.commission_free:
-#                 if record.product_id.categ_id.agent_ids:
-#
-#                 else:
-#                     record.agent_ids = record._prepare_agents_vals_partner(
-#                         record.order_id.partner_id
-#                     )
+class SaleOrderLine(models.Model):
+    _inherit = "sale.order.line"
+
+    @api.depends("order_id.partner_id","product_template_id")
+    def _compute_agent_ids(self):
+        agent_ids = []
+        self.agent_ids = False  # for resetting previous agents
+        for record in self.filtered(lambda x: x.order_id.partner_id):
+            partner = order_id.partner_id
+            if not record.commission_free:
+                #chequeo si el producto seleccionado, tiene en la categoria configurado el agente y si tiene configurado agente en la provicia del cliente
+                if record.product_template_id.categ_id.agent_ids and partner.state_id and partner.state_id.agent_ids:
+                    for agent in record.product_template_id.categ_id.agent_ids:
+                        if agent.id in partner.state_id.agent_ids.ids and agent.id not in agent_ids:
+                            agent_ids.append(agent.id)
+                    if agent_ids:
+                        record.agent_ids = [(0, 0,agent_ids)]
+                    else:
+                        record.agent_ids= [(0, 0, self._prepare_agent_vals(agent)) for agent in partner.agent_ids]
+                else:
+                    record.agent_ids = record._prepare_agents_vals_partner(
+                        record.order_id.partner_id
+                    )
