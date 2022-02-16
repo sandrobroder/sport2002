@@ -3,14 +3,6 @@
 
 from odoo import api, fields, models
 
-class SaleCommissionMixin(models.AbstractModel):
-    _inherit = "sale.commission.mixin"
-
-    def _prepare_agents_vals_partner(self, partner):
-        if partner.state_id:
-        return [(0, 0, self._prepare_agent_vals(agent)) for agent in partner.agent_ids]
-
-
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
