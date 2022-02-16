@@ -30,8 +30,6 @@ class SaleOrderLine(models.Model):
                             agent_ids.append(agent)
                     if agent_ids:
                         record.agent_ids = [(0, 0, self._prepare_agent_vals(agent)) for agent in agent_ids]
-                    else:
-                        record.agent_ids= [(0, 0, self._prepare_agent_vals(agent)) for agent in partner.agent_ids]
                 else:
                     record.agent_ids = record._prepare_agents_vals_partner(
                         record.order_id.partner_id
