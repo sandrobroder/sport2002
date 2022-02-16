@@ -24,3 +24,4 @@ class SaleOrderLine(models.Model):
                     record.agent_ids = record._prepare_agents_vals_partner(
                         record.order_id.partner_id
                     )
+        
