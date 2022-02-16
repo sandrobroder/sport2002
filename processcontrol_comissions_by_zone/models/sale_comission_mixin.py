@@ -19,9 +19,8 @@ class SaleOrderLine(models.Model):
                         if agent.id in partner.state_id.agent_ids.ids and agent not in agent_ids:
                             agent_ids.append(agent)
                     if agent_ids:
-                        record.agent_ids = [(0, 0, self._prepare_agent_vals(agent)) for agent in agent_ids]
+                        record.agent_ids = [(0, 0, record._prepare_agent_vals(agent)) for agent in agent_ids]
                 else:
                     record.agent_ids = record._prepare_agents_vals_partner(
                         record.order_id.partner_id
                     )
-        
