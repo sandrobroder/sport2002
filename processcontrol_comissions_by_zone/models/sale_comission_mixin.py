@@ -21,7 +21,7 @@ class SaleOrderLine(models.Model):
         agent_ids = []
         self.agent_ids = False  # for resetting previous agents
         for record in self.filtered(lambda x: x.order_id.partner_id):
-            partner = order_id.partner_id
+            partner = record.order_id.partner_id
             if not record.commission_free:
                 #chequeo si el producto seleccionado, tiene en la categoria configurado el agente y si tiene configurado agente en la provicia del cliente
                 if record.product_template_id.categ_id.agent_ids and partner.state_id and partner.state_id.agent_ids:
