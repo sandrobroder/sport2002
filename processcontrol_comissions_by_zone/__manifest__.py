@@ -14,6 +14,5 @@
         'views/sale_order_view.xml',
         'views/account_move_view.xml',
         'views/stock_picking_view.xml',
-        'data/email_template_view.xml'
     ]
 }
