@@ -22,7 +22,7 @@ class PrintProductLabelLine(models.TransientModel):
     @api.depends('product_id')
     def _compute_price(self):
         for record in self:
-            record.price=Float()
+            record.price= 
             product_pricelist_item_obj=self.env['product.pricelist.item']
             if record.product_id:
                 user_id = self.env['res.users'].browse(record._uid.id)
