@@ -17,6 +17,24 @@ class PrintProductLabelLine(models.TransientModel):
     barcode = fields.Char('Barcode', related='product_id.barcode')
     qty_initial = fields.Integer('Initial Qty', default=1)
     qty = fields.Integer('Label Qty', default=1)
+    price = fields.Float('Precio',compute='_compute_price',store=True)
+
+    @api.depends('product_id')
+    def _compute_price(self):
+        for record in self:
+            record.price=Float()
+            product_pricelist_item_obj=self.env['product.pricelist.item']
+            if record.product_id:
+                user_id = self.env['res.users'].browse(record._uid.id)
+                if user_id.login == 'info@skaterootsbcn.com':
+                    pricelist_id = product_pricelist_item_obj.search([('product_id','=',record.product_id.id),('pricelist_id','=',21870)],limit=1)
+                    if pricelist_id:
+                        rec.price = pricelist_id.fixed_price
+                else:
+                    rec.price = rec.product_id.list_price
+
+
+
 
     @api.depends('qty')
     def _compute_selected(self):
