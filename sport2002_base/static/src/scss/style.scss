@@ -1,0 +1,14 @@
+
+.te_p_barcode {
+    .te_barcode {
+        display: inline-block;
+    }
+    .js_barcode_div {
+        display: inline-block;
+        font-size: $font-size-base - 0.125rem; /* Reduced 2px */
+        color: rgba(33, 37, 41, 0.7) !important;
+    }
+}
+.te_p_sku {
+    display: block !important;
+}

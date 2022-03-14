@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="import_from_file_wizard_view_knk" model="ir.ui.view">
+        <field name="name">import.from.file.wizard.view.knk</field>
+        <field name="model">import.from.file.sale</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="file" />
+                        <field name="filename" invisible="1"/>
+                        <field name="download_sample_file" filename="filename"/>
+                    </group>
+                    <footer>
+                        <button name="import_file" string="Import File" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

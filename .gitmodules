@@ -95,6 +95,11 @@
 	url = git@github.com:OCA/delivery-carrier.git
 	branch = 14.0
 
+[submodule "OCA/bank-statement-import"]
+	path = OCA/bank-statement-import
+	url = git@github.com:OCA/bank-statement-import.git
+	branch = 14.0
+
 [submodule "OCA/product-variant"]
 	path = OCA/product-variant
 	url = git@github.com:OCA/product-variant.git
