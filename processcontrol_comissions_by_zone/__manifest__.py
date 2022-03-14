@@ -13,6 +13,6 @@
         'views/product_category_view.xml',
         'views/sale_order_view.xml',
         'views/account_move_view.xml',
-        'views/stock_picking_view.xml'
+        'views/stock_picking_view.xml',
     ]
 }
