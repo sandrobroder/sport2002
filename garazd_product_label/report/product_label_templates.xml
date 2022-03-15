@@ -17,7 +17,7 @@
                         <span t-field="label.product_id.default_code"/>
                     </div>
                         <div t-if="label.price" style="width: 100%; padding: 0; margin: 0; font-size: 12px;">
-                        <p>Precio: </p><span t-field="label.price"/>
+                        <strong>Precio: </strong><span t-field="label.price"/>
                     </div>
                     <div t-if="label.product_id.barcode" class="text-center align-middle" style="width: 100%; height: 13px; padding: 0 3px;">
                         <t t-if="label.wizard_id.humanreadable" t-set="show_code" t-value="1"/>
