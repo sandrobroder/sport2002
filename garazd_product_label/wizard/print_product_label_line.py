@@ -25,7 +25,7 @@ class PrintProductLabelLine(models.TransientModel):
             record.price= float()
             product_pricelist_item_obj=self.env['product.pricelist.item']
             if record.product_id:
-                user_id = self.env['res.users'].browse(record._uid.id)
+                user_id = self.env['res.users'].browse(record._uid)
                 if user_id.login == 'info@skaterootsbcn.com':
                     pricelist_id = product_pricelist_item_obj.search([('product_id','=',record.product_id.id),('pricelist_id','=',21870)],limit=1)
                     if pricelist_id:
