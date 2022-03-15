@@ -29,9 +29,9 @@ class PrintProductLabelLine(models.TransientModel):
                 if user_id.login == 'info@skaterootsbcn.com':
                     pricelist_id = product_pricelist_item_obj.search([('product_id','=',record.product_id.id),('pricelist_id','=',21870)],limit=1)
                     if pricelist_id:
-                        rec.price = pricelist_id.fixed_price
+                        record.price = pricelist_id.fixed_price
                 else:
-                    rec.price = rec.product_id.list_price
+                    record.price = record.product_id.list_price
 
 
 
