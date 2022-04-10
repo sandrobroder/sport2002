@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import logging
 
 from odoo import api, fields, models, _
+_logger = logging.getLogger(__name__)
 
 
 class PrintProductLabelLine(models.TransientModel):
@@ -26,12 +28,13 @@ class PrintProductLabelLine(models.TransientModel):
             product_pricelist_item_obj=self.env['product.pricelist.item']
             if record.product_id:
                 user_id = self.env['res.users'].browse(record._uid)
+                combination_info = record.with_context(website_id=2).product_id.product_tmpl_id._get_combination_info()
+
                 if user_id.login == 'info@skaterootsbcn.com':
-                    pricelist_id = product_pricelist_item_obj.search([('product_id','=',record.product_id.id),('pricelist_id','=',21870)],limit=1)
-                    if pricelist_id:
-                        record.price = pricelist_id.fixed_price
-                else:
-                    record.price = record.product_id.list_price
+                    combination_info = record.with_context(website_id=2).product_id.product_tmpl_id._get_combination_info()
+
+                record.price = combination_info['price']
+
 
 
 
