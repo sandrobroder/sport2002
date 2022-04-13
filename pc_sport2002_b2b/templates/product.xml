@@ -58,6 +58,20 @@
         </xpath>
     </template>
 
+    <template id="pc_ept_price_slider_block" inherit_id="emipro_theme_base.ept_price_slider_block"
+              name="PC View Filter Range Price" priority="300">
+        <xpath expr="//div[hassclass('te_wish_price')]" position="replace">
+            <t t-if="request.env.user.name != 'Public user'">
+                <div class="te_wish_price mb8">
+                    <t t-set="combination_info"
+                       t-value="wish.product_id._get_combination_info_variant()"/>
+                    <t t-esc="combination_info['price']"
+                       t-options="{'widget': 'monetary', 'display_currency': website.pricelist_id.currency_id}"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
     <template id="quick_view_template_process" inherit_id="emipro_theme_base.quick_view_container"
               name="Quick View Template Process" priority="300">
         <xpath expr="//div[hasclass('quick_view_content')]" position="attributes">
