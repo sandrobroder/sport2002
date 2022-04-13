@@ -4,7 +4,7 @@
 
     <template id="pc_ept_price_slider_block" inherit_id="theme_clarico_vega.ept_price_slider_block"
               name="PC View Filter Range Price" priority="300">
-        <xpath expr="//div[@id='ept_price_slider_block']" position="replace">
+        <xpath expr="//div[hasclass('ept_price_slider_block')]" position="replace">
             <t t-if="request.env.user.name != 'Public user'">
                 <div class="ept_price_slider_block">
                     <div class="price_filter_head te_fa-plus">
@@ -58,7 +58,7 @@
         </xpath>
     </template>
 
-    <template id="pc_ept_price_slider_block" inherit_id="theme_clarico_vega.ept_price_slider_block"
+    <template id="pc_ept_price_slider_block" inherit_id="theme_clarico_vega.product_wishlist_ept"
               name="PC View Filter Range Price" priority="300">
         <xpath expr="//div[hassclass('te_wish_price')]" position="replace">
             <t t-if="request.env.user.name != 'Public user'">
