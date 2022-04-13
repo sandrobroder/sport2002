@@ -4,7 +4,7 @@
 
     <template id="pc_ept_price_slider_block" inherit_id="theme_clarico_vega.website_pricefilter_ept"
               name="PC View Filter Range Price" priority="300">
-        <xpath expr="t[@<t t-if='website.is_price_range_filter and website.price_filter_on'>]" position="replace">
+        <xpath expr="t[@t t-if='website.is_price_range_filter and website.price_filter_on']" position="replace">
             <t t-if="request.env.user.name != 'Public user'">
                 <t t-if="website.is_price_range_filter and website.price_filter_on">
                     <t t-set="curr_web" t-value="request.website.get_current_website()"/>
