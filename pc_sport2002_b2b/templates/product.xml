@@ -2,7 +2,7 @@
 <odoo>
     <!--=================== Product ========================-->
 
-    <template id="pc_ept_price_slider_block" inherit_id="emipro_theme_base.ept_price_slider_block"
+    <template id="pc_ept_price_slider_block" inherit_id="theme_clarico_vega.ept_price_slider_block"
               name="PC View Filter Range Price" priority="300">
         <xpath expr="//div[@id='ept_price_slider_block']" position="replace">
             <t t-if="request.env.user.name != 'Public user'">
@@ -58,7 +58,7 @@
         </xpath>
     </template>
 
-    <template id="pc_ept_price_slider_block" inherit_id="emipro_theme_base.ept_price_slider_block"
+    <template id="pc_ept_price_slider_block" inherit_id="theme_clarico_vega.ept_price_slider_block"
               name="PC View Filter Range Price" priority="300">
         <xpath expr="//div[hassclass('te_wish_price')]" position="replace">
             <t t-if="request.env.user.name != 'Public user'">
