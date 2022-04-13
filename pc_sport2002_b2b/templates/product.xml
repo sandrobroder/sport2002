@@ -68,15 +68,7 @@
         </xpath>
     </template>
 
-    <template id="product_wishlist_ept" inherit_id="website_sale_wishlist.product_wishlist">
-        <xpath expr="//div[hasclass('checkbox')]" position="replace">
-            <div class="checkbox">
-                <label class='text-muted'>
-                    <input type="checkbox" id='b2b_wish' value="1" class="mr8"/>
-                    <span>Add product to my cart but keep it in my wishlist</span>
-                </label>
-            </div>
-        </xpath>
+    <template id="pc_product_wishlist_ept" inherit_id="website_sale_wishlist.product_wishlist" priority="1000">
         <xpath expr="//table[@id='o_comparelist_table']" position="replace">
             <table
                     class="table table-bordered table-striped table-hover text-center table-comparator t_wish_table"
