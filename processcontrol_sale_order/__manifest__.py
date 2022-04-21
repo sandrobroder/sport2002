@@ -9,6 +9,6 @@
     'installable': True,
     'auto_install': False,
     'data': [
-        'views/account_payment_mode.xml',
+        'views/sale_order.xml',
     ]
 }
