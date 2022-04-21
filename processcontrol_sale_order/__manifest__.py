@@ -5,7 +5,7 @@
     'author': "ProcessControl",
     'website': "https://www.processcontrol.es",
     'description': """""",
-    'depends': ['sale', 'sh_import_product_var'],
+    'depends': ['sale', 'sh_import_product_var', 'delivery_package_number'],
     'installable': True,
     'auto_install': False,
     'data': [
