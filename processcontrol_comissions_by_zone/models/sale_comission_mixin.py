@@ -7,7 +7,6 @@ from odoo import api, fields, models
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    @api.onchange('product_template_id')
     @api.depends("order_id.partner_id", "product_template_id")
     def _compute_agent_ids(self):
         agent_ids = []
