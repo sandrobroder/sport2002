@@ -29,3 +29,11 @@ class SaleOrderLine(models.Model):
                     record.agent_ids = domain_agent_ids
                 else:
                     record.agent_ids = agent_ids
+
+    @api.onchange('product_id')
+    def product_id_change(self):
+        for rec in self:
+            super(SaleOrderLine, self).product_id_change()
+            rec._compute_agent_ids()
+
+
