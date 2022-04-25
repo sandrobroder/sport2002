@@ -21,10 +21,9 @@ class SaleOrderLine(models.Model):
                 )
                 # chequeo que los agentes en la ficha del cliente, esten dentro de la marca:
                 if record.product_template_id.categ_id.agent_ids:
-                    if domain_agent_ids:
-                        for agent in record.product_template_id.categ_id.agent_ids:
-                            if agent in domain_agent_ids:
-                                agent_ids.append(agent)
+                    for agent in record.product_template_id.categ_id.agent_ids:
+                        if agent.id in domain_agent_ids:
+                            agent_ids.append(agent)
                 if agent_ids:
                     record.agent_ids = agent_ids
 
