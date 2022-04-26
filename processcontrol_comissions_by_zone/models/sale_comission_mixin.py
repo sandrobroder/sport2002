@@ -19,9 +19,6 @@ class SaleOrderLine(models.Model):
             if not record.commission_free:
                 for agent in record.order_id.partner_id.agent_ids:
                     domain_agent_ids.append(agent.id)
-
-                _logger.info('CATEGORIAS AGENTES %s', record.product_template_id.categ_id.agent_ids)
-                _logger.info('DOMAIN AGENTES %s', domain_agent_ids)
                 # chequeo que los agentes en la ficha del cliente, esten dentro de la marca:
                 if record.product_template_id.categ_id.agent_ids:
                     for agent in record.product_template_id.categ_id.agent_ids:
@@ -29,6 +26,12 @@ class SaleOrderLine(models.Model):
                             agent_ids.append(agent.id)
                 if agent_ids:
                     record.agent_ids = agent_ids
+
+    @api.onchange('product_template_id')
+    def _onchange_product_id(self):
+        for rec in self:
+            if rec.product_template_id:
+                rec._compute_agent_ids()
 
 
 
