@@ -23,9 +23,9 @@ class SaleOrderLine(models.Model):
                 if record.product_template_id.categ_id.agent_ids:
                     for agent in record.product_template_id.categ_id.agent_ids:
                         if agent.id in domain_agent_ids:
-                            agent_ids.append(agent.id)
+                            agent_ids.append(agent)
                 if agent_ids:
-                    record.agent_ids = agent_ids
+                    record.agent_ids = [(0, 0, record._prepare_agent_vals(agent)) for agent in agent_ids]
 
     @api.onchange('product_template_id')
     def _onchange_product_id(self):
