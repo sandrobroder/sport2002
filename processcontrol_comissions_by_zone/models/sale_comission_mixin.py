@@ -26,9 +26,9 @@ class SaleOrderLine(models.Model):
                 if record.product_template_id.categ_id.agent_ids:
                     for agent in record.product_template_id.categ_id.agent_ids:
                         if agent.id in domain_agent_ids:
-                            agent_ids.append(agent)
+                            agent_ids.append(agent.id)
                 if agent_ids:
-                    record.agent_ids = agent_ids.ids
+                    record.agent_ids = agent_ids
 
 
 
