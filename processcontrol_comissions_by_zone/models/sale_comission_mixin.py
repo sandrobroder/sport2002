@@ -17,9 +17,9 @@ class SaleOrderLine(models.Model):
         for record in self.filtered(lambda x: x.order_id.partner_id):
             record.agent_ids = False
             if not record.commission_free:
-                domain_agent_ids = record._prepare_agents_vals_partner(
-                    record.order_id.partner_id
-                )
+                for agent in record.order_id.partner_id.agent_ids:
+                    domain_agent_ids.append(agent.id)
+
                 _logger.info('CATEGORIAS AGENTES %s', record.product_template_id.categ_id.agent_ids)
                 _logger.info('DOMAIN AGENTES %s', domain_agent_ids)
                 # chequeo que los agentes en la ficha del cliente, esten dentro de la marca:
