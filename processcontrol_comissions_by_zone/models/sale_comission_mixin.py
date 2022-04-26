@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from logging import getLogger
+_logger=getLogger(__name__)
 
 
 class SaleOrderLine(models.Model):
@@ -14,11 +16,12 @@ class SaleOrderLine(models.Model):
         # for resetting previous agents
         for record in self.filtered(lambda x: x.order_id.partner_id):
             record.agent_ids = False
-            partner = record.order_id.partner_id
             if not record.commission_free:
                 domain_agent_ids = record._prepare_agents_vals_partner(
                     record.order_id.partner_id
                 )
+                _logger.info('CATEGORIAS AGENTES %s', record.product_template_id.categ_id.agent_ids)
+                _logger.info('DOMAIN AGENTES %s', domain_agent_ids)
                 # chequeo que los agentes en la ficha del cliente, esten dentro de la marca:
                 if record.product_template_id.categ_id.agent_ids:
                     for agent in record.product_template_id.categ_id.agent_ids:
