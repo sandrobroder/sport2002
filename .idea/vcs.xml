@@ -8,6 +8,7 @@
     <mapping directory="$PROJECT_DIR$/OCA/account-invoicing" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/account-payment" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/bank-payment" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/OCA/bank-statement-import" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/commission" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/community-data-files" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/credit-control" vcs="Git" />
@@ -16,6 +17,7 @@
     <mapping directory="$PROJECT_DIR$/OCA/l10n-spain" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/partner-contact" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/pos" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/OCA/product-variant" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/reporting-engine" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/sale-workflow" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/OCA/server-ux" vcs="Git" />
