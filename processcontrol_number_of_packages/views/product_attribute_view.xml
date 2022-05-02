@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="delivery_package_number.view_picking_withcarrier_out_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='number_of_packages']" position="replace">
-                <field name="number_of_packages" />
+                <field name="number_of_packages"/>
             </xpath>
         </field>
     </record>
