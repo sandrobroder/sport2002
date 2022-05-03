@@ -14,6 +14,9 @@ class AccountMove(models.Model):
                 rec.x_cyc = rec.partner_id.x_cyc
                 rec.x_cesce= rec.partner_id.x_cesce
 
+class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
+    
     @api.depends("move_id.partner_id")
     def _compute_agent_ids(self):
         agent_ids = []
