@@ -1,7 +1,5 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
-import logging
-_logger = logging.getLogger(__name__)
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
@@ -26,25 +24,15 @@ class AccountMoveLine(models.Model):
         # for resetting previous agents
         for record in self.filtered(lambda x: x.move_id.partner_id):
             record.agent_ids = False
-            partner = record.move_id.partner_id
             if not record.commission_free:
-                domain_agent_ids = record._prepare_agents_vals_partner(
-                    record.move_id.partner_id
-                )
-                _logger.info('DOMAIN AGENT IDS %s',domain_agent_ids)
+                for agent in record.move_id.partner_id.agent_ids:
+                    domain_agent_ids.append(agent.id)
+
                 product_template_id = record.product_id.product_tmpl_id
-                _logger.info('PRODUC TTEMPLATE %s', product_template_id)
                 # chequeo que los agentes en la ficha del cliente, esten dentro de la marca:
                 if product_template_id.categ_id.agent_ids:
-                    if domain_agent_ids:
-                        for agent in product_template_id.categ_id.agent_ids:
-                            if (agent.id in domain_agent_ids):
-                                agent_ids.append(agent)
-                if not agent_ids:
-                    record.agent_ids = domain_agent_ids
-                else:
-                    record.agent_ids = agent_ids
-            _logger.info('record AGENT IDS %s',  record.agent_ids )
-
-    def recompute_agents(self):
-        self._compute_agent_ids()
+                    for agent in product_template_id.categ_id.agent_ids:
+                        if agent.id in domain_agent_ids:
+                            agent_ids.append(agent)
+                if agent_ids:
+                    record.agent_ids = [(0, 0, record._prepare_agent_vals(agent)) for agent in agent_ids]

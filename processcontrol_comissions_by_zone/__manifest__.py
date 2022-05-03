@@ -5,7 +5,7 @@
     'author': "ProcessControl",
     'website': "https://www.processcontrol.es",
     'description': """""",
-    'depends': ['sale_commission','base_location','account','product','account_tax_balance'],
+    'depends': ['sale_commission','base_location','account','product'],
     'installable': True,
     'auto_install': False,
     'data': [
