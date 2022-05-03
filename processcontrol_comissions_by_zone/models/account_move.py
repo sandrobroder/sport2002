@@ -13,3 +13,26 @@ class AccountMove(models.Model):
             if rec.partner_id:
                 rec.x_cyc = rec.partner_id.x_cyc
                 rec.x_cesce= rec.partner_id.x_cesce
+
+    @api.depends("move_id.partner_id")
+    def _compute_agent_ids(self):
+        agent_ids = []
+        domain_agent_ids = []
+        # for resetting previous agents
+        for record in self.filtered(lambda x: x.move_id.partner_id):
+            record.agent_ids = False
+            partner = record.move_id.partner_id
+            if not record.commission_free:
+                domain_agent_ids = record._prepare_agents_vals_partner(
+                    record.move_id.partner_id
+                )
+                # chequeo que los agentes en la ficha del cliente, esten dentro de la marca:
+                if record.product_template_id.categ_id.agent_ids:
+                    if domain_agent_ids:
+                        for agent in record.product_template_id.categ_id.agent_ids:
+                            if (agent.id in domain_agent_ids):
+                                agent_ids.append(agent)
+                if not agent_ids:
+                    record.agent_ids = domain_agent_ids
+                else:
+                    record.agent_ids = agent_ids
