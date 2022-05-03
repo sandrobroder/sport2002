@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+import logging
 
 from odoo import api, fields, models, _
+_logger = logging.getLogger(__name__)
 
 
 class PrintProductLabelLine(models.TransientModel):
@@ -17,6 +19,25 @@ class PrintProductLabelLine(models.TransientModel):
     barcode = fields.Char('Barcode', related='product_id.barcode')
     qty_initial = fields.Integer('Initial Qty', default=1)
     qty = fields.Integer('Label Qty', default=1)
+    price = fields.Float('Precio',compute='_compute_price',store=True)
+
+    @api.depends('product_id')
+    def _compute_price(self):
+        for record in self:
+            record.price= float()
+            product_pricelist_item_obj=self.env['product.pricelist.item']
+            if record.product_id:
+                user_id = self.env['res.users'].browse(record._uid)
+                combination_info = record.with_context(website_id=2).product_id.product_tmpl_id._get_combination_info()
+
+                if user_id.login == 'info@skaterootsbcn.com':
+                    combination_info = record.with_context(website_id=2).product_id.product_tmpl_id._get_combination_info()
+
+                record.price = combination_info['price']
+
+
+
+
 
     @api.depends('qty')
     def _compute_selected(self):
