@@ -17,7 +17,7 @@ class AccountMove(models.Model):
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    @api.depends("move_id.partner_id")
+    @api.depends("move_id.partner_id",'commission_free')
     def _compute_agent_ids(self):
         agent_ids = []
         domain_agent_ids = []
@@ -40,3 +40,6 @@ class AccountMoveLine(models.Model):
                     record.agent_ids = domain_agent_ids
                 else:
                     record.agent_ids = agent_ids
+
+    def recompute_agents(self):
+        self._compute_agent_ids()
