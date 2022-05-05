@@ -22,9 +22,11 @@ class SaleOrderLine(models.Model):
                 # chequeo que los agentes en la ficha del cliente, esten dentro de la marca:
                 if record.product_template_id.categ_id.agent_ids:
                     for agent in record.product_template_id.categ_id.agent_ids:
-                        if agent.id in domain_agent_ids:
+                        if agent.id in domain_agent_ids and (agent not in agent_ids):
                             agent_ids.append(agent)
                 if agent_ids:
+                    if record.agent_ids:
+                        record.agent_ids.unlink()
                     record.agent_ids = [(0, 0, record._prepare_agent_vals(agent)) for agent in agent_ids]
 
     @api.onchange('product_template_id')
