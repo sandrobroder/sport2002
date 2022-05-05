@@ -35,4 +35,4 @@ class AccountMoveLine(models.Model):
                         if agent.id in domain_agent_ids and (agent not in agent_ids):
                             agent_ids.append(agent)
                 if agent_ids:
-                    record.agent_ids = [(0, 0, record._prepare_agent_vals(agent)) for agent in agent_ids]
+                    record.agent_ids = agent_ids.ids
