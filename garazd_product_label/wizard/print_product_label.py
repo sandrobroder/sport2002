@@ -70,6 +70,15 @@ class PrintProductLabel(models.TransientModel):
             raise Warning(_('Nothing to print, set the quantity of labels in the table.'))
         return self.env.ref(self.template).with_context(discard_logo_check=True).report_action(labels)
 
+    def action_print_sport(self):
+        """ Print labels """
+        self.ensure_one()
+        labels = self.label_ids.filtered('selected').mapped('id')
+        if not labels:
+            raise Warning(_('Nothing to print, set the quantity of labels in the table.'))
+        return self.env.ref("garazd_product_label.report_product_label_A4_57x35_sport").with_context(
+            discard_logo_check=True).report_action(labels)
+
     def action_preview(self):
         """ Preview labels """
         self.ensure_one()

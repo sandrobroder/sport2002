@@ -9,7 +9,15 @@
                 <header>
                     <button
                         name="action_print"
-                        string="Print"
+                        string="Print Roots"
+                        help="Print product labels"
+                        type="object"
+                        icon="fa-print"
+                        class="btn-primary mr8"
+                    />
+                    <button
+                        name="action_print_sport"
+                        string="Print Sport2002"
                         help="Print product labels"
                         type="object"
                         icon="fa-print"
