@@ -12,12 +12,13 @@
                                class="badge"
                          />
                     </div>
-
+                    <div style="width: 100%; padding: 0; margin: 0; font-size: 25px; font-weight: bold;">
+                        <span t-if="label.product_id.currency_id.position == 'before'" t-field="label.product_id.currency_id.symbol"/>
+                        <span t-field="label.product_id.lst_price"/>
+                        <span t-if="label.product_id.currency_id.position == 'after'" t-field="label.product_id.currency_id.symbol"/>
+                    </div>
                     <div t-if="label.product_id.default_code" style="width: 100%; padding: 0; margin: 0; font-size: 12px;">
                         <span t-field="label.product_id.default_code"/>
-                    </div>
-                        <div t-if="label.price" style="width: 100%; padding: 0; margin: 0; font-size: 12px;">
-                        <strong>Precio: </strong><span t-field="label.price"/>
                     </div>
                     <div t-if="label.product_id.barcode" class="text-center align-middle" style="width: 100%; height: 13px; padding: 0 3px;">
                         <t t-if="label.wizard_id.humanreadable" t-set="show_code" t-value="1"/>
@@ -53,7 +54,7 @@
                         <t t-foreach="list(range(qty))" t-as="index_qty">
                             <div t-if="count % 21 == 0" style="page-break-after:always;"/>
                             <div t-if="count % 3 == 0" style="clear:both;"/>
-                            <div style="width: 35%; float: left; height: 180px; margin: 0 0px;">
+                            <div style="width: 30%; float: left; height: 180px; margin: 0 10px;">
                                 <t t-call="garazd_product_label.label_57x35"/>
                             </div>
                             <t t-set="count" t-value="count+1" />
