@@ -6,6 +6,7 @@ class AccountMove(models.Model):
 
     x_cyc = fields.Boolean(string='CyC')
     x_cesce = fields.Boolean(string='CESCE')
+    commission_calculated = fields.Boolean(string="Commission Calculated")
 
     @api.onchange('partner_id')
     def onchange_invoice_partner_information(self):
