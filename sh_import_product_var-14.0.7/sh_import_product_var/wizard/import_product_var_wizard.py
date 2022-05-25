@@ -39,9 +39,9 @@ class import_product_var_wizard(models.TransientModel):
         ('barcode', 'Barcode'),
         ('int_ref', 'Internal Reference'),
     ],
-                                         default='name',
-                                         string="Product Variant Update By",
-                                         required=True)
+        default='name',
+        string="Product Variant Update By",
+        required=True)
 
     is_create_m2m_record = fields.Boolean(
         string="Create a New Record for Dynamic M2M Field (if not exist)?")
@@ -288,7 +288,7 @@ class import_product_var_wizard(models.TransientModel):
                               xlrd.error_text_from_code.get(
                                   cell.value,
                                   _("unknown error code %s") % cell.value)
-                          })
+                        })
                 else:
                     values.append(cell.value)
             values_sheet.append(values)
@@ -334,7 +334,7 @@ class import_product_var_wizard(models.TransientModel):
                             if skip_header:
                                 skip_header = False
 
-                                for i in range(23, len(row)):
+                                for i in range(21, len(row)):
                                     name_field = row[i]
                                     name_m2o = False
                                     if '@' in row[i]:
@@ -502,7 +502,7 @@ class import_product_var_wizard(models.TransientModel):
                                             'product.category'].search([
                                                 ('complete_name', '=', 'All')
                                             ],
-                                                                       limit=1)
+                                            limit=1)
                                         if search_category:
                                             tmpl_vals.update({
                                                 'categ_id':
@@ -586,7 +586,7 @@ class import_product_var_wizard(models.TransientModel):
                                             'uom.uom'].search([
                                                 ('name', '=', row[6].strip())
                                             ],
-                                                              limit=1)
+                                            limit=1)
                                         if search_uom:
                                             tmpl_vals.update(
                                                 {'uom_id': search_uom.id})
@@ -618,7 +618,7 @@ class import_product_var_wizard(models.TransientModel):
                                             'uom.uom'].search([
                                                 ('name', '=', row[7].strip())
                                             ],
-                                                              limit=1)
+                                            limit=1)
                                         if search_uom_po:
                                             tmpl_vals.update({
                                                 'uom_po_id':
@@ -882,7 +882,8 @@ class import_product_var_wizard(models.TransientModel):
                                                 splited_attr_value_price_list = attr_value.split(
                                                     '@')
                                                 if ',' in splited_attr_value_price_list[1]:
-                                                    new_value = splited_attr_value_price_list[1].replace(",", ".")
+                                                    new_value = splited_attr_value_price_list[1].replace(
+                                                        ",", ".")
                                                     attr_value_price_dic.update({
                                                         splited_attr_value_price_list[0]:
                                                         float(new_value)
@@ -890,7 +891,8 @@ class import_product_var_wizard(models.TransientModel):
                                                 else:
                                                     attr_value_price_dic.update({
                                                         splited_attr_value_price_list[0]:
-                                                        float(splited_attr_value_price_list[1])
+                                                        float(
+                                                            splited_attr_value_price_list[1])
                                                     })
                                             else:
                                                 splited_attr_value_price_list = [
@@ -1313,7 +1315,7 @@ class import_product_var_wizard(models.TransientModel):
                                                                 .name) not in [
                                                                     0, 0.0, '',
                                                                     "", None
-                                                                ]:
+                                                        ]:
                                                             extra_price = float(
                                                                 attr_value_price_dic
                                                                 .get(
