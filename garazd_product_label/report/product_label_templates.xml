@@ -5,7 +5,7 @@
         <table class="table table-bordered col-xs-4">
             <tr height="155px" style="border:0;margin:0;padding:0;">
                 <td class="col-xs-4 text-center" style="border:0;margin:0;padding:0;">
-                    <div style="overflow:hidden; height:69px !important; width: 100% !important; padding: 5px 5px 0; line-height: 1.3;">
+                    <div style="overflow:hidden; height:69px !important; width: 252px; !important; padding: 5px 5px 0; line-height: 1.3;">
                         <span t-field="label.product_id.name"/>
                          <span t-if="label.product_id.product_template_attribute_value_ids"
                                t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion')))"
@@ -43,7 +43,7 @@
         <table class="table table-bordered col-xs-4">
             <tr height="155px" style="border:0;margin:0;padding:0;">
                 <td class="col-xs-4 text-center" style="border:0;margin:0;padding:0;">
-                    <div style="overflow:hidden; height:69px !important; width: 100% !important; padding: 5px 5px 0; line-height: 1.3;">
+                    <div style="overflow:hidden; height:69px !important; width: 252px; !important; padding: 5px 5px 0; line-height: 1.3;">
                         <span t-field="label.product_id.name"/>
                          <span t-if="label.product_id.product_template_attribute_value_ids"
                                t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion')))"
