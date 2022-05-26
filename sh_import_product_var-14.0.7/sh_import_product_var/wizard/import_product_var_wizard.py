@@ -334,7 +334,7 @@ class import_product_var_wizard(models.TransientModel):
                             if skip_header:
                                 skip_header = False
 
-                                for i in range(20, len(row)):
+                                for i in range(21, len(row)):
                                     name_field = row[i]
                                     name_m2o = False
                                     if '@' in row[i]:
