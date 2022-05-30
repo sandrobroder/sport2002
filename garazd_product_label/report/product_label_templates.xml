@@ -5,14 +5,42 @@
         <table class="table table-bordered col-xs-4">
             <tr height="155px" style="border:0;margin:0;padding:0;">
                 <td class="col-xs-4 text-center" style="border:0;margin:0;padding:0;">
-                    <div style="overflow:hidden; height:69px !important; width: 252px; !important; padding: 5px 5px 0; line-height: 1.3;">
-                        <span t-field="label.product_id.name"/>
-                         <span t-if="label.product_id.product_template_attribute_value_ids"
-                               t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion')))"
-                               class="badge"
-                         />
-                    </div>
-
+                    <t t-if="label and label.product_id and len(label.product_id.name) &lt;= 70">
+                        <div style="font-size:12px; overflow:hidden; height:69px !important; width: 252px; !important; padding-top: 2px; margin: auto; line-height: 1.3;">
+                            <span t-field="label.product_id.name"/>
+                             <span t-if="label.product_id.product_template_attribute_value_ids"
+                                   t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion' and not n.attribute_id.name.startswith('Ruta'))))"
+                                   class="badge"
+                             />
+                        </div>
+                    </t>
+                    <t t-if="label and label.product_id and len(label.product_id.name) &gt; 70 and len(label.product_id.name) &lt;= 140">
+                        <div style="font-size:10px; overflow:hidden; height:69px !important; width: 252px; !important; padding-top: 2px; margin: auto; line-height: 1.3;">
+                            <span t-field="label.product_id.name"/>
+                             <span t-if="label.product_id.product_template_attribute_value_ids"
+                                   t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion' and not n.attribute_id.name.startswith('Ruta'))))"
+                                   class="badge"
+                             />
+                        </div>
+                    </t>
+                    <t t-if="label and label.product_id and len(label.product_id.name) &gt; 140 and len(label.product_id.name) &lt;= 210">
+                        <div style="font-size:8px; overflow:hidden; height:69px !important; width: 252px; !important; padding-top: 2px; margin: auto; line-height: 1.3;">
+                            <span t-field="label.product_id.name"/>
+                             <span t-if="label.product_id.product_template_attribute_value_ids"
+                                   t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion' and not n.attribute_id.name.startswith('Ruta'))))"
+                                   class="badge"
+                             />
+                        </div>
+                    </t>
+                    <t t-if="label and label.product_id and len(label.product_id.name) &gt; 210">
+                        <div style="font-size:6px; overflow:hidden; height:69px !important; width: 252px; !important; padding-top: 2px; margin: auto; line-height: 1.3;">
+                            <span t-field="label.product_id.name"/>
+                             <span t-if="label.product_id.product_template_attribute_value_ids"
+                                   t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion' and not n.attribute_id.name.startswith('Ruta'))))"
+                                   class="badge"
+                             />
+                        </div>
+                    </t>
                     <div t-if="label.product_id.default_code" style="width: 100%; padding: 0; margin: 0; font-size: 12px;">
                         <span t-field="label.product_id.default_code"/>
                     </div>
@@ -43,13 +71,42 @@
         <table class="table table-bordered col-xs-4">
             <tr height="155px" style="border:0;margin:0;padding:0;">
                 <td class="col-xs-4 text-center" style="border:0;margin:0;padding:0;">
-                    <div style="overflow:hidden; height:69px !important; width: 252px; !important; padding: 5px 5px 0; line-height: 1.3;">
-                        <span t-field="label.product_id.name"/>
-                         <span t-if="label.product_id.product_template_attribute_value_ids"
-                               t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion')))"
-                               class="badge"
-                         />
-                    </div>
+                    <t t-if="label and label.product_id and len(label.product_id.name) &lt;= 70">
+                        <div style="font-size:12px; overflow:hidden; height:69px !important; width: 252px; !important; padding-top: 2px; margin: auto; line-height: 1.3;">
+                            <span t-field="label.product_id.name"/>
+                             <span t-if="label.product_id.product_template_attribute_value_ids"
+                                   t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion' and not n.attribute_id.name.startswith('Ruta'))))"
+                                   class="badge"
+                             />
+                        </div>
+                    </t>
+                    <t t-if="label and label.product_id and len(label.product_id.name) &gt; 70 and len(label.product_id.name) &lt;= 140">
+                        <div style="font-size:10px; overflow:hidden; height:69px !important; width: 252px; !important; padding-top: 2px; margin: auto; line-height: 1.3;">
+                            <span t-field="label.product_id.name"/>
+                             <span t-if="label.product_id.product_template_attribute_value_ids"
+                                   t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion' and not n.attribute_id.name.startswith('Ruta'))))"
+                                   class="badge"
+                             />
+                        </div>
+                    </t>
+                    <t t-if="label and label.product_id and len(label.product_id.name) &gt; 140 and len(label.product_id.name) &lt;= 210">
+                        <div style="font-size:8px; overflow:hidden; height:69px !important; width: 252px; !important; padding-top: 2px; margin: auto; line-height: 1.3;">
+                            <span t-field="label.product_id.name"/>
+                             <span t-if="label.product_id.product_template_attribute_value_ids"
+                                   t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion' and not n.attribute_id.name.startswith('Ruta'))))"
+                                   class="badge"
+                             />
+                        </div>
+                    </t>
+                    <t t-if="label and label.product_id and len(label.product_id.name) &gt; 210">
+                        <div style="font-size:6px; overflow:hidden; height:69px !important; width: 252px; !important; padding-top: 2px; margin: auto; line-height: 1.3;">
+                            <span t-field="label.product_id.name"/>
+                             <span t-if="label.product_id.product_template_attribute_value_ids"
+                                   t-esc="u', '.join(map(lambda x: x.attribute_line_id.attribute_id.name + u': ' + x.name, label.product_id.product_template_attribute_value_ids.filtered(lambda n: n.name != 'Seccion' and not n.attribute_id.name.startswith('Ruta'))))"
+                                   class="badge"
+                             />
+                        </div>
+                    </t>
 
                     <div t-if="label.product_id.default_code" style="width: 100%; padding: 0; margin: 0; font-size: 12px;">
                         <span t-field="label.product_id.default_code"/>
