@@ -9,7 +9,9 @@ _logger = logging.getLogger(__name__)
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
-
+    
+    without_automatism = fields.Boolean(string="Without Automatism")
+    
     def _get_combination_info(self, combination=False, product_id=False, add_qty=1, pricelist=False,
                               parent_combination=False, only_template=False):
         """Override for website, where we want to:
