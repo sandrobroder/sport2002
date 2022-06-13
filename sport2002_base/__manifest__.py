@@ -11,7 +11,7 @@
                 'theme_clarico_vega',
                 ],
     "data": [
-        # "views/shop.xml",
+        "views/product_template.xml",
         "views/product_pricelist.xml",
         # "templates/assets.xml",
         "templates/product.xml",
