@@ -4,7 +4,7 @@
     <template id="theme_assets_frontend" inherit_id="website.assets_frontend">
         <xpath expr="script[last()]" position="after">
             <script type="text/javascript"
-                    src="/sport2002_base/static/src/js/frontend/sale_cart_link.js"/>
+                    src="/pc_sport2002_temporary_fixed_add_to_cart/static/src/js/frontend/sale_cart_link.js"/>
         </xpath>
     </template>
 
