@@ -8,6 +8,7 @@
             <xpath expr="//field[@name='invoice_vendor_bill_id']" position="after">
                 <field name="x_cyc" />
                 <field name="x_cesce" />
+                <field name="commission_calculated" />
             </xpath>
         </field>
     </record>
