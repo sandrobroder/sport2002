@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <template id="assets_frontend" inherit_id="website.assets_frontend" name="Hide JS">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/website_hide_unavailable_variant/static/src/js/hide.js"/>
+            </xpath>
+        </template>
+
+        <template id="variant_not_avail" inherit_id="website_sale.product">
+            <xpath expr="//div[hasclass('js_product')]" position="inside">
+                <div id="unavailable_variant" t-att-data-values="product.get_variant_count()">
+                </div>
+            </xpath>
+        </template>
+
+        <template id="product" inherit_id="website_sale.product">
+            <xpath expr="//t[@t-set='combination']" position="replace">
+                <t t-set="combination"
+                   t-value="product.with_context(special_call=True)._get_first_possible_combination()"/>
+            </xpath>
+        </template>
+
+        <template id="variants" inherit_id="sale.variants">
+            <xpath expr="//t[@t-foreach='product.valid_product_template_attribute_line_ids']" position="before">
+                <t t-set="is_first_attr" t-value="True"/>
+            </xpath>
+            <xpath expr="//select/t[@t-foreach='ptal.product_template_value_ids._only_active()']" position="before">
+                <t t-if="not is_first_attr and website">
+                    <option value="0" readonly=""/>
+                </t>
+            </xpath>
+
+            <xpath expr="//t[@t-foreach='product.valid_product_template_attribute_line_ids']" position="inside">
+                <t t-set="is_first_attr" t-value="False"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>
