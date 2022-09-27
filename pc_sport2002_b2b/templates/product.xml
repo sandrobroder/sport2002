@@ -4,7 +4,7 @@
     
     
     <!-- ==================== Ajax Add to cart =================== -->
-    <template id="products_add_to_cart_ept" inherit_id="website_sale.products_add_to_cart">
+    <template id="products_add_to_cart_ept_process" inherit_id="website_sale.products_add_to_cart">
         <xpath expr="//t[@t-if='product_variant_id']/a[hasclass('a-submit')]" position="attributes">
             <attribute name="t-if">request.env.user.name != 'Public user'</attribute>
         </xpath>
