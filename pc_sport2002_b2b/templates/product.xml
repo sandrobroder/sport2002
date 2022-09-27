@@ -100,11 +100,13 @@
                                 <div class='te_wish_btn'>
                                     <input name="product_id" t-att-value="wish.product_id.id"
                                            type="hidden"/>
-                                    <button type="button" role="button"
-                                            class="btn btn-link o_wish_add mb4">
-                                        <i class="fa fa-shopping-cart mr4"/>Add
-                                        <span class='d-none d-md-inline'>to Cart</span>
-                                    </button>
+                                    <t t-if="request.env.user.name != 'Public user'">
+                                        <button type="button" role="button"
+                                                class="btn btn-link o_wish_add mb4">
+                                            <i class="fa fa-shopping-cart mr4"/>Add
+                                            <span class='d-none d-md-inline'>to Cart</span>
+                                        </button>
+                                    </t>
                                     <button type="button" class="btn btn-link o_wish_rm no-decoration text-danger">
                                         <i class='fa fa-trash-o mr4'/>
                                         Remove
