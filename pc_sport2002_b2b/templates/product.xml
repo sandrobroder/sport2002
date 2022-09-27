@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!--=================== Product ========================-->
+    
+    
+    <!-- ==================== Ajax Add to cart =================== -->
+    <template id="products_add_to_cart_ept" inherit_id="website_sale.products_add_to_cart">
+        <xpath expr="//t[@t-if='product_variant_id']/a[hasclass('a-submit')]" position="attributes">
+            <attribute name="t-if">request.env.user.name != 'Public user'</attribute>
+        </xpath>
+    </template>
 
     <template id="pc_ept_price_slider_block" inherit_id="website_sale.products_attributes"
               name="PC View Filter Range Price" priority="3000">
