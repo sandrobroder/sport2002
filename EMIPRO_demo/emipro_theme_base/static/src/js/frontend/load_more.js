@@ -78,6 +78,9 @@ odoo.define('emipro_theme_base.load_more', function(require) {
                                 if($('#id_lazyload').length) {
                                     $("img.lazyload").lazyload();
                                 }
+                                if($(".color-changer").length) {
+                                    $(".color-changer").mCustomScrollbar({axis: "x",theme: "dark-thin",alwaysShowScrollbar: 0 });
+                                }
                             }
                         });
                     }
@@ -133,6 +136,9 @@ odoo.define('emipro_theme_base.load_more', function(require) {
                                 }
                                 if($('#id_lazyload').length) {
                                     $("img.lazyload").lazyload();
+                                }
+                                if($(".color-changer").length) {
+                                    $(".color-changer").mCustomScrollbar({axis: "x",theme: "dark-thin",alwaysShowScrollbar: 0 });
                                 }
                             }
                         });
@@ -218,6 +224,9 @@ odoo.define('emipro_theme_base.load_more', function(require) {
                                 $('.load_more_button').removeClass('active');
                             }
                             self.lazyLoad();
+                            if($(".color-changer").length) {
+                                $(".color-changer").mCustomScrollbar({axis: "x",theme: "dark-thin",alwaysShowScrollbar: 0 });
+                            }
                         }
                     });
                 }
@@ -286,6 +295,9 @@ odoo.define('emipro_theme_base.load_more', function(require) {
                                 $('.load_more_button_top').removeClass('active');
                             }
                             self.lazyLoad();
+                            if($(".color-changer").length) {
+                                $(".color-changer").mCustomScrollbar({axis: "x",theme: "dark-thin",alwaysShowScrollbar: 0 });
+                            }
                         }
                     });
                 }

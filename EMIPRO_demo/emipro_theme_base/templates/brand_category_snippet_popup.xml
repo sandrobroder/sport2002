@@ -43,10 +43,42 @@
                                     </div>
                                 </span>
                                 <span class="float-right">
-                                    <div class="configure-selection">
-                                        <span class="fa fa-file-text mr-1"/>
-                                        <span class="title">User Guide</span>
-                                    </div>
+                                    <t t-set="theme_name" t-value="request.website.theme_id.name"/>
+                                    <t t-if="theme_name == 'theme_clarico'">
+                                        <t t-if="name == 'category-slider'">
+                                            <t t-set="user_guide"
+                                               t-value="'https://www.emiprotechnologies.com/docs/v14/theme-clarico#topic1787'"/>
+                                            <t t-set="video"
+                                               t-value="'https://www.youtube.com/watch?v=DWmFQhMfYwg&amp;list=PLZGehiXauylbZduKt8OESRyUeVUeYmQqR'"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="user_guide"
+                                               t-value="'https://www.emiprotechnologies.com/docs/v14/theme-clarico#topic1785'"/>
+                                            <t t-set="video"
+                                               t-value="'https://www.youtube.com/watch?v=DWmFQhMfYwg&amp;list=PLZGehiXauylbZduKt8OESRyUeVUeYmQqR'"/>
+                                        </t>
+                                    </t>
+                                    <t t-elif="theme_name == 'theme_clarico_vega'">
+                                        <t t-if="name == 'category-slider'">
+                                            <t t-set="user_guide"
+                                               t-value="'https://www.emiprotechnologies.com/docs/v14/theme-clarico-vega#topic2005'"/>
+                                            <t t-set="video"
+                                               t-value="'https://www.youtube.com/watch?v=DWmFQhMfYwg&amp;list=PLZGehiXauylbZduKt8OESRyUeVUeYmQqR'"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="user_guide"
+                                               t-value="'https://www.emiprotechnologies.com/docs/v14/theme-clarico-vega#topic2004'"/>
+                                            <t t-set="video"
+                                               t-value="'https://www.youtube.com/watch?v=DWmFQhMfYwg&amp;list=PLZGehiXauylbZduKt8OESRyUeVUeYmQqR'"/>
+                                        </t>
+                                    </t>
+                                    <a t-attf-href="#{user_guide}" target="_blank"
+                                       class="text-decoration-none user_guide">
+                                        <div class="configure-selection">
+                                            <span class="fa fa-file-text mr-1"/>
+                                            <span class="title">User Guide</span>
+                                        </div>
+                                    </a>
                                     <div class="configure-selection">
                                         <span class="fa fa-play-circle mr-1"/>
                                         <span class="title">Videos</span>

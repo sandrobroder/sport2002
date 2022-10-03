@@ -36,7 +36,10 @@ odoo.define('emipro_theme_base.pwa_web', function (require) {
                 dv_offline.show();
             }
         }
-        navigator.serviceWorker.register('/service_worker');
+        navigator.serviceWorker.register('/service_worker').then(() => console.info('service worker registered'))
+        .catch(error => {
+          console.log('ServiceWorker registration failed: ', error)
+        });
     }
 });
 

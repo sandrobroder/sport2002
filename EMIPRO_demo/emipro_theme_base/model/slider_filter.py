@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-    This model is used to create a slider filter fields
-"""
+"""This model is used to create a slider filter fields"""
 from odoo import api, fields, models, _
 
 
@@ -10,16 +8,9 @@ class SliderFilter(models.Model):
     _description = "Slider Filter"
 
     display_name = fields.Char(string="Name", required=True, translate=True)
-    website_published = fields.Boolean(string='Website Publish',default=True)
+    website_published = fields.Boolean(string='Website Publish', default=True)
     filter_domain = fields.Text(string="Filter Domain", required=True)
 
     def website_publish_button(self):
-        """
-        Set slider filter published and unpublished on website
-        :return:
-        """
-        if self.website_published:
-            self.write({'website_published': False})
-        else:
-            self.write({'website_published': True})
-
+        """Set slider filter published and unpublished on website"""
+        self.write({'website_published': not self.website_published})

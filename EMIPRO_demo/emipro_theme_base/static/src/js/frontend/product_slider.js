@@ -65,6 +65,26 @@ odoo.define('website_slider.front_js', function (require) {
             'discount_policy':discount_policy,
             }
             // Render the product slider
+            this.$relativeTarget = $('#wrapwrap'); // #wrapwrap for now bcoz window is not scrolleble in v14
+            var position = this.$relativeTarget.scrollTop();
+            this.$sticky = self.$target;
+            var elementTop = self.$sticky.offset().top;
+            var elementBottom = elementTop + self.$sticky.outerHeight();
+            var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            if (elementTop < windowHeight && elementTop != 0) {
+                self.ajaxCall(self, params)
+            } else {
+                this.$relativeTarget.on('scroll.snippet_root_scroll', _.throttle(ev => {
+                    var viewportTop = $('#wrapwrap').scrollTop();
+                    var viewportBottom = viewportTop + $('#wrapwrap').height();
+                    if (elementBottom > position && elementTop < viewportBottom ) {
+                        self.ajaxCall(self, params)
+                        position = scroll;
+                    }
+                }, 200));
+            }
+        },
+        ajaxCall: function (self, params) {
             ajax.jsonRpc('/slider/render', 'call',params).then(function (data) {
                 $(self.$target).html(data);
                 self.$target.find('.slider_edit_msg').toggleClass('d-none', true);
@@ -72,13 +92,18 @@ odoo.define('website_slider.front_js', function (require) {
                     $("img.lazyload").lazyload();
                 }
                 self.initOwlSlider();
+                if($(".color-changer").length) {
+                    $(".color-changer").mCustomScrollbar({axis: "x",theme: "dark-thin",alwaysShowScrollbar: 0 });
+                }
                 $(self.$target).find(".js_filter_change").first().addClass( "active" );
                 $(self.$target).find(".a-submit").click(function (event) {
                     sale._onClickSubmit(event)
                  });
                 self.addToWishlist($(self.$target));
-                self.slider_render($(self.$target));
-
+//                self.sliderRender($(self.$target));
+                if($(self.$target).find(".group_website_designer").length == 0){
+                    $(self.$target).removeAttr('data-product_ids data-category_ids data-discount_policy data-ui_option data-name data-limit data-filter_id data-sort_by data-slider_type data-style name data-item_ids')
+                }
             });
         },
         addToWishlist: function (target) {
@@ -274,40 +299,60 @@ odoo.define('website_slider.front_js', function (require) {
                 });
             });
         },
-        slider_render: function(target){
-            /* This method is used for update the dynamic product carousel while page load */
-            var self = this;
-            $(target).find(".js_filter_change").click(function(){
-                $('.cus_theme_loader_layout').removeClass('d-none');
-                var filter_id = $(this).attr('data-id');
-                $(target).find(".js_filter_change").removeClass('active');
-                $(this).addClass('active');
-                var current_filter = $(target).find("div[filter-id='" + filter_id + "']");
-                var slider_id = $(target).attr("data-slider-id");
-                $(target).find(".js_filter_data").hide()
-                if (current_filter.length == 1){
-                    $('.cus_theme_loader_layout').addClass('d-none');
-                    $('.cus_theme_loader_layout').addClass('hidden');
-                    current_filter.show()
+    });
+
+    publicWidget.registry.js_multi_snippet = publicWidget.Widget.extend({
+            selector: ".js_multi_tab_snippet",
+            events: {
+                'click .product_tabs_main .nav-item a': 'sliderRender',
+            },
+            sliderRender: function(target){
+                var targetEl = $(target.currentTarget).attr('href') || false;
+                var self = this;
+                self.$target = $(targetEl).find('.js_slider_snippet')
+                var name = self.$target.attr("name");
+                var item_ids = self.$target.attr("data-item_ids");
+                var discount_policy = self.$target.attr('data-discount_policy')
+                var slider_type = self.$target.attr('data-slider_type')
+                var style = self.$target.attr('data-style')
+                var ui_options = self.$target.attr("data-ui_option");
+                var sort_by = self.$target.attr('data-sort_by')
+                var limit = self.$target.attr('data-limit')
+                var params =  {
+                'name':name,
+                'item_ids': item_ids,
+                'slider_type':slider_type,
+                'style':style,
+                'ui_options':ui_options,
+                'limit':limit,
+                'sort_by':sort_by,
+                'discount_policy':discount_policy,
                 }
-                else {
-                    ajax.jsonRpc('/slider/render', 'call', {'slider_id': slider_id,'filter_id':filter_id}).then(function (data) {
-                        $('.cus_theme_loader_layout').addClass('d-none');
-                        $('.cus_theme_loader_layout').addClass('hidden');
-                        $(target).find(".js_data_container").append($(data).find(".js_filter_data"));
-                        $(target).find(".a-submit").click(function (event) {
-                            sale._onClickSubmit(event)
-                        });
-                        self.addToWishlist(target);
-                        self.initOwlSlider();
+                if(name) {
+                    ajax.jsonRpc('/slider/render', 'call',params).then(function (data) {
+                        self.$target.html(data);
+                        self.$target.find('.slider_edit_msg').toggleClass('d-none', true);
                         if($('#id_lazyload').length) {
                             $("img.lazyload").lazyload();
                         }
+                        var slider_snippet_obj = new publicWidget.registry.js_slider_snippet();
+                        slider_snippet_obj.initOwlSlider();
+                        if($(".color-changer").length) {
+                            $(".color-changer").mCustomScrollbar({axis: "x",theme: "dark-thin",alwaysShowScrollbar: 0 });
+                        }
+                        self.$target.find(".js_filter_change").first().addClass( "active" );
+                        self.$target.find(".a-submit").click(function (event) {
+                            sale._onClickSubmit(event)
+                         });
+                        slider_snippet_obj.addToWishlist(self.$target);
+                        if(self.$target.find(".group_website_designer").length == 0){
+                            self.$target.removeAttr('data-product_ids data-category_ids data-discount_policy data-ui_option data-name data-limit data-filter_id data-sort_by data-slider_type data-style name data-item_ids')
+                        }
                     });
                 }
-            });
-        }
-    });
+            },
+        });
+
     var owl_rtl = false;
     if ($('#wrapwrap').hasClass('o_rtl')) {
         owl_rtl = true;
@@ -339,5 +384,8 @@ odoo.define('website_slider.front_js', function (require) {
             },
         },
     });
-
+    $('.js_multi_slider .product_tabs_nav a[data-toggle="tab"]').on('shown.bs.tab', function () {
+        var data_id = $(this).attr('aria-controls');
+        $('#'+data_id).find('.owl-carousel').trigger('refresh.owl.carousel');
+    })
 });

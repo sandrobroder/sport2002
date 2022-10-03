@@ -9,7 +9,7 @@ odoo.define('slider.builder.common.editor', function (require) {
     	disabledInEditableMode: false,
 		edit_events: {
 			/* Common Methods For Category, Brand And Product Slider */
-			'click .js_category_brand_snippet,.js_slider_snippet' : 'initSliderView', // Show The Configuration Popup
+			'click .js_category_brand_snippet,.js_slider_snippet,.js_multi_tab_snippet' : 'initSliderView', // Show The Configuration Popup
 			'click .js-configuration-selection' : '_onClickProductSelection', // Configuration Section
 			'click .js-layout-selection' : '_onClickLayoutSelection', // UI Layout Section
 			'click .slider_style_option a,.slider_sort_option a,.slider_filter_option a' : '_activeAndPreview', // Change the Preview while changing the Style
@@ -32,7 +32,223 @@ odoo.define('slider.builder.common.editor', function (require) {
 			/* Brand, Category slider method */
             'click .category_brand_option .js_item_data': '_onClickCategoryBrand', // Toggle active class
             'click .category_brand_option .js_load_more_button': '_onClickLoadmore', // Load more category or Brand
+
+            /** Multiple tab **/
+            'click .js_add_tab': 'addTab', // Add tab
+            'click .js_remove_tab': 'removeTab', // Remove tab
+            'click .js-prev-tab': 'prevTab', // Go to previous tab
+            'click .js-next-tab': 'nextTab', // Go to next tab
+            'keyup .js_input_tab' : '_inputTab', // Update the title of the tab
+            'click .slider_filter_option a' : '_setItemIds', // Set the product items in data-item_ids attribute
+            'change .slider_category_list, .category-discount':  '_setItemIds', // Set the product items in data-item_ids attribute
+            'click .tab_style_option a' : '_activeAndPreviewTab', // Change the preview while changing the tab Style
+            'click [data-class="style5"] a' : '_onClickSliderType5', // update active li item with animation
+            /** Multiple tab **/
 		},
+
+		_findLinksAndPanes: function () {
+		    this.$tab =  this.sliderTarget.find('.product_tabs_main');
+            this.$navLinks = this.$tab.find('.nav .nav-link');
+            this.$tabPanes = this.$tab.find('.tab-content .tab-pane');
+        },
+
+        _disabledButtons: function() { // disabled buttons of add/remove
+            if(this.$tab.find('.nav-item').length < 3) {
+                $('.product-multi-tab').find('.js_remove_tab').addClass('disabled')
+            } else {
+                $('.product-multi-tab').find('.js_remove_tab').removeClass('disabled')
+            }
+            if(this.$tab.find('.nav-item').length < 4) {
+                $('.product-multi-tab').find('.js_add_tab').removeClass('disabled')
+            } else {
+                $('.product-multi-tab').find('.js_add_tab').addClass('disabled')
+            }
+        },
+
+        addTab: function (ev) {
+            this.$input = $(ev.currentTarget).siblings('.input-product') || false
+            if(this.$tab.find('.nav-item').length < 4) {
+                var $activeItem = this.$navLinks.filter('.active').parent();
+                var $activePane = this.$tabPanes.filter('.active');
+                var $navItem = $activeItem.clone();
+                var $navLink = $navItem.find('.nav-link').removeClass('active');
+                var $tabPane = $activePane.clone().removeClass('active show');
+                $navItem.insertAfter($activeItem);
+                $tabPane.insertAfter($activePane);
+                this._findLinksAndPanes();
+                this._generateUniqueIDs();
+                this._disabledButtons();
+                $navLink.tab('show').html('');
+                $('.js-next-tab').trigger( "click" ); /* Go to the the next tab configuration */
+            }
+        },
+        removeTab: function (ev) {
+            var self = this;
+            var $input = $(ev.currentTarget).parents('.js_new_tab').find('.js_input_tab') || false
+            var dataTab = $input.attr('data-tab')
+            if(self.$tab.find('.nav-item').length > 2) {
+                var $activeLink = self.$navLinks.filter('.active');
+                var $activePane = self.$tabPanes.filter('.active');
+                var $next = this.$navLinks.eq((this.$navLinks.index($activeLink) + 1));
+                if (self.$navLinks.index($activeLink) > 0) {
+                    $next = self.$navLinks.eq((this.$navLinks.index($activeLink) - 1));
+                }
+                return new Promise(resolve => {
+                    $next.one('shown.bs.tab', function () {
+                        $activeLink.parent().remove();
+                        $activePane.remove();
+                        self._findLinksAndPanes();
+                        self._disabledButtons()
+                        resolve();
+                    });
+                    /* Go to the the next or previous tab configuration */
+                    if (self.$navLinks.index($activeLink) > 0) {
+                        setTimeout(function () {
+                            $('.js-prev-tab').trigger('click');
+                            dataTab = dataTab - 1
+                            $input.attr('data-tab', dataTab)
+                        },200)
+                    } else {
+                        setTimeout(function () {
+                        $('.js-next-tab').trigger('click');
+                        $input.attr('data-tab', dataTab)
+                        },200)
+                    }
+                    setTimeout(function () { // Enable/disable next/prev buttons
+                        self._findLinksAndPanes();
+                        self._disabledButtons()
+                        var data_tab = $input.attr('data-tab', dataTab)
+                        var total_tab = self.$navLinks.length;
+                        if(dataTab == total_tab) {
+                            $('.js-next-tab').addClass('disabled')
+                        } else {
+                            $('.js-next-tab').removeClass('disabled')
+                        }
+                        if(dataTab > 1) {
+                            $('.js-prev-tab').removeClass('disabled')
+                        } else {
+                            $('.js-prev-tab').addClass('disabled')
+                        }
+                    },400)
+                });
+            }
+        },
+        _generateUniqueIDs: function () {/* Generate unique tab ids */
+            for (var i = 0; i <= this.$navLinks.length; i++) {
+                var id = _.now() + '_' + _.uniqueId();
+                var idLink = 'nav_tabs_link_' + id;
+                var idContent = 'nav_tabs_content_' + id;
+                this.$input.eq(i).attr('data-id', 'input_'+id)
+                this.$navLinks.eq(i).attr({
+                    'id': idLink,
+                    'href': '#' + idContent,
+                    'aria-controls': idContent,
+                });
+                this.$tabPanes.eq(i).attr({
+                    'id': idContent,
+                    'aria-labelledby': idLink,
+                });
+            }
+        },
+        _inputTab: function(ev) {
+            /* Set title of the tab */
+            var title = $(ev.currentTarget).val();
+            var data_tab = $(ev.currentTarget).attr('data-tab');
+            this.sliderTarget.find('.nav-item:nth-child('+data_tab+') a').html(title);
+        },
+        prevTab: function(ev) {
+            var self = $(ev.currentTarget);
+            this._findLinksAndPanes()
+            var $input = self.siblings('.js_input_tab');
+            if ($input.val() == '') { //If input value set to null then you can not change tab
+                $input.addClass('required')
+                $('.product_slider_configure_template').find('.js_add_tab').addClass('disabled')
+            } else {//Go to previous tab with all the data
+                $input.removeClass('required')
+                this._disabledButtons()
+                var current_tab = $input.attr('data-tab');
+                current_tab = parseInt(current_tab) - 1;
+                var total_tab = this.$navLinks.length;
+                if(current_tab == total_tab) {
+                    self.siblings('.js-next-tab').addClass('disabled')
+                } else {
+                    self.siblings('.js-next-tab').removeClass('disabled')
+                }
+                if(current_tab > 1) {
+                    self.removeClass('disabled')
+                } else {
+                    self.addClass('disabled')
+                }
+                $input.attr('data-tab', current_tab)
+                var data_tab = $('.product_slider_configure_template').find('.js_input_tab').attr('data-tab') || false
+                var name = this.sliderTarget.find('.tab-pane:nth-child('+data_tab+')').find('.js_slider_snippet').attr('name')
+                name = name === 'product-slider'? $('.product_configure_model .product-config-content').first().attr('data-value') : name
+                if($('.product_configure_model .product-config-content').length > 0) {
+                    $('.product_configure_model .product-config-content[data-value="'+name+'"]').click()
+                }
+                this.sliderTarget.find(".nav-item:nth-child("+data_tab+") .nav-link").tab('show');
+                var tab_title = this.sliderTarget.find('.nav-item:nth-child('+data_tab+') a').html();
+                $input.val($.trim(tab_title));
+            }
+        },
+        nextTab: function(ev) {
+            var self = $(ev.currentTarget);
+            this._findLinksAndPanes()
+            var $input = self.siblings('.js_input_tab');
+            if ($input.val() == '') {//If input value set to null then you can not change tab
+                $input.addClass('required')
+                $('.product_slider_configure_template').find('.js_add_tab').addClass('disabled')
+            } else {//Go to next tab with all the data
+                $input.removeClass('required')
+                this._disabledButtons()
+                var current_tab = $input.attr('data-tab');
+                current_tab = parseInt(current_tab) + 1;
+                var total_tab = this.$navLinks.length;
+                if(current_tab == total_tab) {
+                    self.addClass('disabled')
+                } else {
+                    self.removeClass('disabled')
+                }
+                if(current_tab > 1) {
+                    self.siblings('.js-prev-tab').removeClass('disabled')
+                } else {
+                    self.siblings('.js-prev-tab').addClass('disabled')
+                }
+                $input.attr('data-tab', current_tab)
+                var data_tab = $('.product_slider_configure_template').find('.js_input_tab').attr('data-tab') || false
+                var name = this.sliderTarget.find('.tab-pane:nth-child('+data_tab+')').find('.js_slider_snippet').attr('name')
+                name = name === 'product-slider'? $('.product_configure_model .product-config-content').first().attr('data-value') : name
+                if($('.product_configure_model .product-config-content').length > 0) {
+                    $('.product_configure_model .product-config-content[data-value="'+name+'"]').click()
+                }
+                this.sliderTarget.find(".nav-item:nth-child("+data_tab+") .nav-link").tab('show');
+                var tab_title = this.sliderTarget.find('.nav-item:nth-child('+data_tab+') a').html();
+                $input.val($.trim(tab_title));
+            }
+        },
+        _setItemIds: function() {
+            var item_ids = []
+            if (this.sliderTarget.attr('name') == 'product-multi-tab') {
+                var data_tab = $('.product_slider_configure_template').find('.js_input_tab').attr('data-tab') || false
+                var target = this.sliderTarget.find('.tab-pane:nth-child('+data_tab+')').find('.js_slider_snippet')
+                var name = target.attr('name')
+                name = name === 'product-slider'? $('.product_configure_model .product-config-content').first().attr('data-value') : name
+                if (name === 'manual-configuration'){
+                    $('.product-box .products').each(function(){
+                         item_ids.push($(this).attr('data-item_id'));
+                    });
+                }
+                if (name === 'product-category-discount'){
+                    item_ids = $('.category-discount .slider_category_list').val()
+                    $('.category-discount input[type="checkbox"]').length > 0 && target.attr("data-discount_policy",$('.category-discount input[type="checkbox"]:checked').length > 0 ? 'discounts':'products')
+                }
+                if (name === 'custom-domain'){
+                    item_ids = $(".slider_filter_option .dropdown-item.active").attr('data-filter')
+                }
+                item_ids.length > 0 && target.attr("data-item_ids", item_ids);
+            }
+        },
+
 		/*  Product Slider Methods  */
 		_onClickConfigContent: function (ev) {
 			$(".div_sort_by").hide()
@@ -48,6 +264,11 @@ odoo.define('slider.builder.common.editor', function (require) {
                     $('.product_ui_configure_template .js-conf-bottom').hide();
                 }
             }
+            if(this.sliderTarget.attr('name') == 'product-multi-tab') {
+                var data_tab = $('.product_slider_configure_template').find('.js_input_tab').attr('data-tab')
+                var target = this.sliderTarget.find('.tab-pane:nth-child('+data_tab+')').find('.js_slider_snippet')
+                target.attr("name",name)
+            }
             this.loadProductSection()
 		},
 		//Change the preview while changing in (Wishlist,add to cart,quick-view etc.)
@@ -57,6 +278,7 @@ odoo.define('slider.builder.common.editor', function (require) {
 		},
 		_onClickBoxClose: function(ev){
 			$(ev.currentTarget).parents('.product-main').remove();
+			this._setItemIds();
 		},
 		_onClickBox: function(ev){
 			$('.js_input_item').focus();
@@ -80,6 +302,7 @@ odoo.define('slider.builder.common.editor', function (require) {
 			}
 		},
 		appendData: function(key,exclude_products){
+		    var self = this;
 			var max = $('.ui-configure input[name="limit"]').attr('max') || this.limit
 			max = parseInt(max)
 			if(exclude_products.length >= max){
@@ -98,6 +321,7 @@ odoo.define('slider.builder.common.editor', function (require) {
 					$(".js_new_item").after('<li class="js_items products media align-items-center product-main" value ='+val+' data-item_id ='+val+'>'+$(this).html()+'</li>');
 					$('.js_input_item').val('')
 					$("#js_item").empty().removeClass('show')
+					self._setItemIds()
 				});
             })
 		},
@@ -117,7 +341,7 @@ odoo.define('slider.builder.common.editor', function (require) {
 					}
 				}
 				else{
-				$(target).addClass('d-none')
+				    $(target).addClass('d-none')
 				}
             })
 		},
@@ -126,6 +350,11 @@ odoo.define('slider.builder.common.editor', function (require) {
 			var name = self.sliderTarget.attr("data-name") || false;
 			var target = self.sliderTarget
 			var limit = self.limit
+			if(self.sliderTarget.attr('name') == 'product-multi-tab') {
+                var $input = $('.product_slider_configure_template').find('.js_input_tab')
+                var data_tab = $input.attr('data-tab');
+                target = self.sliderTarget.find('.tab-pane:nth-child('+data_tab+')').find('.js_slider_snippet')
+			}
 			$('.js-layout-selection,.js-next-btn').removeClass('disabled')
 			ajax.jsonRpc('/get-product-list', 'call',{'name': name, 'limit': limit}).then(function(data) {
 				if (data && data.error){
@@ -146,13 +375,11 @@ odoo.define('slider.builder.common.editor', function (require) {
 						var checked = (ev.currentTarget.checked) ? false : true;
 						ev.currentTarget.checked=(checked) ? false : checked.toString();
 					});
-					if (name == 'custom-domain')
-					{
+					if (name == 'custom-domain') {
 						var filter_id = target.attr('data-filter_id');
 						if($('.slider_filter_option  .dropdown-item[data-filter="'+filter_id +'"]').length > 0){
 							$('.slider_filter_option  .dropdown-item[data-filter="'+filter_id +'"]').trigger('click')
-						}
-						else{
+						} else{
 							$('.slider_filter_option .dropdown-item').first().click();
 						}
 					}
@@ -162,8 +389,7 @@ odoo.define('slider.builder.common.editor', function (require) {
 						if(item_ids.length){
 							item_ids = item_ids.split(',').map(function(e) {return +parseInt(e)})
 							$('.slider_category_list').val(item_ids).click()
-						}
-						else {
+						} else {
 							$(".slider_category_list").val($(".slider_category_list option:first").val());
 						}
 						if(discount_policy == 'discounts') {
@@ -205,6 +431,12 @@ odoo.define('slider.builder.common.editor', function (require) {
 			        this.limit = this.sliderTarget.data('limit');
 			    }
 			}
+			if (this.sliderTarget.attr('name') == 'product-multi-tab') {
+			    this._findLinksAndPanes();
+			    this.sliderTarget.find('.nav-item .nav-link, .tab-pane').removeClass('active show')
+                this.sliderTarget.find('.nav-item:first-child .nav-link').addClass('active')
+                this.sliderTarget.find('.tab-pane:first-child').addClass('active show')
+			}
 			this.showPopup()
         },
 
@@ -221,6 +453,18 @@ odoo.define('slider.builder.common.editor', function (require) {
 				$('.cus_theme_loader_layout').addClass('d-none')
 				$('#product_configure_model').modal('show');
 				name = name === 'product-slider'? $('.product_configure_model .product-config-content').first().attr('data-value'): name
+				if (name == 'product-multi-tab') {
+				    var $input = $('.product_slider_configure_template').find('.js_input_tab')
+				    var data_tab = $input.attr('data-tab');
+				    var target = self.sliderTarget.find('.tab-pane:nth-child('+data_tab+')').find('.js_slider_snippet')
+				    var tab_title = self.sliderTarget.find('.nav-item:nth-child('+data_tab+') a').html();
+                    $input.val($.trim(tab_title));
+				    name = target.attr('name')
+				    name = name === 'product-slider'? $('.product_configure_model .product-config-content').first().attr('data-value') : name
+				    item_ids = target.attr('data-item_ids') || false;
+				    item_ids.length > 0 && target.attr("data-item_ids", item_ids);
+				    self._disabledButtons();
+				}
 				$('#product_configure_model').on('shown.bs.modal', function (ev) {
                 	$('.product_configure_model .slider-configure').click()
                 	$('.product_configure_model h4').first().click()
@@ -237,11 +481,13 @@ odoo.define('slider.builder.common.editor', function (require) {
 
 				var item_ids = self.sliderTarget.attr('data-item_ids') || false;
 				var style = self.sliderTarget.attr('data-style') || false;
+				var tabStyle = self.sliderTarget.attr('data-tab-style') || false;
 				var sort_by = self.sliderTarget.attr('data-sort_by') || false;
 				var limit = self.sliderTarget.attr('data-limit') || '10';
 				var product_count = self.sliderTarget.attr('data-product_count') || false; discount_policy
                 item_ids = item_ids ? item_ids.split(',').map(function(e) {return +parseInt(e)}) : item_ids
                 style ? $(".product_configure_model .slider_style_option a[data-style='"+style+"']").first().click() : $(".product_configure_model .slider_style_option a").first().click()
+                tabStyle ? $(".product_configure_model .tab_style_option a[data-tab-style='"+tabStyle+"']").first().click() : $(".product_configure_model .tab_style_option a").first().click()
                 sort_by && $(".product_configure_model .slider_sort_option a[data-sort_by='"+sort_by+"']").first().click()
                 $('.product_configure_model input[name="limit"]').val(limit)
                 // Brand And Category Slider
@@ -316,6 +562,8 @@ odoo.define('slider.builder.common.editor', function (require) {
 			$(".product_configure_model .slider_style_option a.active").click()
 			if(!$('.layout-configure .slider_style_option').length) {
                 self.getSliderPreview();
+                self.getTabType6Preview(ev);
+                self.otherTypes(ev);
             }
 		},
 
@@ -360,7 +608,25 @@ odoo.define('slider.builder.common.editor', function (require) {
 			$(ev.currentTarget).parentsUntil( ".slider-dropdown" ).find("a").removeClass('active');
             $(ev.currentTarget).addClass('active');
             $(ev.currentTarget).parentsUntil( ".dropdown_div" ).find('.slider-dropdown-button').text($(ev.currentTarget).text());
+            this.getSliderPreview();
+            this.getTabType5Preview(ev);
+            this.getTabType6Preview(ev);
+		},
+
+		_activeAndPreviewTab: function (ev) {
+			$(ev.currentTarget).parentsUntil( ".tab-dropdown" ).find("a").removeClass('active');
+            $(ev.currentTarget).addClass('active');
+            $(ev.currentTarget).parentsUntil( ".dropdown_div" ).find('.tab-dropdown-button').text($(ev.currentTarget).text());
+            var className = $(ev.currentTarget).attr('data-class')
+            this.sliderTarget.find('.product_tabs_nav .nav').attr('data-class',className)
             this.getSliderPreview()
+            if ($(ev.currentTarget).text().trim() == 'Style 6') {
+                this.getTabType6Preview(ev);
+            }
+            else {
+                this.otherTypes(ev);
+            }
+            this.getTabType5Preview(ev);
 		},
 
 		// Save Configuration
@@ -392,17 +658,163 @@ odoo.define('slider.builder.common.editor', function (require) {
             $('.product_ui_configure_template .product-config-icon.active').each(function(){
                    ui_option.push($(this).data('value'));
             });
-            item_ids.length > 0 && target.attr("data-item_ids", item_ids);
-            style && target.attr("data-style", style);
-            ui_option.length > 0 && target.attr("data-ui_option", ui_option);
-            slider_type && target.attr("data-slider_type", slider_type);
-            sort_by && target.attr("data-sort_by", sort_by);
-            limit && target.attr("data-limit", limit);
-            target.attr("name", name);
+            if(target.attr('name') == 'product-multi-tab') {
+                /** If multi tab, then each of the content will be saved **/
+                var tabStyle = $('.tab_style_option a.active').attr('data-tab-style') || false
+                target.find('.nav-item .nav-link, .tab-pane').removeClass('active show')
+                target.find('.nav-item:first-child .nav-link').addClass('active')
+                target.find('.tab-pane:first-child').addClass('active show')
+                tabStyle && this.sliderTarget.attr("data-tab-style", tabStyle);
+                this.sliderTarget.find('.product_tabs_content .tab-pane').each(function () {
+                    target = $(this).find('.js_slider_snippet')
+                    style && target.attr("data-style", style);
+                    ui_option.length > 0 && target.attr("data-ui_option", ui_option);
+                    slider_type && target.attr("data-slider_type", slider_type);
+                    sort_by && target.attr("data-sort_by", sort_by);
+                    limit && target.attr("data-limit", limit);
+                })
+			} else {
+                item_ids.length > 0 && target.attr("data-item_ids", item_ids);
+                style && target.attr("data-style", style);
+                ui_option.length > 0 && target.attr("data-ui_option", ui_option);
+                slider_type && target.attr("data-slider_type", slider_type);
+                sort_by && target.attr("data-sort_by", sort_by);
+                limit && target.attr("data-limit", limit);
+                target.attr("name", name);
+            }
             $('.ui-configuration input[name="product_count"]').length > 0 && target.attr("data-product_count",$('.ui-configuration input[name="product_count"]:checked').length > 0 ? '1':'0')
             $('.category-discount input[type="checkbox"]').length > 0 && target.attr("data-discount_policy",$('.category-discount input[type="checkbox"]:checked').length > 0 ? 'discounts':'products')
             $('#product_configure_model').modal('hide');
 		},
+		// multi tab tab style 5 active preview
+		getTabType5Preview: function(ev){
+			var tabs = $(ev.currentTarget).parents('[data-class="style5"]');
+            $(tabs).each(function(){
+                if ( $(this).find('.active').length == 0 ){
+                   $(this).find('li').first().children('a').addClass('active');
+                   var activeFirstItem = $(this).find('.active');
+                   var activeFirstWidth = activeFirstItem.innerWidth();
+                   var activeFirstHeight = activeFirstItem.innerHeight();
+                   $(this).find(".tab_selector").css({
+                        "left": 0 + "px",
+                        "width": activeFirstWidth + "px",
+                        "height": activeFirstHeight + "px",
+                        "top": activeFirstItem.position.top + "px"
+                   });
+                }
+                else{
+                   var activeItem = $(this).find('.active');
+                   var activeWidth = activeItem.innerWidth();
+                   var activeHeight = activeItem.innerHeight();
+                   $(this).find(".tab_selector").css({
+                     "left": activeItem.position.left + "px",
+                     "width": activeWidth + "px",
+                     "height": activeHeight + "px",
+                     "top": activeItem.position.top + "px"
+                   });
+                }
+                $(this).find("li.nav-item").css({'width':'auto;'});
+                $(this).find("li.nav-item a").css({'height':'auto;'});
+            });
+            var getItemHeight = tabs.find('li.nav-item').innerHeight();
+            var getItemWidth = tabs.find('li.nav-item').innerWidth();
+            tabs.find('.tab_selector').css({'height': getItemHeight});
+            tabs.find('.tab_selector').css({'width': getItemWidth});
+		},
+		// show multi tab style 5 active animation
+		_onClickSliderType5: function(ev){
+              ev.preventDefault();
+              var activeWidth = $(ev.currentTarget).innerWidth();
+              var activeHeight = $(ev.currentTarget).innerHeight();
+              var itemPos = $(ev.currentTarget).position();
+              $(ev.currentTarget).parents('[data-class="style5"]').find(".tab_selector").css({
+                "left":itemPos.left + "px",
+                "width": activeWidth + "px",
+                "height": activeHeight + "px",
+                "top": itemPos.top + "px"
+              });
+		},
+		// multi tab tab style 6 active preview
+		getTabType6Preview: function(ev){
+		    /* Multi tab style 6 active parent */
+		    var config_tab = $('.product-configure-tab-preview > [data-class="style6"]');
+		    $(config_tab).find("a.nav-link").removeClass('active');
+		    if( $(config_tab).find("li.nav-item").hasClass('active') == 0 ){
+                $(config_tab).find("li.nav-item").first().addClass('active');
+            }
+            else{
+                $(config_tab).find("a.nav-link.active").closest("li.nav-item").addClass('active');
+            }
+            $('[data-class="style6"] a').on("click", function(ev){
+                $('[data-class="style6"]').find("li.nav-item").removeClass('active');
+                $(ev.currentTarget).closest("li.nav-item").addClass('active');
+            });
+
+            var parentTab = $('.nav[data-class="style6"]');
+            if (parentTab){
+                var numItems = parentTab.find('li').length;
+                if (numItems == 12) {
+                   parentTab.find("li.nav-item").width("8.3%");
+                }
+                else if (numItems == 11) {
+                  parentTab.find("li.nav-item").width("9%");
+                }
+                else if (numItems == 10) {
+                  parentTab.find("li.nav-item").width("10%");
+                }
+                else if (numItems == 9) {
+                  parentTab.find("li.nav-item").width("11.1%");
+                }
+                else if (numItems == 8) {
+                  parentTab.find("li.nav-item").width("12.5%");
+                }
+                else if (numItems == 7) {
+                  parentTab.find("li.nav-item").width("14.2%");
+                }
+                else if (numItems == 6) {
+                  parentTab.find("li.nav-item").width("16.666666666666667%");
+                }
+                else if (numItems == 5) {
+                  parentTab.find("li.nav-item").width("20%");
+                }
+                else if (numItems == 4) {
+                  parentTab.find("li.nav-item").width("25%");
+                }
+                else if (numItems == 3) {
+                  parentTab.find("li.nav-item").width("33.3%");
+                }
+                else if (numItems == 2) {
+                  parentTab.find("li.nav-item").width("50%");
+                }
+                else{
+                    parentTab.find("li.nav-item").width("auto");
+                }
+            }
+
+            $(parentTab).each(function (ev) {
+                var highestBox = 0;
+                $( $(ev.currentTarget).find('li a') ).each(function () {
+                    if ($(ev.currentTarget).height() > highestBox){
+                       highestBox = $(ev.currentTarget).height();
+                    }
+                });
+                $($(ev.currentTarget).find('li a')).height(highestBox);
+                var getItemHeight = $(ev.currentTarget).find('li').innerHeight();
+		        $(ev.currentTarget).find('.tab_selector').css({'height': getItemHeight});
+            });
+		},
+
+		otherTypes: function(ev){
+		    var getCurrentType = $(ev.currentTarget).attr('data-class');
+		    var currentStyle = $('.product-configure-tab-preview').find('ul').attr('data-class', getCurrentType);
+		    currentStyle.find('li.nav-item').css('width','auto');
+		    currentStyle.find('li.nav-item a.nav-link').css('height','auto');
+		    if ( getCurrentType == 'style5'){
+		        var getItemHeight = currentStyle.find('li').height();
+		        currentStyle.find('.tab_selector').css({'height': getItemHeight});
+		    }
+		},
+
 		getItemIds: function(name){
 			var item_ids = []
 			if (name === 'manual-configuration'){
@@ -456,15 +868,23 @@ odoo.define('slider.builder.common.editor', function (require) {
             slider_type ? params['slider_type'] = slider_type : false
             discount_policy ? params['discount_policy'] = discount_policy :false
             ui_option ? params['ui_options'] = ui_option :false
+            if(this.sliderTarget.attr('name') == 'product-multi-tab') {
+                var tab_design =  this.sliderTarget.find('.product_tabs_nav').html()
+                $(".product-configure-tab-preview").html(tab_design)
+            }
         	if(name === 'brand-slider' || name === 'category-slider'){
 				ajax.jsonRpc('/slider/category-brand-render', 'call',params).then(function (data) {
 					$(".product-configure-section-preview").html(data)
+					var owl_rtl = false;
+                    if ($('#wrapwrap').hasClass('o_rtl')) {
+                        owl_rtl = true;
+                    }
 					$(".product-configure-section-preview").find('.slider_edit_msg').toggleClass('d-none', true);
 					$('.category_carousel,.brand_carousel').owlCarousel({
 						loop: false,
 						rewind: true,
 						margin: 10,
-						rtl : false,
+						rtl : owl_rtl,
 						nav: true,
 						lazyLoad:true,
 						dots: false,

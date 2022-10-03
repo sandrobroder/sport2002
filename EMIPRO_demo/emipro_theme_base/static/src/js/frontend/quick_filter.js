@@ -61,7 +61,7 @@ odoo.define('emipro_theme_base.quick_filter', function(require) {
     $(document).mouseup(function(e) {
         var container = $(".te_quick_filter_dropdown_menu");
         /* hide quick filter if click outside the popup */
-        if(e.target.className != "te_quick_filter_dropdown btn te_sort_btn") {
+        if(e.target.className != "te_quick_filter_dropdown btn te_sort_btn btn-sm") {
             if (!container.is(e.target) && container.has(e.target).length === 0) {
                 $(".te_quick_filter_main_div").removeClass('active');
                 container.slideUp();

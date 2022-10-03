@@ -12,6 +12,8 @@ odoo.define('emipro_theme_base.quick_view', function(require) {
         '/website_sale_stock/static/src/xml/website_sale_stock_product_availability.xml',
         QWeb
     );
+    var Dialog = require('web.Dialog');
+    var _t = core._t;
 
 
     publicWidget.registry.quickView = publicWidget.Widget.extend({
@@ -90,4 +92,50 @@ odoo.define('emipro_theme_base.quick_view', function(require) {
     $('#quick_view_model').on('hidden.bs.modal', function (e) {
         $("#quick_view_model .modal-body").html('');
     })
+    publicWidget.registry.reorder = publicWidget.Widget.extend({
+        selector: ".o_portal_my_doc_table, #portal_sale_content",
+        events: {
+            'click .btn_reorder': 'reorderSale',
+        },
+        reorderSale: function(ev) {
+            /* This method is called while click on the reorder button
+             and show the confirm box if stock is not available for any product */
+            ev.preventDefault()
+            self = this;
+            var re_order = $(".o_portal_my_doc_table");
+            var $msg = _t("Some Products you want to add in your cart do not have enough stock or they are temporary out of stock ! Do you want to continue ?")
+            var $title = re_order.find(".text_reorder").text()
+            var element = ev.currentTarget;
+            var order_id = $(element).attr('data-id');
+            ajax.jsonRpc('/order_check_reorder', 'call', {'order_id':order_id}).then(function(response) {
+                if(response)
+                {
+                    Dialog.confirm(self, $msg,
+                    {
+                        size: 'medium',
+                        title: $title,
+                        buttons: [{
+                            text: _t('Yes'),
+                            classes: 'btn btn-primary yes',
+                            close: true,
+                            click: function () {
+                                ajax.jsonRpc('/order_reorder', 'call',{'order_id':order_id}).then(function(response) {
+                                    window.location.href = '/shop/cart';
+                                });
+                            }
+                        }, {
+                            text: _t('No'),
+                            classes: 'btn btn-secondary no',
+                            close: true,
+                        }]
+                    });
+                }
+                else {
+                    ajax.jsonRpc('/order_reorder', 'call',{'order_id':order_id}).then(function(response) {
+                                    window.location.href = '/shop/cart';
+                                });
+                }
+            });
+            },
+        });
 });

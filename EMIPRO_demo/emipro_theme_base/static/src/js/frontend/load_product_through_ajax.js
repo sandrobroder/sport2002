@@ -13,6 +13,7 @@ odoo.define('emipro_theme_base.load_product_through_ajax', function(require) {
     var quickFilter = new sAnimations.registry.te_quick_filter_main_div();
     var core = require('web.core');
     var _t = core._t;
+    var sale = new sAnimations.registry.WebsiteSale();
 
     sAnimations.registry.WebsiteSale.include({
         _onChangeAttribute: function(event) {
@@ -53,8 +54,40 @@ odoo.define('emipro_theme_base.load_product_through_ajax', function(require) {
                 }
             }
         },
+/*        _onClickAdd: function (ev) {
+            var self = $(ev.currentTarget)
+            if(self.closest('.product_details_sticky').length || self.hasClass('ajax-add-to-cart')) {
+                var def = () => {
+                    this.isBuyNow = $('#product_details #buy_now').attr('id') === 'buy_now';
+                    var $form = $('#product_details .js_main_product #add_to_cart').closest('form')
+                    return this._handleAdd($form);
+                };
+                return def();
+            } else {
+                this._super.apply(this, arguments);
+            }
+            setTimeout(function(){
+                $('.modal').find('footer').find('button').addClass('te_theme_button');
+            }, 700);
+        },*/
         _onClickAdd: function (ev) {
-            this._super.apply(this, arguments);
+            var self = $(ev.currentTarget)
+            if(self.hasClass('ajax-add-to-cart')){
+               var $form = $('#product_details .js_main_product #add_to_cart').closest('form')
+                sale._handleAdd($form);
+            }
+            else if (self.hasClass('ajax-buy-now') || self.hasClass('te_buy_now')) {
+                var def = () => {
+                    this.isBuyNow = $('#product_details #buy_now').attr('id') === 'buy_now';
+                    var $form = $('#product_details .js_main_product #add_to_cart').closest('form')
+                    return this._handleAdd($form);
+                };
+                return def();
+            }
+            else {
+                this._super.apply(this, arguments);
+            }
+
             setTimeout(function(){
                 $('.modal').find('footer').find('button').addClass('te_theme_button');
             }, 700);
@@ -238,6 +271,9 @@ odoo.define('emipro_theme_base.load_product_through_ajax', function(require) {
                     if($('#id_lazyload').length) {
                         $("img.lazyload").lazyload();
                     }
+                    if($(".color-changer").length) {
+                        $(".color-changer").mCustomScrollbar({axis: "x",theme: "dark-thin",alwaysShowScrollbar: 0 });
+                    }
 
                 }
             });
@@ -261,9 +297,6 @@ odoo.define('emipro_theme_base.load_product_through_ajax', function(require) {
         _onClearAttribDiv: function(event) {
             /* This method is inherit to clear attribute div */
             var attr_name = $(event.currentTarget).attr('attribute-name');
-            if($('.te_view_all_filter_inner').find(".te_clear_attr_a").hasClass(attr_name)) {
-                $('.te_view_all_filter_div .te_view_all_filter_inner').find('.te_clear_attr_a.'+attr_name).trigger('click');
-            }
             var self = event.currentTarget;
             var curent_div = $(self).parents("li.nav-item");
             var curr_divinput = $(curent_div).find("input:checked");

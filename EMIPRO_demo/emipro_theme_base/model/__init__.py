@@ -12,3 +12,8 @@ from . import proudct_pricelist
 from . import res_config
 from . import product_tab_line
 from . import product_attribute_value
+from . import ir_attachment
+from . import menu_label
+from . import synonym_group
+from . import search_keyword_report
+from . import html_dict
