@@ -9,8 +9,6 @@
             <xpath expr="//form/sheet/group" position="after">
                 <group>
                     <field name="is_dynamic_menu" />
-                    <field name="menu_label_text" />
-                    <field name="menu_label_text_color" />
                 </group>
             </xpath>
         </field>
@@ -23,8 +21,6 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='is_mega_menu']" position="after">
                 <field name="is_dynamic_menu" />
-                <field name="menu_label_text" />
-                <field name="menu_label_text_color" />
             </xpath>
         </field>
     </record>

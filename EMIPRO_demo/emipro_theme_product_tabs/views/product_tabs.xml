@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='sales']" position="after">
                 <page name="product_tabs" string="Product Tabs">
-                    <field name="tab_line_ids" mode="kanban">
+                    <field name="tab_line_ids" mode="kanban" context="{'default_tab_type': 'specific product'}">
                         <kanban>
                             <templates>
                                 <t t-name="kanban-box">
@@ -20,11 +20,16 @@
                         <form string="Product Tab">
                             <sheet>
                                 <group>
-                                    <field name="tab_name"/>
-                                    <field name="tab_content"/>
+                                    <field name="tab_name" string="Name"/>
+                                    <field name="tab_type" widget="radio" invisible="1"/>
                                     <field name="website_ids" options="{'no_create': True}" widget="many2many_tags" domain="[('theme_id.author','like','Emipro Technologies Pvt. Ltd.')]" groups="website.group_multi_website"/>
                                     <field name="sequence"/>
                                 </group>
+                                <notebook>
+                                    <page string="Content">
+                                        <field name="tab_content" string="Content" widget="html"/>
+                                    </page>
+                                </notebook>
                             </sheet>
                         </form>
                     </field>
