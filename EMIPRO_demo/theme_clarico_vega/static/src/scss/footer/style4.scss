@@ -52,7 +52,6 @@ span.te_footer_add_tel_email_text_ept {
         @include media-breakpoint-down(md) {
             margin-bottom: 0px;
         }
-
     }
 }
 ul.te_footer_info_ept li a{
@@ -163,13 +162,12 @@ ul.te_footer_info_text{
 {
     color: nth($f_color,20);
 	@include media-breakpoint-down(md) {
-		//text-align:right;
-		font-size:nth($f_sizes,3);
-		margin-bottom: 8px;
-		margin-top: 8px;
-		}
-		@include media-breakpoint-down(sm) {
-		text-align:left;
+        font-size:nth($f_sizes,3);
+        margin-bottom: 8px;
+        margin-top: 8px;
+    }
+    @include media-breakpoint-down(sm) {
+        text-align:left;
 	}
 }
 .te_footer_payment_img
@@ -195,7 +193,6 @@ ul.te_footer_info_text{
         margin-bottom: 15px;
     }
 }
-
 .te_end_ftr_container{
     @include media-breakpoint-down(sm) {
         width: 90%;

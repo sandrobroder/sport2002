@@ -6,7 +6,7 @@ odoo.define('theme_clarico_vega.vertical_menu', function(require) {
     publicWidget.registry.vertical_menu = publicWidget.Widget.extend({
         selector: ".te_bar_icon",
         start: function () {
-            self = this;
+            var self = this;
             self.callVerticalMenu();
         },
         callVerticalMenu: function(){
@@ -38,10 +38,8 @@ odoo.define('theme_clarico_vega.vertical_menu', function(require) {
 
             // Vertical menu position
             var $h_menu = $("#oe_main_menu_navbar").height();
-            if($('.te_vertical_menu').hasClass('te_vertical_style_10')) {
+            if ($h_menu){
                 $(".te_vertical_menu").css({top:$h_menu + 0, bottom: 0, left: 0, position:'fixed', 'z-index':9999});
-            } else {
-                $(".te_vertical_menu").css({top:$h_menu + 0, bottom: 0, right: 0, position:'fixed', 'z-index':9999});
             }
         },
     });
@@ -49,11 +47,12 @@ odoo.define('theme_clarico_vega.vertical_menu', function(require) {
     $(document).mouseup(function(e)
     {
         var container = $(".te_vertical_menu");
-        // if the target of the click isn't the container nor a descendant of the container
-        if (!container.is(e.target) && container.has(e.target).length === 0)
-        {
+        var edit_button = $(e.target.parentElement).attr('id');
+        /* if the target of the click isn't the container nor a descendant of the container */
+        if (!container.is(e.target) && container.has(e.target).length === 0 && edit_button != "edit-page-menu"){
             container.removeClass("te_open");
             $("#wrapwrap").removeClass("te_menu_overlay");
         }
+    
     });
 });

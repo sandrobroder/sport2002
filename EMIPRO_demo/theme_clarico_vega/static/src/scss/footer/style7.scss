@@ -156,7 +156,6 @@ footer.o_footer
         color: nth($f_color,3);
         margin-top: -70px;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1);
-
         .te_footer_logo_img
         {
             img
@@ -164,7 +163,6 @@ footer.o_footer
                 max-width: 100px;
             }
         }
-
         @include media-breakpoint-down(sm)
         {
             width: 90%;

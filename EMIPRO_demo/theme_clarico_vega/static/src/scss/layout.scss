@@ -17,6 +17,9 @@ INDEX:
 {
 	display:none;
 }
+form.o_wsale_products_searchbar_form div.dropdown-menu.show{
+	overflow-y: auto !important;
+}
 .te_user_account
 {
 	> .dropdown-menu a.dropdown-item
@@ -314,6 +317,7 @@ div[name="mail_button"]
 	perspective: 1000px;
 	padding:30px 20px;
 	text-align: center;
+	-webkit-backface-visibility: hidden; /* Safari */
 	backface-visibility: hidden;
 	border-radius: 5px;
 }
@@ -342,6 +346,7 @@ div[name="mail_button"]
 	padding:20px;
 	text-align: center;
 	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden; /* Safari */
 	background: nth($f_color,05);
 }
 .te_contactus_banner_section

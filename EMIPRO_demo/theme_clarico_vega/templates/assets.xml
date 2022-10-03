@@ -23,7 +23,6 @@
             <link rel="stylesheet" type="text/css"
                   href="/theme_clarico_vega/static/src/scss/jquery.mCustomScrollbar.css"/>
             <link rel="stylesheet" href="/theme_clarico_vega/static/lib/aos/aos.css"/>
-            <link rel="stylesheet" href="/theme_clarico_vega/static/lib/drift-zoom/drift-basic.css"/>
         </xpath>
         <xpath expr="script[last()]" position="after">
             <script type="text/javascript" src="/theme_clarico_vega/static/src/js/frontend/owl.carousel.js"/>
@@ -39,6 +38,7 @@
             <script type="text/javascript" src="/emipro_theme_base/static/src/js/frontend/quick_view.js"/>
             <script type="text/javascript" src="/emipro_theme_base/static/src/js/frontend/price_slider.js"/>
             <script type="text/javascript" src="/emipro_theme_base/static/src/js/frontend/banner_video.js"/>
+            <script type="text/javascript" src="/emipro_theme_base/static/src/js/frontend/ajax_color_pane.js"/>
             <script type="text/javascript"
                     src="/emipro_theme_base/static/src/js/frontend/load_product_through_ajax.js"/>
             <script type="text/javascript"
@@ -52,7 +52,6 @@
             <script type="text/javascript" src="/theme_clarico_vega/static/src/js/frontend/jquery.mixitup.min.js"/>
             <script type="text/javascript"
                     src="/theme_clarico_vega/static/src/js/frontend/jquery.ui.touch-punch.min.js"/>
-            <script type="text/javascript" src="/emipro_theme_base/static/src/js/frontend/category_wise_search.js"/>
         </xpath>
         <xpath expr="script[last()]" position="after">
             <t t-set="configurator_state" t-value="request.env['ir.module.module'].sudo().search([('name', '=', 'sale_product_configurator'), ('state', 'in', ['installed'])])"/>

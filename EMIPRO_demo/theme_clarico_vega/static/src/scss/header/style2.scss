@@ -27,12 +27,10 @@
         {
             & #top_menu
             {
-                //width: 100%;
                 > li
                 {
                     border-left: 1px solid $border-color;
                     min-height: 40px;
-                    /*line-height: 130%;*/
                     line-height: inherit;
                     /* Menu links style */
                     @if index(('fill', 'outline', 'pills', 'block', 'border-bottom'), o-website-value('header-links-style')) == null {
@@ -45,7 +43,10 @@
     				>a.nav-link.active
     				{
     					min-height: inherit;
-    				}
+    					@include media-breakpoint-down(sm){
+                            width: inherit;
+                        }
+                    }
                     @include media-breakpoint-down(sm)
                     {
                         border-left:0;
@@ -89,13 +90,6 @@
             padding: 0px;
         }
     }
-//     header.o_header_affixed #top_menu_collapse #top_menu {
-//         @include media-breakpoint-up(sm){
-//             text-align: right !important;
-//             width: auto;
-//             margin-left: auto !important;
-//         }
-//     }
     /*------- Header Offer Text, Company Logo, Cart Icon, Search Box, Wishlist Icon --------*/
     .te_header_style_2_main{
          .te_header_search {
@@ -108,8 +102,19 @@
                 }
             }
         }
+        & .te_offer_left{
+            @media (max-width:992px) and (min-width:768px){
+                flex: 0 0 65%;
+                max-width: 65%;
+                display: block !important;
+            }
+        }
         & .te_login_right{
             padding: 0;
+            @media (max-width:992px) and (min-width:768px){
+                flex: 0 0 35%;
+                max-width: 35%;
+            }
             & a.btn-link{
                 padding: 13px 5px;
                 font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
@@ -130,6 +135,7 @@
                 }
             }
         }
+
         @include media-breakpoint-down(md)
         {
             & .te_header_style_2_inner{
@@ -155,7 +161,7 @@
         {
             width: 100%;
             display: inline-block;
-            padding: 10px 15px 0;
+            padding: 0px 0px;
 
             .te_header_before_logo img{
                 max-height: 50px;
@@ -222,6 +228,39 @@
             }
         }
     }
+    /* Offer text in mobile/ipad */
+    .te_header_top_text_mobile {
+        @include media-breakpoint-down(sm){
+            display: inline-block !important;
+            text-align: center;
+            width: 100%;
+            padding: 5px;
+            font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
+            color: theme-color("header_top_text_color");
+            background-color: theme-color("header_top_bg_color");
+            & .te_s_header_offer_text span{
+                vertical-align: middle;
+            }
+        }
+    }
+    .o_header_affixed{
+        .te_header_top_text_mobile {
+            @include media-breakpoint-down(sm){
+                display: none !important;
+            }
+        }
+    }
+    .editor_enable{
+       .te_header_top_text_mobile {
+            display: inline-block !important;
+            width: 100%;
+            text-align: center;
+            padding: 5px;
+            font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
+            color: theme-color("header_top_text_color");
+            background-color: theme-color("header_top_bg_color");
+       }
+    }
     /*------ User Administrator Text --------*/
     .te_user_account
     {
@@ -248,6 +287,9 @@
         }
         @include media-breakpoint-down(sm)
         {
+            .dropdown-toggle{
+                padding-right: 15px !important;
+            }
             .te_user_account_icon
             {
                 i
@@ -266,6 +308,7 @@
             font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
             @include media-breakpoint-up(md) {
                 color: inherit;
+                font-family: inherit;
             }
             @include media-breakpoint-down(sm) {
                 padding: 0;
@@ -283,6 +326,9 @@
         {
             display: inline-block;
             vertical-align: middle;
+        }
+        .js_language_selector{
+            margin-left: 0px !important;
         }
         div.te_pricelist:first-child
         {
@@ -307,10 +353,26 @@
                     left:19px;
                 }
             }
+            @media (max-width:992px) and (min-width:768px){
+                .te_currency_name{
+                    display: none;
+                }
+                .te_currency_symbol{
+                    display: block;
+                }
+            }
         }
         .te_header_lang{
             a.js_change_lang.list-inline-item {
                 font-size: nth($f_sizes,3);
+            }
+            @media (max-width:992px) and (min-width:768px){
+                .lang_btn_name{
+                    display: none;
+                }
+                .lang_btn_code{
+                    display: inline-block !important;
+                }
             }
             @include media-breakpoint-down(sm)
             {
@@ -330,10 +392,6 @@
     }
     .te_header_before_overlay
     {
-        .js_language_selector .dropdown-menu,
-        .js_language_selector .dropdown-menu.show{
-//             top: 25px !important;
-        }
         .te_header_style_2_main
         {
             .js_language_selector .dropup .dropdown-toggle::after
@@ -353,11 +411,8 @@
                     transform: translate3d(-90px, 23px, 0px) !important;
                 }
             }
-
         }
-
     }
-
     /*------ Header Offer Text ---------*/
     .te_offer_left
     {
@@ -400,7 +455,6 @@
         }
     }
     /*-------- Search Box -----------*/
-
     .te_srch_icon_header{
         display:none;
     }
@@ -434,10 +488,6 @@
                 z-index: 1;
                 width: auto;
                 background: nth($f_color,18);
-                /*display: inline-block;
-                flex: none;
-                box-shadow: unset;
-                padding: 0 0.25rem 0 0.5rem;*/
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
                 font-size: inherit;
@@ -521,7 +571,6 @@
             .btn-primary:not(:disabled):not(.disabled).active,
             .show > .btn-primary.dropdown-toggle
             {
-                //background-color: transparent;
                 color: nth($f_color,3);
                 font-size: inherit;
             }
@@ -584,9 +633,9 @@ header.o_header_is_scrolled .te_header_before_overlay {
    #top_menu li.dropdown .menu-categories-container #menu-categories .parent-category .sub-menu-dropdown .dynamic_mega_menu_child .category_column{
         width: 50%;
    }
-   #top_menu li.dropdown .menu-categories-container {
+   /*#top_menu li.dropdown .menu-categories-container {
         position: absolute;
-   }
+   }*/
 }
 .navbar-expand-md .navbar-brand.logo {
     @include media-breakpoint-up(md){

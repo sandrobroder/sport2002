@@ -2,7 +2,6 @@ odoo.define('theme_clarico_vega.website_recently_viewed', function (require) {
     "use strict";
 
     var publicWidget = require('web.public.widget');
-//    var wSaleWishList = require('theme_clarico_vega.wishlist_animate');
     var wSaleUtils = require('website_sale.utils');
     var productsRecentlyViewedSnippet = new publicWidget.registry.productsRecentlyViewedSnippet();
 

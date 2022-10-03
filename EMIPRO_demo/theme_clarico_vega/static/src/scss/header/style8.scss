@@ -1,29 +1,21 @@
-/*=========================== Header Style 8 ==============================*/
+    /*=========================== Header Style 8 ==============================*/
 /*---------- Header container/sticky position styles  ----------------*/
 #wrapwrap.homepage > header:not(.o_header_affixed) > .navbar{
     padding-top: 0px !important;
     @include transition(all,0.55s,ease);
 }
 div#wrapwrap.header_top_overlay .navbar {
-    background-color:nth($f_color,27);
-    @include media-breakpoint-down(md){
-        background-color:nth($f_color,5);
-    }
-}
-.navbar-light{
-    background-color:nth($f_color,27);
-}
-div#wrapwrap.header_top_overlay .navbar {
-    background-color:nth($f_color,27);
     padding:0px !important;
 }
 div#wrapwrap:not(.homepage) .navbar{
-    background-color:nth($f_color,5) !important;
     padding:0px !important;
 }
 .navbar .container {
     max-width: 100%;
     width: 100%;
+    @include media-breakpoint-down(sm){
+        justify-content: flex-end;
+    }
 }
 .o_header_affixed{
     margin-top: 0px !important;
@@ -53,9 +45,6 @@ header.o_header_is_scrolled .navbar #top_menu > li.nav-item{
         padding-top: 0;
         padding-bottom: 0px;
     }
-    @include media-breakpoint-down(sm){
-        padding: 0.5rem 1rem;
-    }
 }
 div#wrapwrap.homepage header:not(.o_header_is_scrolled) nav.navbar {
     position: fixed !important;
@@ -69,7 +58,6 @@ div#wrapwrap.homepage header:not(.o_header_is_scrolled) nav.navbar {
         }
 }
 nav.navbar.start-sticky {
-    background-color:nth($f_color,5) !important;
     box-shadow: 0 0 3px #757575;
     padding:0px !important;
     @include media-breakpoint-down(md){
@@ -91,20 +79,22 @@ header .navbar-brand, header .navbar .navbar-brand.logo {
     @include media-breakpoint-down(md){
         min-height:auto;
         float: left;
-        width: 75%;
-        max-width: 100%;
         margin: 0 auto;
         text-align: center;
         display: inline-block;
         @include align-items(center);
+        max-width: 80%;
+        width: auto;
     }
     @include media-breakpoint-down(xs){
         margin-left: 0px !important;
         margin-right: 0px !important;
+        width: 100%;
     }
     .img{
         @include media-breakpoint-down(md){
             width: 100%;
+            margin: 0px auto;
         }
     }
 }
@@ -113,7 +103,6 @@ header .navbar-brand, header .navbar .navbar-brand.logo {
         @include transition(all,0.3s,ease);
     }
 }
-
 /*-------- Header Search Icon, User Icon, Cart Icon, Wishlist Icon, Price List, language List -----------*/
 a.dropdown-item.js_change_lang,
 .h8_pricelist .dropdown-menu a.dropdown-item{
@@ -138,6 +127,8 @@ header .collapse.navbar-collapse .dropdown-menu a.dropdown-item{
             min-width: 210px;
             @include position(static,null,null,null,0);
             margin: 0;
+            color: inherit;
+            height: calc(1.5em + 1.35rem + 2px);
             @media (min-width:1400px){ /* custom media query for big screen */
                 min-width: 225px;
                 opacity:0.8;
@@ -153,6 +144,10 @@ header .collapse.navbar-collapse .dropdown-menu a.dropdown-item{
                     opacity:1;
                 }
             }
+            @include media-breakpoint-down(xs){
+                min-width: 200px;
+            }
+
         }
         .ept-parent-category {
             border: 0;
@@ -207,6 +202,12 @@ body.editor_enable.editor_has_snippets .o_wsale_products_searchbar_form {
     display: flex;
     max-width: 335px;
     margin-right: 20px;
+    @include media-breakpoint-down(md){
+        margin-right: 0px;
+    }
+    @include media-breakpoint-down(xs){
+        max-width: 300px;
+    }
 }
 .te_header_icon_right {
     width: auto;
@@ -231,46 +232,54 @@ body.editor_enable.editor_has_snippets .o_wsale_products_searchbar_form {
         display: block;
     }
 }
-.h8_pricelist .te_currency_name {
-    display: none;
-}
-.h8_pricelist .te_currency_symbol {
-    display: block;
-}
-.h8_pricelist .dropdown-menu{
-    &:before{
-        right:15px;
-        left:unset;
+.h8_pricelist{
+    .te_currency_name {
+        display: none;
     }
-    &:after{
-        right:14px;
-        left:unset;
+    .te_currency_symbol {
+        display: block;
     }
-    @include media-breakpoint-down(md)
-    {
-        margin-bottom: 8px;
-        margin-top: 0 !important;
+    .dropdown-menu{
         &:before{
-            right: 40px;
-            top: unset;
-            bottom: -12px;
-            border-color:#fff transparent transparent transparent;
+            right:15px;
+            left:unset;
         }
         &:after{
-            right: 39px;
-            top: unset;
-            bottom: -15px;
-            border-color:#ededed transparent transparent transparent;
+            right:14px;
+            left:unset;
+        }
+        @include media-breakpoint-down(md)
+        {
+            margin-bottom: 8px;
+            margin-top: 0 !important;
+            &:before{
+                right: 40px;
+                top: unset;
+                bottom: -12px;
+                border-color:#fff transparent transparent transparent;
+            }
+            &:after{
+                right: 39px;
+                top: unset;
+                bottom: -15px;
+                border-color:#ededed transparent transparent transparent;
+            }
         }
     }
 }
 .te_header_icon_right{
     .js_language_selector {
         .dropdown-toggle {
-            font-size: inherit;
+            font-size: 18px;
             padding: 0 4px;
             box-shadow: none !important;
             vertical-align: text-bottom;
+            .o_lang_flag{
+                 @include media-breakpoint-down(md){
+                    width: 1em;
+                    height: 1em;
+                 }
+            }
         }
         a.js_change_lang.list-inline-item {
             font-size: inherit;
@@ -305,6 +314,7 @@ body.editor_enable.editor_has_snippets .o_wsale_products_searchbar_form {
             @include media-breakpoint-down(md){
                 border-top: 0;
                 border-bottom: 0.3em solid;
+                font-size: 16px;
             }
         }
     }
@@ -313,16 +323,26 @@ body.editor_enable.editor_has_snippets .o_wsale_products_searchbar_form {
     display: inline-block;
 }
 .te_header_icon_right a{
-    font-size: inherit;
+    font-size: 18px;
+    /*color: inherit !important;*/
 }
-.te_header_right_icon .te_cart_icon_head a sup, .te_header_right_icon .te_wish_icon_head a sup {
-    @include border-radius(12px);
-    width: auto;
-    padding: 4px 6px;
-    vertical-align: top;
-    display: inline-block !important;
-    top: -10px;
-    right: 10px;
+.te_header_right_icon {
+    .te_cart_icon_head a sup,
+    .te_wish_icon_head a sup {
+        @include border-radius(12px);
+        width: auto;
+        padding: 4px 6px;
+        vertical-align: top;
+        display: inline-block !important;
+        top: -10px;
+        right: 10px;
+        @include media-breakpoint-down(md){
+            padding: 2px 5px;
+            font-size: 65%;
+            top: -5px;
+            right: 12px;
+        }
+    }
 }
 @include media-breakpoint-down(md){
     .te_header_right_icon .te_header_icon_right {
@@ -376,29 +396,39 @@ body.editor_enable.editor_has_snippets .o_wsale_products_searchbar_form {
 .js_language_selector .btn-secondary.dropdown-toggle:hover{
     color:nth($f_color,19) !important;
 }
-.h8_pricelist .dropdown-menu,
-.h8_pricelist .dropdown-menu.show{
-    left: auto !important;
-    right: 0px;
-    @include media-breakpoint-down(md){
-        transform: translate3d(0px, -51px, 0px) !important;
-        top: auto;
-        bottom: 0;
-    }
-    @include media-breakpoint-down(sm){
-        transform: translate3d(28px, -38px, 0px) !important;
+.h8_pricelist {
+    .dropdown-menu,
+    .dropdown-menu.show{
+        left: auto !important;
+        right: 0px;
+        @include media-breakpoint-down(md){
+            transform: translate3d(0px, -51px, 0px) !important;
+            top: auto;
+            bottom: 0;
+        }
+        @include media-breakpoint-down(sm){
+            transform: translate3d(28px, -38px, 0px) !important;
+        }
     }
 }
-.o_rtl .h8_pricelist .dropdown-menu,
-.o_rtl .h8_pricelist .dropdown-menu.show{
-    @include media-breakpoint-down(sm){
-        transform: translate3d(28px, -38px, 0px) !important;
+.o_rtl .h8_pricelist{
+    .dropdown-menu,
+    .dropdown-menu.show{
+        @include media-breakpoint-down(sm){
+            transform: translate3d(28px, -38px, 0px) !important;
+        }
     }
 }
 @include media-breakpoint-down(md){
     .te_header_right_icon .dropdown-toggle::after{
         border-top: 0;
         border-bottom: 0.3em solid;
+    }
+    .ept-parent-category {
+        &.dropdown-toggle::after{
+            border-top: 0.3em solid;
+            border-bottom: 0;
+        }
     }
     .te_header_account .te_signin {
         padding: 10px;
@@ -418,12 +448,14 @@ header .js_language_selector .dropdown-menu,
         border-bottom: 0.3em solid;
     }
 }
-header .js_language_selector .dropdown-menu,
-header .js_language_selector .dropdown-menu.show {
-    @include media-breakpoint-down(md){
-        transform: translate3d(0px, -49px, 0px) !important;
-        top: auto;
-        bottom: 0;
+header .js_language_selector{
+    .dropdown-menu,
+    .dropdown-menu.show {
+        @include media-breakpoint-down(md){
+            transform: translate3d(0px, -49px, 0px) !important;
+            top: auto;
+            bottom: 0;
+        }
     }
 }
 @include media-breakpoint-down(md){
@@ -441,6 +473,7 @@ header .js_language_selector .dropdown-menu.show {
     align-items: center;
     @include media-breakpoint-down(md){
         margin:0px;
+        height:$o-theme-navbar-logo-height;
     }
     button.btn.btn-primary.oe_search_button{
         z-index:9;
@@ -454,16 +487,16 @@ header .js_language_selector .dropdown-menu.show {
 @include media-breakpoint-down(md){
     .te_srch_icon_mobile_header {
         display: inline-block;
-        font-size: 17px;
+        font-size: 18px;
     }
     .te_header_8_search.te_header_search
     {
         opacity: 1;
         visibility: visible;
-        transform: translate(0, -20px);
+        transform: translate(0, 0px);
         outline: 0;
-        position: absolute;
-        top: 18px;
+        position: relative;
+        top: auto;
         right: 0px;
         bottom: auto;
         width: 100%;
@@ -487,7 +520,7 @@ header .js_language_selector .dropdown-menu.show {
     }
     i.fa.fa-times.te_srch_close {
         display: none;
-        @include position(relative,-2px,null,null,auto);
+        /*@include position(relative,-2px,null,null,auto);*/
     }
     form.o_wsale_products_searchbar_form .dropdown-menu.show {
         @include position(fixed,10%,auto,null,0);
@@ -575,7 +608,6 @@ header .js_language_selector .dropdown-menu.show {
         }
     }
 }
-
 .h8_pricelist .dropdown a.dropdown-toggle.btn.btn-link,
 .te_header_lang .js_language_selector {
     @include media-breakpoint-down(md){
@@ -587,7 +619,7 @@ header .js_language_selector .dropdown-menu.show {
 }
 .te_header_lang .js_language_selector{
     @include media-breakpoint-down(md){
-        padding: 8px 6px;
+        padding: 10px 6px;
         margin-left: 0px !important;
     }
 }
@@ -626,10 +658,14 @@ header .js_language_selector .dropdown-menu.show {
         display: block;
         margin-left: 0px !important;
     }
+    @include media-breakpoint-down(xs){
+        margin-right: auto;
+    }
 }
 .te_srch_icon_mobile_header {
     @include media-breakpoint-down(md){
-        margin:0px 10px;
+        margin-left: 0px;
+        width: 30px;
     }
     @include media-breakpoint-down(sm){
         margin:0px 0px;
@@ -661,60 +697,87 @@ header .js_language_selector .dropdown-menu.show {
     @include media-breakpoint-down(md){
         min-width: unset;
         margin:0px 0px;
+        padding: 0;
     }
 }
-.te_srch_icon_mobile_header .te_srch_icon,
-.te_srch_icon_mobile_header .te_srch_close{
-    @include media-breakpoint-down(lg){
-        font-size: inherit;
+.te_srch_icon_mobile_header {
+    .te_srch_icon,
+    .te_srch_close {
+        @include media-breakpoint-down(lg){
+            font-size: inherit;
+        }
+        @include media-breakpoint-down(md){
+            width: inherit;
+        }
     }
 }
-.te_srch_icon_mobile_header .te_srch_icon{
+/*.te_srch_icon_mobile_header .te_srch_icon{
     @include media-breakpoint-down(md){
         position: absolute;
-        top: 30%;
-        right: 20px;
+           top: -2px;
+           right: 26px;
     }
-}
-.te_header_8_search.te_header_search .te_sub_search.active{
-    @include media-breakpoint-down(lg){
-        display:inline-block;
+    @include media-breakpoint-down(sm){
+        top: -3px;
+        right: 18px;
     }
-}
+}*/
 .te_header_8_search.te_header_search.active .input-group.te_search_group{
     @include media-breakpoint-down(md){
         @include transform(scaleX(1))
         visibility:visible;
     }
 }
-.te_header_8_search.te_header_search .input-group.te_search_group {
-    @include media-breakpoint-down(lg){
-        width:185px;
+.te_header_8_search.te_header_search {
+    .te_sub_search.active{
+        @include media-breakpoint-down(lg){
+            display:inline-block;
+        }
     }
-    @include media-breakpoint-down(md){
-        background: nth($f_color,5);;
-        padding: 5px;
-        transform: scaleX(0);
-        @include transition(all, 0.3s);
-        transform-origin: top right;
-        margin-left: 10px;
-        @include position(fixed,50px,auto,null,0);
+    .input-group.te_search_group {
+        @include media-breakpoint-down(lg){
+            width:185px;
+        }
+        @include media-breakpoint-down(md){
+            background: nth($f_color,5);;
+            padding: 5px;
+            transform: scaleX(0);
+            @include transition(all, 0.3s);
+            transform-origin: top right;
+            margin-left: 10px;
+            @include position(fixed,50px,auto,null,0);
+        }
     }
 }
- .te_srch_icon_mobile_header .te_srch_icon,
- .te_srch_icon_mobile_header .te_srch_close{
-    @include media-breakpoint-down(lg){
-        font-size: inherit;
-    }
+ .te_srch_icon_mobile_header {
+     .te_srch_icon,
+     .te_srch_close{
+        @include media-breakpoint-down(lg){
+            font-size: inherit;
+        }
+     }
  }
 .te_header_right_icon {
     @include media-breakpoint-down(md){
+        float: none;
+        text-align: right;
+        margin-left: 0px;
+        width: auto;
+        max-width: none;
+        padding: 0;
+    }
+    @include media-breakpoint-down(xs){
         margin: 0;
         float: right;
         text-align: right;
         flex: 0 0 auto;
         max-width: none;
         position: relative;
+        padding: 0px;
+        margin-left: auto;
+    }
+    @media (max-width: 359px){
+        margin-left: 0px;
     }
 }
 /*--------- Menu label text styles --------*/
@@ -741,7 +804,9 @@ header .js_language_selector .dropdown-menu.show {
 }
 .navbar #top_menu_collapse #top_menu > li > a.nav-link{
     padding: 0.5rem 0.7rem;
+    margin: 0px !important;
     outline: none;
+    color: inherit;
 }
 .navbar #top_menu_collapse #top_menu > li.active_item > a.nav-link:before {
     opacity: 1;
@@ -814,6 +879,10 @@ header .js_language_selector .dropdown-menu.show {
 		}
 	}
 }
+ .navbar-expand-md .navbar-collapse.show {
+    @include o-apply-colors('menu');
+ }
+
 @include media-breakpoint-down(md){
     ul.nav.navbar-nav {
         @include display(flex);
@@ -839,11 +908,11 @@ header .js_language_selector .dropdown-menu.show {
         }
     }
 }
-@media (min-width: 1200px){
+/*@media (min-width: 1200px){
     #custom_menu #te_main_ul {
         width: auto;
     }
-}
+}*/
 @include media-breakpoint-up(lg){
     .navbar{
         #custom_menu{
@@ -962,14 +1031,16 @@ footer.bg-light.o_footer {
     }
 }
 /* Edit page style */
-body.editor_enable.editor_has_snippets .navbar .container {
-    max-width: 1400px;
-    width: 90%;
-    margin: 0 auto;
-}
-body.editor_enable.editor_has_snippets .navbar .te_header_right_icon {
-    flex: 0 0 auto;
-    max-width: none;
+body.editor_enable.editor_has_snippets {
+    .navbar .container {
+        max-width: 1400px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .navbar .te_header_right_icon {
+        flex: 0 0 auto;
+        max-width: none;
+    }
 }
 /* apply extra color*/
 .te_header_icon_right .dropdown-menu.show a.dropdown-item{
@@ -1009,6 +1080,11 @@ header .navbar .te_header_icon_right .dropdown-menu {
         @include media-breakpoint-down(md){
             bottom:45px;
         }
+    }
+}
+.product_details_sticky{
+    @media (max-width: 991px) and (min-width: 768px){
+        max-width: 100%;
     }
 }
 /* Mobile & Ipad view add extra spacing for icons in footer */

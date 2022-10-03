@@ -92,6 +92,7 @@
                     color: #fff;
                     @include transition(all,.4s)
                     opacity: 0;
+                    padding: 10px;
                     &:before, &:after {
                         @include position(absolute,10px,10px,10px,10px);
                         content: '';
@@ -202,17 +203,19 @@
 /*================= 02. Product page offer timer ===============*/
 .rounded_digit_product
 {
-	/*@include border(1px,19,solid);*/
-	margin-right: 0px;
-	width: 60px;
-	vertical-align: middle;
-	display: inline-block;
+    margin-right: 0px;
+    width: 50px;
+    vertical-align: middle;
+    display: inline-block;
+    box-shadow: 0px 0px 10px 0 rgba(50, 50, 93, 0.2);
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
 	.te_days_hr_min_sec
 	{
 		font-size: 18px;
-		padding: 5px 5px 0px;
+		padding: 2px 4px 0px;
 		line-height: normal;
-        font-weight: 300;
+        font-weight: 500;
 	}
 	#time_lbl
 	{
@@ -235,18 +238,15 @@
 }
 .digit_separator {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
     font-size: 20px;
     font-family: inherit;
     font-weight: 300;
 }
 .product_offer_timer {
-	padding: 20px 20px 12px;
-	display: inline-block;
-	margin-bottom: 0.5rem;
-	margin-top: 1.1rem;
-	@include box-shadow(0px 0px 10px 0 rgba(50, 50, 93, 0.2))
-	border: 1px solid #dbdbdb;
+	    padding: 6px 0px 6px;
+        display: inline-block;
+        margin-top: 0;
 	>span:last-child
 	{
 		.rounded_digit_product
@@ -255,21 +255,21 @@
 		}
 	}
 }
-.timer_data {
+/* .timer_data {
 	display: inline-block;
 	@include position(absolute,0px,null,null,22px);
-	background: #b7b6b6; /* Static color */
+	background: #b7b6b6;  *//* Static color *//*
 	color: nth($f_color, 5);
 	max-width: 275px;
 	width: 100%;
     text-align: center;
     .timer_input{
-        .te_offer_timer_msg_div{
+        *//*  .te_offer_timer_msg_div{
             border: 1px solid #d2d2d2;
             padding: 0 5px;
-        }
+        } *//*
     }
-}
+} */
 .te_time_main_div {
 	@include position(relative);
 }

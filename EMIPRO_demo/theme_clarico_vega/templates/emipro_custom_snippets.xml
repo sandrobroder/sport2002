@@ -2,6 +2,11 @@
 <odoo>
     <!--===============All Snippet List================== -->
     <template id="theme_clarico_vega" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_content']/div[hasclass('o_panel_body')]" position="inside">
+            <!-- Banner -->
+            <t t-snippet="theme_clarico_vega.s_button"
+               t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/button.jpg"/>
+        </xpath>
         <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]/t[@t-snippet='website.s_banner']"
                position="after">
             <!-- Banner -->
@@ -42,6 +47,10 @@
             <!-- Mega Menus Style 6 -->
             <t t-snippet="theme_clarico_vega.megamenu_style_6"
                t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/snippet5.jpg"/>
+
+            <t t-snippet="theme_clarico_vega.menu_item_label"
+               t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/Menu_label_snippet.jpg"/>
+
         </xpath>
         <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_header')]" position="before">
             <!--=== Dynamic Snippets ==== -->
@@ -53,6 +62,9 @@
                 <!-- Product Carousel -->
                 <t t-snippet="theme_clarico_vega.p_slider"
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/product_carousel.jpg"/>
+                <!-- Multi Tab Product Carousel -->
+                <t t-snippet="theme_clarico_vega.p_multi_slider"
+                   t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/product_carousel.jpg"/>
                 <!-- Banner With Product Carousel -->
                 <t t-snippet="theme_clarico_vega.product_slider_banner"
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/banner_carousel.jpg"/>
@@ -62,22 +74,20 @@
                 <!-- Category Carousel -->
                 <t t-snippet="theme_clarico_vega.category_slider"
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/category_carousel.jpg"/>
-
-                 <!-- Brand Slider -->
+                <!-- Brand Slider -->
                 <t t-snippet="theme_clarico_vega.brand_slider"
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/brand_carousel.jpg"/>
-
                 <!-- Exclusive Brand Slider -->
                 <t t-snippet="theme_clarico_vega.brand_slider_template_snippet"
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/exclusive_brand.jpg"/>
-
                 <!-- Banner Video -->
                 <t t-snippet="theme_clarico_vega.banner_video"
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/banner_with_video.jpg"/>
-
                 <!-- Generate Google Map -->
                 <t t-snippet="theme_clarico_vega.google_map_generate"
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/google_map.jpeg"/>
+
+
             </div>
 
             <!--====== All Sliders Style ======-->
@@ -254,7 +264,7 @@
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/title_style3.jpg"/>
                 <t t-snippet="theme_clarico_vega.s_title_4_ept"
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/title_style2.jpg"/>
-                  <t t-snippet="theme_clarico_vega.s_title_5_ept"
+                <t t-snippet="theme_clarico_vega.s_title_5_ept"
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/title_style5.jpg"/>
             </div>
 
@@ -416,6 +426,13 @@
                    t-thumbnail="/theme_clarico_vega/static/src/img/snippets/snippets_icon/header-offer-text.jpg"/>
             </div>
         </xpath>
+    </template>
+
+    <!--============== Button =================-->
+    <template name="Button" id="s_button">
+        <div class="s_button text-center">
+            <button type="button" role="button" class="btn btn-primary te_theme_button">Button</button>
+        </div>
     </template>
 
     <!--============== Space =================-->
@@ -1631,7 +1648,7 @@
         </div>
     </template>
 
-     <!--====== Category  slider ====-->
+    <!--====== Category  slider ====-->
     <template id="category_slider" name="Category Builder">
         <section class="pt4 pb4">
             <div class="js_category_brand_snippet"
@@ -1673,62 +1690,69 @@
                     <div class="row">
                         <section class="col-lg-4 col-md-4 col-sm-4 col-12">
                             <div class="te_category-heading-center">
-                                <a class="te_menu_category_heading nav-link" href="#">Lorem</a>
-                                <p>
+                                <div class="d-flex">
+                                    <a class="te_menu_category_heading nav-link" href="#">Lorem</a>
+                                </div>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum dolor sit</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum dolor sit</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum sit</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum dolor sit</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum dolor sit</a>
-                                </p>
+                                </section>
+
                             </div>
                         </section>
                         <section class="col-lg-4 col-md-4 col-sm-4 col-12">
                             <div class="te_category-heading-center">
-                                <a class="te_menu_category_heading nav-link" href="#">Lorem</a>
-                                <p>
+                                <div class="d-flex">
+                                    <a class="te_menu_category_heading nav-link" href="#">Lorem</a>
+                                </div>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum dolor sit</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem</a>
-                                </p>
+                                </section>
                             </div>
                         </section>
                         <section class="col-lg-4 col-md-4 col-sm-4 col-12">
                             <div class="te_category-heading-center">
-                                <a class="te_menu_category_heading nav-link" href="#">Lorem</a>
-                                <p>
+                                <div class="d-flex">
+                                    <a class="te_menu_category_heading nav-link" href="#">Lorem</a>
+                                </div>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum dolor sit</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum dolor sit</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum sit</a>
-                                </p>
-                                <p>
+                                </section>
+                                <section class="te_menu_category_item">
                                     <a href="#" class="te_menu_item nav-link">Lorem ipsum dolor sit</a>
-                                </p>
+                                </section>
                             </div>
                         </section>
                     </div>
@@ -1848,37 +1872,37 @@
                             <ul class="mb-0">
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum dolor sit</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum sit</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum sit</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum dolor sit</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                             </ul>
@@ -1887,37 +1911,37 @@
                             <ul class="mb-0">
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum dolor sit</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum dolor sit</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum dolor sit</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum dolor sit</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                                 <section>
                                     <li>
-                                        <p>
+                                        <div class="d-flex">
                                             <a href="#" class="nav-link">Lorem ipsum dolor sit</a>
-                                        </p>
+                                        </div>
                                     </li>
                                 </section>
                             </ul>
@@ -2133,26 +2157,36 @@
                         </div>
                     </div>
                     <section class="py-lg-3 py-md-3 py-sm-3 py-2">
-                        <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        <div class="d-flex">
+                            <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        </div>
                         <ul>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                         </ul>
@@ -2166,26 +2200,36 @@
                         </div>
                     </div>
                     <section class="py-lg-3 py-md-3 py-sm-3 py-2">
-                        <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        <div class="d-flex">
+                            <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        </div>
                         <ul>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                         </ul>
@@ -2199,26 +2243,36 @@
                         </div>
                     </div>
                     <section class="py-lg-3 py-md-3 py-sm-3 py-2">
-                        <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        <div class="d-flex">
+                            <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        </div>
                         <ul>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                         </ul>
@@ -2232,26 +2286,36 @@
                         </div>
                     </div>
                     <section class="py-lg-3 py-md-3 py-sm-3 py-2">
-                        <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        <div class="d-flex">
+                            <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        </div>
                         <ul>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                         </ul>
@@ -2265,26 +2329,36 @@
                         </div>
                     </div>
                     <section class="py-lg-3 py-md-3 py-sm-3 py-2">
-                        <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        <div class="d-flex">
+                            <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        </div>
                         <ul>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                         </ul>
@@ -2298,26 +2372,36 @@
                         </div>
                     </div>
                     <section class="py-lg-3 py-md-3 py-sm-3 py-2">
-                        <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        <div class="d-flex">
+                            <a class="te_menu_ctg_main" href="#">Lorem + ipsum</a>
+                        </div>
                         <ul>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                             <section>
                                 <li>
-                                    <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    <div class="d-flex">
+                                        <a class="te_menu_sub nav-link m-0" href="#">Lorem ipsum</a>
+                                    </div>
                                 </li>
                             </section>
                         </ul>
@@ -2343,7 +2427,9 @@
                                         </div>
                                     </section>
                                     <section class="col-md-8 align-item-center">
-                                        <h5 class="mb0 te_employee_name_ti"><a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a></h5>
+                                        <h5 class="mb0 te_employee_name_ti d-flex">
+                                            <a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a>
+                                        </h5>
                                         <h6 class="te_designation_name_sub_ti nav-link mb-0">My Heading 6</h6>
                                     </section>
                                 </div>
@@ -2358,7 +2444,9 @@
                                         </div>
                                     </section>
                                     <section class="col-md-8 align-item-center">
-                                        <h5 class="mb0 te_employee_name_ti"><a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a></h5>
+                                        <h5 class="mb0 te_employee_name_ti d-flex">
+                                            <a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a>
+                                        </h5>
                                         <h6 class="te_designation_name_sub_ti nav-link mb-0">My Heading 6
                                         </h6>
                                     </section>
@@ -2374,7 +2462,9 @@
                                         </div>
                                     </section>
                                     <section class="col-md-8 align-item-center">
-                                        <h5 class="mb0 te_employee_name_ti"><a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a></h5>
+                                        <h5 class="mb0 te_employee_name_ti d-flex">
+                                            <a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a>
+                                        </h5>
                                         <h6 class="te_designation_name_sub_ti nav-link mb-0">My Heading 6
                                         </h6>
                                     </section>
@@ -2390,7 +2480,9 @@
                                         </div>
                                     </section>
                                     <section class="col-md-8 align-item-center">
-                                        <h5 class="mb0 te_employee_name_ti"><a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a></h5>
+                                        <h5 class="mb0 te_employee_name_ti d-flex">
+                                            <a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a>
+                                        </h5>
                                         <h6 class="te_designation_name_sub_ti nav-link mb-0">My Heading 6
                                         </h6>
                                     </section>
@@ -2406,7 +2498,9 @@
                                         </div>
                                     </section>
                                     <section class="col-md-8 align-item-center">
-                                        <h5 class="mb0 te_employee_name_ti"><a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a></h5>
+                                        <h5 class="mb0 te_employee_name_ti d-flex">
+                                            <a href="#" class="te_employee_name_ti">Lorem ipsum dolor</a>
+                                        </h5>
                                         <h6 class="te_designation_name_sub_ti nav-link mb-0">My Heading 6
                                         </h6>
                                     </section>
@@ -2422,7 +2516,9 @@
                                         </div>
                                     </section>
                                     <section class="col-md-8 align-item-center">
-                                        <h5 class="mb0 te_employee_name_ti"><a href="#" class="te_employee_name_ti">Lorem ipsum</a></h5>
+                                        <h5 class="mb0 te_employee_name_ti d-flex">
+                                            <a href="#" class="te_employee_name_ti">Lorem ipsum</a>
+                                        </h5>
                                         <h6 class="te_designation_name_sub_ti nav-link mb-0">My Heading 6
                                         </h6>
                                     </section>
@@ -2440,9 +2536,12 @@
                                 </div>
                             </section>
                             <section class="te_emp_title_sub_title col-lg-12 col-md-6 align-self-center">
-                                <a href="#" class="card-title text-left te_three_columns_heading te_employee_name_ti">
-                                    Lorem ipsum dolor
-                                </a>
+                                <div class="d-flex">
+                                    <a href="#"
+                                       class="card-title text-left te_three_columns_heading te_employee_name_ti">
+                                        Lorem ipsum dolor
+                                    </a>
+                                </div>
                                 <p class="card-text text-left te_three_columns_para o_default_snippet_text te_designation_name_sub_ti">
                                     Lorem ipsum dolor sit amet, eam et reque justo quidam, te est audire persius. Duis
                                     meis quas vim ex, ius no oblique
@@ -2454,11 +2553,25 @@
             </div>
         </section>
     </template>
+    <!--=================== Menu label snippet ========================-->
+    <template id="menu_item_label" name="Menu Label">
+        <span class="te_menu_label">
+            <section class="te_label_color">New</section>
+        </span>
+    </template>
+    <template id="menu_label_snippet_options" inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <div data-selector=".te_menu_label"
+                 data-drop-in=".s_mega_menu_multi_menus a,.te_menu_style_6 a,.te_menu_style_5 a,.te_menu_style_3 a,.te_menu_style_1 a">
+            </div>
+        </xpath>
+    </template>
     <!--=================== Team-1 =============================-->
     <template id="employee_team_1" name="Team Style 1">
         <section class="s_carousel_wrapper" data-vxml="001">
             <div id="carouselTeam_1" data-type="multi"
-                 class="container carousel slide s_carousel carousel-showmanymoveone common_carousel_emp_ept" data-ride="carousel"
+                 class="container carousel slide s_carousel carousel-showmanymoveone common_carousel_emp_ept"
+                 data-ride="carousel"
                  data-interval="10000">
                 <div class="carousel-inner row mx-auto" role="listbox">
                     <section class="carousel-item active">
@@ -2720,528 +2833,529 @@
     <!--======================= Team-2 =============================-->
     <template id="employee_team_2" name="Team Style 2">
         <section class="s_carousel_wrapper" data-vxml="001">
-        <div id="carousel_carousel_2"
+            <div id="carousel_carousel_2"
                  class="container carousel slide s_carousel carousel-showmanymoveone common_carousel_emp_ept"
                  data-ride="carousel"
                  data-interval="0">
-            <div class="carousel-inner pb64" role="listbox">
-                <section class="carousel-item active">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="">
-                            <div class="te_img_hover_overflow">
-                                <img alt="Clarico-Team-2"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
-                                     class="img-fluid d-block mx-auto"/>
-                            </div>
-                            <section class="text-center te_team_2_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="te_social_2_icon text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
-                                    </section>
-                                </section>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="">
-                            <div class="te_img_hover_overflow">
-                                <img alt="Clarico-Team-2"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
-                                     class="img-fluid d-block mx-auto"/>
-                            </div>
-                            <section class="text-center te_team_2_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <div class="te_social_2_icon text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
-                                    </section>
+                <div class="carousel-inner pb64" role="listbox">
+                    <section class="carousel-item active">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="">
+                                <div class="te_img_hover_overflow">
+                                    <img alt="Clarico-Team-2"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
+                                         class="img-fluid d-block mx-auto"/>
                                 </div>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="">
-                            <div class="te_img_hover_overflow">
-                                <img alt="Clarico-Team-2"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
-                                     class="img-fluid d-block mx-auto"/>
-                            </div>
-                            <section class="text-center te_team_2_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="te_social_2_icon text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                                <section class="text-center te_team_2_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="te_social_2_icon text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="">
-                            <div class="te_img_hover_overflow">
-                                <img alt="Clarico-Team-2"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
-                                     class="img-fluid d-block mx-auto"/>
                             </div>
-                            <section class="text-center te_team_2_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="te_social_2_icon text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                        </section>
+                    </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="">
+                                <div class="te_img_hover_overflow">
+                                    <img alt="Clarico-Team-2"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
+                                         class="img-fluid d-block mx-auto"/>
+                                </div>
+                                <section class="text-center te_team_2_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <div class="te_social_2_icon text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
+                                    </div>
+                                </section>
+                            </div>
+                        </section>
+                    </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="">
+                                <div class="te_img_hover_overflow">
+                                    <img alt="Clarico-Team-2"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
+                                         class="img-fluid d-block mx-auto"/>
+                                </div>
+                                <section class="text-center te_team_2_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="te_social_2_icon text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="">
-                            <div class="te_img_hover_overflow">
-                                <img alt="Clarico-Team-2"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
-                                     class="img-fluid d-block mx-auto"/>
                             </div>
-                            <section class="text-center te_team_2_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="te_social_2_icon text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                        </section>
+                    </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="">
+                                <div class="te_img_hover_overflow">
+                                    <img alt="Clarico-Team-2"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
+                                         class="img-fluid d-block mx-auto"/>
+                                </div>
+                                <section class="text-center te_team_2_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="te_social_2_icon text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="">
-                            <div class="te_img_hover_overflow">
-                                <img alt="Clarico-Team-2"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
-                                     class="img-fluid d-block mx-auto"/>
                             </div>
-                            <section class="text-center te_team_2_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="te_social_2_icon text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                        </section>
+                    </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="">
+                                <div class="te_img_hover_overflow">
+                                    <img alt="Clarico-Team-2"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
+                                         class="img-fluid d-block mx-auto"/>
+                                </div>
+                                <section class="text-center te_team_2_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="te_social_2_icon text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
+                            </div>
+                        </section>
                     </section>
-                </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="">
+                                <div class="te_img_hover_overflow">
+                                    <img alt="Clarico-Team-2"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_2/320_290.jpg"
+                                         class="img-fluid d-block mx-auto"/>
+                                </div>
+                                <section class="text-center te_team_2_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="te_social_2_icon text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
+                                    </section>
+                                </section>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+                <a class="carousel-control-prev te_team_arrow" role="button" data-slide="prev"
+                   data-target="#carousel_carousel_2">
+                    <span class="te_next_prev">
+                        <span class="fa fa-angle-left"/>
+                    </span>
+                </a>
+                <a class="carousel-control-next text-faded te_team_arrow" role="button" data-slide="next"
+                   data-target="#carousel_carousel_2">
+                    <span class="te_next_prev">
+                        <span class="fa fa-angle-right"/>
+                    </span>
+                </a>
             </div>
-            <a class="carousel-control-prev te_team_arrow" role="button" data-slide="prev"
-               data-target="#carousel_carousel_2">
-                <span class="te_next_prev">
-                    <span class="fa fa-angle-left"/>
-                </span>
-            </a>
-            <a class="carousel-control-next text-faded te_team_arrow" role="button" data-slide="next"
-               data-target="#carousel_carousel_2">
-                <span class="te_next_prev">
-                    <span class="fa fa-angle-right"/>
-                </span>
-            </a>
-        </div>
         </section>
     </template>
     <!--===================== Team-3 ============================-->
     <template id="employee_team_3" name="Team Style 3">
         <section class="s_carousel_wrapper" data-vxml="001">
-        <div id="carouselcarousel_3"
-                 class="container carousel s_carousel slide carousel-showmanymoveone common_carousel_emp_ept" data-ride="carousel"
+            <div id="carouselcarousel_3"
+                 class="container carousel s_carousel slide carousel-showmanymoveone common_carousel_emp_ept"
+                 data-ride="carousel"
                  data-interval="10000">
-            <div class="carousel-inner row mx-auto te_team_3_row">
-                <section class="carousel-item active">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor ">
-                        <div class="te_team_img">
-                            <div class="">
-                                <div class="te_img_hover_overflow">
-                                    <img alt="Clarico-Team-3"
-                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
-                                         class="img-fluid d-block mx-auto"/>
+                <div class="carousel-inner row mx-auto te_team_3_row">
+                    <section class="carousel-item active">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor ">
+                            <div class="te_team_img">
+                                <div class="">
+                                    <div class="te_img_hover_overflow">
+                                        <img alt="Clarico-Team-3"
+                                             src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
+                                             class="img-fluid d-block mx-auto"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <section class="text-center te_team_3_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="col-lg-12 te_social_icon_3 text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_facebook">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_twitter">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_google-plus">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_linkedin">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                                <section class="text-center te_team_3_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="col-lg-12 te_social_icon_3 text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_facebook">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_twitter">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_google-plus">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_linkedin">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="te_team_img">
-                            <div class="">
-                                <div class="te_img_hover_overflow">
-                                    <img alt="Clarico-Team-3"
-                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
-                                         class="img-fluid d-block mx-auto"/>
-                                </div>
                             </div>
-                            <section class="text-center te_team_3_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="col-lg-12 te_social_icon_3 text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_facebook">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_twitter">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_google-plus">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_linkedin">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                        </section>
+                    </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="te_team_img">
+                                <div class="">
+                                    <div class="te_img_hover_overflow">
+                                        <img alt="Clarico-Team-3"
+                                             src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
+                                             class="img-fluid d-block mx-auto"/>
+                                    </div>
+                                </div>
+                                <section class="text-center te_team_3_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="col-lg-12 te_social_icon_3 text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_facebook">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_twitter">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_google-plus">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_linkedin">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="te_team_img">
-                            <div class="">
-                                <div class="te_img_hover_overflow">
-                                    <img alt="Clarico-Team-3"
-                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
-                                         class="img-fluid d-block mx-auto"/>
-                                </div>
                             </div>
-                            <section class="text-center te_team_3_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="col-lg-12 te_social_icon_3 text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_facebook">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_twitter">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_google-plus">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_linkedin">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                        </section>
+                    </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="te_team_img">
+                                <div class="">
+                                    <div class="te_img_hover_overflow">
+                                        <img alt="Clarico-Team-3"
+                                             src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
+                                             class="img-fluid d-block mx-auto"/>
+                                    </div>
+                                </div>
+                                <section class="text-center te_team_3_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="col-lg-12 te_social_icon_3 text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_facebook">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_twitter">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_google-plus">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_linkedin">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="te_team_img">
-                            <div class="">
-                                <div class="te_img_hover_overflow">
-                                    <img alt="Clarico-Team-3"
-                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
-                                         class="img-fluid d-block mx-auto"/>
-                                </div>
                             </div>
-                            <section class="text-center te_team_3_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="col-lg-12 te_social_icon_3 text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_facebook">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_twitter">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_google-plus">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_linkedin">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                        </section>
+                    </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="te_team_img">
+                                <div class="">
+                                    <div class="te_img_hover_overflow">
+                                        <img alt="Clarico-Team-3"
+                                             src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
+                                             class="img-fluid d-block mx-auto"/>
+                                    </div>
+                                </div>
+                                <section class="text-center te_team_3_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="col-lg-12 te_social_icon_3 text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_facebook">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_twitter">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_google-plus">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_linkedin">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="te_team_img">
-                            <div class="">
-                                <div class="te_img_hover_overflow">
-                                    <img alt="Clarico-Team-3"
-                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
-                                         class="img-fluid d-block mx-auto"/>
-                                </div>
                             </div>
-                            <section class="text-center te_team_3_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="col-lg-12 te_social_icon_3 text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_facebook">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_twitter">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_google-plus">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_linkedin">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                        </section>
+                    </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="te_team_img">
+                                <div class="">
+                                    <div class="te_img_hover_overflow">
+                                        <img alt="Clarico-Team-3"
+                                             src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
+                                             class="img-fluid d-block mx-auto"/>
+                                    </div>
+                                </div>
+                                <section class="text-center te_team_3_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="col-lg-12 te_social_icon_3 text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_facebook">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_twitter">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_google-plus">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_linkedin">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
-                    </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
-                        <div class="te_team_img">
-                            <div class="">
-                                <div class="te_img_hover_overflow">
-                                    <img alt="Clarico-Team-3"
-                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
-                                         class="img-fluid d-block mx-auto"/>
-                                </div>
                             </div>
-                            <section class="text-center te_team_3_design">
-                                <p class="te_employee_name mt16">Lorem ipsum</p>
-                                <p class="te_employee_job_title mt8">
-                                    Lorem
-                                </p>
-                                <section class="col-lg-12 te_social_icon_3 text-center">
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_facebook">
-                                            <span class="fa fa-facebook"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_twitter">
-                                            <span class="fa fa-twitter"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_google-plus">
-                                            <span class="fa fa-instagram"/>
-                                        </a>
-                                    </section>
-                                    <section class="te_social_icon_inline">
-                                        <a href="#" class="te_team_3_linkedin">
-                                            <span class="fa fa-linkedin"/>
-                                        </a>
+                        </section>
+                    </section>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_resize s_col_no_bgcolor">
+                            <div class="te_team_img">
+                                <div class="">
+                                    <div class="te_img_hover_overflow">
+                                        <img alt="Clarico-Team-3"
+                                             src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/team_3/320_290.jpg"
+                                             class="img-fluid d-block mx-auto"/>
+                                    </div>
+                                </div>
+                                <section class="text-center te_team_3_design">
+                                    <p class="te_employee_name mt16">Lorem ipsum</p>
+                                    <p class="te_employee_job_title mt8">
+                                        Lorem
+                                    </p>
+                                    <section class="col-lg-12 te_social_icon_3 text-center">
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_facebook">
+                                                <span class="fa fa-facebook"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_twitter">
+                                                <span class="fa fa-twitter"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_google-plus">
+                                                <span class="fa fa-instagram"/>
+                                            </a>
+                                        </section>
+                                        <section class="te_social_icon_inline">
+                                            <a href="#" class="te_team_3_linkedin">
+                                                <span class="fa fa-linkedin"/>
+                                            </a>
+                                        </section>
                                     </section>
                                 </section>
-                            </section>
-                        </div>
+                            </div>
+                        </section>
                     </section>
-                </section>
+                </div>
+                <a class="carousel-control-prev te_team_arrow" role="button" data-slide="prev"
+                   data-target="#carouselcarousel_3">
+                    <span class="te_next_prev">
+                        <span class="fa fa-angle-left"/>
+                    </span>
+                </a>
+                <a class="carousel-control-next text-faded te_team_arrow" role="button" data-slide="next"
+                   data-target="#carouselcarousel_3">
+                    <span class="te_next_prev">
+                        <span class="fa fa-angle-right"/>
+                    </span>
+                </a>
             </div>
-            <a class="carousel-control-prev te_team_arrow" role="button" data-slide="prev"
-               data-target="#carouselcarousel_3">
-                <span class="te_next_prev">
-                    <span class="fa fa-angle-left"/>
-                </span>
-            </a>
-            <a class="carousel-control-next text-faded te_team_arrow" role="button" data-slide="next"
-               data-target="#carouselcarousel_3">
-                <span class="te_next_prev">
-                    <span class="fa fa-angle-right"/>
-                </span>
-            </a>
-        </div>
         </section>
     </template>
     <!--===================== Team-4 ============================-->
@@ -3777,150 +3891,156 @@
     <!--========================= Customer-1 =====================================-->
     <template id="customers_carousel_1" name="Customer Style 1">
         <section class="s_carousel_wrapper" data-vxml="001">
-        <div id="carouselcarousel_1"
+            <div id="carouselcarousel_1"
                  class="container carousel s_carousel slide common_carousel_emp_ept" data-ride="carousel"
                  data-interval="10000">
-            <div class="carousel-inner row mx-auto" role="listbox">
-                <section class="carousel-item active">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
-                        <div class="card rounded-0">
-                            <div>
-                                <img alt="Clarico-Customer-1"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
-                                     class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                <div class="carousel-inner row mx-auto" role="listbox">
+                    <section class="carousel-item active">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
+                            <div class="card rounded-0">
+                                <div>
+                                    <img alt="Clarico-Customer-1"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
+                                         class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                                </div>
+                                <div>
+                                    <h5 class="te_emp_name">My Heading 5</h5>
+                                </div>
+                                <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo
+                                    quidam,
+                                    te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
+                                    Ornatus
+                                </p>
+                                <div>
+                                    <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
+                                </div>
                             </div>
-                            <div>
-                                <h5 class="te_emp_name">My Heading 5</h5>
-                            </div>
-                            <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo quidam,
-                                te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
-                                Ornatus
-                            </p>
-                            <div>
-                                <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
-                            </div>
-                        </div>
+                        </section>
                     </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
-                        <div class="card rounded-0">
-                            <div>
-                                <img alt="Clarico-Customer-1"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
-                                     class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
+                            <div class="card rounded-0">
+                                <div>
+                                    <img alt="Clarico-Customer-1"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
+                                         class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                                </div>
+                                <div>
+                                    <h5 class="te_emp_name">My Heading 5</h5>
+                                </div>
+                                <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo
+                                    quidam,
+                                    te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
+                                    Ornatus
+                                </p>
+                                <div>
+                                    <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
+                                </div>
                             </div>
-                            <div>
-                                <h5 class="te_emp_name">My Heading 5</h5>
-                            </div>
-                            <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo quidam,
-                                te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
-                                Ornatus
-                            </p>
-                            <div>
-                                <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
-                            </div>
-                        </div>
+                        </section>
                     </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
-                        <div class="card rounded-0">
-                            <div>
-                                <img alt="Clarico-Customer-1"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
-                                     class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
+                            <div class="card rounded-0">
+                                <div>
+                                    <img alt="Clarico-Customer-1"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
+                                         class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                                </div>
+                                <div>
+                                    <h5 class="te_emp_name">My Heading 5</h5>
+                                </div>
+                                <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo
+                                    quidam,
+                                    te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
+                                    Ornatus
+                                </p>
+                                <div>
+                                    <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
+                                </div>
                             </div>
-                            <div>
-                                <h5 class="te_emp_name">My Heading 5</h5>
-                            </div>
-                            <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo quidam,
-                                te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
-                                Ornatus
-                            </p>
-                            <div>
-                                <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
-                            </div>
-                        </div>
+                        </section>
                     </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
-                        <div class="card rounded-0">
-                            <div>
-                                <img alt="Clarico-Customer-1"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
-                                     class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
+                            <div class="card rounded-0">
+                                <div>
+                                    <img alt="Clarico-Customer-1"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
+                                         class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                                </div>
+                                <div>
+                                    <h5 class="te_emp_name">My Heading 5</h5>
+                                </div>
+                                <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo
+                                    quidam,
+                                    te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
+                                    Ornatus
+                                </p>
+                                <div>
+                                    <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
+                                </div>
                             </div>
-                            <div>
-                                <h5 class="te_emp_name">My Heading 5</h5>
-                            </div>
-                            <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo quidam,
-                                te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
-                                Ornatus
-                            </p>
-                            <div>
-                                <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
-                            </div>
-                        </div>
+                        </section>
                     </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
-                        <div class="card rounded-0">
-                            <div>
-                                <img alt="Clarico-Customer-1"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
-                                     class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
+                            <div class="card rounded-0">
+                                <div>
+                                    <img alt="Clarico-Customer-1"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
+                                         class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                                </div>
+                                <div>
+                                    <h5 class="te_emp_name">My Heading 5</h5>
+                                </div>
+                                <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo
+                                    quidam,
+                                    te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
+                                    Ornatus
+                                </p>
+                                <div>
+                                    <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
+                                </div>
                             </div>
-                            <div>
-                                <h5 class="te_emp_name">My Heading 5</h5>
-                            </div>
-                            <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo quidam,
-                                te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
-                                Ornatus
-                            </p>
-                            <div>
-                                <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
-                            </div>
-                        </div>
+                        </section>
                     </section>
-                </section>
-                <section class="carousel-item">
-                    <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
-                        <div class="card rounded-0">
-                            <div>
-                                <img alt="Clarico-Customer-1"
-                                     src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
-                                     class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                    <section class="carousel-item">
+                        <section class="col-12 col-sm-6 col-md-4 col-lg-3 s_col_no_bgcolor text-center te_left_right">
+                            <div class="card rounded-0">
+                                <div>
+                                    <img alt="Clarico-Customer-1"
+                                         src="/theme_clarico_vega/static/src/img/snippets/employee_and_customers/customer_1/110_125.jpg"
+                                         class="mt16 mb16 col-lg-4 col-4 te_emp_img"/>
+                                </div>
+                                <div>
+                                    <h5 class="te_emp_name">My Heading 5</h5>
+                                </div>
+                                <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo
+                                    quidam,
+                                    te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
+                                    Ornatus
+                                </p>
+                                <div>
+                                    <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
+                                </div>
                             </div>
-                            <div>
-                                <h5 class="te_emp_name">My Heading 5</h5>
-                            </div>
-                            <p class="px-2 py-1 te_emp_content">Lorem ipsum dolor sit amet, eam et reque justo quidam,
-                                te est audire persius. Duis meis quas vim ex, ius no oblique phaedrum pertinacia.
-                                Ornatus
-                            </p>
-                            <div>
-                                <b class="px-2 mb32 te_emp_content d-block">-Lorem</b>
-                            </div>
-                        </div>
+                        </section>
                     </section>
-                </section>
+                </div>
+                <a class="carousel-control-prev te_team_arrow" role="button" data-slide="prev"
+                   data-target="#carouselExample">
+                    <span class="te_next_prev">
+                        <span class="fa fa-angle-left"/>
+                    </span>
+                </a>
+                <a class="carousel-control-next text-faded abc te_team_arrow" role="button"
+                   data-slide="next" data-target="#carouselExample">
+                    <span class="te_next_prev">
+                        <span class="fa fa-angle-right"/>
+                    </span>
+                </a>
             </div>
-            <a class="carousel-control-prev te_team_arrow" role="button" data-slide="prev"
-               data-target="#carouselExample">
-                <span class="te_next_prev">
-                    <span class="fa fa-angle-left"/>
-                </span>
-            </a>
-            <a class="carousel-control-next text-faded abc te_team_arrow" role="button"
-               data-slide="next" data-target="#carouselExample">
-                <span class="te_next_prev">
-                    <span class="fa fa-angle-right"/>
-                </span>
-            </a>
-        </div>
         </section>
     </template>
     <!--======================== Customer-2 ===============================-->
@@ -3964,13 +4084,13 @@
                         </div>
                     </div>
                     <div class="carousel-control-prev te_team_arrow" role="button" data-slide="prev"
-                       data-target="#myCarousel">
+                         data-target="#myCarousel">
                         <span class="te_next_prev">
                             <span class="fa fa-angle-left"/>
                         </span>
                     </div>
                     <div class="carousel-control-next text-faded abc te_team_arrow" role="button"
-                       data-slide="next" data-target="#myCarousel">
+                         data-slide="next" data-target="#myCarousel">
                         <span class="te_next_prev">
                             <span class="fa fa-angle-right"/>
                         </span>
@@ -7383,7 +7503,10 @@
                 <div class="row s_nb_column_fixed">
                     <div class="col-lg-12 te_title_5 pt32">
                         <h6 class="te_subtitle_top_style5">My Heading 4</h6>
-                            <h2 class="te_title_style5"> <i class="fa fa-address-book-o"/> -  Lorem ipsum</h2>
+                        <h2 class="te_title_style5">
+                            <i class="fa fa-address-book-o"/>
+                            - Lorem ipsum
+                        </h2>
                         <h6 class="te_subtitle_bottom_style5">Lorem Ipsum is simply dummy text of the printing.
                         </h6>
                     </div>
@@ -7407,14 +7530,16 @@
         </section>
         <section t-if="not banner_video_url" contenteditable="false" groups="website.group_website_designer">
             <div class="missing_option_warning alert alert-info rounded-0 fade show d-print-none">
-                        Your Banner Video will be displayed here... This message is displayed because you did not configure Banner Video.<br/>
-                        Configure From Website -> Configuration -> Setting -> Video URL for Banner
+                Your Banner Video will be displayed here... This message is displayed because you did not configure
+                Banner Video.
+                <br/>
+                Configure From Website -> Configuration -> Setting -> Video URL for Banner
             </div>
         </section>
     </template>
 
     <template id="banner_video" name="Banner Video">
-        <section>
+        <section class="py-2">
             <div class="js_banner_video" data-isemipro='true'>
                 <div class="css_non_editable_mode_hidden o_not_editable">
                     <div class="missing_option_warning alert alert-info rounded-0 fade show d-print-none">
@@ -7640,7 +7765,7 @@
     </template>
     <!--====================== Customer 5 ===========================-->
     <template id="customers_5" name="Customer Style 5">
-        <section class="te_customer_testimonial_s5 pt64">
+        <section class="te_customer_testimonial_s5 pt64 container-fluid">
             <div class="row">
                 <div class="col-lg-5 col-9 mx-auto">
                     <div class="te_customer_testimonial">Lorem Ipsum</div>

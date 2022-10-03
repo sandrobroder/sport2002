@@ -128,8 +128,25 @@ odoo.define('theme_clarico_vego.cart_popup', function(require) {
                         ev.preventDefault();
                         cartPopup._onClickRemoveItem(ev)
                     });
+                    $(".te_clear_cart_popover").on('click', function(ev) {
+                        ajax.jsonRpc('/shop/clear_cart', 'call', {}).then(function (data) {
+                            location.reload();
+                        });
+                    });
                 });
             }, 300);
         }
+    });
+    publicWidget.registry.clear_cart = publicWidget.Widget.extend({
+        selector: '#wrapwrap',
+        read_events: {
+            'click .te_clear_cart': '_onClickClearCart',
+        },
+        _onClickClearCart: function (ev) {
+            ev.preventDefault();
+            ajax.jsonRpc('/shop/clear_cart', 'call', {}).then(function (data) {
+                location.reload();
+            });
+        },
     });
 });

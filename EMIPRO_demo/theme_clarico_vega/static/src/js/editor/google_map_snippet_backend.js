@@ -25,7 +25,6 @@ odoo.define('theme_clarico_vega.google_map_snippet_backend',function(require) {
                         $group.find('input.form-control').after('<div class="col-md-8 static_location d-none"><input class="static_location" type="text"/></div>');
                         $group.find('input.static_location').after("<span class='static_address_format_span static_location'><span class='show-format-span'>Either Address or Latitude and Longitude as below.</span><span class='address_span'>- 16a, Little London, Milton Keynes, MK19 6HT</span><span class='lat_long_span'>- 57.815637,-101.137504</span></span>");
                         $group.append("<div class='google_map_size_div'><label class='col-md-4 col-form-label'>Map Width:</label><div class='width_div col-md-8'><input type='text' name='width' class='map_input_ele' value=''/> PX</div><label class='col-md-4 col-form-label'>Map Height:</label><div class='height_div col-md-8'><input type='text' name='height' class='map_input_ele' value=''/> PX</div></div>");
-
                         /* Get dynamically address of company*/
                         return rpc.query({
                             model: 'website',
@@ -49,7 +48,6 @@ odoo.define('theme_clarico_vega.google_map_snippet_backend',function(require) {
                         return;
                     }
                     else{
-//                        self.$target.attr("data-date", result);
                         var getValue = val;
                         var lat_long = getValue.split(',');
                         var dialog = self.$($dialog).find('.btn-primary');

@@ -35,4 +35,13 @@
         </xpath>
     </template>
 
+    <template id="post_info_ept" inherit_id="website_blog.post_info">
+        <xpath expr="//time[@t-field='blog_post.post_date']" position="replace">
+            <t t-set="active_lang" t-value="request.env['res.lang'].sudo().search([('code', '=', request.env.lang)])"></t>
+            <t t-if="active_lang">
+                <time t-field="blog_post.post_date" class="text-nowrap font-weight-bold px-2" t-field-options='{"format": blog_post.post_date.strftime(active_lang.date_format)}'/>
+            </t>
+        </xpath>
+    </template>
+
 </odoo>

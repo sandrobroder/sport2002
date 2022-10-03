@@ -70,13 +70,16 @@
             <attribute name="class">btn btn-secondary btn-block o_download_btn te_theme_button</attribute>
         </xpath>
         <xpath expr="//a[hasclass('o_portal_invoice_print')]" position="attributes">
-            <attribute name="class">btn btn-secondary btn-block o_print_btn o_portal_invoice_print te_theme_button</attribute>
+            <attribute name="class">btn btn-secondary btn-block o_print_btn o_portal_invoice_print te_theme_button
+            </attribute>
         </xpath>
         <xpath expr="//a[hasclass('btn-primary')]" position="attributes">
             <attribute name="class">btn btn-primary btn-block mb8 te_theme_button</attribute>
         </xpath>
         <xpath expr="//a[@id='o_sale_portal_paynow']" position="attributes">
-            <attribute name="t-att-class">'btn-block te_theme_button mb8 %s' % ('btn btn-light' if sale_order.transaction_ids else 'btn btn-primary')</attribute>
+            <attribute name="t-att-class">'btn-block te_theme_button mb8 %s' % ('btn btn-light' if
+                sale_order.transaction_ids else 'btn btn-primary')
+            </attribute>
         </xpath>
         <xpath expr="//div[hasclass('justify-content-center')]/t/div[1]/a" position="attributes">
             <attribute name="class">btn btn-primary te_theme_button</attribute>
@@ -96,7 +99,15 @@
     </template>
     <template id="product_buy_now_button" inherit_id="website_sale.product_buy_now">
         <xpath expr="//a[@id='buy_now']" position="attributes">
-            <attribute name="class">btn btn-outline-primary btn-lg mt16 d-block d-sm-inline-block te_theme_button</attribute>
+            <attribute name="class">btn btn-outline-primary btn-lg mt16 d-block d-sm-inline-block te_theme_button
+            </attribute>
+            <attribute name="t-if">False if website.b2b_hide_add_to_cart and website.is_public_user() else True</attribute>
+        </xpath>
+        <xpath expr="//a[@id='buy_now']" position="attributes">
+            <attribute name="t-attf-class">btn btn-outline-primary btn-lg mt16 te_theme_button
+                #{'w-50 sticky_enable' if request.website.viewref('theme_clarico_vega.product_sticky_details_container').active else 'w-100 d-inline-block'}
+            </attribute>
+            <attribute name="t-if">False if website.b2b_hide_add_to_cart and website.is_public_user() else True</attribute>
         </xpath>
     </template>
 </odoo>

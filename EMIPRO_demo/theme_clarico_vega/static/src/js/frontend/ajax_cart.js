@@ -3,40 +3,28 @@ odoo.define('theme_clarico_vega.ajax_cart', function (require) {
     var sAnimations = require('website.content.snippets.animation');
     var publicWidget = require('web.public.widget');
     var core = require('web.core');
-     var ajax = require('web.ajax');
+    var ajax = require('web.ajax');
     var _t = core._t;
     var WebsiteSale = new sAnimations.registry.WebsiteSale();
     var QWeb = core.qweb;
+    var wUtils = require('website.utils');
     var xml_load = ajax.loadXML(
         '/website_sale_stock/static/src/xml/website_sale_stock_product_availability.xml',
         QWeb
     );
-    /*var OptionalProductsModal = require('sale_product_configurator.OptionalProductsModal');*/
     var flag = 1;
 
     publicWidget.registry.WebsiteSale.include({
         _submitForm: function () {
-            var $productCustomVariantValues = $('<input>', {
-                name: 'product_custom_attribute_values',
-                type: "hidden",
-                value: JSON.stringify(this.rootProduct.product_custom_attribute_values)
-            });
-            this.$form.append($productCustomVariantValues);
+            let params = this.rootProduct;
+            params.add_qty = params.quantity;
 
-            var $productNoVariantAttributeValues = $('<input>', {
-                name: 'no_variant_attribute_values',
-                type: "hidden",
-                value: JSON.stringify(this.rootProduct.no_variant_attribute_values)
-            });
-            this.$form.append($productNoVariantAttributeValues);
-
+            params.product_custom_attribute_values = JSON.stringify(params.product_custom_attribute_values);
+            params.no_variant_attribute_values = JSON.stringify(params.no_variant_attribute_values);
             if (this.isBuyNow) {
-                this.$form.append($('<input>', {name: 'express', type: "hidden", value: true}));
-                this.$form.trigger('submit', [true]);
-                return new Promise(function () {});
+                params.express = true;
+                return wUtils.sendRequest('/shop/cart/update', params);
             }
-
-            /*this.$form.trigger('submit', [true]);*/
 
             /*return new Promise(function () {});*/
             var frm = this.$form
@@ -47,6 +35,7 @@ odoo.define('theme_clarico_vega.ajax_cart', function (require) {
             var product_id = frm.find('#add_to_cart').attr('product-id');
             var product_product = frm.find('input[name="product_id"]').val();
             var product_custom_attribute_values = frm.find('input[name="product_custom_attribute_values"]').val();
+            var no_variant_attribute_values = frm.find('input[name="no_variant_attribute_values"]').val();
             if(!product_id) {
                product_id = frm.find('.a-submit').attr('product-id');
             }
@@ -69,7 +58,7 @@ odoo.define('theme_clarico_vega.ajax_cart', function (require) {
                 if(!quantity) {
                    quantity = 1;
                 }
-                ajax.jsonRpc('/shop/cart/update_custom', 'call',{'product_id':product_product,'add_qty':quantity, 'product_custom_attribute_values':product_custom_attribute_values}).then(function(data) {
+                ajax.jsonRpc('/shop/cart/update_custom', 'call',{'product_id':product_product,'add_qty':quantity, 'product_custom_attribute_values':product_custom_attribute_values,'no_variant_attribute_values':no_variant_attribute_values}).then(function(data) {
                     var ajaxCart = new publicWidget.registry.ajax_cart();
                     if(data) {
                         $('.ajax_cart_modal > .cart_close').trigger('click');
@@ -84,6 +73,7 @@ odoo.define('theme_clarico_vega.ajax_cart', function (require) {
                         }
                         setTimeout(function(){
                             ajaxCart.ajaxCartSucess(product_id, product_product);
+                            $('input[name="product_custom_attribute_values"]').remove();
                         }, 700);
                         /* Resize menu */
                         setTimeout(() => {
@@ -143,11 +133,6 @@ odoo.define('theme_clarico_vega.ajax_cart', function (require) {
                         $parent.find('.css_attribute_color').filter(':has(input:checked)').addClass("active");
                         $parent.find('.css_attribute_color').filter(':has(input:checked)').parent('.list-inline-item').addClass("active_li");
                     });
-
-                    /*$( ".list-inline-item .css_attribute_color" ).change(function() {
-                        $('.list-inline-item').removeClass('active_li');
-                        $(this).parent('.list-inline-item').addClass('active_li');
-                    });*/
                     setTimeout(function(){
                         var quantity = $('.ajax_cart_content').find('.quantity').val();
                         $('.ajax_cart_content').find('.quantity').val(quantity).trigger('change');
@@ -185,6 +170,7 @@ odoo.define('theme_clarico_vega.ajax_cart', function (require) {
                             var product_id = frm.find('.product_template_id').attr('value');
                             setTimeout(function(){
                                 ajaxCart.ajaxCartSucess(product_id, product_product);
+                                $('input[name="product_custom_attribute_values"]').remove();
                             }, 700);
                             /* Resize menu */
                             setTimeout(() => {
@@ -235,6 +221,9 @@ odoo.define('theme_clarico_vega.ajax_cart', function (require) {
     });
     $(document).on('click', '.ajax_cart_modal #buy_now', function(ev){
         WebsiteSale._onClickAdd(ev);
+    });
+    $(document).on('click', '.ajax_cart_modal .cart_close', function(ev){
+        $("#ajax_cart_model .modal-body, #ajax_cart_model_shop .modal-body").html("");
     });
     if (!$('#ajax_cart_product_template').length) {
         $(document).on('click', '.oe_website_sale #add_to_cart', async function(ev){

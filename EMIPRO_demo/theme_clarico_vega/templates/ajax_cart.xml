@@ -65,10 +65,10 @@
                             <img t-else="" t-att-src="'/web/image/product.template/%s/image_128' % product.id"  class="variant_image" alt="Product Image"/>
                         </div>
                     </div>
-                    <div class="col text-left w-50 position-relative px-0">
+                    <div class="col text-left w-50 position-relative px-0 overflow-hidden">
                         <div class="col-right-details">
-                            <h1 itemprop="name" t-field="product.name" class="te_product_name">Product Name</h1>
-                            <t t-call="website_sale.product_price"/>
+                            <h1 itemprop="name" t-field="product.name" class="te_product_name" t-att-title="product.name">Product Name</h1>
+                            <t t-call="website_sale.product_price" t-if="False if (website.b2b_hide_price and website.is_public_user()) else True"/>
                         </div>
                     </div>
                     <div class="col-md-12 col-xl-12" id="product_details">
@@ -127,7 +127,7 @@
                                 </a>
                                 <t t-if="buy_now_show">
                                     <a role="button" id="buy_now"
-                                       class="btn btn-outline-primary btn-lg mt16 d-block d-sm-inline-block te_theme_button"
+                                       class="btn btn-outline-primary btn-lg mt16 d-block d-sm-inline-block te_theme_button ajax-buy-now"
                                        href="#">
                                         <span class="fa fa-bolt"/>
                                         Buy Now
@@ -160,7 +160,7 @@
             <t t-set="website_sale_order" t-value="website.sale_get_order()"/>
             <t t-set="cart_qty" t-value="website_sale_order.cart_quantity"/>
             <section
-                    t-attf-class="container-fluid py-2 oe_website_sale #{'discount' if combination_info['has_discounted_price'] else ''}"
+                    t-attf-class="container-fluid py-2 o_not_editable oe_website_sale #{'discount' if combination_info['has_discounted_price'] else ''}"
                     id="product_detail">
                 <div class="row">
                     <input type="hidden" class="cart_qty" t-att-value="cart_qty"/>
@@ -171,7 +171,7 @@
                         <span>You added</span>
                         <spant t-field="product.name" class="te_product_name">Product Name</spant>
                         <span>to your</span>
-                        <a type='button' href='/shop/cart'>shopping cart.</a>
+                        <a type='button' href='/shop/cart'><i class="fa fa-shopping-cart"/>shopping cart.</a>
                     </div>
                     <div class="product-image-container">
                         <span class="new_span d-flex h-100 justify-content-center align-items-center">
@@ -187,11 +187,11 @@
                     <div class="ajax-sucess-bottom">
                         <div class="te_cart_btn">
                             <a role="button" href="javascript:void(0)"
-                               class="btn btn-secondary mb32 d-xl-inline-block ajax-sucess-continue te_theme_button">
+                               class="btn btn-secondary o_not_editable mb32 d-xl-inline-block ajax-sucess-continue te_theme_button">
                                 <span class="">Continue Shopping</span>
                             </a>
                             <a role="button"
-                               class="btn btn-primary float-right d-xl-inline-block ajax-sucess-checkout te_theme_button"
+                               class="btn btn-primary float-right o_not_editable d-xl-inline-block ajax-sucess-checkout te_theme_button"
                                href="/shop/checkout?express=1">
                                 <span class="">Process Checkout</span>
                                 <span class="fa fa-chevron-right"/>
