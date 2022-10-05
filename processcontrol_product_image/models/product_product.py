@@ -5,7 +5,7 @@ from odoo import api, fields, models, _
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    @api.constrains('image_variant_1920', 'image_1920')
+    @api.constrains('image_variant_1920')
     def get_image_field(self):
         for rec in self:
             #variants = []
