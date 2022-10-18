@@ -15,25 +15,25 @@
 		background-color: nth($f_color,27) !important;
 		border-color:theme-color("secondary") !important;
 		border-width:2px !important;
-		&:after {
-			background-color:theme-color("secondary") !important;
-		}
-		&:hover {
-			border-color:theme-color("secondary") !important;
-			color: nth($f_color,5) !important;
-		}
+// 		&:after {
+// 			background-color:theme-color("secondary") !important;
+// 		}
+// 		&:hover {
+// 			border-color:theme-color("secondary") !important;
+// 			color: nth($f_color,5) !important;
+// 		}
     }
     &.btn-danger
     {
     	color: theme-color('danger');
     	border-color: theme-color('danger');
-    	&:after {
-			background-color:theme-color('danger');
-		}
-		&:hover {
-			border-color:theme-color('danger');
-			color: nth($f_color,5);
-		}
+//     	&:after {
+// 			background-color:theme-color('danger');
+// 		}
+// 		&:hover {
+// 			border-color:theme-color('danger');
+// 			color: nth($f_color,5);
+// 		}
     }
 
     @include media-breakpoint-down(xs) {
@@ -41,24 +41,24 @@
 		font-size:nth($f_sizes,3);
     }
 
-    &:after {
-	    content: '';
-	    @include position(absolute,50%,unset,unset,50%)
-		z-index: -1;
-	    @include transition(all,0.3s,null)
-	    width:0;
-	    height: 103%;
-	    background:nth($f_color,19);
-	    opacity: 0;
-	    @include transform(translateX(-50%) translateY(-50%)) 
-    }
+//     &:after {
+// 	    content: '';
+// 	    @include position(absolute,50%,unset,unset,50%)
+// 		z-index: -1;
+// 	    @include transition(all,0.3s,null)
+// 	    width:0;
+// 	    height: 103%;
+// 	    background:nth($f_color,19);
+// 	    opacity: 0;
+// 	    @include transform(translateX(-50%) translateY(-50%))
+//     }
     &:hover {
     	@include border(2px,19,solid)
 	    background-color:unset;
 	    color:nth($f_color,5);
-	    &:after {
-			width: 90%;
-    		opacity: 1;
-    	}
+// 	    &:after {
+// 			width: 90%;
+//     		opacity: 1;
+//     	}
     }
 }

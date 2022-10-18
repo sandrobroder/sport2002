@@ -23,23 +23,23 @@ odoo.define('emipro_theme_base.price_slider', function(require) {
             var urlMaxVal = parseFloat(searchParams.get('max_price'));
             var inputMinVal = parseFloat($("input.ept_price_min").val());
             var inputMaxVal = parseFloat($("input.ept_price_max").val());
-            var showMinVal;
-            var showMaxVal;
+            var showMinVal = 1;
+            var showMaxVal = 1;
             if(urlMinVal && urlMaxVal)
             {
-                showMinVal = urlMinVal;
-                showMaxVal = urlMaxVal;
+                showMinVal = urlMinVal || 1;
+                showMaxVal = urlMaxVal || 1;
                 $("input.ept_price_min").val(urlMinVal);
                 $("input.ept_price_max").val(urlMaxVal);
             }else {
-                showMinVal = minValue;
-                showMaxVal = maxValue;
+                showMinVal = minValue || 1;
+                showMaxVal = maxValue || 1;
             }
             $("#ept_price_slider").slider({
                 range: true,
                 step: 1,
-                min: minValue,
-                max:maxValue,
+                min: minValue || 1,
+                max:maxValue || 1,
                 values: [showMinVal, showMaxVal],
                 slide: function(event, ui) {
                     for (var i = 0; i < ui.values.length; ++i) {
@@ -62,7 +62,7 @@ odoo.define('emipro_theme_base.price_slider', function(require) {
         },
         resetFilter: function (event) {
             /* This method is called for reset the price slider */
-            var minValue = parseFloat($("#price_slider_min").val());
+            var minValue = parseFloat($("#price_slider_min").val()) || 1;
             var maxValue = parseFloat($("#price_slider_max").val());
             $("input.ept_price_min").val(minValue);
             $("input.ept_price_max").val(maxValue);

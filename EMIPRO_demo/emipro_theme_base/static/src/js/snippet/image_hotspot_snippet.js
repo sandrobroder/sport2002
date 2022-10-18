@@ -172,6 +172,7 @@ odoo.define('theme_clarico_vega.image_hotspot_snippet_backend',function(require)
 
 		_onKeyupInput: _.debounce( function(ev) {
 			var val = $(ev.currentTarget).val().trim()
+			console.log(val);
 			if(!val.length){
 				$("#js_item").empty().removeClass('show')
 			}
@@ -188,7 +189,7 @@ odoo.define('theme_clarico_vega.image_hotspot_snippet_backend',function(require)
 		appendData: function(key) {
 			var self = this;
 			ajax.jsonRpc('/get-suggested-products-for-hotspot', 'call',{'key':key}).then(function(data) {
-				$("#js_item").empty().removeClass('show').addClass('dropdown-menu show').html(data)
+				$('#image_hotspot_configure_model').find("#js_item").empty().removeClass('show').addClass('dropdown-menu show').html(data)
 				// Set the product to Input
 				$(".input-item-link").on('click',async function (ev) {
 					$('.hotspot_product').val($(this).data('item_name')).attr({'data-product_id':$(this).data('item_id'), 'data-product_name':$(this).data('item_name')})

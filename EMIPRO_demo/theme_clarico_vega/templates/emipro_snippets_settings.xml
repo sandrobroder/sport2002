@@ -98,6 +98,9 @@
             <we-checkbox string="Login Popup"
                          data-customize-website-views="theme_clarico_vega.login_popup_ept"
                          data-reload="/"/>
+            <we-checkbox string="Filter in Sidebar" data-name="filter_sidebar"
+                         data-customize-website-views="theme_clarico_vega.clarico_filter_sidebar"
+                         data-reload="/"/>
             <we-checkbox string="Sticky Attribute &amp; Category Filter"
                          data-customize-website-views="theme_clarico_vega.sticky_product_categories"
                          data-reload="/"/>
@@ -111,7 +114,12 @@
                          data-customize-website-views="theme_clarico_vega.product_sticky_details_container"
                          data-reload="/"/>
             <we-checkbox string="Product Brand"
+                         data-name="product_brand"
                          data-customize-website-views="theme_clarico_vega.product_brand_attribute_custom"
+                         data-reload="/"/>
+            <we-checkbox string="Show Brand Logo"
+                         data-dependencies="product_brand"
+                         data-customize-website-views="theme_clarico_vega.product_show_brand_logo"
                          data-reload="/"/>
             <we-checkbox string="Show Associated Attribute Value"
                          data-customize-website-views="theme_clarico_vega.display_product_associate_attribute_value_ept"
@@ -125,7 +133,42 @@
             <we-colorpicker data-dependencies="product_label" string="Label Color"
                             data-color="product_label" data-color-type="theme" data-customize-website-color=""/>
 
+            <we-checkbox string="Horizontal Category" data-name="horizontal_category"
+                         data-customize-website-views="theme_clarico_vega.shop_horizontal_category"
+                         data-reload="/"/>
+
+            <we-select string="Choose Category Style" data-dependencies="horizontal_category">
+                <we-button data-name="category_round_style" string="Rounded image style"
+                           data-customize-website-views="theme_clarico_vega.option_round_image_style" data-reload="/"/>
+                <we-button data-name="category_pill_style" string="Pill Style"
+                           data-customize-website-views="theme_clarico_vega.option_pill_style" data-reload="/"/>
+            </we-select>
+            <we-checkbox string="Color Variant"
+                         data-customize-website-views="theme_clarico_vega.shop_color_variant_ept" data-reload="/"/>
+            <we-checkbox string="Hide Description and Variants Values"
+                         data-customize-website-views="theme_clarico_vega.hide_variant_info_in_cart_ept, theme_clarico_vega.hide_variant_details_cart_summary_ept_ext, theme_clarico_vega.hide_variant_details_cart_ept"
+                         data-reload="/"/>
+            <!-- Clear Cart Button -->
+            <we-checkbox string="Clear Cart Option" data-name="clear_cart"
+                                     data-customize-website-views="theme_clarico_vega.clear_cart_link_ept" data-reload="/"/>
         </div>
     </template>
+
+    <template id="shop_page_product_snippet_options" inherit_id="website_sale.snippet_options"
+              name="shop page snippet options">
+        <xpath expr="//we-select[hasclass('o_wsale_ppr_submenu')]" position="inside">
+            <we-button data-set-ppr="5">5</we-button>
+            <we-button data-set-ppr="6">6</we-button>
+        </xpath>
+    </template>
+
+    <template id="s_website_form_options" inherit_id="website.snippet_options">
+        <!-- Extend drop locations to columns -->
+        <xpath expr="//t[@t-set='so_content_addition_selector']" position="inside">, .s_button</xpath>
+        <xpath expr="//div[@data-js='sizing_y']" position="attributes">
+            <attribute name="data-selector" add=".s_button" separator=","/>
+        </xpath>
+    </template>
+
 
 </odoo>

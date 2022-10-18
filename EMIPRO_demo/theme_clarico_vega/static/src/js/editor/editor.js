@@ -10,6 +10,7 @@ odoo.define('theme_clarico_vega.s_editor_js', function (require) {
 	        var self = this;
 	        var defs = [];
 	        $('div,section').removeClass('aos-animate');
+	        $('.te_tab_mb_nav_link').removeClass('active');
 	        $("div[data_aos_ept],section[data_aos_ept]").each(function(){
 				var data_aos_ept = $(this).attr('data_aos_ept');
 				if(data_aos_ept){
@@ -36,6 +37,7 @@ odoo.define('theme_clarico_vega.s_editor_js', function (require) {
             var self = this;
             var def = this._super.apply(this, arguments);
             return def.then(() => {
+                $('#ajax_cart_model_shop, #quick_view_model_shop, #ajax_cart_model_shop').modal('hide');
                 $("body section.hotspot_element").each(function(){
                     $(this).draggable({
                         containment: 'parent',
@@ -43,18 +45,11 @@ odoo.define('theme_clarico_vega.s_editor_js', function (require) {
                         scroll: false,
                         revertDuration: 200,
                         refreshPositions: true,
-//                        drag: function () {
-//                            var esc = $.Event("keydown", { keyCode: 27 });
-//                            $("body").trigger(esc);
-//                        },
                         stop: function () {
                             var l = ( 100 * parseFloat($(this).position().left / parseFloat($(this).parent().width())) ) + "%" ;
                             var t = ( 100 * parseFloat($(this).position().top / parseFloat($(this).parent().height())) ) + "%" ;
                             $(this).css("left", l);
                             $(this).css("top", t);
-//                            $('body.editor_enable').removeClass('o_fullscreen')
-//                            var esc = $.Event("keydown", { keyCode: 27 });
-//                            $("body").trigger(esc);
                         }
                     })
                 });

@@ -17,7 +17,6 @@ odoo.define('theme_clarico_vega.editor_js',function(require) {
                     'window_title': this.popup_title,
                      input: "Date",init: function (date) {
                         var $group = this.$dialog.find('div.form-group');
-                        /*$group.find('input').attr("placeholder","Time Format Ex. Oct 01, 2019 13:00:00")*/
                         var days = 1;
                         var date = new Date(Date.now()+days*24*60*60*1000).toDateString();
                         $group.find('input').after("<span class='show-format-span'>Time Format Ex. "+ date.substr(date.indexOf(' ')+ 1) +" 13:00:00</span>");

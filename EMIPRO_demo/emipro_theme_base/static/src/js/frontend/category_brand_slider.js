@@ -50,83 +50,108 @@ odoo.define('website_category_brand_slider.front_js', function (require) {
             'product_count':product_count,
             }
             // Render category and brand slider
+            this.$relativeTarget = $('#wrapwrap'); // #wrapwrap for now bcoz window is not scrolleble in v14
+            var position = this.$relativeTarget.scrollTop();
+            this.$sticky = self.$target;
+            var elementTop = self.$sticky.offset().top;
+            var elementBottom = elementTop + self.$sticky.outerHeight();
+            var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            if (elementTop < windowHeight && elementTop != 0) {
+                self.ajaxCall(self, params)
+            } else {
+                this.$relativeTarget.on('scroll.snippet_root_scroll', _.throttle(ev => {
+                    var viewportTop = $('#wrapwrap').scrollTop();
+                    var viewportBottom = viewportTop + $('#wrapwrap').height();
+                    if (elementBottom > position && elementTop < viewportBottom ) {
+                        self.ajaxCall(self, params)
+                        position = scroll;
+                    }
+                }, 200));
+            }
+        },
+        ajaxCall: function (self, params) {
             ajax.jsonRpc('/slider/category-brand-render', 'call',params).then(function (data) {
                 $(self.$target).html(data);
-				self.$target.find('.slider_edit_msg').toggleClass('d-none', true);
-                $('.brand_slider_template_3 .brand_carousel').each(function(index) {
-                    var $items = $(this);
-                    var items = $items.find(".item").length;
-                    $items.owlCarousel({
-                        loop: items > 3 ? true : false,
-                        margin: 10,
-                        rtl : false,
-                        nav: true,
-                        lazyLoad:true,
-                        dots: false,
-                        autoplay: true,
-                        autoplayTimeout: 4000,
-                        navText : ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-                        autoplayHoverPause:true,
-                        items: 3,
-                        responsive:{
-                            0: {
-                                items: 2,
-                                loop: items > 2 ? true : false,
-                            },
-                            576: {
-                                items: 3,
-                                loop: items > 3 ? true : false,
-                            },
-                            992: {
-                                items: 2,
-                                loop: items > 2 ? true : false,
-                            },
-                            1300: {
-                                items: 3,
-                                loop: items > 3 ? true : false,
-                            }
-                        }
-                    });
-                })
-
-                $('.category_carousel,.brand_carousel').each(function(index) {
-                    var $items = $(this);
-                    var items = $items.find(".item").length;
-                    $items.owlCarousel({
-                        loop: items > 6 ? true : false,
-                        margin: 10,
-                        rtl : false,
-                        nav: true,
-                        lazyLoad:true,
-                        dots: false,
-                        autoplay: true,
-                        autoplayTimeout: 4000,
-                        navText : ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-                        autoplayHoverPause:true,
-                        items: 6,
-                        responsive: {
-                            0: {
-                                items: 2,
-                                loop: items > 2 ? true : false,
-                            },
-                            576: {
-                                items: 3,
-                                loop: items > 3 ? true : false,
-                            },
-                            991: {
-                                items: 4,
-                                loop: items > 4 ? true : false,
-                            },
-                            1200: {
-                                items: 6,
-                                loop: items > 6 ? true : false,
-                            }
-                        }
-                    });
-                })
                 if($('#id_lazyload').length) {
                     $("img.lazyload").lazyload();
                 }
+                self.initOwlSlider();
+            })
+        },
+        initOwlSlider: function () {
+            var owl_rtl = false;
+            if ($('#wrapwrap').hasClass('o_rtl')) {
+                owl_rtl = true;
+            }
+            $('.brand_slider_template_3 .brand_carousel').each(function(index) {
+                var $items = $(this);
+                var items = $items.find(".item").length;
+                $items.owlCarousel({
+                    loop: items > 3 ? true : false,
+                    margin: 10,
+                    rtl : owl_rtl,
+                    nav: true,
+                    lazyLoad:true,
+                    dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 4000,
+                    navText : ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+                    autoplayHoverPause:true,
+                    items: 3,
+                    responsive:{
+                        0: {
+                            items: 2,
+                            loop: items > 2 ? true : false,
+                        },
+                        576: {
+                            items: 3,
+                            loop: items > 3 ? true : false,
+                        },
+                        992: {
+                            items: 2,
+                            loop: items > 2 ? true : false,
+                        },
+                        1300: {
+                            items: 3,
+                            loop: items > 3 ? true : false,
+                        }
+                    }
+                });
+            })
+            $('.category_carousel,.brand_carousel').each(function(index) {
+                var $items = $(this);
+                var items = $items.find(".item").length;
+                $items.owlCarousel({
+                    loop: items > 6 ? true : false,
+                    margin: 10,
+                    rtl : owl_rtl,
+                    nav: true,
+                    lazyLoad:true,
+                    dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 4000,
+                    navText : ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+                    autoplayHoverPause:true,
+                    items: 6,
+                    responsive: {
+                        0: {
+                            items: 2,
+                            loop: items > 2 ? true : false,
+                        },
+                        576: {
+                            items: 3,
+                            loop: items > 3 ? true : false,
+                        },
+                        991: {
+                            items: 4,
+                            loop: items > 4 ? true : false,
+                        },
+                        1200: {
+                            items: 6,
+                            loop: items > 6 ? true : false,
+                        }
+                    }
+                });
             })
         },
     })

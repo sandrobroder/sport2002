@@ -1513,6 +1513,7 @@
 .te_price_main
 {
   @include transition(all,.3s);
+  overflow: visible !important;
   @include media-breakpoint-down(xs){
     margin-bottom:10px;
   }
@@ -3588,7 +3589,7 @@
         top:0;
 		.te_s_5_img
 		{
-			@include transition(transform, 0.8s);
+			@include transition(transform, 0.6s);
 			transform-style: preserve-3d;
 			img {
 				max-height: 40px;
@@ -4511,9 +4512,9 @@
                 border-radius: 20px;
                 a{
                     padding: 40px 30px;
-                    display:block;
+                    display:flex;
                     font-size: inherit;
-                    font-weight: 600;
+                    font-weight: 300;
                     vertical-align: middle;
                     color:nth($f_color,3);
                     text-decoration: none;
@@ -5091,6 +5092,7 @@ font-size:nth($f_sizes,8);
 		}
 		@include media-breakpoint-down(sm){
 			height: 40vh !important;
+			background-position: center !important;
 		}
 		@include media-breakpoint-down(xs){
 			height: 20vh !important;

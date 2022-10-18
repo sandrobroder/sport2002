@@ -321,10 +321,9 @@
                                             <t t-set="difference"
                                                t-value="round(combination_info['list_price'] - combination_info['price'],2)"/>
                                             <t t-set="discount"
-                                               t-value="round(difference*100/combination_info['list_price']) if combination_info['list_price'] &gt; 0 else 0"/>
-                                            <div class="te_percentage" t-if="discount">
-                                                <span t-esc="'(%s'%(discount)+'%'"/>
-                                                Off)
+                                               t-value="round(difference*100/combination_info['list_price'], 2) if combination_info['list_price'] &gt; 0 else 0"/>
+                                            <div class="te_percentage">
+                                                (<span class="percent_val" t-esc="'%s'%(discount)"/>% Off)
                                             </div>
                                         </div>
                                     </div>

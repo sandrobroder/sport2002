@@ -271,7 +271,15 @@
 }
 .o_portal_chatter_messages {
 	.media {
-		padding-bottom:2rem;
+// 		padding-bottom:2rem;
+        border: 1px solid #ededed;
+        padding: 15px 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        box-shadow:0 3px 12px #ccc;
+        .o_wrating_publisher_comment{
+            margin:0 !important;
+        }
 	}
 	.o_portal_chatter_message_title {
 		h5 {
@@ -282,7 +290,6 @@
 		}
 	}
 }
-
 .o_portal_wrap {
 	#sidebar_content
 	{
@@ -307,6 +314,14 @@
 	{
 		padding: 0;
 	}
+}
+.o_portal_chatter_header{
+    .col-lg-3 p{
+        text-align: center;
+    }
+    .progress{
+        height:5px;
+    }
 }
 /*-------------------User detail form-------------------*/
 .o_portal_details {

@@ -13,7 +13,7 @@ odoo.define('theme_clarico_vega.login_popup', function (require) {
             'submit #loginRegisterPopup .oe_reset_password_form': '_resetPassword' // on submit of reset password form from popup
         },
         start: function () {
-            self = this;
+            var self = this;
         },
 
         _customerLogin: function(e){

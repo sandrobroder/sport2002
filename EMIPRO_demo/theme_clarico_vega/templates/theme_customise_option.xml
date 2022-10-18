@@ -64,9 +64,11 @@
                        data-img="/theme_clarico_vega/static/src/img/customise_option/h_style-10.png"/>
         </xpath>
         <xpath expr="//we-select[@data-variable='header-template']" position="after">
-            <we-colorpicker data-dependencies="header_style_10_opt" string="Header Top BG Color"
+            <we-colorpicker data-dependencies="header_style_1_opt, header_style_2_opt, header_style_3_opt, header_style_4_opt,
+            header_style_5_opt, header_style_6_opt, header_style_7_opt, header_style_10_opt" string="Header Top BG Color"
                             data-color="header_top_bg_color" data-color-type="theme" data-customize-website-color=""/>
-            <we-colorpicker data-dependencies="header_style_10_opt" string="Header Top Text Color"
+            <we-colorpicker data-dependencies="header_style_1_opt, header_style_2_opt, header_style_3_opt, header_style_4_opt,
+            header_style_5_opt, header_style_6_opt, header_style_7_opt, header_style_10_opt" string="Header Top Text Color"
                             data-color="header_top_text_color" data-color-type="theme" data-customize-website-color=""/>
         </xpath>
         <xpath expr="//we-select[@data-variable='header-template']" position="after">
@@ -75,12 +77,29 @@
                     <we-checkbox string="Lazy Load" data-select-class="lazyload" data-no-preview="true"/>
                 </div>
             </t>
+            <div data-selector=".te_menu_label">
+                <we-button-group string="Label position">
+                    <we-button data-select-class="te_label_top" title="Position Top">Top</we-button>
+                    <we-button data-select-class="" title="Position Right">Right</we-button>
+                    <we-button data-select-class="te_label_bottom" title="Position Bottom">Bottom</we-button>
+                    <we-button data-select-class="te_label_left" title="Position Left">Left</we-button>
+                </we-button-group>
+            </div>
             <div data-selector=".s_title_3_ept, .s_title_1_ept">
                 <we-colorpicker string="Gradient color 1" data-color="button_gradient_1" data-color-type="theme"
                                 data-customize-website-color=""/>
                 <we-colorpicker string="Gradient color 1" data-color="button_gradient_2" data-color-type="theme"
                                 data-customize-website-color=""/>
             </div>
+
+            <div data-selector=".s_button">
+                <we-button-group string="Alignment">
+                    <we-button data-select-class="text-left" title="Left">Left</we-button>
+                    <we-button data-select-class="text-center" title="Center">Center</we-button>
+                    <we-button data-select-class="text-right" title="Right">Right</we-button>
+                </we-button-group>
+            </div>
+
             <div data-selector="section, section .row > div, .s_col_no_bgcolor, .s_col_no_bgcolor.row > div, .o_gallery .row > div">
                 <we-select string="Animations" class="fa fa-magic" data-no-preview="true">
                     <we-button data-select-class="none" data-aos-data="none">Remove Animation</we-button>
@@ -93,7 +112,8 @@
                     <we-button data-select-class="fade-left" data-aos-data="fade-left">Left</we-button>
                     <we-button data-select-class="fade-up-right" data-aos-data="fade-up-right">up-right</we-button>
                     <we-button data-select-class="fade-up-left" data-aos-data="fade-up-left">Up-left</we-button>
-                    <we-button data-select-class="fade-down-right" data-aos-data="fade-down-right">down-right</we-button>
+                    <we-button data-select-class="fade-down-right" data-aos-data="fade-down-right">down-right
+                    </we-button>
                     <we-button data-select-class="fade-down-left" data-aos-data="fade-down-left">down-left</we-button>
 
                     <div class="text-muted text-white py-3 px-4">Flip</div>

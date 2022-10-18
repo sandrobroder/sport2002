@@ -1,4 +1,5 @@
 /* Slider editor */
+#tab_configure_model,
 #product_configure_model {
     padding-right: $o-we-sidebar-width !important;
     .product_configure_model {
@@ -68,9 +69,6 @@
                     border-radius: 4px;
                     &.disabled {
                     	opacity: 0.6;
-                    }
-                    .title {
-                        vertical-align: middle;
                     }
                     .icon {
                         height: 13px;
@@ -201,6 +199,54 @@
                         }
                         .sub-title {
                         	font-size: 14px;
+                        }
+                    }
+                }
+                .product-multi-tab {
+                    border-bottom: 3px solid #ededed;
+                    margin-bottom: 0px;
+                    .col-3 {
+                        .sub-title {
+                            font-size: 13px;
+                            color: #888;
+                        }
+                    }
+                    .col-9 {
+                        border-left: 1px solid #ededed;
+                        .input-product {
+                            display: inline-block;
+                            width: auto;
+                            border-color: #ccc;
+                            height: 36px;
+                            padding: 0.5rem 0.75rem;
+                            &.required {
+                                border-color: red
+                            }
+                        }
+                        .new-product {
+                            .fa {
+                                display: inline-block;
+                                height: 30px;
+                                width: 30px;
+                                border: 2px solid #666;
+                                text-align: center;
+                                line-height: 26px;
+                                border-radius: 50%;
+                                font-size: 20px;
+                                vertical-align: middle;
+                                cursor: pointer;
+                                &.disabled {
+                                    border: 2px solid #ddd;
+                                    color: #888;
+                                }
+                            }
+                            .tab-conf-btn {
+                                margin-left: 1rem;
+                                display: inline-block;
+                                .fa {
+                                    font-size: 14px;
+                                }
+                            }
                         }
                     }
                 }

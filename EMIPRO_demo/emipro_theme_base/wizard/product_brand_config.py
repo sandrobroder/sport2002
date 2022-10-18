@@ -10,9 +10,7 @@ class ProductBrandConfig(models.TransientModel):
     @api.onchange('brand_id')
     def onchange_brand_id(self):
         #set the brand into wizard
-        self.write({
-                'product_ids': [(6, 0, self.brand_id.product_ids.ids)]
-            })
+        self.write({'product_ids': [(6, 0, self.brand_id.product_ids.ids)]})
 
     def config_brand_product(self):
         #unset if any and set to the select

@@ -4,37 +4,32 @@ odoo.define('theme_clarico_vega.snippet.editor', function (require) {
 const {qweb, _t, _lt} = require('web.core');
 const Dialog = require('web.Dialog');
 const weSnippetEditor = require('web_editor.snippet.editor');
-const wSnippetOptions = require('website.editor.snippets.options');
 var options = require('web_editor.snippets.options');
 
-const FontFamilyPickerUserValueWidget = wSnippetOptions.FontFamilyPickerUserValueWidget;
-
-    weSnippetEditor.Class.include({
-        xmlDependencies: (weSnippetEditor.Class.prototype.xmlDependencies || [])
-            .concat(['/website/static/src/xml/website.editor.xml']),
-        events: _.extend({}, weSnippetEditor.Class.prototype.events, {
-            'click .o_we_customize_theme_btn_ept': '_onThemeTabClickEpt',
-        }),
-        tabs: _.extend({}, weSnippetEditor.Class.prototype.tabs, {
-            THEME_EPT: 'theme-ept',
-        }),
-        OptionsTabStructureEpt: [
-            ['theme-options-ept', _lt("Theme Settings")],
-        ],
-
-        /**
-         * @override
-         */
-        _updateLeftPanelContent: function ({content, tab}) {
-            this._super(...arguments);
-            this.$('.o_we_customize_theme_btn_ept').toggleClass('active', tab === this.tabs.THEME_EPT);
-        },
-
-        /**
-         * @private
-         */
-        _onThemeTabClickEpt: async function (ev) {
-            this._execWithLoadingEffect(async () => new Promise(resolve => setTimeout(() => resolve(), 0)), false, 0);
+weSnippetEditor.Class.include({
+    events: _.extend({}, weSnippetEditor.Class.prototype.events, {
+        'click .o_we_customize_theme_btn_ept': '_onThemeTabClickEpt',
+    }),
+    tabs: _.extend({}, weSnippetEditor.Class.prototype.tabs, {
+        THEME_EPT: 'theme-ept',
+    }),
+    OptionsTabStructureEpt: [
+        ['theme-options-ept', _lt("Theme Settings")],
+    ],
+    _updateLeftPanelContent: function ({content, tab}) {
+        this._super(...arguments);
+        this.$('.o_we_customize_theme_btn_ept').toggleClass('active', tab === this.tabs.THEME_EPT);
+    },
+    async _onThemeTabClickEpt(ev) {
+        // Note: nothing async here but start the loading effect asap
+        let releaseLoader;
+        try {
+            const promise = new Promise(resolve => releaseLoader = resolve);
+            this._execWithLoadingEffect(() => promise, false, 400);
+            // loader is added to the DOM synchronously
+            await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+            // ensure loader is rendered: first call asks for the (already done) DOM update,
+            // second call happens only after rendering the first "updates"
 
             if (!this.topFakeOptionElEpt) {
                 let el;
@@ -58,16 +53,28 @@ const FontFamilyPickerUserValueWidget = wSnippetOptions.FontFamilyPickerUserValu
             // - the element is hidden afterwards so it does not take space in the
             //   DOM, same as the overlay which may make a scrollbar appear.
             this.topFakeOptionElEpt.classList.remove('d-none');
-            const editor = await this._activateSnippet($(this.bottomFakeOptionElEpt));
+            const editorPromise = this._activateSnippet($(this.bottomFakeOptionElEpt));
+            releaseLoader(); // because _activateSnippet uses the same mutex as the loader
+            releaseLoader = undefined;
+            const editor = await editorPromise;
             this.topFakeOptionElEpt.classList.add('d-none');
             editor.toggleOverlay(false);
 
             this._updateLeftPanelContent({
                 tab: this.tabs.THEME_EPT,
             });
-        },
-    });
-    options.registry.ThemeOptionsEpt = options.Class.extend({
-        pageOptionName: 'ThemeOptionsEpt',
-    });
+        } catch (e) {
+            // Normally the loading effect is removed in case of error during the action but here
+            // the actual activity is happening outside of the action, the effect must therefore
+            // be cleared in case of error as well
+            if (releaseLoader) {
+                releaseLoader();
+            }
+            throw e;
+        }
+    },
+});
+options.registry.ThemeOptionsEpt = options.Class.extend({
+    pageOptionName: 'ThemeOptionsEpt',
+});
 });

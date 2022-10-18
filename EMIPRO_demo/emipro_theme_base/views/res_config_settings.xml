@@ -128,33 +128,126 @@
                         </div>
                     </div>
                 </div>
-                <div class="row o_settings_container mt16 w-100" id="clarico_advanced_search">
+                <div class="row o_settings_container mt16 w-50" id="clarico_out_of_stock">
                     <div class="col-12 o_setting_box">
                         <div class="o_setting_left_pane">
-                            <field name="is_advanced_search"/>
+                            <field name="option_out_of_stock"/>
                         </div>
                         <div class="o_setting_right_pane">
-                            <label for="is_advanced_search"/>
+                            <label for="option_out_of_stock"/>
                             <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
                             <div class="text-muted">
-                                Enhance the search suggestions on website
+                                Enable for out of stock label for products in website
                             </div>
-                            <div class="content-group" attrs="{'invisible': [('is_advanced_search', '=', False)]}">
-                                <div>
-                                    <field name="allowed_search_category" class="w-auto"
-                                           string="Allow Search In Category"/>
-                                    <label string="Allow Search In Category" for="allowed_search_category"/>
-                                    <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                            <br/>
+                            <div class="content-group" attrs="{'invisible': [('option_out_of_stock', '=', False)]}">
+                                <label string="Text For Out of stock" for="text_out_of_stock"/>
+                                <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                                <div class="text-muted">
+                                    Display this text label in out of stock
                                 </div>
-                                <div>
-                                    <field name="allowed_search_blog" class="w-auto" string="Allow Search In Blog"/>
-                                    <label string="Allow Search In Blog" for="allowed_search_blog"/>
-                                    <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                                <field name="text_out_of_stock" attrs="{'required': [('option_out_of_stock', '=', True)]}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row o_settings_container mt16 w-100" id="clarico_brand_search_shop">
+                    <div class="col-12 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="allowed_search_brand"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <div class="content-group">
+                                <label string="Allow Search In Brand" for="allowed_search_brand"/>
+                                <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                                <div class="text-muted">
+                                    Enhance the brand search on website shop
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <hr class="w-100"/>
+                <!-- b2b hide pricing -->
+                <div class="row o_settings_container mt16 w-100" id="b2b_hide_details">
+                    <div class="col-6 o_setting_box w-50">
+                        <div class="o_setting_left_pane">
+                            <field name="b2b_hide_details"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="b2b_hide_details" string="Hide Add to Cart for Guest Users"/>
+                            <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                            <br/>
+                            <div class="content-group" attrs="{'invisible': [('b2b_hide_details', '=', False)]}">
+                                <br/>
+                                <field name="is_b2b_message"/>
+                                <label for="is_b2b_message" string="Display Message instead of product price/cart button"/>
+                                <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                            </div>
+                            <div class="content-group" attrs="{'invisible': [('is_b2b_message', '=', False)]}">
+                                <br/>
+                                <div class="">Login or Register
+                                    <field name="text_b2b_hide_details" class="ml-2"/>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-6 o_setting_box w-50">
+                        <div class="content-group" attrs="{'invisible': [('b2b_hide_details', '=', False)]}">
+                            <div invisible="1">
+                                <div class="o_setting_left_pane">
+                                    <field name="b2b_hide_add_to_cart"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="b2b_hide_add_to_cart"/>
+                                    <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                                    <div class="text-muted">
+                                        Do not allow guest users to place an order option
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                            <div class="o_setting_left_pane">
+                                <field name="b2b_hide_price"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="b2b_hide_price" string="Hide Product Price for Guest Users"/>
+                                <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                                <div class="text-muted">
+                                    Hide price for guest users along with hide add to cart feature
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 o_setting_box w-50">
+                        <div class="o_setting_left_pane">
+                            <field name="b2b_checkout"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="b2b_checkout" string="Disallow Guest Checkout"/>
+                            <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                            <div class="text-muted">
+                                Disallow checkout for guest users
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt16 o_settings_container" id="clarico_allow_reorder">
+                    <div class="col-12 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="allow_reorder"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="allow_reorder"/>
+                            <span class="fa fa-lg fa-globe" title="Values set here are website-specific."/>
+                            <div class="text-muted">
+                                Enable to Reorder the Existing Sales Orders
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="w-100"/>
             </div>
         </field>
     </record>

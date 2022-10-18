@@ -9,31 +9,32 @@ class ProductHotspot(WebsiteSale):
     # Render the Hotspot configuration popup
     @http.route('/get-image-hotspot-template', type='json', auth='public', website=True)
     def get_image_hotspot_template(self, **kw):
-        tmplt = request.env['ir.ui.view'].sudo().search([('key', '=', 'emipro_theme_base.image_hotspot_configure_template')])
+        template = 'emipro_theme_base.image_hotspot_configure_template'
+        tmplt = request.env['ir.ui.view'].sudo().search([('key', '=', template)])
         if tmplt:
-            response = http.Response(template='emipro_theme_base.image_hotspot_configure_template')
+            response = http.Response(template=template)
             return response.render()
 
     # Render the Product List
     @http.route('/get-suggested-products-for-hotspot', type='json', auth='public', website=True)
     def get_suggested_products_for_hotspot(self, **kw):
-        key = kw.get('key')
+        key = kw.get('key', False)
         website_domain = request.website.website_domain()
-        products = request.env['product.template'].search([('sale_ok', '=', True),('name', 'ilike', key),('type','in',['product','consu'])]+website_domain,
-                                                          limit=5)
-        tmplt = request.env['ir.ui.view'].sudo().search(
-            [('key', '=', 'emipro_theme_base.suggested_products_for_hotspot')])
+        website_domain += [('sale_ok', '=', True), ('name', 'ilike', key), ('type', 'in', ['product', 'consu'])]
+        products = request.env['product.template'].search(website_domain, limit=5)
+        template = 'emipro_theme_base.suggested_products_for_hotspot'
+        tmplt = request.env['ir.ui.view'].sudo().search([('key', '=', template)])
         if tmplt:
-            response = http.Response(template='emipro_theme_base.suggested_products_for_hotspot',qcontext={'products':products})
+            response = http.Response(template=template, qcontext={'products': products})
             return response.render()
         return products
 
     # Render the Hotspot Product popover template
     @http.route('/get-pop-up-product-details', type='json', auth='public', website=True)
     def get_popup_product_details(self, **kw):
-        product = kw.get('product')
+        product = kw.get('product', False)
         if product:
             product = request.env['product.template'].sudo().browse(product)
-            values = {'product': product}
-            response = http.Response(template='emipro_theme_base.product_add_to_cart_popover',  qcontext=values)
+            response = http.Response(template='emipro_theme_base.product_add_to_cart_popover',
+                                     qcontext={'product': product})
             return response.render()

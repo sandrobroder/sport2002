@@ -9,6 +9,16 @@
              <xpath expr="//field[@name='sequence']" position="after">
                  <field name="icon" widget="image" class="oe_avatar w-100" options="{'size': [30, 30]}"/>
              </xpath>
+            <xpath expr="//div[hasclass('oe_left')]" position="after">
+                <notebook>
+                    <page string="Category Description">
+                        <field name="website_description"/>
+                    </page>
+                </notebook>
+            </xpath>
+             <xpath expr="//field[@name='sequence']" position="after">
+                    <field name="menu_label_id"/>
+             </xpath>
         </field>
     </record>
 </odoo>

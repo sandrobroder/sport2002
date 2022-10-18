@@ -38,7 +38,6 @@ odoo.define('theme_clarico_vega.wishlist_animate', function (require) {
 
             productReady.then(function (productId) {
                 productId = parseInt(productId, 10);
-
                 if (productId && !_.contains(self.wishlistProductIDs, productId)) {
                     return self._rpc({
                         route: '/shop/wishlist/add',
@@ -61,8 +60,6 @@ odoo.define('theme_clarico_vega.wishlist_animate', function (require) {
             setTimeout(() => {
                 $('#top_menu').trigger('resize');
             }, 200);
-
-
         },
         _addOrMoveWish: function (e) {
             var self = this;

@@ -203,6 +203,15 @@ nav.navbar #top_menu_collapse #top_menu > li > a.nav-link{
         font-size: $font-size-dynamic - 0.125rem !important; /* Reduced 2px */
     }
 }
+.te_dynamic_ept {
+    .dropdown-toggle {
+        .fa-chevron-down.te_icon{
+            @include media-breakpoint-down(sm){
+                display: none;
+            }
+        }
+    }
+}
 /* RTL */
 .o_rtl .te_header_before_right{
   .te_header_account
@@ -318,9 +327,6 @@ nav.navbar #top_menu_collapse #top_menu > li > a.nav-link{
 	    @include transition(all, 0.3s, ease-in-out);
 	}
 }
-.te_searchform__body.te_header_style_5_main_search .dropdown-menu.show a {
-    border-bottom: 1px solid #ededed;
-}
 .te_header_before_overlay {
     .te_header_lang div.js_language_selector {
         button.dropdown-toggle{
@@ -349,29 +355,29 @@ nav.navbar #top_menu_collapse #top_menu > li > a.nav-link{
     }
 }
 .te_header_style_5_main{
-    .te_header_before_right.col-lg-8 {
-        padding:10px 5px;
+    .te_header_before_left.col-lg-7 {
+        padding-left: 4px;
         @include media-breakpoint-down(md)
         {
             width: 60%;
         }
         @include media-breakpoint-down(sm)
         {
-            text-align:right;
-            width: 62%;
+            padding-right: 0px;
+            width: 40%;
         }
     }
-    .te_header_before_left.col-lg-4
+    .te_header_before_right.col-lg-5
     {
-        padding-left: 4px;
+        padding:10px 5px;
         @include media-breakpoint-down(md)
         {
             width: 40%;
         }
         @include media-breakpoint-down(sm)
         {
-            padding-right: 0px;
-            width: 38%;
+            text-align:right;
+            width: 60%;
         }
         @media (max-width: 370px) /* media query for header 5 mobile view */
         {
@@ -400,11 +406,11 @@ header .js_language_selector .list-inline a.js_change_lang.list-inline-item:not(
         }
     }
 }
-@media (max-width: 991px) and (min-width: 768px) { /* Ipad view specific media query */
-    #top_menu li.dropdown .menu-categories-container {
+/*@media (max-width: 991px) and (min-width: 768px) {*/ /* Ipad view specific media query */
+    /*#top_menu li.dropdown .menu-categories-container {
         position: absolute;
     }
-}
+}*/
 .te_searchform__body
 {
 	input.search-query.form-control.oe_search_box {
@@ -544,7 +550,6 @@ header .js_language_selector .list-inline a.js_change_lang.list-inline-item:not(
 			{
 				display: block;
 				padding: 13px 5px;
-				/*font-size: inherit;*/
 				font-family: inherit;
 				font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
 			}
@@ -552,8 +557,15 @@ header .js_language_selector .list-inline a.js_change_lang.list-inline-item:not(
 			{
 				display: none;
 			}
-
 		}
+		.te_header_top_text{
+            color: nth($f_color,19);
+            font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
+            font-weight: 400;
+            @include media-breakpoint-down(sm){
+                display: none;
+            }
+        }
 		.dropdown .dropdown-menu a{
 		    font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
 		}
@@ -607,14 +619,43 @@ header .js_language_selector .list-inline a.js_change_lang.list-inline-item:not(
                             left:10px;
                         }
 					}
-					/*@include media-breakpoint-down(sm)
-					{
-						transform: translate3d(0, 32px, 0px) !important;
-					}*/
 				}
 			}
 		}
 	}
+}
+/* Offer text in mobile/ipad */
+.te_header_top_text_mobile {
+    @include media-breakpoint-down(sm){
+        display: inline-block !important;
+        text-align: center;
+        width: 100%;
+        padding: 5px;
+        font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
+        color: theme-color("header_top_text_color");
+        background-color: theme-color("header_top_bg_color");
+        & .te_s_header_offer_text span{
+            vertical-align: middle;
+        }
+    }
+}
+.o_header_affixed{
+    .te_header_top_text_mobile {
+        @include media-breakpoint-down(sm){
+            display: none !important;
+        }
+    }
+}
+.editor_enable{
+   .te_header_top_text_mobile {
+        display: inline-block !important;
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+        font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
+        color: theme-color("header_top_text_color");
+        background-color: theme-color("header_top_bg_color");
+   }
 }
 /* RTL */
 body .o_rtl .te_header_top .te_lang_price .te_header_pricelist .dropdown .dropdown-menu{
@@ -624,7 +665,6 @@ body .o_rtl .te_header_top .te_lang_price .te_header_pricelist .dropdown .dropdo
         right: auto !important;
     }
 }
-
 .te_header_before_overlay
 {
     .te_header_style_5_main
@@ -644,7 +684,6 @@ body .o_rtl .te_header_top .te_lang_price .te_header_pricelist .dropdown .dropdo
             }
             .dropdown-toggle {
                 background: nth($f_color,27) !important;
-                /*font-size: inherit;*/
                 font-size: $font-size-dynamic - 0.125rem; /* Reduced 2px */
                 padding: 0 4px;
                 box-shadow: none !important;
