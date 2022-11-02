@@ -1,5 +1,8 @@
 odoo.define('hide_unavailable_variants', function (require) {
     'use strict';
+
+    require('theme_clarico_vega.theme_script')
+    require('emipro_theme_base.quick_view')
     var ajax = require('web.ajax');
     var publicWidget = require('web.public.widget');
     var sAnimations = require('website.content.snippets.animation');
@@ -424,6 +427,7 @@ odoo.define('hide_unavailable_variants', function (require) {
                     $("img.lazyload").lazyload();
                 }
                 WebsiteSale.init();
+                console.log(">???????????????????????????????????")
                 WebsiteSale.on_start_check_variant()
                 WebsiteSale._startZoom();
                 var combination = [];
