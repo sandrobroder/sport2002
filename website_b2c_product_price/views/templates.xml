@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+
+        <template id="product_price" inherit_id="website_sale.product_price">
+            <xpath expr="." position="inside">
+                <div t-if="pricelist and pricelist.use_b2c_price" t-field="product.description_product"/>
+            </xpath>
+        </template>
+
+        <template id="product" inherit_id="website_sale.product">
+            <xpath expr="//div[@id='product_details']/h1[@t-field='product.name']" position="replace">
+                <h1 t-if="pricelist.use_b2c_price and product.product_brand_ept_id" itemprop="name">
+                    <span t-esc="product.product_brand_ept_id.name.upper()"/>
+                    <span t-field="product.name"/>
+                </h1>
+                <h1 t-else="" itemprop="name" t-field="product.name">Product Name</h1>
+            </xpath>
+        </template>
+
+        <template id="products_item" inherit_id="website_sale.products_item">
+            <xpath expr="//h6[hasclass('o_wsale_products_item_title')]/a[@itemprop='name']" position="replace">
+                <!--                <h1 t-if="pricelist.use_b2c_price" itemprop="name">-->
+                <!--                    <span t-esc="product.product_brand_ept_id.name.upper()"/>-->
+                <!--                    <span t-field="product.name"/>-->
+                <!--                </h1>-->
+                <!--                <h1 t-else="" itemprop="name" t-field="product.name">Product Name</h1>-->
+                <a t-if="pricelist.use_b2c_price and product.product_brand_ept_id " itemprop="name"
+                   t-att-href="product_href" t-att-content="product.name">
+                    <span t-esc="product.product_brand_ept_id.name.upper()"/>
+                    <span t-field="product.name"/>
+                </a>
+
+                <a t-else="" itemprop="name" t-att-href="product_href" t-att-content="product.name"
+                   t-field="product.name"/>
+
+            </xpath>
+        </template>
+        <!--
+
+                <template id="listing">
+                  <ul>
+                    <li t-foreach="objects" t-as="object">
+                      <a t-attf-href="#{ root }/objects/#{ object.id }">
+                        <t t-esc="object.display_name"/>
+                      </a>
+                    </li>
+                  </ul>
+                </template>
+                <template id="object">
+                  <h1><t t-esc="object.display_name"/></h1>
+                  <dl>
+                    <t t-foreach="object._fields" t-as="field">
+                      <dt><t t-esc="field"/></dt>
+                      <dd><t t-esc="object[field]"/></dd>
+                    </t>
+                  </dl>
+                </template>
+        -->
+    </data>
+</odoo>

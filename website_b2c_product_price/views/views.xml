@@ -1,0 +1,111 @@
+<odoo>
+    <data>
+
+        <record id="product_pricelist_item_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.pricelist.item.form</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='applied_on']" position="before">
+                    <field name="pricelist_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.template.b2c.price.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='list_price']/.." position="after">
+                    <field name="customer_list_price" widget='monetary'
+                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='description_sale']/.." position="after">
+                    <group string="Product Description">
+                        <field name="description_product"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_pricelist_form_view_inherit">
+            <field name="name">pricelist_multi_rule_creation</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='website_id']" position="after">
+                    <field name="use_b2c_price"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_tax_form_view_inherit">
+            <field name="name">account_tax_form_view_inherit</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="is_b2c_tax"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- explicit list view definition -->
+        <!--
+            <record model="ir.ui.view" id="website_b2c_product_price.list">
+              <field name="name">website_b2c_product_price list</field>
+              <field name="model">website_b2c_product_price.website_b2c_product_price</field>
+              <field name="arch" type="xml">
+                <tree>
+                  <field name="name"/>
+                  <field name="value"/>
+                  <field name="value2"/>
+                </tree>
+              </field>
+            </record>
+        -->
+
+        <!-- actions opening views on models -->
+        <!--
+            <record model="ir.actions.act_window" id="website_b2c_product_price.action_window">
+              <field name="name">website_b2c_product_price window</field>
+              <field name="res_model">website_b2c_product_price.website_b2c_product_price</field>
+              <field name="view_mode">tree,form</field>
+            </record>
+        -->
+
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="website_b2c_product_price.action_server">
+              <field name="name">website_b2c_product_price server</field>
+              <field name="model_id" ref="model_website_b2c_product_price_website_b2c_product_price"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "tree,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
+
+        <!-- Top menu item -->
+        <!--
+            <menuitem name="website_b2c_product_price" id="website_b2c_product_price.menu_root"/>
+        -->
+        <!-- menu categories -->
+        <!--
+            <menuitem name="Menu 1" id="website_b2c_product_price.menu_1" parent="website_b2c_product_price.menu_root"/>
+            <menuitem name="Menu 2" id="website_b2c_product_price.menu_2" parent="website_b2c_product_price.menu_root"/>
+        -->
+        <!-- actions -->
+        <!--
+            <menuitem name="List" id="website_b2c_product_price.menu_1_list" parent="website_b2c_product_price.menu_1"
+                      action="website_b2c_product_price.action_window"/>
+            <menuitem name="Server to list" id="website_b2c_product_price" parent="website_b2c_product_price.menu_2"
+                      action="website_b2c_product_price.action_server"/>
+        -->
+    </data>
+</odoo>
