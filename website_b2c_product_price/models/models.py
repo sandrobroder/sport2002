@@ -38,6 +38,8 @@ class ProductTemplate(models.Model):
             parent_combination=parent_combination, only_template=only_template)
         if pricelist and pricelist.use_b2c_price and self.customer_list_price:
             combination_info["list_price"] = self.customer_list_price
+            has_discounted_price = pricelist.currency_id.compare_amounts(self.customer_list_price, combination_info["price"]) == 1
+            combination_info['has_discounted_price'] = has_discounted_price
         return combination_info
 
 
