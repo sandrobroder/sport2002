@@ -1,19 +1,2 @@
-Unique Identification;Name;Can be Sold?;Can be Purchased?;Product Type;Category;Unit of Measure;Purchase Unit of Measure;Customer Taxes;Vendor Taxes;Description for Customers;Invoicing Policy;Sales Price;Cost;variant Attributes;Attribute Values;Internal Reference;Barcode;Weight;Volume;Qty On Hand;Image path/url;Variant Cost Price;x_temporada;public_categ_ids@id;product_brand_ept_id@name;x_duro_blando;without_automatism;is_published;;;;
-9;113/17/0124 01 TOLINA;TRUE;TRUE;Storable Product;All;Unidades;Unidades;;;113/17/0124 01 TOLINA description;;;;color2,size,style;Blue@50#S@50#Collar@10;;;;;;;106;Test;4682,4689,4684;Heat2 Original;Duro;FALSE;TRUE;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Unique Identification,Name,Can be Sold?,Can be Purchased?,Product Type,Category,Unit of Measure,Purchase Unit of Measure,Customer Taxes,Vendor Taxes,Description for Customers,Invoicing Policy,Sales Price,Cost,variant Attributes,Attribute Values,Internal Reference,Barcode,Weight,Volume,Qty On Hand,Image path/url,Variant Cost Price,fix_price,x_temporada,public_categ_ids@id,product_brand_ept_id@name,x_duro_blando,without_automatism,is_published
+9,113/17/0124 01 TOLINA,TRUE,TRUE,Storable Product,All,Unidades,Unidades,,,113/17/0124 01 TOLINA description,,,,"color2,size,style",Blue@50#S@50#Collar@10,,,,,,,106,0,Test,"4682,4689,4684",Heat2 Original,Duro,FALSE,TRUE
