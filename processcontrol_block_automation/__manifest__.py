@@ -4,7 +4,7 @@
     'author': "ProcessControl",
     'website': "https://www.processcontrol.es",
     'description': """""",
-    'depends': ['base', 'product'],
+    'depends': ['base'],
     'installable': True,
     'auto_install': False,
     'data': [
