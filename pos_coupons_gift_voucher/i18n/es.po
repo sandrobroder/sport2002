@@ -1,0 +1,703 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_coupons_gift_voucher
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-06 13:49+0000\n"
+"PO-Revision-Date: 2022-01-06 13:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.report_pos_gift_coupon
+msgid ""
+"<br/>\n"
+"\t\t\t\t\t\t\t\t\t<strong>Amount:</strong>"
+msgstr ""
+"<br/>\n"
+"\t\t\t\t\t\t\t\t\t<strong>Monto:</strong>"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.report_pos_gift_coupon
+msgid ""
+"<br/>\n"
+"\t\t\t\t\t\t\t\t\t<strong>Issue Date:</strong>"
+msgstr ""
+"<br/>\n"
+"\t\t\t\t\t\t\t\t\t<strong>Fecha de asunto:</strong>"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.report_pos_gift_coupon
+msgid "<span style=\"color:#E74C3C; font-weight: bold;\"> Name: </span>"
+msgstr "<span style=\"color:#E74C3C; font-weight: bold;\"> Nombre: </span>"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.report_pos_gift_coupon
+msgid "<strong>Customer:</strong>"
+msgstr "<strong>Cliente:</strong>"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.report_pos_gift_coupon
+msgid "<strong>Expiry Date:</strong>"
+msgstr "<strong>Fecha de caducidad:</strong>"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__active
+msgid "Active"
+msgstr "Activa"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.actions.act_window,name:pos_coupons_gift_voucher.action_pos_coupan
+#: model:ir.ui.menu,name:pos_coupons_gift_voucher.menu_pos_gift_act
+msgid "All Gift Coupons"
+msgstr "Todos los cupones de regalo"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__is_categ
+msgid "Allow for Specific Category"
+msgstr "Permitir categoría específica"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__partner_true
+msgid "Allow for Specific Customer"
+msgstr "Permitir para cliente específica"
+
+#. module: pos_coupons_gift_voucher
+#: code:addons/pos_coupons_gift_voucher/models/pos_coupons_config.py:0
+#, python-format
+msgid "Allows only one activated Configuration of POS"
+msgstr "Permite una sola Configuración de TPV activada"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Already Used !!!"
+msgstr "Ya usado !!!"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Amount :"
+msgstr "Monto :"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__amount_type
+#, python-format
+msgid "Amount Type"
+msgstr "Tipo de cantidad"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Apply"
+msgstr "Solicitar"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Apply Coupon On"
+msgstr "Aplicar cupón en"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__apply_coupon_on
+msgid "Apply Coupon on"
+msgstr "Aplicar cupón en"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Apply Coupon/Gift Voucher Code"
+msgstr "Aplicar código de cupón/vale de regalo"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Back"
+msgstr "atrás"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.report_pos_gift_coupon
+msgid "Barcode"
+msgstr "Código de barras"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Confirmation"
+msgstr "Confirmación"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.actions.report,name:pos_coupons_gift_voucher.action_gift_coupons
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_order__coupon_id
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.pos_sale_order_inherit
+#, python-format
+msgid "Coupon"
+msgstr "Cupón"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__amount
+#, python-format
+msgid "Coupon Amount"
+msgstr "Importe del cupón"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Coupon Amount is greater than order amount"
+msgstr "El monto del cupón es mayor que el monto del pedido"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__c_barcode
+msgid "Coupon Barcode"
+msgstr "Código de barras del cupón"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__c_barcode_img
+msgid "Coupon Barcode Image"
+msgstr "Imagen de código de barras de cupón"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__coupon_apply_times
+msgid "Coupon Code Apply Limit"
+msgstr "Límite de aplicación del código de cupón"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_form_view
+msgid "Coupon Description..."
+msgstr "Descripción del cupón..."
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_form_view
+msgid "Coupon History"
+msgstr "Historial de cupones"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Coupon Number :"
+msgstr "Número de cupón:"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Coupon Options"
+msgstr "Opciones de cupones"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_product_product__is_coupon_product
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_product_template__is_coupon_product
+msgid "Coupon Product"
+msgstr "Producto de cupón"
+
+#. module: pos_coupons_gift_voucher
+#: code:addons/pos_coupons_gift_voucher/models/pos_coupon.py:0
+#, python-format
+msgid "Coupon amount is greater than maximum amount"
+msgstr "El monto del cupón es mayor que el monto máximo"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Coupon usage limit"
+msgstr "Límite de uso del cupón"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Create"
+msgstr "Crear"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Create Coupon"
+msgstr "Crear cupón"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__user_id
+msgid "Created By"
+msgstr "Creado por"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__coupon_desc
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_form_view
+msgid "Description"
+msgstr "Descripción"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Email:"
+msgstr "Correo electrónico:"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Empty Order"
+msgstr "Pedido vacío"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Enter Your Coupon Code Here"
+msgstr "Ingrese su código de cupón aquí"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Expired"
+msgstr "Caducada"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__expiry_date
+#, python-format
+msgid "Expiry Date"
+msgstr "Fecha de caducidad"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__exp_dat_show
+msgid "Expiry Date."
+msgstr "Fecha de caducidad."
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Expiry date :"
+msgstr "Fecha de caducidad :"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_form_view
+msgid "Expiry date of this coupon"
+msgstr "Fecha de caducidad de este cupón"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_form_view
+msgid "Extra Information"
+msgstr "Información extra"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.model.fields.selection,name:pos_coupons_gift_voucher.selection__pos_gift_coupon__amount_type__fix
+#, python-format
+msgid "Fixed"
+msgstr "Reparada"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_form_view
+msgid "For your eyes only. This will never be displayed to the customer."
+msgstr "Confidencial. Esto nunca se mostrará al cliente."
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.actions.report,name:pos_coupons_gift_voucher.gift_coupon_print
+msgid "Gift Coupon"
+msgstr "Cupón de regalo"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.ui.menu,name:pos_coupons_gift_voucher.menu_gift_coupon
+msgid "Gift Coupons"
+msgstr "Cupones de regalo"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Gift coupon"
+msgstr "Cupón de regalo"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Gift coupon is created successfully."
+msgstr "El cupón de regalo se creó con éxito."
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__id
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Invalid Amount !!!"
+msgstr "Monto invalido !!!"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Invalid Code !!!"
+msgstr "Codigo invalido !!!"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Invalid Customer !!!"
+msgstr "Cliente inválida !!!"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__issue_date
+#, python-format
+msgid "Issue Date"
+msgstr "Fecha de asunto"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Issue date :"
+msgstr "Fecha de asunto :"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Max Amount"
+msgstr "Importe máximo"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Maximum Limit Exceeded !!!"
+msgstr "¡¡¡Límite máximo excedido!!!"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__max_amount
+msgid "Maximum amount"
+msgstr "Importe máximo"
+
+#. module: pos_coupons_gift_voucher
+#: code:addons/pos_coupons_gift_voucher/models/pos_coupons_config.py:0
+#, python-format
+msgid "Maximum amount must be greater than minimum amount"
+msgstr "La cantidad máxima debe ser mayor que la cantidad mínima"
+
+#. module: pos_coupons_gift_voucher
+#: code:addons/pos_coupons_gift_voucher/models/pos_coupons_config.py:0
+#, python-format
+msgid "Minimum amount must be less than maximum amount"
+msgstr "El importe mínimo debe ser inferior al importe máximo"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__name
+#, python-format
+msgid "Name"
+msgstr "Nombre"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Name :"
+msgstr "Nombre :"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_form_view
+msgid "New Gift Coupon"
+msgstr "Cupón de regalo nuevo"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__description
+msgid "Note"
+msgstr "Nota"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__order_ids
+msgid "Order"
+msgstr "Pedido"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__categ_ids
+msgid "POS Categories"
+msgstr "Categorías de punto de venta"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model,name:pos_coupons_gift_voucher.model_pos_gift_coupon
+msgid "POS Gift Coupon"
+msgstr "Cupón de regalo POS"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_tree_view
+msgid "POS Gift Coupons"
+msgstr "Cupones de regalo POS"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__partner_id
+msgid "Partner"
+msgstr "Compañera"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Percentage"
+msgstr "Porcentaje"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Phone:"
+msgstr "Teléfono:"
+
+#. module: pos_coupons_gift_voucher
+#: code:addons/pos_coupons_gift_voucher/models/pos_coupon.py:0
+#, python-format
+msgid ""
+"Please Enter Valid Date.Expiry Date Should not be greater than Issue Date."
+msgstr ""
+"Ingrese la fecha válida. La fecha de vencimiento no debe ser posterior a la fecha de emisión."
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model,name:pos_coupons_gift_voucher.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Pedidos de punto de venta"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_form_view
+#, python-format
+msgid "Print"
+msgstr "Impresión"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Print Coupon"
+msgstr "Imprimir cupón"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__product_id
+#, python-format
+msgid "Product"
+msgstr "Producto"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model,name:pos_coupons_gift_voucher.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Select Coupon"
+msgstr "Seleccionar cupón"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Specific Category"
+msgstr "Categoría específica"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "Specific Customer"
+msgstr "Cliente específica"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.model.fields.selection,name:pos_coupons_gift_voucher.selection__pos_gift_coupon__apply_coupon_on__taxed
+#, python-format
+msgid "Taxed Amount"
+msgstr "Importe gravado"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "The Coupon You are trying to apply is Expired"
+msgstr "El cupón que está tratando de aplicar está vencido"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid ""
+"There must be at least one product in your order before it can be apply for "
+"voucher code."
+msgstr ""
+"Debe haber al menos un producto en su pedido antes de que pueda solicitarlo "
+"Código de cupón."
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "This Gift Coupon is not applicable for this Customer"
+msgstr "Este Cupón de Regalo no es aplicable para este Cliente"
+
+#. module: pos_coupons_gift_voucher
+#: model_terms:ir.ui.view,arch_db:pos_coupons_gift_voucher.view_pos_gift_coupan_form_view
+msgid ""
+"This will be displayed in the order summary, as well as on the invoice."
+msgstr ""
+"Esto se mostrará en el resumen del pedido, así como en la factura."
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Unknown customer"
+msgstr "Cliente desconocida"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#: model:ir.model.fields.selection,name:pos_coupons_gift_voucher.selection__pos_gift_coupon__apply_coupon_on__untaxed
+#, python-format
+msgid "Untaxed Amount"
+msgstr "Importe no gravado"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__used
+msgid "Used"
+msgstr "Usada"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/xml/pos_coupons_gift_voucher.xml:0
+#, python-format
+msgid "User:"
+msgstr "Usuaria:"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "Voucher Code Entered by you is Invalid. Enter Valid Code..."
+msgstr "El código de cupón ingresado por usted no es válido. Introduzca un código válido..."
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "You already exceed the maximum limit for this Coupon code."
+msgstr "Ya superaste el límite máximo para este código de cupón."
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "You already exceed the maximum number of limit for this Coupon code"
+msgstr "Ya excedió el número máximo de límite para este código de cupón"
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid "You cannot use Coupons/Gift Voucher. Select customer first."
+msgstr "No se pueden utilizar Cupones/Vales Regalo. Seleccione el cliente primero."
+
+#. module: pos_coupons_gift_voucher
+#. openerp-web
+#: code:addons/pos_coupons_gift_voucher/static/src/js/pos_coupons_gift_voucher.js:0
+#, python-format
+msgid ""
+"You have already use Coupon code, at a time you can use one coupon in a "
+"Single Order"
+msgstr ""
+"Ya ha usado el código de cupón, a la vez puede usar un cupón en un "
+"Pedido único"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields,field_description:pos_coupons_gift_voucher.field_pos_gift_coupon__coupon_count
+msgid "coupon count"
+msgstr "conteo de cupones"
+
+#. module: pos_coupons_gift_voucher
+#: model:ir.model.fields.selection,name:pos_coupons_gift_voucher.selection__pos_gift_coupon__amount_type__per
+msgid "percentage(%)"
+msgstr "porcentaje(%)"

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	
+		<!-- Add custom js for POS Coupons and Gift Voucher -->	    
+		<template id="assets_for_pos_coupons_gift_voucher" inherit_id="point_of_sale.assets">
+			<xpath expr="." position="inside">
+				<link rel="stylesheet" href="/pos_coupons_gift_voucher/static/src/css/custom.css"/>
+				
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/jquery-barcode.js"/>
+				
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/AfterCreateCouponPopup.js"/>
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/CouponConfigPopup.js"/>
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/CouponPrint.js"/>
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/CouponReceiptScreen.js"/>
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/CreateCouponPopup.js"/>
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/GiftCouponButton.js"/>
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/multiselect.js" ></script>
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/models.js"/>
+				<script type="text/javascript" src="/pos_coupons_gift_voucher/static/src/js/SelectExistingCouponPopup.js"/>
+			</xpath>
+		</template>
+		
+	</data>
+</odoo>
