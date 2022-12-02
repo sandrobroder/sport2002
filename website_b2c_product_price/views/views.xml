@@ -1,5 +1,15 @@
 <odoo>
     <data>
+        <record id="view_res_users_form_inherit" model="ir.ui.view">
+            <field name="name">res.users.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <field name="tz_offset" position="after">
+                    <field name="product_price_to_show"/>
+                </field>
+            </field>
+        </record>
 
         <record id="product_pricelist_item_form_view_inherit" model="ir.ui.view">
             <field name="name">product.pricelist.item.form</field>
@@ -50,6 +60,47 @@
                 </xpath>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="product_template_kanban_stock_view">
+            <field name="name">Product Template Kanban Stock</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="inside">
+                    <field name="product_price_to_show"/>
+                    <field name="currency_id"/>
+                </xpath>
+                <xpath expr="//div[@name='product_lst_price']" position="replace">
+                    <div name="product_lst_price" class="mt-1">
+                        <t t-if="record.product_price_to_show.raw_value == 'sales_price'">
+                            Sales Price:
+                            <field name="lst_price" widget="monetary"
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </t>
+                        <t t-elif="record.product_price_to_show.raw_value == 'price_with_tax'">
+                            Sales Price(Tax Inc.):
+                            <field name="customer_list_price" widget='monetary'
+                                   options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </t>
+                        <t t-else="1">
+                            <div name="product_lst_price">
+                                <div class="mt-1">
+                                    Sales Price:
+                                    <field name="lst_price" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </div>
+                                <div class="mt-1">
+                                    Sales Price(Tax Inc.):
+                                    <field name="customer_list_price" widget="monetary"
+                                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
 
         <!-- explicit list view definition -->
         <!--

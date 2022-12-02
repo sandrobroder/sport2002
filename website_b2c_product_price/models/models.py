@@ -9,8 +9,20 @@ from odoo.exceptions import UserError, ValidationError
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    customer_list_price = fields.Float(string="Precio Roots")
+    customer_list_price = fields.Float(string="Customer Sales Price(Tax Inc.)", digits='Product Price')
+    product_price_to_show = fields.Selection(
+        [("sales_price", "Sales Price"), ("price_with_tax", "Sales Price(Tax Inc.)")],
+        compute="compute_which_price_to_show")
     description_product = fields.Text()
+
+    def compute_which_price_to_show(self):
+        for rec in self:
+            if self.env.user.product_price_to_show == "sales_price":
+                rec.product_price_to_show = "sales_price"
+            elif self.env.user.product_price_to_show == "price_with_tax":
+                rec.product_price_to_show = "price_with_tax"
+            else:
+                rec.product_price_to_show = False
 
     def open_pricelist_rules(self):
         self.ensure_one()
@@ -200,3 +212,9 @@ class AccountTax(models.Model):
     _inherit = "account.tax"
 
     is_b2c_tax = fields.Boolean()
+
+
+class ResUsers(models.Model):
+    _inherit = "res.users"
+
+    product_price_to_show = fields.Selection([("sales_price", "Sales Price"), ("price_with_tax", "Sales Price(Tax Inc.)")])
