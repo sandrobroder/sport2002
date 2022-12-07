@@ -9,7 +9,7 @@ from odoo.exceptions import UserError, ValidationError
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    customer_list_price = fields.Float(string="Customer Sales Price(Tax Inc.)", digits='Product Price')
+    customer_list_price = fields.Float(string="Precio Roots", digits='Product Price')
     product_price_to_show = fields.Selection(
         [("sales_price", "Sales Price"), ("price_with_tax", "Sales Price(Tax Inc.)")],
         compute="compute_which_price_to_show")
