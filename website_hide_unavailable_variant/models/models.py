@@ -42,6 +42,10 @@ class ProductTemplate(models.Model):
                             unavailable_variant_view_type.append(value.attribute_id.unavailable_value_view_type)
 
                     valid_combination_list.append(tuple(val))
+            first_combi = rec._get_first_possible_combination()
+            first_val = None
+            if first_combi:
+                first_val = first_combi[0].id
             valid_comb = set(valid_combination_list)
             value_count_per_attr = []
             attribute_line_ids = self.attribute_line_ids
@@ -79,7 +83,8 @@ class ProductTemplate(models.Model):
                 "unavailable_variant_view_type": unavailable_variant_view_type,
                 "value_to_show": variant_val_child_dict,
                 "value_to_show_tuple": list(valid_comb),
-                "value_count_per_attr": value_count_per_attr
+                "value_count_per_attr": value_count_per_attr,
+                "first_val": first_val
             }
             # print("unavailable_variant_dict", unavailable_variant_dict)
             return json.dumps(unavailable_variant_dict)

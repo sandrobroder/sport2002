@@ -14,10 +14,10 @@
 
     'author': "ErpMstar Solutions",
     'category': 'eCommerce',
-    'version': '1.2',
+    'version': '1.4',
 
     # any module necessary for this one to work correctly
-    'depends': ['website_sale', 'emipro_theme_base', 'theme_clarico_vega'],
+    'depends': ['website_sale', 'theme_clarico_vega'],
 
     # always loaded
     'data': [

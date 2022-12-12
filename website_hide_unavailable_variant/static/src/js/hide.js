@@ -1,5 +1,8 @@
 odoo.define('hide_unavailable_variants', function (require) {
     'use strict';
+
+    require('theme_clarico_vega.theme_script')
+    require('emipro_theme_base.quick_view')
     var ajax = require('web.ajax');
     var publicWidget = require('web.public.widget');
     var sAnimations = require('website.content.snippets.animation');
@@ -112,7 +115,16 @@ odoo.define('hide_unavailable_variants', function (require) {
                                             if (!variant_value_id) {
                                                 variant_value_id = $(attr_var_list[x]).data("value_id")
                                             }
-                                            if (list.indexOf(parseInt(variant_value_id)) != -1) { } else {
+                                            if (list.indexOf(parseInt(variant_value_id)) != -1) {
+                                                if ($(attr_var_list[x]).hasClass("list-inline-item")) {
+                                                    $(attr_var_list[x]).css({ "display": "inline-block" });
+                                                }
+                                                else {
+                                                    $(attr_var_list[x]).css({ "display": "list-item" });
+                                                }
+
+                                            }
+                                            else {
                                                 if (unavailable_variant_view_type[attr_index] == 'none') {
 
                                                 }
@@ -159,7 +171,6 @@ odoo.define('hide_unavailable_variants', function (require) {
 
         _getCombinationInfo: function (ev) {
             var self = this;
-            //            console.log("Get Combination Info")
             if ($(ev.target).hasClass('variant_custom_value')) {
                 return Promise.resolve();
             }
@@ -235,6 +246,8 @@ odoo.define('hide_unavailable_variants', function (require) {
                 });
             });
 
+
+            var time_out = 0
             var id_tuples = $parent.find("#unavailable_variant").data('values')
             if (id_tuples && Object.keys(id_tuples).length) {
                 var variants = JSON.parse(JSON.stringify(id_tuples))
@@ -243,9 +256,19 @@ odoo.define('hide_unavailable_variants', function (require) {
                 var value_count_per_attr = variants.value_count_per_attr
                 var attribute_display_types = variants.attribute_display_types
                 var clicked_on_variant_id = parseInt($(ev.target).attr('data-value_id'))
-                if (!clicked_on_variant_id) {
+                if (isNaN(clicked_on_variant_id)) {
                     clicked_on_variant_id = parseInt($(ev.target).val())
+                    if (isNaN(clicked_on_variant_id)) {
+                        var first_val = id_tuples['first_val']
+                        if (first_val) {
+                            clicked_on_variant_id = first_val
+                            time_out = 500
+                        }
+
+                    }
+
                 }
+                setTimeout(function(){
                 var unavailable_variant_view_type = variants.unavailable_variant_view_type
                 var all_attrs_childs = $parent.find(".js_add_cart_variants").children()
 
@@ -398,75 +421,77 @@ odoo.define('hide_unavailable_variants', function (require) {
                     }
                 }
                 $parent.find("p.css_not_available_msg").remove()
+            }, time_out)
             }
         },
     });
 
 
-    publicWidget.registry.quickView.include({
-        initQuickView: function (ev) {
-            /* This method is called while click on the quick view icon
-             and show the model and quick view data */
-            ev.preventDefault()
-            self = this;
-            var element = ev.currentTarget;
-            var product_id = $(element).attr('data-id');
-            ajax.jsonRpc('/quick_view_item_data', 'call', { 'product_id': product_id }).then(function (data) {
-                if ($("#wrap").hasClass('js_sale')) {
-                    $("#quick_view_model_shop .modal-body").html(data);
-                    $("#quick_view_model_shop").modal({ keyboard: true });
-                } else {
-                    $("#quick_view_model .modal-body").html(data);
-                    $("#quick_view_model").modal({ keyboard: true });
-                }
-                var WebsiteSale = new sAnimations.registry.WebsiteSale();
-                if ($('#id_lazyload').length) {
-                    $("img.lazyload").lazyload();
-                }
-                WebsiteSale.init();
-                WebsiteSale.on_start_check_variant()
-                WebsiteSale._startZoom();
-                var combination = [];
-                xml_load.then(function () {
-                    var $message = $(QWeb.render(
-                        'website_sale_stock.product_availability',
-                        combination
-                    ));
-                    $('div.availability_messages').html($message);
-                });
+    // publicWidget.registry.quickView.include({
+    //     initQuickView: function (ev) {
+    //         /* This method is called while click on the quick view icon
+    //          and show the model and quick view data */
+    //         ev.preventDefault()
+    //         self = this;
+    //         var element = ev.currentTarget;
+    //         var product_id = $(element).attr('data-id');
+    //         ajax.jsonRpc('/quick_view_item_data', 'call', { 'product_id': product_id }).then(function (data) {
+    //             if ($("#wrap").hasClass('js_sale')) {
+    //                 $("#quick_view_model_shop .modal-body").html(data);
+    //                 $("#quick_view_model_shop").modal({ keyboard: true });
+    //             } else {
+    //                 $("#quick_view_model .modal-body").html(data);
+    //                 $("#quick_view_model").modal({ keyboard: true });
+    //             }
+    //             var WebsiteSale = new sAnimations.registry.WebsiteSale();
+    //             if ($('#id_lazyload').length) {
+    //                 $("img.lazyload").lazyload();
+    //             }
+    //             WebsiteSale.init();
+    //             //                console.log(">???????????????????????????????????")
+    //             //                WebsiteSale.on_start_check_variant()
+    //             WebsiteSale._startZoom();
+    //             var combination = [];
+    //             xml_load.then(function () {
+    //                 var $message = $(QWeb.render(
+    //                     'website_sale_stock.product_availability',
+    //                     combination
+    //                 ));
+    //                 $('div.availability_messages').html($message);
+    //             });
 
-                setTimeout(function () {
-                    theme_script.productGallery();
-                    $('#mainSlider .owl-carousel').trigger('refresh.owl.carousel');
-                    $('#thumbnailSlider .owl-carousel').trigger('refresh.owl.carousel');
-                    var quantity = $('.quick_view_content').find('.quantity').val();
-                    $('.quick_view_content').find('.quantity').val(quantity).trigger('change');
+    //             setTimeout(function () {
+    //                 theme_script.productGallery();
+    //                 $('#mainSlider .owl-carousel').trigger('refresh.owl.carousel');
+    //                 $('#thumbnailSlider .owl-carousel').trigger('refresh.owl.carousel');
+    //                 var quantity = $('.quick_view_content').find('.quantity').val();
+    //                 $('.quick_view_content').find('.quantity').val(quantity).trigger('change');
 
-                }, 200);
-                setTimeout(function () {
-                    if ($(this).find('.a-submit').hasClass('out_of_stock')) {
-                        $(this).find('.a-submit').addClass('disabled');
-                    }
-                }, 1000);
-                $('.variant_attribute  .list-inline-item').find('.active').parent().addClass('active_li');
-                $(".list-inline-item .css_attribute_color").change(function (ev) {
-                    var $parent = $(ev.target).closest('.js_product');
-                    $parent.find('.css_attribute_color').parent('.list-inline-item').removeClass("active_li");
-                    $parent.find('.css_attribute_color').filter(':has(input:checked)').parent('.list-inline-item').addClass("active_li");
-                });
+    //             }, 200);
+    //             setTimeout(function () {
+    //                 if ($(this).find('.a-submit').hasClass('out_of_stock')) {
+    //                     $(this).find('.a-submit').addClass('disabled');
+    //                 }
+    //             }, 1000);
+    //             $('.variant_attribute  .list-inline-item').find('.active').parent().addClass('active_li');
+    //             $(".list-inline-item .css_attribute_color").change(function (ev) {
+    //                 var $parent = $(ev.target).closest('.js_product');
+    //                 $parent.find('.css_attribute_color').parent('.list-inline-item').removeClass("active_li");
+    //                 $parent.find('.css_attribute_color').filter(':has(input:checked)').parent('.list-inline-item').addClass("active_li");
+    //             });
 
-                /*$( ".list-inline-item .css_attribute_color" ).change(function() {
-                    $('.list-inline-item').removeClass('active_li');
-                    $(this).parent('.list-inline-item').addClass('active_li');
-                });*/
+    //             /*$( ".list-inline-item .css_attribute_color" ).change(function() {
+    //                 $('.list-inline-item').removeClass('active_li');
+    //                 $(this).parent('.list-inline-item').addClass('active_li');
+    //             });*/
 
-                /* Attribute value tooltip */
-                $(function () {
-                    $('[data-toggle="tooltip"]').tooltip({ animation: true, delay: { show: 300, hide: 100 } })
-                });
+    //             /* Attribute value tooltip */
+    //             $(function () {
+    //                 $('[data-toggle="tooltip"]').tooltip({ animation: true, delay: { show: 300, hide: 100 } })
+    //             });
 
-            });
+    //         });
 
-        },
-    })
+        // },
+    // })
 });
