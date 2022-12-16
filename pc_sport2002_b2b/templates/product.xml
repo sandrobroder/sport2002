@@ -133,7 +133,7 @@
         <!--	    </xpath>-->
     </template>
 
-    <template id="quick_view_template_process" inherit_id="emipro_theme_base.quick_view_container"
+<!--     <template id="quick_view_template_process" inherit_id="emipro_theme_base.quick_view_container"
               name="Quick View Template Process" priority="300">
         <xpath expr="//div[hasclass('quick_view_content')]" position="attributes">
             <attribute name="class">quick_view_content d-flex align-content-center flex-wrap</attribute>
@@ -152,7 +152,6 @@
                     </div>
 
                     <div class="col-md-6 col-xl-6" id="product_details">
-                        <!-- Display Product Rating -->
                         <t t-if="request.website.viewref('theme_clarico_vega.clarico_shop_products_label').active">
                             <t t-if="product.label_line_ids">
                                 <t t-foreach="product.label_line_ids" t-as="labels">
@@ -273,7 +272,7 @@
                 </div>
             </section>
         </xpath>
-    </template>
+    </template> -->
 
     <template id="product_processcontrol_b2b" inherit_id="website_sale.products_item" name="product B2B" priority="300">
         <xpath expr="//div[hasclass('product_price')]" position="replace">
