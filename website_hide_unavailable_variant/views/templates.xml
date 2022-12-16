@@ -313,7 +313,7 @@
                        t-value="product._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
                     <t t-set="product_variant"
                        t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
-                    <section
+                                        <section
                             t-attf-class="container-fluid py-2 oe_website_sale #{'discount' if combination_info['has_discounted_price'] else ''}"
                             id="product_detail">
                         <div class="row">
@@ -354,8 +354,6 @@
                                       method="POST">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                     <div class="js_product js_main_product">
-                                        <div id="unavailable_variant" t-att-data-values="product.get_variant_count()">
-                                        </div>
                                         <t t-call="website_sale.product_price"/>
                                         <t t-placeholder="select">
                                             <input type="hidden" class="product_id" name="product_id"
@@ -372,8 +370,7 @@
                                             </t>
                                         </t>
                                         <p t-if="True" class="css_not_available_msg alert alert-warning">This
-                                            combination
-                                            does
+                                            combination does
                                             not exist.
                                         </p>
                                         <t t-set="qty_show"
@@ -404,23 +401,25 @@
                                         </t>
                                         <t t-set="configurator_state"
                                            t-value="request.env['ir.module.module'].sudo().search([['name', '=', 'sale_product_configurator']])"/>
-                                        <t t-if="configurator_state and configurator_state.state == 'installed'">
-                                            <a role="button"
-                                               t-att-id="'add_to_cart' if not product.optional_product_ids else ''"
-                                               t-attf-class="btn btn-primary btn-lg mt16 a-submit te_theme_button quick-add-to-cart #{'disabled out_of_stock' if product.sudo().virtual_available &lt; 1 else ''}"
-                                               href="#">
-                                                <span class="fa fa-shopping-cart"/>
-                                                Add to Cart
-                                            </a>
-                                        </t>
-                                        <t t-else="">
-                                            <a role="button"
-                                               id="add_to_cart"
-                                               t-attf-class="btn btn-primary btn-lg mt16 a-submit te_theme_button quick-add-to-cart #{'disabled out_of_stock' if product.sudo().virtual_available &lt; 1 else ''}"
-                                               href="#">
-                                                <span class="fa fa-shopping-cart"/>
-                                                Add to Cart
-                                            </a>
+                                        <t t-if="request.env.user.name != 'Public user'">
+                                            <t t-if="configurator_state and configurator_state.state == 'installed'">
+                                                <a role="button"
+                                                   t-att-id="'add_to_cart' if not product.optional_product_ids else ''"
+                                                   t-attf-class="btn btn-primary btn-lg mt16 a-submit te_theme_button quick-add-to-cart #{'disabled out_of_stock' if product.sudo().virtual_available &lt; 1 else ''}"
+                                                   href="#">
+                                                    <span class="fa fa-shopping-cart"/>
+                                                    Add to Cart
+                                                </a>
+                                            </t>
+                                            <t t-else="">
+                                                <a role="button"
+                                                   id="add_to_cart"
+                                                   t-attf-class="btn btn-primary btn-lg mt16 a-submit te_theme_button quick-add-to-cart #{'disabled out_of_stock' if product.sudo().virtual_available &lt; 1 else ''}"
+                                                   href="#">
+                                                    <span class="fa fa-shopping-cart"/>
+                                                    Add to Cart
+                                                </a>
+                                            </t>
                                         </t>
                                         <t t-if="buy_now_show">
                                             <a role="button" id="buy_now"
@@ -447,6 +446,7 @@
                             </div>
                         </div>
                     </section>
+
                 </div>
             </xpath>
         </field>
