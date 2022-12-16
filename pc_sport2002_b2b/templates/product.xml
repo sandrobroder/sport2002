@@ -277,10 +277,10 @@
     <template id="product_processcontrol_b2b" inherit_id="website_sale.products_item" name="product B2B" priority="300">
         <xpath expr="//div[hasclass('product_price')]" position="replace">
             <div class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
-                <t t-if="request.env.user.name != 'Public user'">
+                <t t-if="not request.env.user._is_public()">
                     <span t-if="combination_info['price']" t-esc="combination_info['price']" class="te_p_sm"
                           t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
-                </t>
+              
                 <del t-attf-class="text-danger mr-1 te_p_disc {{'' if combination_info['has_discounted_price'] else 'd-none'}}"
                      style="white-space: nowrap;" t-esc="combination_info['list_price']"
                      t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
@@ -292,11 +292,12 @@
                     <t t-set="discount"
                        t-value="round(difference*100/combination_info['list_price']) if combination_info['list_price'] &gt; 0 else 0"/>
                     <span class="te_percentage" t-esc="'(%s'%(discount)+'% Off)'"/>
-                    <div class="te_percentage" t-if="discount">
+<!--                     <div class="te_percentage" t-if="discount">
                         <span t-esc="'(%s'%(discount)+'%'"/>
                         Off)
-                    </div>
+                    </div> -->
                 </div>
+                      </t>
             </div>
         </xpath>
     </template>
