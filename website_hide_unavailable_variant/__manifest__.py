@@ -17,7 +17,7 @@
     'version': '1.4',
 
     # any module necessary for this one to work correctly
-    'depends': ['website_sale', 'theme_clarico_vega'],
+    'depends': ['website_sale', 'theme_clarico_vega', 'pc_sport2002_b2b'],
 
     # always loaded
     'data': [
