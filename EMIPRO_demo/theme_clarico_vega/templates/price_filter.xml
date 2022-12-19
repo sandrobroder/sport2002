@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!--================== Theme Price Filter Code ====================-->
+    <!--================== Theme Price Filter Code update ====================-->
     <template id="website_pricefilter_ept" name="Price Filter" inherit_id="website_sale.products_attributes">
         <xpath expr="//form" position="inside">
             <t t-if="False if (website.b2b_hide_price and website.is_public_user()) else True and website.is_price_range_filter and website.price_filter_on">
