@@ -297,23 +297,21 @@
         </xpath>
     </template> -->
     
-    <record id="product_catg_test_extended" model="ir.ui.view">
+        <record id="quick_view_template_extended" model="ir.ui.view">
         <field name="name">quick_view_template_extended</field>
         <field name="inherit_id" search="[('key', '=', 'theme_clarico_vega.quick_view_template')]"/>
         <field name="type">qweb</field>
-        <field name="key">website_hide_unavailable_variant.product_catg_test_extended</field>
+        <field name="key">website_hide_unavailable_variant.quick_view_template_extended</field>
         <field name="arch" type="xml">
             <xpath expr="." position="replace">
                 <div class="quick_view_content d-flex align-content-center flex-wrap">
-
-                    <t t-set="combination" t-value="product._get_first_possible_combination()"/>
                     <t t-set="combination"
                        t-value="product.with_context(special_call=True)._get_first_possible_combination()"/>
                     <t t-set="combination_info"
                        t-value="product._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
                     <t t-set="product_variant"
                        t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
-                                        <section
+                    <section
                             t-attf-class="container-fluid py-2 oe_website_sale #{'discount' if combination_info['has_discounted_price'] else ''}"
                             id="product_detail">
                         <div class="row">
@@ -322,6 +320,7 @@
                             </div>
 
                             <div class="col-md-6 col-xl-6" id="product_details">
+                                <!-- Display Product Rating -->
                                 <t t-if="request.website.viewref('theme_clarico_vega.clarico_shop_products_label').active">
                                     <t t-if="product.label_line_ids">
                                         <t t-foreach="product.label_line_ids" t-as="labels">
@@ -355,7 +354,10 @@
                                     <div class="js_product js_main_product">
                                         <div id="unavailable_variant" t-att-data-values="product.get_variant_count()">
                                         </div>
-                                        <t t-call="website_sale.product_price"/>
+                                        <t t-call="website_sale.product_price"
+                                           t-if="False if (website.b2b_hide_price and website.is_public_user()) else True"/>
+                                        <t t-if="True if website.is_b2b_message and website.is_public_user() else False"
+                                           t-call="theme_clarico_vega.b2b_hide_details_msg"/>
                                         <t t-placeholder="select">
                                             <input type="hidden" class="product_id" name="product_id"
                                                    t-att-value="product_variant.id"/>
@@ -374,35 +376,35 @@
                                             combination does
                                             not exist.
                                         </p>
-                                        <t t-set="qty_show"
-                                           t-value="request.website.viewref('website_sale.product_quantity').active"/>
-                                        <t t-set="buy_now_show"
-                                           t-value="request.website.viewref('website_sale.product_buy_now').active"/>
-                                        <t t-if="qty_show">
-                                            <div class="css_quantity input-group oe_website_spinner te_product_quantity"
-                                                 contenteditable="false">
-                                                <div class="input-group-prepend">
-                                                    <a t-attf-href="#" class="btn btn-secondary js_add_cart_json"
-                                                       aria-label="Remove one"
-                                                       title="Remove one">
-                                                        <span class="fa fa-minus"/>
-                                                    </a>
+                                        <t t-if="False if (website.b2b_hide_add_to_cart and website.is_public_user()) else True">
+                                            <t t-set="qty_show"
+                                               t-value="request.website.viewref('website_sale.product_quantity').active"/>
+                                            <t t-set="buy_now_show"
+                                               t-value="request.website.viewref('website_sale.product_buy_now').active"/>
+                                            <t t-if="qty_show">
+                                                <div class="css_quantity input-group oe_website_spinner te_product_quantity"
+                                                     contenteditable="false">
+                                                    <div class="input-group-prepend">
+                                                        <a t-attf-href="#" class="btn btn-secondary js_add_cart_json"
+                                                           aria-label="Remove one"
+                                                           title="Remove one">
+                                                            <span class="fa fa-minus"/>
+                                                        </a>
+                                                    </div>
+                                                    <input type="text" class="form-control quantity" data-min="1"
+                                                           name="add_qty"
+                                                           value="1"/>
+                                                    <div class="input-group-append">
+                                                        <a t-attf-href="#"
+                                                           class="btn btn-secondary float_left js_add_cart_json"
+                                                           aria-label="Add one" title="Add one">
+                                                            <span class="fa fa-plus"/>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                                <input type="text" class="form-control quantity" data-min="1"
-                                                       name="add_qty"
-                                                       value="1"/>
-                                                <div class="input-group-append">
-                                                    <a t-attf-href="#"
-                                                       class="btn btn-secondary float_left js_add_cart_json"
-                                                       aria-label="Add one" title="Add one">
-                                                        <span class="fa fa-plus"/>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </t>
-                                        <t t-set="configurator_state"
-                                           t-value="request.env['ir.module.module'].sudo().search([['name', '=', 'sale_product_configurator']])"/>
-                                        <t t-if="request.env.user.name != 'Public user'">
+                                            </t>
+                                            <t t-set="configurator_state"
+                                               t-value="request.env['ir.module.module'].sudo().search([['name', '=', 'sale_product_configurator']])"/>
                                             <t t-if="configurator_state and configurator_state.state == 'installed'">
                                                 <a role="button"
                                                    t-att-id="'add_to_cart' if not product.optional_product_ids else ''"
@@ -421,14 +423,14 @@
                                                     Add to Cart
                                                 </a>
                                             </t>
-                                        </t>
-                                        <t t-if="buy_now_show">
-                                            <a role="button" id="buy_now"
-                                               class="btn btn-outline-primary btn-lg mt16 d-block d-sm-inline-block te_theme_button"
-                                               href="#">
-                                                <span class="fa fa-bolt"/>
-                                                Buy Now
-                                            </a>
+                                            <t t-if="buy_now_show">
+                                                <a role="button" id="buy_now"
+                                                   class="btn btn-outline-primary btn-lg mt16 d-block d-sm-inline-block te_theme_button"
+                                                   href="#">
+                                                    <span class="fa fa-bolt"/>
+                                                    Buy Now
+                                                </a>
+                                            </t>
                                         </t>
                                         <div class="availability_messages o_not_editable"/>
                                         <div id="product_option_block"/>
@@ -447,11 +449,12 @@
                             </div>
                         </div>
                     </section>
-
                 </div>
+
             </xpath>
         </field>
-    </record> 
+    </record>
+
     
         <record id="ajax_cart_template_extended" model="ir.ui.view">
         <field name="name">ajax_cart_template_extended</field>
