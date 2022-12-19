@@ -451,7 +451,7 @@
                             </select>
                         </t>
                         <t t-if="a.display_type == 'radio'">
-                            <ul class="nav nav-pills flex-column">
+                            <ul class="nav nav-pills flex-column" style="display:none;">
                                 <div t-if="a.allow_search" id="js_attrib_search" class="collapsed">
                                     <div class="js_attrib_search">
                                         <input type="text" class="js_attrib_search_ept sliderValue"
@@ -498,7 +498,7 @@
                             </ul>
                         </t>
                         <t t-if="a.display_type == 'color'">
-                            <ul class="nav nav-pills flex-column">
+                            <ul class="nav nav-pills flex-column" style="display:none;">
                                 <div t-if="a.allow_search" id="js_attrib_search" class="collapsed">
                                     <div class="js_attrib_search">
                                         <input type="text" class="js_attrib_search_ept sliderValue"
@@ -577,7 +577,7 @@
                                     <span>Brand</span>
                                     <a class="te_clear_all_variant">[Clear]</a>
                                 </div>
-                                <ul class="nav nav-pills flex-column brand_main">
+                                <ul class="nav nav-pills flex-column brand_main" style="display:none;">
                                     <div t-if="website.allowed_search_brand" id="js_attrib_search" class="collapsed">
                                         <div class="js_attrib_search">
                                             <input type="text" class="js_attrib_search_ept sliderValue"
