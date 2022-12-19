@@ -3,7 +3,7 @@
     <!--================== Theme Price Filter Code ====================-->
     <template id="website_pricefilter_ept" name="Price Filter" inherit_id="website_sale.products_attributes">
         <xpath expr="//form" position="inside">
-            <t t-if="website.is_price_range_filter and website.price_filter_on">
+            <t t-if="False if (website.b2b_hide_price and website.is_public_user()) else True and website.is_price_range_filter and website.price_filter_on">
                 <t t-set="curr_web" t-value="request.website.get_current_website()"/>
                 <t t-set="range_values" t-value='website.get_min_max_prices(search,category,attrib_values)'/>
                  <t t-if="range_values and range_values[2] and range_values[3]">
