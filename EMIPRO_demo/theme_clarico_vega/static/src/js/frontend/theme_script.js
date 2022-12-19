@@ -355,7 +355,7 @@ odoo.define('theme_clarico_vega.theme_script', function(require) {
             this.onSelectAttribute();
             this._onslide();
             $(".color-changer").mCustomScrollbar({axis: "x",theme: "dark-thin",alwaysShowScrollbar: 0});
-            $(".js_attributes li.nav-item").find('ul, select' ).css("display","block");
+//             $(".js_attributes li.nav-item").find('ul, select' ).css("display","block");
             $(".te_pricerange_content").show();
             $(".te_show_category").find('i').removeClass("fa-chevron-right").addClass("fa-chevron-down");
             $("#wsale_products_categories_collapse").find(".te_ctg_h4").addClass("te_fa-plus");
