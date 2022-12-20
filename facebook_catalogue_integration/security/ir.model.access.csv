@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_brand,product_brand,model_product_brand,,1,1,1,1
+access_fb_catalogue_product_field,fb_catalogue_product_field,model_fb_catalogue_product_field,,1,1,1,1
+access_field_mapping_line,field_mapping_line,model_field_mapping_line,,1,1,1,1
+access_fb_odoo_field_mapping,fb_odoo_field_mapping,model_fb_odoo_field_mapping,,1,1,1,1
+access_facebook_catalogue,facebook_catalogue,model_facebook_catalogue,,1,1,1,1
