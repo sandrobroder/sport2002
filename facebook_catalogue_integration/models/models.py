@@ -10,7 +10,7 @@ from odoo import models, fields, api
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    brand_id = fields.Many2one('product.brand', string='Brand Name', required=True)
+    brand_id = fields.Many2one('product.brand', string='Brand Name')
     gtin = fields.Char(string='GTIN')
     mpn = fields.Char(string='MPN')
 
