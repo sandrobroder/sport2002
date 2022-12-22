@@ -25,7 +25,7 @@
                                         <div>
                                             <strong t-field="o.partner_id.name"/>
                                         </div>
-                                        <span t-field="o.partner_id"
+                                        <span t-field="o.partner_shipping_id"
                                               t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
 
                                 <div>
                                     <span>Agencia:</span>
-                                    <span t-field="o.carrier_id"/>
+                                    <span t-field="o.x_Transporte"/>
                                 </div>
                                 <br/>
 
