@@ -30,6 +30,18 @@
                                 <p t-field="o.scheduled_date"/>
                             </t>
                         </div>
+                        <div t-if="o.sale_id.x_Transporte" class="col-auto" >
+                            <strong>Operador:</strong>
+                           
+                                <p t-field="o.sale_id.x_Transporte"/>
+                          
+                        </div>
+                        <div t-if="o.sale_id.x_numero_bultos" class="col-auto" >
+                            <strong>Bultos:</strong>
+                            
+                                <p t-field="o.sale_id.x_numero_bultos"/>
+                           
+                        </div>
                     </div>
                     <div t-if="o.state!='done'">
                         Delivery not validated
@@ -265,7 +277,7 @@
     </template>
 
     <record id="action_report_delivery" model="ir.actions.report">
-        <field name="name">Validated Delivery Slip</field>
+        <field name="name">Albarán sin valora</field>
         <field name="model">stock.picking</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">delivery_validated_slip.report_deliveryslip</field>
