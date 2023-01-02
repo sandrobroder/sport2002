@@ -50,8 +50,8 @@
                             </div>
                         </div>
                         <div class="col-6"
-                             style="padding-left:7mm; border-right:1px dashed black; height: 149mm; padding-top: 7mm">
-                            <div t-if="len(per_page_chunk) >= 2">
+                             style="padding-right:7mm; height: 149mm; padding-top: 7mm;">
+                            <div t-if="len(per_page_chunk) >= 2 " class="pl-4">
                                 <div>
                                     <div>Datos Empresa:</div>
                                     <div class="company_address" style="padding-left: 12px;">
@@ -96,8 +96,8 @@
                     </div>
                     <div class="row">
                         <div class="col-6"
-                             style="padding-left:7mm; border-right:1px dashed black; height: 149mm; padding-top: 7mm">
-                            <div t-if="len(per_page_chunk) >= 3">
+                            style="padding-right:7mm; border-top:1px dashed black; height: 148mm; padding-top: 7mm">
+                            <div t-if="len(per_page_chunk) >= 3 ">
                                 <div>
                                     <div>Datos Empresa:</div>
                                     <div class="company_address" style="padding-left: 12px;">
@@ -140,8 +140,8 @@
                             </div>
                         </div>
                         <div class="col-6"
-                             style="padding-left:7mm; border-right:1px dashed black; height: 149mm; padding-top: 7mm">
-                            <div t-if="len(per_page_chunk) >= 4">
+                              style="border-left:1px dashed black; border-top:1px dashed black; height: 148mm; padding-top: 7mm">
+                            <div t-if="len(per_page_chunk) >= 4 " class="pl-4">
                                 <div>
                                     <div>Datos Empresa:</div>
                                     <div class="company_address" style="padding-left: 12px;">
