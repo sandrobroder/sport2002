@@ -14,3 +14,17 @@ Initial Release
 
 => [ADD] depends processcontrol_product_image
 => [fix] import product image
+
+
+ 14.0.4 (29 Dec 2022)
+-----------------------
+=> [fix] image_variant_1920 don't write in when import template.
+    record_vals = {
+        'image_1920': image_base64
+    }
+    if self.product_model == 'pro_var':
+        record_vals.update({
+            'image_variant_1920': image_base64,
+        })
+    search_record.sudo().write(record_vals)
+

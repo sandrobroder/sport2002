@@ -155,10 +155,14 @@ class ShImportImgZipShop(models.TransientModel):
                                                         search_record.product_template_image_ids = [
                                                             (0, 0, extra_image_vals)]
                                                 else:
-                                                    search_record.sudo().write({
-                                                        'image_1920': image_base64,
-                                                        'image_variant_1920': image_base64,
-                                                    })
+                                                    record_vals = {
+                                                        'image_1920': image_base64
+                                                    }
+                                                    if self.product_model == 'pro_var':
+                                                        record_vals.update({
+                                                            'image_variant_1920': image_base64,
+                                                        })
+                                                    search_record.sudo().write(record_vals)
 
                                                 counter += 1
 
