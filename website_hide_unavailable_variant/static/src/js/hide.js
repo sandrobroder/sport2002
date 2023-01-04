@@ -382,6 +382,11 @@ odoo.define('hide_unavailable_variants', function (require) {
 
             var time_out = 0
             var id_tuples = $parent.find("#unavailable_variant").data('values')
+            var first_val = id_tuples['first_val']
+            if (first_val){
+                delete id_tuples['first_val']
+                $parent.find("#unavailable_variant").data('values', id_tuples)
+            }
             if (id_tuples && Object.keys(id_tuples).length) {
                 var variants = JSON.parse(JSON.stringify(id_tuples))
                 var value_to_show_tuple = variants.value_to_show_tuple
@@ -392,7 +397,6 @@ odoo.define('hide_unavailable_variants', function (require) {
                 if (isNaN(clicked_on_variant_id)) {
                     clicked_on_variant_id = parseInt($(ev.target).val())
                     if (isNaN(clicked_on_variant_id)) {
-                        var first_val = id_tuples['first_val']
                         if (first_val) {
                             clicked_on_variant_id = first_val
                             time_out = 500
