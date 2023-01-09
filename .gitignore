@@ -5,3 +5,14 @@
 .idea/modules.xml
 .idea/pihernz.iml
 .idea/vcs.xml
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.py[co]
+/.venv
+/.pytest_cache
+*$py.class
+
+# C extensions
+*.so
