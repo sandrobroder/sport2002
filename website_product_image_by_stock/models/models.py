@@ -8,20 +8,14 @@ class ProductTemplate(models.Model):
 
     @api.model
     def set_product_template_image(self):
-        product_tmpl_ids = self.env["product.template"].search([("is_published", "=", True), ("type", "=", "product")])
+        product_tmpl_ids = self.env["product.template"].search([("is_published", "=", True), ("type", "=", "product")], limit=100)
         for product_template_id in product_tmpl_ids:
-            variant = self.env['product.product'].browse(product_template_id._get_first_possible_variant_id())
             available_variant = None
-            if variant:
+            for variant in product_template_id.product_variant_ids:
                 qty_available = variant.qty_available
                 if qty_available > 0 and variant.image_variant_128:
                     available_variant = variant
-                else:
-                    for variant in product_template_id.product_variant_ids:
-                        qty_available = variant.qty_available
-                        if qty_available > 0 and variant.image_variant_128:
-                            available_variant = variant
-                            break
+                    break
             if available_variant:
                 product_template_id.image_1920 = available_variant.image_1920
 
