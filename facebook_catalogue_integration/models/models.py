@@ -10,7 +10,8 @@ from odoo import models, fields, api
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    brand_id = fields.Many2one('product.brand', string='Brand Name')
+    google_category_id = fields.Many2one("product.google.category", string="Google Category for Product")
+    brand_id = fields.Many2one('product.brand', string='Brand Name', required=True)
     gtin = fields.Char(string='GTIN')
     mpn = fields.Char(string='MPN')
 
@@ -47,6 +48,63 @@ class FieldMapping(models.Model):
     field_mapping_ids = fields.One2many("field.mapping.line", "mapping_id",
                                         string="Facebook Odoo Field Mapping for Product")
 
+    def create(self, vals):
+        for rec in vals:
+            if 'created_by_data' in rec:
+                if rec['created_by_data']:
+                    fb_fields = self.env['fb.catalogue.product.field'].search([('is_required', '=', True)])
+                    mapping_line = []
+                    for fb_field in fb_fields:
+                        model_field = None
+                        default_value = ""
+                        if fb_field.name in ['id', 'link', 'image_link']:
+                            model_field = self.env['ir.model.fields'].search(
+                                [('model', '=', 'product.template'), ('name', '=', 'id')])
+                        elif fb_field.name == 'title':
+                            model_field = self.env['ir.model.fields'].search(
+                                [('model', '=', 'product.template'), ('name', '=', 'display_name')])
+                        elif fb_field.name == 'description':
+                            model_field = self.env['ir.model.fields'].search(
+                                [('model', '=', 'product.template'), ('name', '=', 'description')])
+                        elif fb_field.name == 'availability':
+                            default_value = 'in stock'
+                        elif fb_field.name == 'condition':
+                            default_value = 'new'
+                        elif fb_field.name == 'price':
+                            model_field = self.env['ir.model.fields'].search(
+                                [('model', '=', 'product.template'), ('name', '=', 'lst_price')])
+                        elif fb_field.name == 'brand':
+                            model_field = self.env['ir.model.fields'].search(
+                                [('model', '=', 'product.template'), ('name', '=', 'brand_id')])
+
+                        if model_field:
+                            mapping_line.append([0, 0, {'fb_product_field_id': fb_field.id,
+                                                        'odoo_model_field_id': model_field.id}])
+                        else:
+                            mapping_line.append([0, 0, {'fb_product_field_id': fb_field.id,
+                                                        'default_value': default_value}])
+                    rec['field_mapping_ids'] = mapping_line
+        result = super(FieldMapping, self).create(vals)
+        return result
+
+
+class FbAttachmentMapping(models.Model):
+    _name = "fb.catalogue.attachment.map"
+    _rec_name = 'fb_catalogue_id'
+    _order = 'id desc'
+
+    fb_catalogue_id = fields.Many2one("facebook.catalogue", string='Facebook Catalogue')
+    is_latest = fields.Boolean(string='Is Latest Feed', default=True)
+    attachment_id = fields.Many2one('ir.attachment')
+
+    @api.model
+    def create(self, vals):
+        attachment_ids = self.env['fb.catalogue.attachment.map'].search([('is_latest', '=', True)])
+        for attachment in attachment_ids:
+            if attachment.is_latest:
+                attachment.is_latest = False
+        return super(FbAttachmentMapping, self).create(vals)
+
 
 class FacebookCatalogue(models.Model):
     _name = "facebook.catalogue"
@@ -55,8 +113,8 @@ class FacebookCatalogue(models.Model):
     price_list_id = fields.Many2one("product.pricelist")
     currency_id = fields.Many2one(related="price_list_id.currency_id")
     field_mapping_id = fields.Many2one('fb.odoo.field.mapping', help='Used in Facebook Odoo field mapping')
-    attachment = fields.Binary('Feed File')
-    file_name = fields.Char('File Name')
+    catalogue_attachment_ids = fields.One2many('fb.catalogue.attachment.map', 'fb_catalogue_id')
+    attachment_count = fields.Integer(string='#Feeds', compute='compute_att_count', help='Total created feeds')
     shop_url = fields.Char('Shop URL', help='Base URL of the shop website')
     feed_url = fields.Char('Feed URL', compute='get_feed_url', help='Use this URL to get the feeds')
     cron_id = fields.Many2one('ir.cron', help='Feeds Auto Create Activated')
@@ -188,6 +246,54 @@ class FacebookCatalogue(models.Model):
                 wr.writerow(row)
         data = open("fb_feeds.csv", "rb").read()
         encoded = base64.b64encode(data)
+        Attachment = self.env['ir.attachment']
         name = datetime.now().strftime("%m/%d/%Y_%H:%M:%S")
-        self.file_name = 'feed_' + name + '.csv'
-        self.attachment = encoded
+        attachment_data = {
+            'name': 'catalogue_' + name + '.csv',
+            'datas': encoded,
+        }
+        attachment_id = Attachment.create(attachment_data).id
+        self.env['fb.catalogue.attachment.map'].create({
+            'fb_catalogue_id': self.id,
+            'attachment_id': attachment_id
+        })
+
+    def compute_att_count(self):
+        for rec in self:
+            rec.attachment_count = len(
+                self.env['fb.catalogue.attachment.map'].search([('fb_catalogue_id', '=', rec.id)]))
+
+    def view_attachments(self):
+        return {
+            'name': 'Catalogue Attachments',
+            'type': 'ir.actions.act_window',
+            'res_model': 'fb.catalogue.attachment.map',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'view_id': False,
+            'target': 'current',
+            '_order': 'id desc',
+            'domain': [('fb_catalogue_id', '=', self.id)]
+        }
+
+    def create_cron(self):
+        model_id = self.env['ir.model'].search([('name', '=', 'facebook.catalogue')], limit=1).id
+        self.cron_id = self.env['ir.cron'].create({'name': self.name + " Feed Creator, Click to Configure",
+                                                   'model_id': model_id,
+                                                   'user_id': self.env.user.id,
+                                                   'state': 'code',
+                                                   'interval_type': 'weeks',
+                                                   'active': True,
+                                                   'code': "env['facebook.catalogue'].browse(" + str(
+                                                       self.id) + ").action_create_csv()"
+                                                   }).id
+
+    def remove_cron(self):
+        self.cron_id.unlink()
+
+
+class GoogleCategory(models.Model):
+    _name = "product.google.category"
+
+    name = fields.Char('Category Name')
+    code = fields.Integer('Category Code')

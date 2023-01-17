@@ -123,5 +123,12 @@
             <field name="name">mpn</field>
             <field name="is_required">False</field>
         </record>
+
+<!--        Default Mapping    -->
+
+        <record id="facebook_catalogue_integration.field_mapping_1" model="fb.odoo.field.mapping">
+            <field name="name">Default Field Mapping</field>
+            <field name="created_by_data">True</field>
+        </record>
     </data>
 </odoo>

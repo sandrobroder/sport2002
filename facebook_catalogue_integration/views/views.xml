@@ -24,6 +24,18 @@
             </field>
         </record>
 
+        <record id="facebook_catalogue_integration.fb_catalogue_attachment_list" model="ir.ui.view">
+            <field name="name">facebook_attachment_list</field>
+            <field name="model">fb.catalogue.attachment.map</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="fb_catalogue_id"/>
+                    <field name="attachment_id"/>
+                    <field name="is_latest"/>
+                </tree>
+            </field>
+        </record>
+
         <record id="facebook_catalogue_integration.facebook_catalogue_list" model="ir.ui.view">
             <field name="name">facebook_facebook_catalogue_list</field>
             <field name="model">facebook.catalogue</field>
@@ -32,6 +44,20 @@
                     <field name="name"/>
                     <field name="shop_url"/>
                     <field name="feed_url"/>
+
+                    <field name="attachment_count"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="facebook_catalogue_integration.google_category_list" model="ir.ui.view">
+            <field name="name">google_category_list</field>
+            <field name="model">product.google.category</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name" required="1"/>
+                    <field name="code" required="1"/>
                 </tree>
             </field>
         </record>
@@ -43,6 +69,28 @@
                 <tree editable="bottom">
                     <field name="name" required="1"/>
                 </tree>
+            </field>
+        </record>
+
+        <!--        Form View      -->
+
+        <record id="facebook_catalogue_integration.fb_catalogue_attachment_form" model="ir.ui.view">
+            <field name="name">facebook_attachment_form</field>
+            <field name="model">fb.catalogue.attachment.map</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="fb_catalogue_id"/>
+                                <field name="is_latest"/>
+                            </group>
+                            <group>
+                                <field name="attachment_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
             </field>
         </record>
 
@@ -60,6 +108,8 @@
                         </span>
                         <group>
                             <group>
+                                <field name="google_category_id"
+                                       help="The Google Product Category [google_product_category] attribute is used to categorize an item. This category is selected from the Google's taxonomy."/>
                                 <field name="brand_id" help="Brand Name for the product"/>
                             </group>
                             <group>
@@ -110,8 +160,32 @@
                         <button string="Create Feeds Manually" name="action_create_csv" type="object"
                                 icon="fa-hand-pointer-o"
                                 class="oe_highlight" help="Create Feeds Manually when needed"/>
+                        <button name="create_cron"
+                                class=""
+                                icon="fa-magic"
+                                type="object"
+                                attrs="{'invisible': [('cron_id','!=', False)]}"
+                                string="Enable Auto Feed Creation"
+                                help="This will automate the feeds creation">
+                        </button>
+                        <button name="remove_cron"
+                                class=""
+                                icon="fa-magic"
+                                type="object"
+                                attrs="{'invisible': [('cron_id','==', False)]}"
+                                string="Disable Auto Feed Creation"
+                                help="This will disable the automated feeds creation">
+                        </button>
                     </header>
                     <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button name="view_attachments"
+                                    class="oe_stat_button"
+                                    icon="fa-paperclip"
+                                    type="object">
+                                <field name="attachment_count" widget="statinfo"/>
+                            </button>
+                        </div>
                         <div class="oe_title">
                             <label for="name" class="oe_edit_only"/>
                             <h1>
@@ -162,10 +236,15 @@
                                    options="{'model': 'product.template', 'in_dialog': true}"
                                    attrs="{'invisible':[('product_select_by','!=','domain')], 'required': [('product_select_by','=','domain')]}"/>
                         </group>
-                        <group>
+                        <newline/>
+                        <group attrs="{'invisible': [('cron_id','=', False)]}">
                             <group>
-                                <field name="attachment" filename="file_name" readonly="1"/>
-                                <field name="file_name" invisible="1"/>
+                                <span>
+                                    <strong class="text-success">Feeds Auto Creation Activated</strong>
+                                </span>
+                                <br/>
+                                <field name="cron_id" nolabel="1" attrs="{'invisible': [('cron_id','=', False)]}"
+                                       readonly="1"/>
                             </group>
                         </group>
                     </sheet>
@@ -176,7 +255,7 @@
 
         <!-- actions opening views on models -->
         <record model="ir.actions.act_window" id="facebook_catalogue_integration.action_window_fb_fields">
-            <field name="name">Facebook Catalogue</field>
+            <field name="name">Facebook Fields</field>
             <field name="res_model">fb.catalogue.product.field</field>
             <field name="view_mode">tree</field>
         </record>
@@ -191,6 +270,12 @@
             <field name="name">Catalogue</field>
             <field name="res_model">facebook.catalogue</field>
             <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="facebook_catalogue_integration.action_window_google_categories" model="ir.actions.act_window">
+            <field name="name">Google Categories</field>
+            <field name="res_model">product.google.category</field>
+            <field name="view_mode">tree</field>
         </record>
 
         <record id="facebook_catalogue_integration.action_window_products_brands" model="ir.actions.act_window">
@@ -220,6 +305,9 @@
         <menuitem name="Facebook Fields" id="facebook_catalogue_integration.menu_1_fb_fields"
                   parent="facebook_catalogue_integration.menu_2"
                   action="facebook_catalogue_integration.action_window_fb_fields"/>
+        <menuitem name="Google Category" id="facebook_catalogue_integration.menu_4_google_cat"
+                  parent="facebook_catalogue_integration.menu_2"
+                  action="facebook_catalogue_integration.action_window_google_categories"/>
         <menuitem name="Product Brands" id="facebook_catalogue_integration.menu_5_brand"
                   parent="facebook_catalogue_integration.menu_4"
                   action="facebook_catalogue_integration.action_window_products_brands"/>

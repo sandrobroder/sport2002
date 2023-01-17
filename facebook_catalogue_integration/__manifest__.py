@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Facebook Catalog Integration",
+    'name': "Facebook Catalogue Integration",
 
     'summary': """
        Facebook Marketing: Create and Upload Product Feeds to Facebook Catalogue Manager""",
@@ -24,10 +24,7 @@
     # only loaded in demonstration mode
     'demo': [
     ],
-    'images': ['static/description/banner.png'],
+    'images': ['static/description/banner.jpg'],
     'installable': True,
-    'website': '',
-    'auto_install': False,
-    'price': 40,
-    'currency': 'EUR',
+    'application': True,
 }
