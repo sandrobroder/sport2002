@@ -7,8 +7,9 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     @api.model
-    def set_product_template_image(self):
-        product_tmpl_ids = self.env["product.template"].search([("is_published", "=", True), ("type", "=", "product")], limit=100)
+     def set_product_template_image(self, offset=0, limit=100):
+        product_tmpl_ids = self.env["product.template"].sudo().search(
+            [("is_published", "=", True), ("type", "=", "product")], order="id", limit=limit, offset=offset)
         for product_template_id in product_tmpl_ids:
             available_variant = None
             for variant in product_template_id.product_variant_ids:
