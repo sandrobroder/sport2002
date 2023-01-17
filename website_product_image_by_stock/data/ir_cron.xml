@@ -4,7 +4,7 @@
         <field name="name">Update Product Template Image By Stock</field>
         <field name="model_id" ref="model_product_template"/>
         <field name="state">code</field>
-        <field name="code">model.set_product_template_image()</field>
+        <field name="code">model.set_product_template_image(offset=0, limit=100)</field>
         <field name='interval_number'>1</field>
         <field name='interval_type'>days</field>
         <field name="numbercall">-1</field>
