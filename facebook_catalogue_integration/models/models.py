@@ -11,7 +11,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     google_category_id = fields.Many2one("product.google.category", string="Google Category for Product")
-    brand_id = fields.Many2one('product.brand', string='Brand Name', required=True)
+    brand_id = fields.Many2one('product.brand', string='Brand Name')
     gtin = fields.Char(string='GTIN')
     mpn = fields.Char(string='MPN')
 
