@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <!--======================== Inclusion of Scss Files ======================-->
-    <template id="theme_assets_frontend" inherit_id="website.assets_frontend">
-        <xpath expr="link[last()]" position="after">
-            <link rel="stylesheet" type="text/scss" href="/ept_theme_customisation/static/src/scss/customization.scss"/>
-        </xpath>
-    </template>
-</odoo>
