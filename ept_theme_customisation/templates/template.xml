@@ -36,7 +36,6 @@
                 </t>
             </xpath>
     </template>
-
     <template id="ept_hide_subtotal"/>
 
     <record id="ept_theme_customisation.ept_hide_subtotal_taxes" model="ir.ui.view">
