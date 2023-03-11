@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="mail_act_sale_imported" model="mail.activity.type">
+            <field name="name">Programacion</field>
+            <field name="icon">fa-cogs</field>
+            <field name="res_model_id" ref="sale.model_sale_order"/>
+        </record>
+
+    </data>
+</odoo>

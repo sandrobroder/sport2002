@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend='ClientDetails'>
+        <t t-jquery='.client-name' t-operation='replace'>
+            <div><b><t t-esc='partner.ref_unique_code' /></b></div>
+            <div class='client-name'><t t-esc='partner.name' /></div>
+        </t>
+    </t>
+    <t t-extend='ClientLine'>
+        <t t-jquery='.client-line' t-operation='prepend'>
+            <td>
+                <t t-esc='partner.ref_unique_code'/>
+            </td>
+        </t>
+    </t>
+    <t t-extend='ClientListScreenWidget'>
+        <t t-jquery='.client-list thead tr' t-operation='prepend'>
+            <th>Ref#</th>
+        </t>
+    </t>
+</templates>
