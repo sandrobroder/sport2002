@@ -14,7 +14,7 @@ from odoo.exceptions import ValidationError, UserError, _logger
 from odoo.loglevels import exception_to_unicode
 
 CUSTOMER_NAME_ROW = 7
-CUSTOMER_NAME_COL = 3
+CUSTOMER_NAME_COL = 2
 ROW_START = 9
 PRODUCT_IDENTIFIER_COL = 2
 ATTR_START = 7
