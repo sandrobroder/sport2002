@@ -14,11 +14,11 @@ from odoo.exceptions import ValidationError, UserError, _logger
 from odoo.loglevels import exception_to_unicode
 
 CUSTOMER_NAME_ROW = 7
-CUSTOMER_NAME_COL = 1
+CUSTOMER_NAME_COL = 3
 ROW_START = 9
-PRODUCT_IDENTIFIER_COL = 0
-ATTR_START = 5
-ATTR_END = 11
+PRODUCT_IDENTIFIER_COL = 2
+ATTR_START = 7
+ATTR_END = 12
 
 
 def chunks(lst, n):
