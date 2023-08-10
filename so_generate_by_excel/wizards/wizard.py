@@ -128,7 +128,8 @@ class ImportExcel(models.TransientModel):
             for order_batch in order_batches:
                 order_ids = self.env["sale.order"].sudo().create(order_batch)
                 order_ids.activity_schedule("so_generate_by_excel.mail_act_sale_imported", self.activity_dead_line)
-                order_ids.action_confirm()
+                for order_id in order_ids:
+                    order_id.action_confirm()
                 created_orders.extend(order_ids.ids)
             r.append("Total %s orders created" % len(created_orders))
         for excel_file_name, error in errors.items():
