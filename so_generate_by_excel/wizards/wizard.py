@@ -16,9 +16,9 @@ from odoo.loglevels import exception_to_unicode
 CUSTOMER_NAME_ROW = 7
 CUSTOMER_NAME_COL = 2
 ROW_START = 9
-PRODUCT_IDENTIFIER_COL = 2
-ATTR_START = 7
-ATTR_END = 13
+PRODUCT_IDENTIFIER_COL = 1
+ATTR_START = 5
+ATTR_END = 10
 
 
 def chunks(lst, n):
