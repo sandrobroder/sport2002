@@ -56,9 +56,9 @@ def migrate(cr, version):
         [('name', 'in', modules)])
     _logger.info('uninstall module %s' % modules)
     _logger.info('ids for module: %s' % module_ids)
-    module_ids = model.search(
+    installed_module_ids = model.search(
         [('name', 'in', ['commission'])])
-    module_ids.button_install()
+    installed_module_ids.button_install()
     for module in module_ids:
         try:
             module.button_uninstall()
