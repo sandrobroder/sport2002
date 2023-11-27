@@ -107,22 +107,22 @@ def migrate(cr, version):
 'website_product_image_by_stock',
 'add_mass_product_in_sale_knk',
 'emipro_theme_banner_video');
-                delete from ir_ui_view where id=2243;
-                delete from ir_ui_view where name='product.product.pack';
+                # delete from ir_ui_view where id=2243;
+                # delete from ir_ui_view where name='product.product.pack';
                
-                delete from ir_model_fields where name ='approval_by_authorised';
-                delete from ir_model_fields where name ='is_approval_by_authorised';
-                delete from ir_config_parameter where key like 'advance_purchase_ordering_ept%';
+                # delete from ir_model_fields where name ='approval_by_authorised';
+                # delete from ir_model_fields where name ='is_approval_by_authorised';
+                # delete from ir_config_parameter where key like 'advance_purchase_ordering_ept%';
                        """)
     _logger.info('**********Delete******** generate_combination')
-    cr.execute("""
-                delete from ir_ui_view where arch_prev like '%generate_combination%';
-                delete from ir_ui_view where arch_prev like '%ict_id%';
+    # cr.execute("""
+    #             delete from ir_ui_view where arch_prev like '%generate_combination%';
+    #             delete from ir_ui_view where arch_prev like '%ict_id%';
 
-                delete from ir_ui_view where arch_prev like '%approval_by_authorised%';
-                delete from ir_ui_view where arch_prev like '%reorder_process_id%';
-                delete from ir_ui_view where arch_prev like '%last_sale%';
-                delete from ir_ui_view where arch_prev like '%sale_journal%' and model='res.company';
-               """)
+    #             delete from ir_ui_view where arch_prev like '%approval_by_authorised%';
+    #             delete from ir_ui_view where arch_prev like '%reorder_process_id%';
+    #             delete from ir_ui_view where arch_prev like '%last_sale%';
+    #             delete from ir_ui_view where arch_prev like '%sale_journal%' and model='res.company';
+    #            """)
     _logger.info('**********Deleted******** generate_combination')
     _logger.info('Migration completed.')
