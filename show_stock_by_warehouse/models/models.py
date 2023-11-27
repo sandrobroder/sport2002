@@ -30,7 +30,11 @@ class ProductTemplate(models.Model):
         # TDE FIXME: why not using directly the function fields ?
         if self.env.user.warehouse_id:
             variants_available = self.mapped('product_variant_ids').with_context(
-                warehouse=self.env.user.warehouse_id.id)._product_available()
+                warehouse=self.env.user.warehouse_id.id)._compute_quantities_dict(self._context.get('lot_id'),
+                                                                                  self._context.get('owner_id'),
+                                                                                  self._context.get('package_id'),
+                                                                                  self._context.get('from_date'),
+                                                                                  self._context.get('to_date'))
             for template in self:
                 qty_available = 0
                 for p in template.product_variant_ids:

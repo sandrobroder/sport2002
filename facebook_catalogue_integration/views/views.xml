@@ -137,7 +137,7 @@
                             </h1>
                         </div>
                         <group string="Facebook Odoo Field Mapping for Product">
-                            <field name="field_mapping_ids" nolabel="1">
+                            <field colspan="2" name="field_mapping_ids" nolabel="1">
                                 <tree editable="bottom">
                                     <field name="fb_product_field_id" attrs="{'required': True}"
                                            options="{'no_open': True, 'no_create': True}"/>
@@ -210,6 +210,19 @@
                                    attrs="{'invisible':[('product_select_by','!=','category')], 'required': [('product_select_by','=','category')]}"/>
                             <field name="brand_ids" widget="many2many_tags"
                                    attrs="{'invisible':[('product_select_by','!=','brand')], 'required': [('product_select_by','=','brand')]}"/>
+                            <field name="limit"
+                                   attrs="{'invisible':[('product_select_by','not in',['domain', 'top_sell'])], 'required': [('product_select_by','in',['domain', 'top_sell'])]}"/>
+                            <field name="rule_products_domain" placeholder="Select product" widget="domain"
+                                   options="{'model': 'product.template', 'in_dialog': true}"
+                                   attrs="{'invisible':[('product_select_by','!=','domain')], 'required': [('product_select_by','=','domain')]}"/>
+                            <field name="manual_select_product_ids" colspan="2"
+                                   attrs="{'invisible':[('product_select_by','!=','manual')], 'required': [('product_select_by','=','manual')]}">
+                                <tree>
+                                    <field name="default_code"/>
+                                    <field name="name"/>
+                                    <field name="list_price"/>
+                                </tree>
+                            </field>
 
                             <label for="date_duration_start" string="Between Dates"
                                    attrs="{'invisible':[('product_select_by','!=','top_sell')]}"/>
@@ -222,28 +235,19 @@
                                        options="{'related_start_date': 'date_duration_start'}"
                                        attrs="{'invisible':[('product_select_by','!=','top_sell')], 'required': [('product_select_by','=','top_sell')]}"/>
                             </div>
-                            <field name="manual_select_product_ids"
-                                   attrs="{'invisible':[('product_select_by','!=','manual')], 'required': [('product_select_by','=','manual')]}">
-                                <tree>
-                                    <field name="default_code"/>
-                                    <field name="name"/>
-                                    <field name="lst_price"/>
-                                </tree>
-                            </field>
-                            <field name="limit"
-                                   attrs="{'invisible':[('product_select_by','not in',['domain', 'top_sell'])], 'required': [('product_select_by','in',['domain', 'top_sell'])]}"/>
-                            <field name="rule_products_domain" placeholder="Select product" widget="domain"
-                                   options="{'model': 'product.template', 'in_dialog': true}"
-                                   attrs="{'invisible':[('product_select_by','!=','domain')], 'required': [('product_select_by','=','domain')]}"/>
+
+
                         </group>
+
+
                         <newline/>
                         <group attrs="{'invisible': [('cron_id','=', False)]}">
-                            <group>
-                                <span>
+                            <group >
+                                <span colspan="2">
                                     <strong class="text-success">Feeds Auto Creation Activated</strong>
                                 </span>
                                 <br/>
-                                <field name="cron_id" nolabel="1" attrs="{'invisible': [('cron_id','=', False)]}"
+                                <field colspan="2" name="cron_id" nolabel="1" attrs="{'invisible': [('cron_id','=', False)]}"
                                        readonly="1"/>
                             </group>
                         </group>
@@ -287,7 +291,8 @@
 
         <!-- Top menu item -->
 
-        <menuitem name="Facebook Catalogue" id="facebook_catalogue_integration.menu_root"/>
+        <menuitem name="Facebook Catalogue" id="facebook_catalogue_integration.menu_root"
+                  web_icon="facebook_catalogue_integration,static/description/icon.png"/>
         <!-- menu categories -->
         <menuitem name="Catalogue" id="facebook_catalogue_integration.menu_1"
                   parent="facebook_catalogue_integration.menu_root" sequence="1"/>

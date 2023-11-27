@@ -28,9 +28,9 @@ class ProductTemplate(models.Model):
                         val.append(value.id)
                         if value.attribute_id.id not in attribute_ids:
                             attribute_ids.append(value.attribute_id.id)
+                            attribute_display_types.update({value.attribute_id.id: value.attribute_id.display_type})
                             unavailable_variant_view_type.append(value.attribute_id.unavailable_value_view_type)
 
-                    # valid_combination_list.append(tuple(val))
             else:
                 for v in rec.with_context(special_call=True)._get_possible_combinations():
                     val = []
@@ -42,10 +42,11 @@ class ProductTemplate(models.Model):
                             unavailable_variant_view_type.append(value.attribute_id.unavailable_value_view_type)
 
                     valid_combination_list.append(tuple(val))
-            first_combi = rec._get_first_possible_combination()
+            first_combi = rec.with_context(special_call=True)._get_first_possible_combination()
             first_val = None
             if first_combi:
                 first_val = first_combi[0].id
+            # print("first_combi", first_combi)
             valid_comb = set(valid_combination_list)
             value_count_per_attr = []
             attribute_line_ids = self.attribute_line_ids
@@ -87,7 +88,7 @@ class ProductTemplate(models.Model):
                 "first_val": first_val
             }
             # print("unavailable_variant_dict", unavailable_variant_dict)
-            return json.dumps(unavailable_variant_dict)
+            return unavailable_variant_dict
 
     def _get_first_possible_combination(self, parent_combination=None, necessary_values=None):
         """See `_get_possible_combinations` (one iteration).
@@ -96,7 +97,7 @@ class ProductTemplate(models.Model):
         combination is possible at all which would be considered a negative
         result, or if there are no attribute lines on the template in which
         case the "empty combination" is actually a possible combination.
-        Therefore, the result of this method when empty should be tested
+        Therefore the result of this method when empty should be tested
         with `_is_combination_possible` if it's important to know if the
         resulting empty combination is actually possible or not.
         """
@@ -116,9 +117,9 @@ class ProductTemplate(models.Model):
             variant_id = self._get_variant_for_combination(combination)
             if variant_id:
                 if variant_id.type == 'product' and self._context.get("special_call"):
-                    virtual_available = variant_id.sudo().with_context(
-                        warehouse=request.website._get_warehouse_available()).virtual_available
-                    if virtual_available <= 0:
+                    free_qty = variant_id.sudo().with_context(
+                        warehouse=self.env['website'].get_current_website()._get_warehouse_available()).free_qty
+                    if (free_qty <= 0):
                         pass
                     else:
                         return org_combination
@@ -138,10 +139,10 @@ class ProductTemplate(models.Model):
             # variant_id = self.product_variant_ids.filtered(
             #     lambda variant: variant.product_template_attribute_value_ids == combination)
             variant_id = self._get_variant_for_combination(combination)
-
             if variant_id and self._context.get("special_call"):
-                virtual_available = variant_id.sudo().with_context(warehouse=request.website._get_warehouse_available()).virtual_available
-                if variant_id.type == 'product' and (virtual_available <= 0):
+                free_qty = variant_id.sudo().with_context(
+                    warehouse=self.env['website'].get_current_website()._get_warehouse_available()).free_qty
+                if variant_id.type == 'product' and (free_qty <= 0):
                     return False
                 else:
                     return True
@@ -155,7 +156,13 @@ class ProductAttribute(models.Model):
                                                    default='none', string='Unavailable Variant View Type')
 
 
+
+
+
 # class ProductProduct(models.Model):
 #     _inherit = "product.product"
 #
 #     hide_on_website = fields.Boolean()
+
+
+

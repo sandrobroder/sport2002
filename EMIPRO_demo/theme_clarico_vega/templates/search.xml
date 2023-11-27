@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <!--  Header search bar  -->
-    <template id="header_search_ept" inherit_id="website_sale.website_sale_products_search_box">
-        <xpath expr="//form" position="attributes">
-            <attribute name="t-att-action">'/shop'</attribute>
-        </xpath>
-    </template>
-</odoo>

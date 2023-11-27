@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        <template id="report_simple_label3x7">
+            <t t-set="barcode_size" t-value="'width:33mm;height:6mm'"/>
+            <t t-set="table_style" t-value="'width:64.2mm;height:38.2mm;margin-top: 8.5px;'"/>
+            <td t-att-style="make_invisible and 'visibility:hidden;'">
+                <div class="o_label_full" t-att-style="table_style">
+                    <div class="text-center" style="height: 4em;line-height: 1;font-size: 11px;">
+                        <strong t-field="product.name" style="font-size: 14px;"/>
+                        <br/>
+                        <strong t-if="product._name == 'product.product'" t-field="product.product_template_variant_value_ids"/>
+                    </div>
+                    <div class="text-center" style="padding-top:0;padding-bottom:0">
+                        <span t-field="product.customer_list_price" t-options='{"widget": "monetary", "display_currency": product.currency_id}'/>
+                    </div>
+                    <div class="">
+                        <div class="text-center">
+                            <span class="text-nowrap" t-field="product.default_code" style="font-size: 12px;"/>
+                            <t t-if="barcode">
+                                <div t-out="barcode" style="padding:0"
+                                     t-options="{'widget': 'barcode', 'symbology': 'auto', 'img_style': barcode_size, 'quiet': 0}"/>
+<!--                                <span class="text-center" t-out="barcode"/>-->
+                            </t>
+                        </div>
+<!--                        <div t-if="extra_html" class="text-right" style="line-height:normal">-->
+<!--                            <div class="o_label_extra_data">-->
+<!--                                <t t-out="extra_html"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+<!--                    <div class="o_label_clear"></div>-->
+                </div>
+            </td>
+        </template>
+
+
+        <template id="report_productlabel" inherit_id="product.report_productlabel">
+            <xpath expr="//t[@t-if='columns and rows']/t[@t-if='columns == 4 and rows == 7']" position="after">
+                <t t-if="columns == 3 and rows == 7">
+                    <t t-set="padding_page" t-value="'padding: 0mm 0mm'"/>
+                    <t t-set="report_to_call" t-value="'product_custom_label.report_simple_label3x7'"/>
+                </t>
+
+            </xpath>
+        </template>
+
+<!--        <record id="product_label_layout_form" model="ir.ui.view">-->
+<!--            <field name="name">product.label.layout.form</field>-->
+<!--            <field name="model">product.label.layout</field>-->
+<!--            <field name="inherit_id" ref="product.product_label_layout_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='extra_html']" position="attributes">-->
+<!--                    <attribute name="attrs">{'invisible': [('print_format', 'not in', ('dymo', '3x7', '2x7xprice'))]}</attribute>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

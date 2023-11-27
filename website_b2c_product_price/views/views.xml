@@ -74,7 +74,7 @@
                     <div name="product_lst_price" class="mt-1">
                         <t t-if="record.product_price_to_show.raw_value == 'sales_price'">
                             Sales Price:
-                            <field name="lst_price" widget="monetary"
+                            <field name="list_price" widget="monetary"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </t>
                         <t t-elif="record.product_price_to_show.raw_value == 'price_with_tax'">
@@ -86,7 +86,7 @@
                             <div name="product_lst_price">
                                 <div class="mt-1">
                                     Sales Price:
-                                    <field name="lst_price" widget="monetary"
+                                    <field name="list_price" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </div>
                                 <div class="mt-1">

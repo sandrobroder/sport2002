@@ -1,10 +1,10 @@
 <odoo>
     <data>
-        <template id="assets" inherit_id="point_of_sale.assets">
-          <xpath expr="." position="inside">
-              <script type="text/javascript" src="/website_b2c_product_price/static/src/js/pos.js"></script>
-          </xpath>
-        </template>
+<!--        <template id="assets" inherit_id="point_of_sale.assets">-->
+<!--          <xpath expr="." position="inside">-->
+<!--              <script type="text/javascript" src="/website_b2c_product_price/static/src/js/pos.js"></script>-->
+<!--          </xpath>-->
+<!--        </template>-->
 
         <template id="product_price" inherit_id="website_sale.product_price">
             <xpath expr="." position="inside">
@@ -14,8 +14,8 @@
 
         <template id="product" inherit_id="website_sale.product">
             <xpath expr="//div[@id='product_details']/h1[@t-field='product.name']" position="replace">
-                <h1 t-if="pricelist.use_b2c_price and product.product_brand_ept_id" itemprop="name">
-                    <span t-esc="product.product_brand_ept_id.name.upper()"/>
+                <h1 t-if="pricelist.use_b2c_price and product.product_brand_id" itemprop="name">
+                    <span t-esc="product.product_brand_id.name.upper()"/>
                     <span t-field="product.name"/>
                 </h1>
                 <h1 t-else="" itemprop="name" t-field="product.name">Product Name</h1>
@@ -25,41 +25,20 @@
         <template id="products_item" inherit_id="website_sale.products_item">
             <xpath expr="//h6[hasclass('o_wsale_products_item_title')]/a[@itemprop='name']" position="replace">
                 <!--                <h1 t-if="pricelist.use_b2c_price" itemprop="name">-->
-                <!--                    <span t-esc="product.product_brand_ept_id.name.upper()"/>-->
+                <!--                    <span t-esc="product.product_brand_id.name.upper()"/>-->
                 <!--                    <span t-field="product.name"/>-->
                 <!--                </h1>-->
                 <!--                <h1 t-else="" itemprop="name" t-field="product.name">Product Name</h1>-->
-                <a t-if="pricelist.use_b2c_price and product.product_brand_ept_id " itemprop="name"
+                <a t-if="pricelist.use_b2c_price and product.product_brand_id " itemprop="name"
                    t-att-href="product_href" t-att-content="product.name">
-                    <span t-esc="product.product_brand_ept_id.name.upper()"/>
+                    <span t-esc="product.product_brand_id.name.upper()"/>
                     <span t-field="product.name"/>
                 </a>
-
                 <a t-else="" itemprop="name" t-att-href="product_href" t-att-content="product.name"
                    t-field="product.name"/>
 
             </xpath>
         </template>
-        <!--
 
-                <template id="listing">
-                  <ul>
-                    <li t-foreach="objects" t-as="object">
-                      <a t-attf-href="#{ root }/objects/#{ object.id }">
-                        <t t-esc="object.display_name"/>
-                      </a>
-                    </li>
-                  </ul>
-                </template>
-                <template id="object">
-                  <h1><t t-esc="object.display_name"/></h1>
-                  <dl>
-                    <t t-foreach="object._fields" t-as="field">
-                      <dt><t t-esc="field"/></dt>
-                      <dd><t t-esc="object[field]"/></dd>
-                    </t>
-                  </dl>
-                </template>
-        -->
     </data>
 </odoo>
