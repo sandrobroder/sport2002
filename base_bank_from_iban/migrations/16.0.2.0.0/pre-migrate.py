@@ -159,5 +159,8 @@ def migrate(cr, version):
     openupgrade.rename_tables(cr, table_renames)
     openupgrade.rename_models(cr, model_renames)
     _handle_settlement_line_commission_id(cr)
+    cr.execute("""
+delete from ir_ui_view where name='res.config.settings.emipro.base';
+""")
     _logger.info("============module migrate")
     
