@@ -20,16 +20,16 @@ model_renames = [
 ]
 
 
-def _handle_settlement_line_commission_id(env):
+def _handle_settlement_line_commission_id(cr):
     """On the new version, this field is computed stored, but the compute method
     doesn't resolve correctly the link here (as it's handled in `account_commission`),
     so we pre-create the column and fill it properly according old expected data.
     """
     openupgrade.logged_query(
-        env.cr, "ALTER TABLE commission_settlement_line ADD commission_id int4"
+        cr, "ALTER TABLE commission_settlement_line ADD commission_id int4"
     )
     openupgrade.logged_query(
-        env.cr,
+        cr,
         """
         UPDATE commission_settlement_line csl
         SET commission_id = aila.commission_id
@@ -41,9 +41,9 @@ def _handle_settlement_line_commission_id(env):
     )
 
 
-@openupgrade.migrate(no_version=True)
-def migrate(env, version):
+@openupgrade.migrate()
+def migrate(cr, version):
     _logger.info("============installe commession")
-    openupgrade.rename_tables(env.cr, table_renames)
-    openupgrade.rename_models(env.cr, model_renames)
-    _handle_settlement_line_commission_id(env)
+    openupgrade.rename_tables(cr, table_renames)
+    openupgrade.rename_models(cr, model_renames)
+    _handle_settlement_line_commission_id(cr)
