@@ -88,6 +88,7 @@ modules = ['account_invoice_report_due_list',
 'website_product_image_by_stock',
 'add_mass_product_in_sale_knk',
 'emipro_theme_banner_video',
+'account_payment_order_return','account_statement_import','sport2002_base'
 ]
 def migrate(cr, version):
     _logger.info(f'Starting migration from version {version}.')
