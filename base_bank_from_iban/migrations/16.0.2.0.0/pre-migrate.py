@@ -201,6 +201,7 @@ def migrate(cr, version):
                delete from ir_ui_view where id=3318;
                delete from ir_ui_view where id=3315;
                delete from ir_ui_view where id=7565;
+               delete from ir_asset;
                 delete from ir_model where model='slider.styles';
                 delete from ir_model_fields where model='slider.styles';
                """)
