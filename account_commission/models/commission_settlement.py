@@ -169,6 +169,13 @@ class SettlementLine(models.Model):
         related="invoice_agent_line_id.object_id",
         string="Source invoice line",
     )
+    commission_id = fields.Many2one(
+        comodel_name="commission",
+        related="invoice_agent_line_id.commission_id",
+        readonly=False,
+        store=True,
+        required=False,
+    )
 
     @api.depends("invoice_agent_line_id")
     def _compute_date(self):
