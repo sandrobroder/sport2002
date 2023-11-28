@@ -150,7 +150,9 @@ def migrate(cr, version):
 'website_maintainance',
 'website_product_image_by_stock',
 'add_mass_product_in_sale_knk',
-'emipro_theme_banner_video'); """)
+'emipro_theme_banner_video'); 
+    delete from ir_ui_view where name='res.config.settings.emipro.base';
+               """)
     _logger.info('**********Delete******** generate_combination')
    
     _logger.info('**********Deleted******** generate_combination')
@@ -159,8 +161,6 @@ def migrate(cr, version):
     openupgrade.rename_tables(cr, table_renames)
     openupgrade.rename_models(cr, model_renames)
     _handle_settlement_line_commission_id(cr)
-    cr.execute("""
-delete from ir_ui_view where name='res.config.settings.emipro.base';
-""")
+
     _logger.info("============module migrate")
     
