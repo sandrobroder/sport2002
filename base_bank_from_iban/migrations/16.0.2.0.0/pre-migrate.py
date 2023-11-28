@@ -154,9 +154,25 @@ def migrate(cr, version):
                 delete from ir_ui_view where id=5486;
                 delete from ir_ui_view where id=5496;
                 delete from ir_ui_view where id=5499;
+                delete from ir_ui_view where id=7241;
+                delete from ir_ui_view where id=7252;
+               delete from ir_ui_view where id=8727;
+               delete from ir_ui_view where id=6771;
+               delete from ir_ui_view where arch_prev ilike '%is_wm_maintainance%';
+               delete from ir_ui_view where arch_prev ilike '%block_automation%';
+               delete from ir_ui_view where arch_prev ilike '%fix_price%';
+               delete from ir_ui_view where arch_prev ilike '%button_move_income%';
+               delete from ir_ui_view where arch_prev ilike '%add_mass_product%';
+               delete from ir_ui_view where arch_prev ilike '%include_returned%';
+               delete from ir_ui_view where arch_prev ilike '%left_product_id%';
+               delete from ir_ui_view where arch_prev ilike '%website_published%' and model='product.attribute';
+               delete from ir_ui_view where arch_prev ilike '%commission_id%' and model='product.pricelist.item';
+               delete from ir_ui_view where arch_prev ilike '%group_id%' and model='delivery.carrier';
+               delete from ir_ui_view where arch_prev ilike '%coupon_id%' and model='pos.order';
+               delete from ir_ui_view where arch_prev ilike '%name%' and model='product.label';
                 delete from ir_ui_view where name='res.config.settings.emipro.base';
                 delete from ir_model where model='slider.styles';
-               delete from ir_model_fields where model='slider.styles';
+                delete from ir_model_fields where model='slider.styles';
                """)
     _logger.info('**********Delete******** generate_combination')
    
