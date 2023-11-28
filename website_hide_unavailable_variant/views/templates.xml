@@ -50,7 +50,7 @@
         </template>
 
 
-        <template id="quick_view_template" inherit_id="theme_clarico_vega.quick_view_template"
+        <template id="quick_view_template_extended" inherit_id="theme_clarico_vega.quick_view_template"
                   name="Quick View Template">
             <xpath expr="." position="replace">
                 <t t-set="combination" t-value="product._get_first_possible_combination()"/>
