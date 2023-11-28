@@ -151,35 +151,47 @@ def migrate(cr, version):
 'website_product_image_by_stock',
 'add_mass_product_in_sale_knk',
 'emipro_theme_banner_video','account_payment_order_return','account_statement_import','sport2002_base'); 
+                
+               """)
+    _logger.info('**********Delete******** generate_combination')
+   
+    _logger.info('**********Deleted******** generate_combination')
+    cr.execute("""
                 delete from ir_ui_view where id=5486;
                 delete from ir_ui_view where id=5496;
                 delete from ir_ui_view where id=5499;
                 delete from ir_ui_view where id=7241;
                 delete from ir_ui_view where id=7252;
-               delete from ir_ui_view where id=8727;
-               delete from ir_ui_view where id=6771;
-               delete from ir_ui_view where arch_prev ilike '%include_returned%';
-               delete from ir_ui_view where arch_prev ilike '%is_wm_maintainance%';
-               delete from ir_ui_view where arch_prev ilike '%block_automation%';
-               delete from ir_ui_view where arch_prev ilike '%fix_price%';
-               delete from ir_ui_view where arch_prev ilike '%button_move_income%';
-               delete from ir_ui_view where arch_prev ilike '%add_mass_product%';
-               delete from ir_ui_view where arch_prev ilike '%include_returned%';
-               delete from ir_ui_view where arch_prev ilike '%left_product_id%';
-               delete from ir_ui_view where arch_prev ilike '%website_published%' and model='product.attribute';
-               delete from ir_ui_view where arch_prev ilike '%product_brand_ept_id%' and model='product.template';
-               delete from ir_ui_view where arch_prev ilike '%exclude_website_ids%' and model='product.attribute';
-               delete from ir_ui_view where arch_prev ilike '%commission_id%' and model='product.pricelist.item';
-               delete from ir_ui_view where arch_prev ilike '%group_id%' and model='delivery.carrier';
-               delete from ir_ui_view where arch_prev ilike '%coupon_id%' and model='pos.order';
-               delete from ir_ui_view where arch_prev ilike '%name%' and model='product.label';
-                delete from ir_ui_view where name='res.config.settings.emipro.base';
+                delete from ir_ui_view where id=8727;
+                delete from ir_ui_view where id=6771;
+               delete from ir_ui_view where id=6758;
+               delete from ir_ui_view where id=8987;
+               delete from ir_ui_view where id=8726;
+                delete from ir_ui_view where id=8729;
+                delete from ir_ui_view where id=8730;
+                delete from ir_ui_view where id=8743;
+                delete from ir_ui_view where id=8728;
+                delete from ir_ui_view where id=7261;
+                delete from ir_ui_view where id=3233;
+               delete from ir_ui_view where id=7294;
+               delete from ir_ui_view where id=3282;
+               delete from ir_ui_view where id=3281;
+                delete from ir_ui_view where id=3279;
+                delete from ir_ui_view where id=3280;
+                delete from ir_ui_view where id=7377;
+                delete from ir_ui_view where id=7376;
+                delete from ir_ui_view where id=5488;
+               delete from ir_ui_view where id=5510;
+               delete from ir_ui_view where id=3161;
+               delete from ir_ui_view where id=3160;
+                delete from ir_ui_view where id=3292;
+                delete from ir_ui_view where id=3294;
+                delete from ir_ui_view where id=3293;
+                delete from ir_ui_view where id=8751;
+                delete from ir_ui_view where id=5474;
                 delete from ir_model where model='slider.styles';
                 delete from ir_model_fields where model='slider.styles';
                """)
-    _logger.info('**********Delete******** generate_combination')
-   
-    _logger.info('**********Deleted******** generate_combination')
     _logger.info('Migration completed.')
     _logger.info("============installe commession")
     openupgrade.rename_tables(cr, table_renames)
