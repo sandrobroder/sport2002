@@ -9,7 +9,7 @@
     "website": "https://github.com/OCA/community-data-files",
     "category": "Localization",
     "license": "AGPL-3",
-    "depends": ["base_iban"],
+    "depends": ["base_iban" ],
     "development_status": "Mature",
     "data": ["views/res_bank_view.xml"],
     "external_dependencies": {"python": ["schwifty"]},
