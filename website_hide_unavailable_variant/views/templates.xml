@@ -72,9 +72,9 @@
                         <div class="col-md-5 col-xl-5 o_wsale_product_images position-relative">
                             <t t-call="website_sale.shop_product_images"/>
                         </div>
-                        <div class="col-md-7 col-xl-7" id="product_details">
+                        <div class="col-md-7 col-xl-7" id="product_details"> -->
                             <!-- Product Ribbon -->
-                            <t t-if="product.website_ribbon_id.id">
+                            <!-- <t t-if="product.website_ribbon_id.id">
                                 <span t-attf-class="te_prod_label d-inline-block overflow-hidden position-relative #{product.website_ribbon_id.html_class if not (product.website_ribbon_id.bg_color and product.website_ribbon_id.text_color) else ' '}"
                                       t-attf-style="background-color: #{product.website_ribbon_id.bg_color}; color: #{product.website_ribbon_id.text_color}">
                                     <t t-esc="product.website_ribbon_id.html"/>
@@ -156,7 +156,7 @@
                                             </div>
                                             <div class="quick_view_buttons">
                                                 <t t-set="configurator_state"
-                                                   t-value="request.env['ir.module.module'].sudo().search([['name', '=', 'sale_product_configurator']])"/>
+                                                   t-value="request.env['ir.module.module'].sudo().search([['name', '=', 'sale_product_configurator']])"/> -->
                                                 <!--                                        <t t-if="configurator_state and configurator_state.state == 'installed'">-->
                                                 <!--                                            <a role="button"-->
                                                 <!--                                               t-att-id="'add_to_cart' if not product.optional_product_ids else ''"-->
@@ -167,15 +167,15 @@
                                                 <!--                                            </a>-->
                                                 <!--                                        </t>-->
                                                 <!--                                        <t t-else="">-->
-                                                <a role="button"
+                                                <!-- <a role="button"
                                                    id="add_to_cart"
                                                    t-attf-class="btn btn-primary btn-lg mt16 a-submit te_theme_button quick-add-to-cart #{'disabled out_of_stock' if product.sudo().virtual_available &lt; 1 else ''}"
                                                    href="#">
                                                     <span class="fa fa-shopping-cart"/>
                                                     Add to Cart
-                                                </a>
+                                                </a> -->
                                                 <!--                                        </t>-->
-                                                <t t-if="product">
+                                                <!-- <t t-if="product">
                                                     <t t-set="buy_now_show"
                                                        t-value="request.website.viewref('website_sale.product_buy_now').active"/>
                                                     <t t-if="buy_now_show">
