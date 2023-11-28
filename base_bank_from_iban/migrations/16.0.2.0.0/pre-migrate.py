@@ -150,11 +150,13 @@ def migrate(cr, version):
 'website_maintainance',
 'website_product_image_by_stock',
 'add_mass_product_in_sale_knk',
-'emipro_theme_banner_video'); 
+'emipro_theme_banner_video','account_payment_order_return','account_statement_import','sport2002_base'); 
                 delete from ir_ui_view where id=5486;
                 delete from ir_ui_view where id=5496;
                 delete from ir_ui_view where id=5499;
                 delete from ir_ui_view where name='res.config.settings.emipro.base';
+                delete from ir_model where model='slider.styles';
+               delete from ir_model_fields where model='slider.styles';
                """)
     _logger.info('**********Delete******** generate_combination')
    
