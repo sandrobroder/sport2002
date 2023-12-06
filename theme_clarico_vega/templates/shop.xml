@@ -282,12 +282,12 @@
             <t t-if="bg_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in bg_class.split(' '))">
                 <span t-attf-class="o_ribbon #{bg_class}"
                       t-attf-style="#{bg_color and ('border-bottom-color: %s; ' % bg_color)} #{bg_color and ('border-left-color: %s; ' % bg_color)} #{text_color and ('color: %s; ' % text_color)} #{bg_color and 'background-color:' + bg_color}"
-                      t-out="td_product['ribbon']['html'] or ''"/>
+                      t-field="product.website_ribbon_id.html"/>
             </t>
             <t t-else="">
                 <span t-attf-class="o_ribbon #{bg_class}"
                       t-attf-style="#{text_color and ('color: %s; ' % text_color)}#{bg_color and 'background-color:' + bg_color}"
-                      t-out="td_product['ribbon']['html'] or ''"/>
+                      t-field="product.website_ribbon_id.html"/>
             </t>
         </xpath>
         <xpath expr="//span[@t-field='image_holder.image_1920']" position="replace">
@@ -322,7 +322,7 @@
         </xpath>
         <xpath expr="//div[hasclass('oe_product_image')]" position="attributes">
             <attribute name="class" value=""/>
-            <attribute name="t-attf-class">oe_product_image position-relative h-100 flex-grow-0 #{'' if bg_class in ['o_product_label_style_4_left','o_product_label_style_4_right'] else 'overflow-hidden'}</attribute>
+            <attribute name="t-attf-class">oe_product_image position-relative h-100 flex-grow-0 #{'' if bg_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in bg_class.split(' ')) else 'overflow-hidden'}</attribute>
         </xpath>
 
         <!--Display Discount Message -->
@@ -469,7 +469,7 @@
                        t-value="request.website.viewref('theme_clarico_vega.product_show_brand_logo').active"/>
                     <t t-if="is_brand_filter_enabled and not brand_val">
                         <t t-set="brand_list" t-value="request.env['product.brand'].sudo().search([('website_published','=', True),('website_id', 'in', (False,website.id))]).filtered(lambda r:r.products_count &gt; 0)"/>
-                        <t t-if="brand_list and search_products">
+                        <t t-if="brand_list and search_brand_products">
                             <div class="accordion-item nav-item">
                                 <div t-attf-class="te_attr_title te_s_attr_head nav-item #{'collapsed' if website.collapse_filter else ''}"
                                      data-bs-toggle="collapse" type="button"

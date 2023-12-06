@@ -85,8 +85,8 @@ odoo.define('theme_clarico_vega.login_popup', function(require) {
                         $("#loginRegisterPopup .oe_login_form .alert-success-error .alert-success").removeClass('d-none').addClass('d-none');
                         $("#loginRegisterPopup .oe_login_form .alert-success-error .alert-danger").html(data_main.error).removeClass('d-none');
                         $(submit_btn).removeClass('o_website_btn_loading disabled');
-                        $(submit_btn).prop('disabled', false);
-                        $(submit_btn).find('span').remove();
+                        $(submit_btn).removeAttr('disabled');
+                        $("#loginRegisterPopup .oe_login_form .oe_login_buttons .te_login_button .fa-spin").removeClass('fa-refresh fa-spin me-2');
 
                    }
                 },
@@ -113,6 +113,8 @@ odoo.define('theme_clarico_vega.login_popup', function(require) {
                     } else if (!data_main.login_success && data_main.error) {
                         $("#loginRegisterPopup .oe_signup_form .alert-success-error .alert-success").removeClass('d-none').addClass('d-none');
                         $("#loginRegisterPopup .oe_signup_form .alert-success-error .alert-danger").html(data_main.error).removeClass('d-none');
+                        $("#loginRegisterPopup .oe_signup_form .oe_login_buttons .te_signup_button").removeAttr('disabled');
+                        $("#loginRegisterPopup .oe_signup_form .oe_login_buttons .te_signup_button .fa-spin").removeClass('fa-refresh fa-spin');
                     }
                 },
                 error: function(data) {

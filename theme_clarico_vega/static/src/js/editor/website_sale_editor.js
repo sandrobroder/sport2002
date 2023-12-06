@@ -26,14 +26,15 @@ options.registry.WebsiteSaleProductsItem = options.Class.extend({
         return _super(...arguments);
     },
 
-     async _colorStyle(){
+    async _colorStyle(){
         var btpClasses = { "bg-black": '#000000', "bg-white": '#FFFFFF', "bg-o-color-1": '#212529', "bg-o-color-2": '#685563', "bg-o-color-3": '#F6F6F6', "bg-o-color-4": '#FFFFFF', "bg-o-color-5": '#383E45', "bg-900": '#212529', "bg-800": '#343A40', "bg-600": '#6C757D', "bg-400": '#CED4DA', "bg-200": '#E9ECEF', "bg-100": '#F8F9FA', "bg-success": '#198754', "bg-info": '#0dcaf0', "bg-warning": '#ffc107', "bg-danger": '#dc3545'};
         for (var key in btpClasses) {
           if($(this.$ribbon).hasClass(key)){
              $(this.$ribbon).removeClass(key).css('background-color', btpClasses[key]);
           }
         }
-     },
+    },
+
 
     async selectStyle(previewMode, widgetValue, params) {
         const proms = [this._super(...arguments)];
@@ -109,6 +110,32 @@ options.registry.WebsiteSaleProductsItem = options.Class.extend({
     async setRibbonPosition(previewMode, widgetValue, params) {
         this.$ribbon[0].className = this.$ribbon[0].className.replace(/o_(ribbon|tag|product_label_style_1|product_label_style_2|product_label_style_3|product_label_style_4|product_label_style_5)_(left|right)/, `o_$1_${widgetValue}`);
         await this._saveRibbon();
+    },
+    changeSequence: function (previewMode, widgetValue, params) {
+        this._rpc({
+            route: '/shop/config/product',
+            params: {
+                product_id: this.productTemplateID,
+                sequence: widgetValue,
+            },
+        }).then(() => this._reloadEditable());
+    },
+    updateUI: async function () {
+        await this._super.apply(this, arguments);
+
+        var sizeX = parseInt(this.$target.attr('colspan') || 1);
+        var sizeY = parseInt(this.$target.attr('rowspan') || 1);
+
+        var $size = this.$el.find('.o_wsale_soptions_menu_sizes');
+        $size.find('tr:nth-child(-n + ' + sizeY + ') td:nth-child(-n + ' + sizeX + ')')
+             .addClass('selected');
+
+        // Adapt size array preview to fit ppr
+        $size.find('tr td:nth-child(n + ' + parseInt(this.ppr + 1) + ')').hide();
+        if (this.rerender) {
+            this.rerender = false;
+            return this._rerenderXML();
+        }
     },
     updateUIVisibility: async function () {
         await this._super(...arguments);

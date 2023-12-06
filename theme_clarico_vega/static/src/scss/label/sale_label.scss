@@ -83,7 +83,7 @@
         &:after {
             content: "";
             @include position(absolute,0px, null, 0px, 0px);
-            width: 10px;
+            width: 47px;
             z-index: -1;
             background: inherit;
             transform: skew(33deg, 0deg);

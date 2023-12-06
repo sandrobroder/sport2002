@@ -625,9 +625,9 @@ span.attr_value {
     input[type="checkbox"]:checked + label:after {
         content: '';
         position: absolute;
-        top: 5px;
+        top: 50%;
+        transform: translateY(-50%);
         right: auto;
-        bottom: auto;
         left: 10px;
         transition-property: all;
         transition-duration: 0.2s;

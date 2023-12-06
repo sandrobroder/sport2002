@@ -674,6 +674,8 @@ odoo.define('theme_clarico_vega.theme_script', function(require) {
                 width: '100%'
             });
             $("#wrapwrap").addClass("wrapwrap_trans_header");
+            $(".te_mega_menu_ept a.dropdown-toggle.o_mega_menu_toggle").attr('href', '#');
+            $(".parent-category .mobile_cate_child").attr('href', '#');
         },
         _closeLeftHeader: function() {
             $("#top_menu_collapse").animate({
@@ -965,7 +967,7 @@ odoo.define('theme_clarico_vega.theme_script', function(require) {
                         this.$sticky.removeClass('sticky-media');
                     }
                 }
-                if($('.featured-all-brands').is(':visible')){
+                if($('.featured-all-brands').is(':visible') && $('.featured-all-brands .brand-main').length){
                     const headerTopHeight = $('header#top').height();
                     const brandMainSection = $('.featured-all-brands .brand-main').offset().top + headerTopHeight + 220;
                     const eptBrandHeader = $('.featured-all-brands').find('.ept_brands_header');

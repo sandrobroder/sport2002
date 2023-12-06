@@ -15,11 +15,26 @@
 
 .te_menu_style_1 {
     background-color: #fff;
+    ul{
+        list-style: none;
+        padding: 0;
+        a{
+            margin: 0 1rem;
+            @include media-breakpoint-down(sm) {
+                margin: 0;
+            }
+        }
+    }
+    @include media-breakpoint-up(md){
+        .menu-items{
+            columns: 4;
+        }
+    }
     .te_category-heading-center {
-        max-height: 284px;
+        max-height: 226px;
         overflow: hidden;
         a.te_menu_item{
-            padding: 0.5rem 0;
+            padding: 0.2rem 0;
             border-bottom-width: 0px;
             white-space: unset;
             line-height: 1.5;
@@ -27,6 +42,7 @@
             color: $navbar-light-color !important;
         }
         .te_menu_category_heading {
+            font-weight: 500;
             font-size: $font-size-dynamic;
             color: nth($f_color, 3) !important;
             font-family: inherit;
@@ -563,13 +579,10 @@ li.nav-item.dropdown.o_extra_menu_items:not(.show) .dropdown-menu.show {
           &:hover {
             background: #f5f5f5;
             .sub-menu-dropdown {
-              opacity: 1;
-              visibility: visible;
-              @include media-breakpoint-down(md) {
+              @include media-breakpoint-up(lg) {
                 display: block;
-              }
-              @include media-breakpoint-down(lg) {
-                display: block;
+                opacity: 1;
+                visibility: visible;
               }
             }
           }
@@ -774,26 +787,10 @@ li.nav-item.dropdown.o_extra_menu_items:not(.show) .dropdown-menu.show {
   @include media-breakpoint-down(xs) {
     max-height: 358px;
   }
-  ul:not(#custom_recursive) {
+  ul#custom_recursive {
     @include media-breakpoint-up(lg) {
       overflow-x: visible !important;
       overflow-y: unset !important;
-    }
-  }
-  ul#custom_recursive{
-    @include media-breakpoint-up(lg) {
-        overflow-y: unset !important;
-        &::-webkit-scrollbar {
-            width: 2px;
-            height: 4px;
-            display: block !important;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: #000000;
-        }
-        &::-webkit-scrollbar-track {
-            background: #b3b2b2;
-        }
     }
   }
   @include media-breakpoint-down(sm) {
@@ -808,7 +805,7 @@ li.nav-item.dropdown.o_extra_menu_items:not(.show) .dropdown-menu.show {
     padding: 0;
     @include media-breakpoint-up(lg) {
       width: 300px;
-      max-height: 413px;
+      max-height: 470px;
       overflow-x: visible !important;
       overflow-y: unset !important;
       > li {
@@ -821,6 +818,10 @@ li.nav-item.dropdown.o_extra_menu_items:not(.show) .dropdown-menu.show {
       max-height: 413px;
       overflow-x: visible !important;
       overflow-y: unset !important;
+    }
+    .see_all_subcate{
+        box-shadow: 0px 3px 10px 0 rgba(50, 50, 93, 0.1);
+        border-bottom: 2px solid #ededed;
     }
   }
   #custom_menu_li {
@@ -976,7 +977,6 @@ li.nav-item.dropdown.o_extra_menu_items.show ul.dropdown-menu.dropdown-menu-righ
       @include position(absolute, 14%, 25px, null, unset);
       width: 45px;
       height: 56px;
-      line-height: 56px;
       text-align: center;
       margin: 0;
     }
@@ -1063,5 +1063,11 @@ header {
                 }
             }
         }
+    }
+}
+.te_menu_name{
+    color: black !important;
+    @include media-breakpoint-up(md) {
+        display: none !important;
     }
 }

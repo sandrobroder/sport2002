@@ -9,7 +9,7 @@
             <t t-else="">
                 <img t-attf-class="card-img-top o_img_product_square o_img_product_cover h-auto #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
         <xpath expr="//div[hasclass('card-title')]" position="attributes">
             <attribute name="class" add="text-truncate" separator=" " />
@@ -25,7 +25,7 @@
             <t t-else="">
                 <img t-attf-class="card-img-top o_img_product_square o_img_product_cover h-auto #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
         <xpath expr="//div[hasclass('o_dynamic_snippet_btn_wrapper')]//button[hasclass('js_add_cart')]" position="attributes">
             <attribute name="t-att-disabled">record.remove_cart_button()</attribute>
@@ -44,7 +44,7 @@
             <t t-else="">
                 <img t-attf-class="img img-fluid o_img_product_square o_img_product_cover h-auto #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
         <xpath expr="//div[hasclass('card-title')]" position="attributes">
             <attribute name="class" add="text-truncate" separator=" " />
@@ -60,7 +60,7 @@
             <t t-else="">
                 <img t-attf-class="card-img-top #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
         <xpath expr="//div[hasclass('card-title')]" position="attributes">
             <attribute name="class" add="text-truncate" separator=" " />
@@ -78,7 +78,7 @@
                 <img t-attf-class="card-img-top o_img_product_square o_img_product_cover h-auto #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']"
                                             t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
         <xpath expr="//div[hasclass('o_dynamic_snippet_btn_wrapper')]//button[hasclass('js_add_cart')]" position="attributes">
             <attribute name="t-att-disabled">record.remove_cart_button()</attribute>
@@ -97,7 +97,7 @@
             <t t-else="">
                 <img t-attf-class="card-img-top o_img_product_square o_img_product_cover h-auto #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
         <xpath expr="//div[hasclass('card-title')]" position="attributes">
             <attribute name="class" add="text-truncate" separator=" " />
@@ -113,7 +113,7 @@
             <t t-else="">
                 <img t-attf-class="img img-fluid mx-auto o_img_product_square #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
 
         <xpath expr="//div[hasclass('o_dynamic_snippet_btn_wrapper')]//button[hasclass('js_add_cart')]" position="attributes">
@@ -133,7 +133,7 @@
             <t t-else="">
                 <img t-attf-class="img img-fluid position-absolute w-100 h-100 o_img_product_cover #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
         <xpath expr="//div[hasclass('o_dynamic_snippet_btn_wrapper')]//button[hasclass('js_add_cart')]" position="attributes">
             <attribute name="t-att-disabled">record.remove_cart_button()</attribute>
@@ -152,7 +152,7 @@
             <t t-else="">
                 <img t-attf-class="card-img-top h-auto o_img_product_square o_img_product_cover rounded #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
     </template>
 
@@ -165,7 +165,7 @@
             <t t-else="">
                 <img t-attf-class="card-img-top h-auto o_img_product_square o_img_product_cover rounded #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
         <xpath expr="//div[hasclass('text-center')]" position="attributes">
             <attribute name="class" add="text-truncate" separator=" " />
@@ -181,7 +181,7 @@
             <t t-else="">
                 <img t-attf-class="card-img-top h-auto o_img_product_square o_img_product_cover rounded #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
     </template>
 
@@ -194,7 +194,7 @@
             <t t-else="">
                 <img t-attf-class="img img-fluid position-absolute o_img_product_cover w-100 h-100 #{'sold-out' if check_stock else ' '}" loading="lazy" t-att-src="data['image_512']" t-att-alt="record.display_name"/>
             </t>
-            <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+            <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
         </xpath>
         <xpath expr="//button[hasclass('js_add_cart')]" position="attributes">
             <attribute name="t-att-disabled">record.remove_cart_button()</attribute>
@@ -333,7 +333,7 @@
             <t t-set="html_class" t-value="record.product_tmpl_id.website_ribbon_id.html_class"/>
             <t t-set="bg_color" t-value="record.product_tmpl_id.website_ribbon_id.bg_color"/>
             <t t-set="text_color" t-value="record.product_tmpl_id.website_ribbon_id.text_color"/>
-            <div t-attf-class="card o_carousel_product_card te_product_ind #{'overflow-visible' if html_class in ['o_product_label_style_4_left','o_product_label_style_4_right'] else ''}"
+            <div t-attf-class="card o_carousel_product_card te_product_ind #{'overflow-visible' if html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' ')) else ''}"
                  t-att-data-add2cart-rerender="data.get('_add2cart_rerender')">
                 <t t-if="record.product_tmpl_id.website_ribbon_id">
                     <t t-if="html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' '))">
@@ -363,7 +363,7 @@
                                  t-att-alt="record.display_name"/>
                         </t>
                     </a>
-                     <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+                     <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
                 </section>
                 <div class="te_prod_info_2">
                     <section class="d-block position-relative p-2 te_prod_info_sub">
@@ -400,7 +400,7 @@
             <t t-set="html_class" t-value="record.product_tmpl_id.website_ribbon_id.html_class"/>
             <t t-set="bg_color" t-value="record.product_tmpl_id.website_ribbon_id.bg_color"/>
             <t t-set="text_color" t-value="record.product_tmpl_id.website_ribbon_id.text_color"/>
-            <div t-attf-class="card o_carousel_product_card w-100 te_product_ind product_slider_style2 #{'overflow-visible' if html_class in ['o_product_label_style_4_left','o_product_label_style_4_right'] else ''}"
+            <div t-attf-class="card o_carousel_product_card w-100 te_product_ind product_slider_style2 #{'overflow-visible' if html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' ')) else ''}"
                  t-att-data-add2cart-rerender="data.get('_add2cart_rerender')">
                 <t t-if="record.product_tmpl_id.website_ribbon_id">
                     <t t-if="html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' '))">
@@ -430,7 +430,7 @@
                                      t-att-alt="record.display_name"/>
                             </t>
                     </a>
-                    <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+                    <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
                     <div class="te_wishlist_quickview_icon">
                         <t t-call="theme_clarico_vega.product_slider_btn"/>
                     </div>
@@ -472,7 +472,7 @@
             <t t-set="html_class" t-value="record.product_tmpl_id.website_ribbon_id.html_class"/>
             <t t-set="bg_color" t-value="record.product_tmpl_id.website_ribbon_id.bg_color"/>
             <t t-set="text_color" t-value="record.product_tmpl_id.website_ribbon_id.text_color"/>
-            <div t-attf-class="card o_carousel_product_card w-100 te_product_ind product_slider_style_3 #{'overflow-visible' if html_class in ['o_product_label_style_4_left','o_product_label_style_4_right'] else ''}"
+            <div t-attf-class="card o_carousel_product_card w-100 te_product_ind product_slider_style_3 #{'overflow-visible' if html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' ')) else ''}"
                  t-att-data-add2cart-rerender="data.get('_add2cart_rerender')">
                 <t t-if="record.product_tmpl_id.website_ribbon_id">
                     <t t-if="html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' '))">
@@ -502,7 +502,7 @@
                                      t-att-alt="record.display_name"/>
                             </t>
                     </a>
-                     <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+                     <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
                     <div class="te_prod_icons_style_3">
                         <t t-call="theme_clarico_vega.product_slider_btn"/>
                         <t t-if="record._website_show_quick_add()">
@@ -544,7 +544,7 @@
             <t t-set="html_class" t-value="record.website_ribbon_id.html_class"/>
             <t t-set="bg_color" t-value="record.website_ribbon_id.bg_color"/>
             <t t-set="text_color" t-value="record.website_ribbon_id.text_color"/>
-            <div t-attf-class="card o_carousel_product_card te_product_ind #{'overflow-visible' if html_class in ['o_product_label_style_4_left','o_product_label_style_4_right'] else ''}" t-att-data-add2cart-rerender="data.get('_add2cart_rerender')">
+            <div t-attf-class="card o_carousel_product_card te_product_ind #{'overflow-visible' if html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' ')) else ''}" t-att-data-add2cart-rerender="data.get('_add2cart_rerender')">
                 <t t-if="record.website_ribbon_id">
                     <t t-if="html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' '))">
                         <span t-attf-class="o_ribbon #{html_class}"
@@ -574,7 +574,7 @@
                             </t>
                         </t>
                     </a>
-                    <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)" t-call="theme_clarico_vega.out_of_stock_label"/>
+                    <t t-if="website.option_out_of_stock and record.remove_cart_button()" t-call="theme_clarico_vega.out_of_stock_label"/>
                 </section>
                 <div class="te_prod_info_2">
                     <section class="d-block position-relative p-2 te_prod_info_sub">
@@ -611,7 +611,7 @@
             <t t-set="html_class" t-value="record.website_ribbon_id.html_class"/>
             <t t-set="bg_color" t-value="record.website_ribbon_id.bg_color"/>
             <t t-set="text_color" t-value="record.website_ribbon_id.text_color"/>
-            <div t-attf-class="card o_carousel_product_card w-100 te_product_ind product_slider_style2 #{'overflow-visible' if html_class in ['o_product_label_style_4_left','o_product_label_style_4_right'] else ''}"
+            <div t-attf-class="card o_carousel_product_card w-100 te_product_ind product_slider_style2 #{'overflow-visible' if html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' ')) else ''}"
                  t-att-data-add2cart-rerender="data.get('_add2cart_rerender')">
                 <t t-if="record.website_ribbon_id">
                     <t t-if="html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' '))">
@@ -642,7 +642,7 @@
                             </t>
                         </t>
                     </a>
-                    <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)"
+                    <t t-if="website.option_out_of_stock and record.remove_cart_button()"
                        t-call="theme_clarico_vega.out_of_stock_label"/>
                     <div class="te_wishlist_quickview_icon">
                         <t t-call="theme_clarico_vega.product_slider_btn_prod_temp"/>
@@ -688,7 +688,7 @@
             <t t-set="html_class" t-value="record.website_ribbon_id.html_class"/>
             <t t-set="bg_color" t-value="record.website_ribbon_id.bg_color"/>
             <t t-set="text_color" t-value="record.website_ribbon_id.text_color"/>
-            <div t-attf-class="card o_carousel_product_card w-100 te_product_ind product_slider_style_3 #{'overflow-visible' if html_class in ['o_product_label_style_4_left','o_product_label_style_4_right'] else ''}" t-att-data-add2cart-rerender="data.get('_add2cart_rerender')">
+            <div t-attf-class="card o_carousel_product_card w-100 te_product_ind product_slider_style_3 #{'overflow-visible' if html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' ')) else ''}" t-att-data-add2cart-rerender="data.get('_add2cart_rerender')">
                 <t t-if="record.website_ribbon_id">
                     <t t-if="html_class and any(cls in ['o_product_label_style_4_left','o_product_label_style_4_right'] for cls in html_class.split(' '))">
                         <span t-attf-class="o_ribbon #{html_class}"
@@ -718,7 +718,7 @@
                             </t>
                         </t>
                     </a>
-                    <t t-if="website.option_out_of_stock and record.type=='product' and (not record.allow_out_of_stock_order) and (record.sudo().free_qty &lt; 1)"
+                    <t t-if="website.option_out_of_stock and record.remove_cart_button()"
                        t-call="theme_clarico_vega.out_of_stock_label"/>
                     <div class="te_prod_icons_style_3">
                         <t t-call="theme_clarico_vega.product_slider_btn_prod_temp"/>

@@ -328,3 +328,16 @@
         }
     }
 }
+.parent-category{
+    .toggle_megamenu{
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 99;
+    }
+    .no_toggle_megamenu{
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+}

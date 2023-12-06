@@ -19,7 +19,6 @@
                 <t t-call="theme_clarico_vega.html_content_tabs_ept"/>
             </t>
         </xpath>
-<!--        <xpath expr="//div[@id='product_full_description']" position="replace"/>-->
         <xpath expr="//div[@id='product_full_description']" position="attributes">
           <attribute name="class">d-none</attribute>
         </xpath>
@@ -75,8 +74,9 @@
         </xpath>
         <xpath expr="//div[@id='product_details']//h1" position="before">
             <t t-if="product.website_ribbon_id.id">
-                <t t-if="product.website_ribbon_id.html_class and any(cls in ['o_ribbon_left','o_ribbon_right'] for cls in product.website_ribbon_id.html_class.split(' '))">
-                    <span t-attf-class="te_prod_label d-inline-block overflow-hidden position-relative"
+                <t t-set="ribbon_cls" t-value="product.website_ribbon_id.html_class and any(cls in ['o_ribbon_left','o_ribbon_right'] for cls in product.website_ribbon_id.html_class.split(' '))"/>
+                <t t-if="ribbon_cls">
+                    <span t-attf-class="te_prod_label d-inline-block overflow-hidden position-relative #{product.website_ribbon_id.html_class if ribbon_cls else ''}"
                           t-attf-style="background-color: #{product.website_ribbon_id.bg_color}; color: #{product.website_ribbon_id.text_color}">
                         <t t-esc="product.website_ribbon_id.html"/>
                     </span>
@@ -689,7 +689,6 @@
                                 <span t-if="combination_info['price']" t-esc="combination_info['price']"
                                       t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                                 <t t-call="theme_clarico_vega.discount_price_ept"/>
-                                <!--<t t-call="website_sale.product_price"/>-->
                             </div>
                         </div>
 
@@ -711,9 +710,6 @@
                                         Buy Now
                                     </a>
                                 </t>
-<!--                            <a class="btn btn-primary" href="#" id="scroll">-->
-<!--                                    <span class="fa fa-arrow-up"/>-->
-<!--                            </a>-->
                             </div>
                         </div>
                     </div>
@@ -724,7 +720,7 @@
 
     <template id="shop_product_image_ept" inherit_id="website_sale.shop_product_image">
         <xpath expr="." position="replace">
-            <div class="d-flex align-items-start justify-content-start h-100 oe_unmovable mt-2">
+            <div class="d-flex align-items-start justify-content-center h-100 oe_unmovable mt-2">
                 <t t-if="not website.is_lazy_load">
                     <div t-if="product_image._name == 'product.image' and product_image.embed_code"
                          t-att-class="image_classes + ' ratio ratio-16x9'">

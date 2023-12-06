@@ -129,7 +129,7 @@
     </template>
 
     <!--========================== cart summary =======================-->
-    <template id="cart_summary_ept" inherit_id="website_sale.cart_summary">
+    <template id="cart_summary_ept" inherit_id="website_sale.cart_summary" priority="17">
         <xpath expr="//div[hasclass('card')]" position="attributes">
             <attribute name="class">card te_cart_summary_card</attribute>
         </xpath>

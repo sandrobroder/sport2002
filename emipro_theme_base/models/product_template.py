@@ -2,6 +2,7 @@
 import logging
 
 from odoo import api, fields, models, _
+from odoo.http import request
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -159,7 +160,8 @@ class ProductTemplate(models.Model):
         return res
 
     def remove_cart_button(self):
-        if self.detailed_type == 'product' and not self.allow_out_of_stock_order and self.sudo().free_qty < 1:
+        if self.detailed_type == 'product' and not self.allow_out_of_stock_order and self.sudo().with_context(
+                warehouse=request.website._get_warehouse_available()).free_qty < 1:
             return True
         return False
 

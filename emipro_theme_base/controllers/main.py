@@ -52,10 +52,12 @@ class WebsiteSaleExt(WebsiteSale):
             values_per_attribute = defaultdict(lambda: request.env['product.attribute.value'])
             # In case we have only one value per attribute we can check for a combination using those attributes directly
             multi_value_attribute = False
-            for value in attribute_values:
-                values_per_attribute[value.attribute_id] |= value
-                if len(values_per_attribute[value.attribute_id]) > 1:
-                    multi_value_attribute = True
+            if attribute_values.pav_attribute_line_ids:
+                for value in attribute_values:
+                    if value.pav_attribute_line_ids:
+                        values_per_attribute[value.attribute_id] |= value
+                        if len(values_per_attribute[value.attribute_id]) > 1:
+                            multi_value_attribute = True
 
             is_brand_filter_applied = False
             brand_attrib_values = [[int(x) for x in v.split("-")] for v in post.get('attrib') if v]
@@ -271,8 +273,6 @@ class WebsiteExt(Website):
                                                    order=order, limit=limit,
                                                    max_nb_chars=max_nb_chars, options=options)
         website = request.website.get_current_website()
-        # categories = request.env['product.public.category'].sudo().search([('website_id', 'in', (False, website.id)),
-        #                                                                    ('name', '=ilike', term.strip())])
         categories = request.env['product.public.category'].sudo().search(
             [('website_id', 'in', (False, website.id))]) \
             .filtered(lambda catg: term.strip().lower() in catg.name.strip().lower())
@@ -283,17 +283,17 @@ class WebsiteExt(Website):
         res['categories'] = search_categories[:10]
         if term and website and website.enable_smart_search:
             is_quick_link = {'status': False}
-            brand = request.env['product.brand'].sudo().search(
-                [('website_id', 'in', (False, website.id)),
-                 ('name', '=ilike', term.strip())])
+            brand = request.env['product.brand'].sudo().search([('website_id', 'in', (False, website.id))]).filtered(
+                lambda b: term.strip().lower() in b.name.strip().lower())
+
             if brand:
                 is_quick_link.update({'status': True,
                                       'navigate_type': 'brand',
                                       'name': brand[0].name,
                                       'url': '/shop/brands/%s' % brand[0].id})
             else:
-                prod_att_value = request.env['product.attribute.value'].sudo().search(
-                    [('name', '=ilike', term.strip())])
+                prod_att_value = request.env['product.attribute.value'].sudo().search([]).filtered(
+                    lambda value: term.strip().lower() in value.name.strip().lower())
                 if prod_att_value:
                     is_quick_link.update({'status': True,
                                           'navigate_type': 'attr_value',
@@ -360,10 +360,8 @@ class EmiproThemeBaseExtended(WebsiteSaleWishlist):
             domain.append(('product_brand_id', '=', request.params.get('brand').id))
 
         if request.params.get('out_of_stock', False):
-            domain = expression.AND([domain, ['|', ('allow_out_of_stock_order', '=', True), '&',
-                                              ('free_qty', '>', 0),
-                                              ('allow_out_of_stock_order', '=', False)]])
-
+            domain.extend(['|', ('allow_out_of_stock_order', '=', True), '&',
+                           ('free_qty', '>', 0), ('allow_out_of_stock_order', '=', False)])
         return domain
 
     @http.route('/hover/color', type='json', auth="public", methods=['POST'], website=True)

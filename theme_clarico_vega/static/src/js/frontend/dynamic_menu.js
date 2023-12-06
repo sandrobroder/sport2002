@@ -14,9 +14,9 @@ odoo.define('theme_clarico_vega.dynamic_menu', function(require) {
             'click .te_all_dynamic_ept': '_callFirstEle',
         },
 
-        _callFirstEle: function() {
+        _callFirstEle: function(ev) {
             if ($(window).width() >= 992) {
-                var has_parent_content = $('.menu-categories-container li.nav-item.parent-category').find('.main_category_child').first()
+                var has_parent_content = $(ev.currentTarget).find('.menu-categories-container li.nav-item.parent-category').find('.mobile_cate_child').first()
                 var get_parent = $(has_parent_content).parents('.parent-category');
                 $(get_parent).find('.sub-menu-dropdown').css({"visibility": "visible","opacity": "1",});
             }
@@ -47,7 +47,7 @@ odoo.define('theme_clarico_vega.dynamic_menu', function(require) {
         selector: '#top_menu_collapse',
         read_events: {
             'mouseenter .parent-category': '_onMouseEnter',
-            'click .main_category_child': '_onMouseEnter',
+            'click .mobile_cate_child': '_onMouseEnter',
             'click .sub-menu-dropdown': '_preventClick',
             'click .ctg_arrow': '_onClickOnArrow',
             'click #top_menu .dropdown': '_onClickDynamicMenu',
@@ -55,9 +55,23 @@ odoo.define('theme_clarico_vega.dynamic_menu', function(require) {
         _onMouseEnter: function(ev) {
             ev.preventDefault();
             ev.stopPropagation();
-            var self = $(ev.currentTarget)
-            if (!self.find('.dynamic_mega_menu_child').length == 1) {
-                self.find('.sub-menu-dropdown').css({"opacity": "1", "z-index":"99"});
+            var self = $(ev.currentTarget);
+            var temp_child_menu_length = self.find('.dynamic_mega_menu_child').length;
+            if ($(window).width() > 992) {
+                if (temp_child_menu_length != 1) {
+                    self.find('.sub-menu-dropdown').css({"opacity": "1", "z-index":"99"});
+                }
+            }
+            else {
+                if (temp_child_menu_length != 1) {
+                    if($(ev.currentTarget.nextElementSibling).hasClass('toggle_megamenu')){
+                        $(ev.currentTarget.nextElementSibling).addClass('no_toggle_megamenu').removeClass('toggle_megamenu');
+                    }
+                    else{
+                        self.parents().find('.sub-menu-dropdown').removeClass('toggle_megamenu');
+                        self.siblings().addClass('toggle_megamenu').removeClass('no_toggle_megamenu');
+                    }
+                }
             }
         },
         _preventClick: function(ev) {

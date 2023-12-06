@@ -5,8 +5,6 @@ from odoo.exceptions import UserError
 class ProductPublicCategory(models.Model):
     _inherit = "product.public.category"
 
-    _order = "name, id"
-
     is_category_page = fields.Boolean(string='Allow Category Page',
                                       help="It will set the separate page for this category")
     category_page = fields.Many2one("website.page", string="Select Page",

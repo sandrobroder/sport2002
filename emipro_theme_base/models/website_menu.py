@@ -27,6 +27,7 @@ class WebsiteMenu(models.Model):
     is_highlight_menu = fields.Boolean(string="Highlight Menu")
     website_id = fields.Many2one('website', 'Website', ondelete='cascade',
                                       inverse = '_set_field_is_mega_menu_overrided')
+    mega_menu_content = fields.Html(translate=True)
 
     # is_mega_menu = fields.Boolean(compute='_compute_field_is_mega_menu_overrided')
 
@@ -67,7 +68,13 @@ class WebsiteMenu(models.Model):
                 website_id = self.website_id.id if self.website_id else request.env['website'].sudo().get_current_website().id
                 context = {'category_menu_styles': menu.category_menu_styles, 'menu': menu, 'website_id': website_id}
                 template = 'theme_clarico_vega.dynamic_category_mega_menu'
-                menu.mega_menu_content = self.env['ir.ui.view']._render_template(template, values=context)
+                temp = {}
+                for langs in list(code for code, _ in self.env['res.lang'].get_installed()) or ['en_US']:
+                    self.env.context = dict(self.env.context)
+                    self.env.context.update({'lang': langs})
+                    mega_menu_content = self.env['ir.ui.view']._render_template(template, values=context)
+                    temp.update({langs:f"""{mega_menu_content}"""})
+                menu.update_field_translations('mega_menu_content', temp)
             else:
                 menu.mega_menu_content = False
                 menu.mega_menu_classes = False
