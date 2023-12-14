@@ -44,12 +44,7 @@ class CommissionMixin(models.AbstractModel):
                 lambda x: not x.commission_id.settlement_type
                           or x.commission_id.settlement_type == settlement_type
             )
-        print("product_categ_id",product_categ_id, agents, settlement_type)
-        if product_categ_id:
-            product_categ_id.get_categ_agent(agents)
-            agents = product_categ_id.agent_ids & agents
-            if len(agents) > 1:
-                raise ValidationError("Multiple agents found for product category %s" % product_categ_id.name)
+        
         return [(0, 0, self._prepare_agent_vals(agent)) for agent in agents]
 
     @api.depends("commission_free")
