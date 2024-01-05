@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_custom_delivery_slips_custom_delivery_slips,custom_delivery_slips.custom_delivery_slips,model_custom_delivery_slips_custom_delivery_slips,base.group_user,1,1,1,1
