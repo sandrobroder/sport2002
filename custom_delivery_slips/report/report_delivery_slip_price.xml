@@ -129,11 +129,11 @@
                                             Lot/Serial Number
                                         </th>
                                     </t>
-                                    <th name="th_sml_qty_ordered"
+<!--                                     <th name="th_sml_qty_ordered"
                                         class="text-center"
                                         t-if="not has_serial_number and (not is_outgoing or not (o.valued and o.sale_id and o.move_line_ids))">
                                         <strong>Ordered</strong>
-                                    </th>
+                                    </th> -->
                                     <th name="th_sml_quantity" class="text-center">
                                         <strong>Delivered</strong>
                                     </th>
