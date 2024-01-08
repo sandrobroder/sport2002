@@ -43,7 +43,6 @@ def _handle_settlement_line_commission_id(cr):
     )
 
 
-
 modules = ['account_invoice_report_due_list',
 'website_sale_show_company_data',
 'website_sale_product_detail_attribute_value_image',
@@ -152,7 +151,6 @@ def migrate(cr, version):
 'website_product_image_by_stock',
 'add_mass_product_in_sale_knk',
 'emipro_theme_banner_video','account_payment_order_return','account_statement_import','sport2002_base'); 
-                
                """)
     _logger.info('**********Delete******** generate_combination')
    
@@ -165,47 +163,50 @@ def migrate(cr, version):
                 delete from ir_ui_view where id=7252;
                 delete from ir_ui_view where id=8727;
                 delete from ir_ui_view where id=6771;
-               delete from ir_ui_view where id=6758;
-               delete from ir_ui_view where id=8987;
-               delete from ir_ui_view where id=8726;
+                delete from ir_ui_view where id=6758;
+                delete from ir_ui_view where id=8987;
+                delete from ir_ui_view where id=8726;
                 delete from ir_ui_view where id=8729;
                 delete from ir_ui_view where id=8730;
                 delete from ir_ui_view where id=8743;
                 delete from ir_ui_view where id=8728;
                 delete from ir_ui_view where id=7261;
                 delete from ir_ui_view where id=3233;
-               delete from ir_ui_view where id=7294;
-               delete from ir_ui_view where id=3282;
-               delete from ir_ui_view where id=3281;
+                delete from ir_ui_view where id=7294;
+                delete from ir_ui_view where id=3282;
+                delete from ir_ui_view where id=3281;
                 delete from ir_ui_view where id=3279;
                 delete from ir_ui_view where id=3280;
                 delete from ir_ui_view where id=7377;
                 delete from ir_ui_view where id=7376;
                 delete from ir_ui_view where id=5488;
-               delete from ir_ui_view where id=5510;
-               delete from ir_ui_view where id=3161;
-               delete from ir_ui_view where id=3160;
+                delete from ir_ui_view where id=5510;
+                delete from ir_ui_view where id=3161;
+                delete from ir_ui_view where id=3160;
                 delete from ir_ui_view where id=3292;
                 delete from ir_ui_view where id=3294;
                 delete from ir_ui_view where id=3293;
                 delete from ir_ui_view where id=8751;
                 delete from ir_ui_view where id=5474;
-               delete from ir_ui_view where id=5505;
-               delete from ir_ui_view where id=3320;
-               delete from ir_ui_view where id=7210;
-               delete from ir_ui_view where id=8549;
-               delete from ir_ui_view where id=3317;
-               delete from ir_ui_view where id=7230;
-               delete from ir_ui_view where id=8568;
-               delete from ir_ui_view where id=3316;
-               delete from ir_ui_view where id=3318;
-               delete from ir_ui_view where id=3315;
-               delete from ir_ui_view where id=7565;
-               delete from ir_ui_view where id=5506;
-               delete from ir_ui_view where id=8102;
-               delete from ir_ui_view where id=971;
-               delete from base_automation where id=2;
-               delete from ir_asset;
+                delete from ir_ui_view where id=5505;
+                delete from ir_ui_view where id=3320;
+                delete from ir_ui_view where id=7210;
+                delete from ir_ui_view where id=8549;
+                delete from ir_ui_view where id=3317;
+                delete from ir_ui_view where id=7230;
+                delete from ir_ui_view where id=8568;
+                delete from ir_ui_view where id=3316;
+                delete from ir_ui_view where id=3318;
+                delete from ir_ui_view where id=3315;
+                delete from ir_ui_view where id=7565;
+                delete from ir_ui_view where id=5506;
+                delete from ir_ui_view where id=8102;
+                delete from ir_ui_view where id=971;
+                delete from ir_ui_view where id=7262;
+                delete from ir_ui_view where id=3283;
+                delete from ir_actions_report where id=950;
+                delete from base_automation where id=2;
+                delete from ir_asset;
                 delete from ir_model where model='slider.styles';
                 delete from ir_model_fields where model='slider.styles';
                """)
