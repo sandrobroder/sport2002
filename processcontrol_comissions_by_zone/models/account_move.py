@@ -14,7 +14,6 @@ class AccountMove(models.Model):
             if rec.partner_id:
                 rec.x_cyc = rec.partner_id.x_cyc
                 rec.x_cesce= rec.partner_id.x_cesce
-                rec.x_credito_y_caucion_nuevo= rec.partner_id.x_credito_y_caucion_nuevo
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
