@@ -2,7 +2,7 @@
 # Part of Softhealer Technologies.
 {
     "name":
-    "Import Product Variant from CSV/Excel file - Advance",
+    "Import Product Variant from CSV/Excel file",
     "author":
     "Softhealer Technologies",
     "website":
