@@ -8,14 +8,14 @@
                     <t t-set="partner" t-value="o.partner_id or (o.move_ids and o.move_ids[0].partner_id) or False"/>
 
                     <t t-set="address">
-                        <div name="div_outgoing_address">
+                        <div name="div_outgoing_address" style="font-size: 12px">
                             <div name="outgoing_delivery_address"
                                  t-if="o.should_print_delivery_address()">
                                 <span>
-                                    <strong>Delivery Address:</strong>
+                                    <strong>Dirección de entrega:</strong>
                                 </span>
                                 <div t-field="o.move_ids[0].partner_id"
-                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True, "phone_icons": False}'/>
                             </div>
                             <div name="outgoing_warehouse_address"
                                  t-elif="o.picking_type_id.code != 'internal' and o.picking_type_id.warehouse_id.partner_id">
@@ -23,13 +23,13 @@
                                     <strong>Warehouse Address:</strong>
                                 </span>
                                 <div t-field="o.picking_type_id.warehouse_id.partner_id"
-                                     t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True, "phone_icons": False}'/>
                             </div>
                         </div>
                     </t>
                     <t t-set="information_block">
-                        <div class="row">
-                            <div class="col-7" name="div_incoming_address">
+                        <div class="row" style="font-size: 12px">
+                            <div class="col" name="div_incoming_address">
                                 <t t-set="show_partner" t-value="False"/>
                                 <div name="vendor_address" t-if="o.picking_type_id.code=='incoming' and partner">
                                     <span>
@@ -40,30 +40,30 @@
                                 <div name="customer_address"
                                      t-if="o.picking_type_id.code=='outgoing' and partner and partner != partner.commercial_partner_id">
                                     <span>
-                                        <strong>Customer Address:</strong>
+                                        <strong>Datos cliente:</strong>
                                     </span>
                                     <t t-set="show_partner" t-value="True"/>
                                 </div>
                                 <div t-if="show_partner" name="partner_header">
                                     <div t-field="partner.commercial_partner_id"
-                                         t-options='{"widget": "contact", "fields": ["address", "name", "phone", "vat"], "no_marker": True, "phone_icons": True}'/>
+                                         t-options='{"widget": "contact", "fields": ["address", "name", "vat"], "no_marker": True, "phone_icons": False}'/>
                                 </div>
                             </div>
                         </div>
                     </t>
                     <t t-set="is_outgoing" t-value="o.picking_type_code == 'outgoing'"/>
 
-                    <div class="page">
+                    <div class="page" style="font-size: 12px">
                         <h2>
                             <span t-field="o.name"/>
                         </h2>
-                        <div class="row mt32 mb32">
+                        <div class="row">
                             <div t-if="o.origin" class="col-auto" name="div_origin">
-                                <strong>Order:</strong>
+                                <strong>Pedido:</strong>
                                 <p t-field="o.origin"/>
                             </div>
                             <div t-if="o.state" class="col-auto" name="div_sched_date">
-                                <strong>Shipping Date:</strong>
+                                <strong>Fecha de envío:</strong>
                                 <t t-if="o.state == 'done'">
                                     <p t-field="o.date_done"/>
                                 </t>
@@ -72,7 +72,7 @@
                                 </t>
                             </div>
                             <div t-if="o.sale_id" class="col-auto" name="div_carrier">
-                                <strong>Operador:</strong>
+                                <strong>Transportista:</strong>
                                 <p t-field="o.sale_id.shipping_carrier_id"/>
                             </div>
                             <div t-if="o.sale_id" class="col-auto">
@@ -84,13 +84,13 @@
                             <thead>
                                 <tr>
                                     <th name="th_sm_product">
-                                        <strong>Product</strong>
+                                        <strong>Producto</strong>
                                     </th>
 <!--                                    <th name="th_sm_ordered">-->
 <!--                                        <strong>Ordered</strong>-->
 <!--                                    </th>-->
                                     <th name="th_sm_quantity">
-                                        <strong>Delivered</strong>
+                                        <strong>Cantidad</strong>
                                     </th>
                                 </tr>
                             </thead>
@@ -114,7 +114,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <table class="table table-sm mt48" t-if="o.move_line_ids and o.state=='done'"
+                        <table class="table table-sm" t-if="o.move_line_ids and o.state=='done'"
                                name="stock_move_line_table">
                             <t t-set="has_serial_number" t-value="False"/>
                             <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')"
@@ -122,7 +122,7 @@
                             <thead>
                                 <tr>
                                     <th name="th_sml_product">
-                                        <strong>Product</strong>
+                                        <strong>Producto</strong>
                                     </th>
                                     <t name="lot_serial" t-if="has_serial_number">
                                         <th>
@@ -135,7 +135,7 @@
                                         <strong>Ordered</strong>
                                     </th>
                                     <th name="th_sml_quantity" class="text-center">
-                                        <strong>Delivered</strong>
+                                        <strong>Cantidad</strong>
                                     </th>
                                     <t t-if="o.valued and o.sale_id and o.move_line_ids and is_outgoing">
 <!--                                        <t t-if="o.state != 'done'">-->
@@ -144,10 +144,10 @@
 <!--                                            </th>-->
 <!--                                        </t>-->
                                         <th class="text-end">
-                                            <strong>Unit Price</strong>
+                                            <strong>Precio ud.</strong>
                                         </th>
                                         <th class="text-end" groups="product.group_discount_per_so_line">
-                                            <strong>Discount</strong>
+                                            <strong>Dto</strong>
                                         </th>
                                         <th class="text-end">
                                             <strong>Subtotal</strong>
@@ -224,10 +224,10 @@
                                 <thead>
                                     <tr>
                                         <th class="text-end">
-                                            <strong>Untaxed Amount</strong>
+                                            <strong>Base Imposible</strong>
                                         </th>
                                         <th class="text-end">
-                                            <strong>Taxes</strong>
+                                            <strong>Impuestos</strong>
                                         </th>
                                         <th class="text-end">
                                             <strong>Total</strong>
@@ -260,7 +260,7 @@
                                 <thead>
                                     <tr>
                                         <th name="th_sb_product">
-                                            <strong>Product</strong>
+                                            <strong>Producto</strong>
                                         </th>
                                         <th/>
                                         <th name="th_sb_quantity" class="text-center">

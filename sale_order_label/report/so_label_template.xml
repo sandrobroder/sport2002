@@ -6,7 +6,7 @@
                 <div class="page">
                     <div class="row">
                         <div class="col-6"
-                             style="padding-left:7mm; border-right:1px dashed black; height: 149mm; padding-top: 7mm">
+                             style="padding-left:5mm;padding-right:5mm; height: 149mm; padding-top: 7mm">
                             <div t-if="len(per_page_chunk) >= 1 ">
                                 <div>
                                     <div>Datos Empresa:</div>
@@ -15,7 +15,7 @@
                                             <strong t-field="o.company_id.partner_id.name"/>
                                         </div>
                                         <span t-field="o.company_id.partner_id"
-                                              t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                                              t-options='{"widget": "contact", "fields": ["address", "phone", "vat"], "no_marker": true}'/>
                                     </div>
                                 </div>
                                 <br/>
@@ -25,15 +25,15 @@
                                         <div>
                                             <strong t-field="o.partner_id.name"/>
                                         </div>
-                                        <span t-field="o.partner_id"
-                                              t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                                        <span t-field="o.partner_shipping_id"
+                                              t-options='{"widget": "contact", "fields": ["address", "vat"], "no_marker": true}'/>
                                     </div>
                                 </div>
                                 <br/>
 
                                 <div>
-                                    <span>Agencia:</span>
-                                    <span t-field="o.carrier_id"/>
+                                    <span>Transportista:</span>
+                                    <span t-field="o.shipping_carrier_id"/>
                                 </div>
                                 <br/>
 
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="col-6"
-                             style="padding-right:7mm; height: 149mm; padding-top: 7mm;">
+                             style="padding-right:2mm; padding-left:12mm; height: 149mm; padding-top: 7mm;">
                             <div t-if="len(per_page_chunk) >= 2 " class="pl-4">
                                 <div>
                                     <div>Datos Empresa:</div>
@@ -59,7 +59,7 @@
                                             <strong t-field="o.company_id.partner_id.name"/>
                                         </div>
                                         <span t-field="o.company_id.partner_id"
-                                              t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                                              t-options='{"widget": "contact", "fields": ["address", "phone", "vat"], "no_marker": true}'/>
                                     </div>
                                 </div>
                                 <br/>
@@ -69,15 +69,15 @@
                                         <div>
                                             <strong t-field="o.partner_id.name"/>
                                         </div>
-                                        <span t-field="o.partner_id"
-                                              t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                                        <span t-field="o.partner_shipping_id"
+                                              t-options='{"widget": "contact", "fields": ["address", "vat"], "no_marker": true}'/>
                                     </div>
                                 </div>
                                 <br/>
 
                                 <div>
-                                    <span>Agencia:</span>
-                                    <span t-field="o.carrier_id"/>
+                                    <span>Transportista:</span>
+                                    <span t-field="o.shipping_carrier_id"/>
                                 </div>
                                 <br/>
 
@@ -96,7 +96,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6"
-                             style="padding-right:7mm; border-top:1px dashed black; height: 148mm; padding-top: 7mm">
+                             style="padding-right:7mm; padding-left:5mm; height: 148mm; padding-top: 7mm">
                             <div t-if="len(per_page_chunk) >= 3 ">
                                 <div>
                                     <div>Datos Empresa:</div>
@@ -105,7 +105,7 @@
                                             <strong t-field="o.company_id.partner_id.name"/>
                                         </div>
                                         <span t-field="o.company_id.partner_id"
-                                              t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                                              t-options='{"widget": "contact", "fields": ["address", "phone", "vat"], "no_marker": true}'/>
                                     </div>
                                 </div>
                                 <br/>
@@ -115,15 +115,15 @@
                                         <div>
                                             <strong t-field="o.partner_id.name"/>
                                         </div>
-                                        <span t-field="o.partner_id"
-                                              t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                                        <span t-field="o.partner_shipping_id"
+                                              t-options='{"widget": "contact", "fields": ["address", "vat"], "no_marker": true}'/>
                                     </div>
                                 </div>
                                 <br/>
 
                                 <div>
-                                    <span>Agencia:</span>
-                                    <span t-field="o.carrier_id"/>
+                                    <span>Transportista:</span>
+                                    <span t-field="o.shipping_carrier_id"/>
                                 </div>
                                 <br/>
 
@@ -141,7 +141,7 @@
 
                         </div>
                         <div class="col-6"
-                             style="border-left:1px dashed black; border-top:1px dashed black; height: 148mm; padding-top: 7mm">
+                             style="height: 148mm; padding-top: 7mm; padding-right: 2mm;padding-left: 12mm">
                             <div t-if="len(per_page_chunk) >= 4 " class="pl-4">
                                 <div>
                                     <div>Datos Empresa:</div>
@@ -150,7 +150,7 @@
                                             <strong t-field="o.company_id.partner_id.name"/>
                                         </div>
                                         <span t-field="o.company_id.partner_id"
-                                              t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": true}'/>
+                                              t-options='{"widget": "contact", "fields": ["address", "phone", "vat"], "no_marker": true}'/>
                                     </div>
                                 </div>
                                 <br/>
@@ -160,15 +160,15 @@
                                         <div>
                                             <strong t-field="o.partner_id.name"/>
                                         </div>
-                                        <span t-field="o.partner_id"
-                                              t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                                        <span t-field="o.partner_shipping_id"
+                                              t-options='{"widget": "contact", "fields": ["address", "vat"], "no_marker": true}'/>
                                     </div>
                                 </div>
                                 <br/>
 
                                 <div>
-                                    <span>Agencia:</span>
-                                    <span t-field="o.carrier_id"/>
+                                    <span>Transportista:</span>
+                                    <span t-field="o.shipping_carrier_id"/>
                                 </div>
                                 <br/>
 

@@ -10,7 +10,7 @@
                         <br/>
                         <strong t-if="product._name == 'product.product'" t-field="product.product_template_variant_value_ids"/>
                     </div>
-                    <div class="text-center" style="padding-top:0;padding-bottom:0">
+                    <div t-if="price_included" class="text-center" style="padding-top:0;padding-bottom:0">
                         <span t-field="product.customer_list_price" t-options='{"widget": "monetary", "display_currency": product.currency_id}'/>
                     </div>
                     <div class="">

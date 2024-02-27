@@ -551,7 +551,7 @@
 
 		<xpath expr="//li[@t-elif='show_dropdown']//a" position="replace">
 			<a t-if="submenu.dynamic_mega_menu" t-attf-class="#{link_class or ''} dropdown-toggle #{submenu.is_mega_menu and 'o_mega_menu_toggle'}"
-			   t-att-href="submenu.category_selection == 'specific' and '/shop/category/%s' %slug(submenu.ecom_category) or submenu.url or '#'"
+			   t-att-href="submenu.category_selection == 'specific' and submenu.ecom_category and '/shop/category/%s' %slug(submenu.ecom_category) or submenu.url or '#'"
 			   data-bs-toggle="dropdown" t-att-data-id="submenu.id">
 				<span t-field="submenu.name" t-attf-class="#{'te_highlighted_menu_span' if submenu.is_highlight_menu else ''}"/>
 				<t t-if="request.website.viewref('theme_clarico_vega.website_submenu_label_ept').active">

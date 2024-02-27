@@ -156,6 +156,14 @@ def migrate(cr, version):
    
     _logger.info('**********Deleted******** generate_combination')
     cr.execute("""
+               update account_reconcile_model set name='Invoices Matching Rule-2' where id=2;
+               update account_reconcile_model set name='Caja Roots-4' where id=4;
+               update account_reconcile_model set name='Caja Roots-5' where id=5;
+                delete from ir_ui_view where id=3161;
+                delete from ir_ui_view where id=3160;
+               delete from ir_ui_view where id=3162;
+               delete from ir_ui_view where id=7562;
+               delete from ir_ui_view where id=5518;
                 delete from ir_ui_view where id=5486;
                 delete from ir_ui_view where id=5496;
                 delete from ir_ui_view where id=5499;
@@ -181,8 +189,6 @@ def migrate(cr, version):
                 delete from ir_ui_view where id=7376;
                 delete from ir_ui_view where id=5488;
                 delete from ir_ui_view where id=5510;
-                delete from ir_ui_view where id=3161;
-                delete from ir_ui_view where id=3160;
                 delete from ir_ui_view where id=3292;
                 delete from ir_ui_view where id=3294;
                 delete from ir_ui_view where id=3293;
@@ -204,11 +210,27 @@ def migrate(cr, version):
                 delete from ir_ui_view where id=971;
                 delete from ir_ui_view where id=7262;
                 delete from ir_ui_view where id=3283;
-                delete from ir_actions_report where id=950;
-                delete from base_automation where id=2;
                 delete from ir_asset;
                 delete from ir_model where model='slider.styles';
                 delete from ir_model_fields where model='slider.styles';
+                delete from ir_model where model='pos.gift.coupon';
+                delete from ir_model where model='import.product.var.wizard';
+                delete from ir_model where model='label.brand';
+                delete from ir_model where model='label.print';
+                delete from ir_model where model='product.brand.ept';
+                delete from ir_model where model='slider.filter';
+                delete from ir_model where model='sh.import.img.zip.shop.wizard';
+                delete from ir_model where model='delivery.carrier.group';
+                delete from ir_model where model='pos.move.reason';
+                delete from ir_model_fields where model='pos.gift.coupon';
+                delete from ir_model_fields where model='import.product.var.wizard';
+                delete from ir_model_fields where model='label.brand';
+                delete from ir_model_fields where model='label.print';
+                delete from ir_model_fields where model='product.brand.ept';
+                delete from ir_model_fields where model='slider.filter';
+                delete from ir_model_fields where model='sh.import.img.zip.shop.wizard';
+                delete from ir_model_fields where model='delivery.carrier.group';
+                delete from ir_model_fields where model='pos.move.reason';
                """)
     _logger.info('Migration completed.')
     _logger.info("============installe commession")

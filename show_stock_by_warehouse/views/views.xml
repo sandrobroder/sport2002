@@ -7,11 +7,11 @@
             <field name="arch" type="xml">
                 <field name="type" position="after">
                     <field name="on_hand_qty_wh_one" attrs="{'invisible':[('type', '!=', 'product')] }" optional="show"
-                           decoration-bf="1" />
-                    <field name="allowed_warehouse_one_id" string="Warehouse One" invisible="1"/>
+                           string="Stock Sport" decoration-bf="1" />
+                    <field name="allowed_warehouse_one_id" string="Stock Sport" invisible="1"/>
                     <field name="on_hand_qty_wh_two" attrs="{'invisible':[('type', '!=', 'product')]}" decoration-bf="1"
-                           string="WH Two On-Hand Qty" optional="show"/>
-                    <field name="allowed_warehouse_two_id" string="Warehouse Two" invisible="1"/>
+                           string="Stock Roots" optional="show"/>
+                    <field name="allowed_warehouse_two_id" string="Stock Roots" invisible="1"/>
                 </field>
             </field>
         </record>
@@ -23,11 +23,11 @@
             <field name="arch" type="xml">
                 <field name="standard_price" position="after">
                     <field name="on_hand_qty_wh_one" attrs="{'invisible':[('type', '!=', 'product')] }" optional="show"
-                           decoration-bf="1" />
-                    <field name="allowed_warehouse_one_id" string="Warehouse One" invisible="1"/>
+                           string="Stock Sport" decoration-bf="1" />
+                    <field name="allowed_warehouse_one_id" string="Stock Sport" invisible="1"/>
                     <field name="on_hand_qty_wh_two" attrs="{'invisible':[('type', '!=', 'product')]}" decoration-bf="1"
-                            optional="show"/>
-                    <field name="allowed_warehouse_two_id" string="Warehouse Two" invisible="1"/>
+                            string="Stock Roots" optional="show"/>
+                    <field name="allowed_warehouse_two_id" string="Stock Roots" invisible="1"/>
                 </field>
             </field>
         </record>

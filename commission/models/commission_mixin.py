@@ -34,6 +34,7 @@ class CommissionMixin(models.AbstractModel):
     )
 
     def _prepare_agent_vals(self, agent):
+        print("agents", agent)
         return {"agent_id": agent.id, "commission_id": agent.commission_id.id}
 
     def _prepare_agents_vals_partner(self, partner, settlement_type=None, product_categ_id=None):
@@ -44,7 +45,13 @@ class CommissionMixin(models.AbstractModel):
                 lambda x: not x.commission_id.settlement_type
                           or x.commission_id.settlement_type == settlement_type
             )
-        
+        # print("product_categ_id",product_categ_id, agents, settlement_type)
+        if product_categ_id:
+            agent_ids = product_categ_id.get_categ_agent(agents)
+            print("agent_ids", agent_ids)
+            agents = agent_ids & agents
+            if len(agents) > 1:
+                raise ValidationError("Multiple agents found for product category %s" % product_categ_id.name)
         return [(0, 0, self._prepare_agent_vals(agent)) for agent in agents]
 
     @api.depends("commission_free")

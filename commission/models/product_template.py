@@ -19,9 +19,9 @@ class ProductCategory(models.Model):
         if self.agent_ids and self.agent_ids & agents:
             return self.agent_ids & agents
         elif self.parent_id:
-            return self.parent_id.get_categ_commission()
+            return self.parent_id.get_categ_agent(agents)
         else:
-            return []
+            return self.env["res.partner"]
 
     def get_categ_commission(self):
         if self.commission_percent:

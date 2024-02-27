@@ -1748,7 +1748,7 @@ div.quick_view_content {
         }
     }
 }
-.dynamic-owl-carousel {
+.owl-carousel.dynamic-owl-carousel {
 	.owl-nav {
         button.owl-prev {
             @include position(absolute,50%,null,null,-12px);
@@ -1757,7 +1757,12 @@ div.quick_view_content {
                 font-size:nth($f_sizes,12);
             }
             @include media-breakpoint-down(sm) {
-                left:-6px;
+                position: absolute;
+                height: 100px;
+                cursor: pointer;
+                border-radius: 3px;
+                margin: 5px;
+                padding: 4px 12px !important;
             }
         }
         button.owl-next {
@@ -1766,7 +1771,12 @@ div.quick_view_content {
             right:-12px;
             @include media-breakpoint-down(sm)
             {
-                right:-6px;
+                position: absolute;
+                height: 100px;
+                cursor: pointer;
+                border-radius: 3px;
+                margin: 5px;
+                padding: 4px 12px !important;
             }
         }
     }

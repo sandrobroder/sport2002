@@ -72,25 +72,25 @@
                 </xpath>
                 <xpath expr="//div[@name='product_lst_price']" position="replace">
                     <div name="product_lst_price" class="mt-1">
-                        <t t-if="record.product_price_to_show.raw_value == 'sales_price'">
-                            Sales Price:
+                        <t t-if="record.product_price_to_show.raw_value == 'sales_price' and record.product_variant_count.value == 1">
+                            Precio Sport:
                             <field name="list_price" widget="monetary"
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </t>
                         <t t-elif="record.product_price_to_show.raw_value == 'price_with_tax'">
-                            Sales Price(Tax Inc.):
+                            Precio Roots:
                             <field name="customer_list_price" widget='monetary'
                                    options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                         </t>
-                        <t t-else="1">
+                        <t t-else="1" >
                             <div name="product_lst_price">
-                                <div class="mt-1">
-                                    Sales Price:
+                                <div class="mt-1" t-if="record.product_variant_count.value == 1">
+                                    Precio Sport:
                                     <field name="list_price" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </div>
                                 <div class="mt-1">
-                                    Sales Price(Tax Inc.):
+                                    Precio Roots:
                                     <field name="customer_list_price" widget="monetary"
                                            options="{'currency_field': 'currency_id', 'field_digits': True}"/>
                                 </div>

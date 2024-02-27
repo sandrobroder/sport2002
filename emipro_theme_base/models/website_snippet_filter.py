@@ -9,6 +9,8 @@ from odoo.osv import expression
 class WebsiteSnippetFilter(models.Model):
     _inherit = 'website.snippet.filter'
 
+    field_names = fields.Char(default='id')
+
     def _get_hardcoded_sample(self, model):
         samples = super()._get_hardcoded_sample(model)
         if model._name == 'product.public.category':

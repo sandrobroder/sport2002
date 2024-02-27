@@ -64,7 +64,7 @@
                 <input type="password" placeholder="Password" name="password" id="password"
                        t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required"
                        autocomplete="current-password" t-att-autofocus="'autofocus' if login else None"
-                       maxlength="4096"/>
+                       maxlength="4096" minlength="8"/>
             </div>
 
             <div class="alert-success-error">
