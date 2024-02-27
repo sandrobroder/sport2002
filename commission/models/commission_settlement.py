@@ -122,7 +122,7 @@ class SettlementLine(models.Model):
         compute="_compute_commission_id",
         readonly=False,
         store=True,
-        required=True,
+        required=False,
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
