@@ -23,6 +23,7 @@
         'views/snippets/s_dynamic_snippet_products.xml',
         'views/product_attribute_value_view.xml',
         'views/product_pricelist_views.xml',
+        'views/website_snippet_filter.xml',
         'wizard/product_document_config.xml',
         'wizard/product_brand_wizard_view.xml',
         'templates/assets.xml',

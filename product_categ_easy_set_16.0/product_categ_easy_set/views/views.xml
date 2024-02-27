@@ -1,0 +1,92 @@
+<odoo>
+    <data>
+
+        <record id="product_category_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.category.form.inherit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="public_categ_ids" widget="many2many_tags" string="eCommerce Categories"/>
+                    <field name="pos_categ_id" string="POS Categories"/>
+                    <field name="brand_id" string="Brand"/>
+                </field>
+
+                <!--                <xpath expr="//div[@name='button_box']/.." position="before">-->
+                <!--                    <header>-->
+                <!--                        <button class="oe_highlight" type="object" name="action_update_category">-->
+                <!--                            Update Category-->
+                <!--                        </button>-->
+                <!--                    </header>-->
+                <!--                </xpath>-->
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="product_categ_easy_set.action_server">
+            <field name="name">Update Category</field>
+            <field name="model_id" ref="product.model_product_category"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.action_update_category()
+            </field>
+            <field name="binding_model_id" ref="product.model_product_category"/>
+
+        </record>
+        <!-- explicit list view definition -->
+        <!--
+            <record model="ir.ui.view" id="product_categ_easy_set.list">
+              <field name="name">product_categ_easy_set list</field>
+              <field name="model">product_categ_easy_set.product_categ_easy_set</field>
+              <field name="arch" type="xml">
+                <tree>
+                  <field name="name"/>
+                  <field name="value"/>
+                  <field name="value2"/>
+                </tree>
+              </field>
+            </record>
+        -->
+
+        <!-- actions opening views on models -->
+        <!--
+            <record model="ir.actions.act_window" id="product_categ_easy_set.action_window">
+              <field name="name">product_categ_easy_set window</field>
+              <field name="res_model">product_categ_easy_set.product_categ_easy_set</field>
+              <field name="view_mode">tree,form</field>
+            </record>
+        -->
+
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="product_categ_easy_set.action_server">
+              <field name="name">product_categ_easy_set server</field>
+              <field name="model_id" ref="model_product_categ_easy_set_product_categ_easy_set"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "tree,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
+
+        <!-- Top menu item -->
+        <!--
+            <menuitem name="product_categ_easy_set" id="product_categ_easy_set.menu_root"/>
+        -->
+        <!-- menu categories -->
+        <!--
+            <menuitem name="Menu 1" id="product_categ_easy_set.menu_1" parent="product_categ_easy_set.menu_root"/>
+            <menuitem name="Menu 2" id="product_categ_easy_set.menu_2" parent="product_categ_easy_set.menu_root"/>
+        -->
+        <!-- actions -->
+        <!--
+            <menuitem name="List" id="product_categ_easy_set.menu_1_list" parent="product_categ_easy_set.menu_1"
+                      action="product_categ_easy_set.action_window"/>
+            <menuitem name="Server to list" id="product_categ_easy_set" parent="product_categ_easy_set.menu_2"
+                      action="product_categ_easy_set.action_server"/>
+        -->
+    </data>
+</odoo>

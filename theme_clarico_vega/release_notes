@@ -1,3 +1,8 @@
+Version 16.2.10 - 08 Jan 24
+===================================
+
+Improvement
+- Fix - Js error on Ios file opening the logged in page
 
 Version 16.2.9 - 12 Oct 23
 ===================================
