@@ -19,7 +19,7 @@ class CommissionSettlement(models.Model):
     agent_id = fields.Many2one(
         comodel_name="res.partner",
         domain="[('agent', '=', True)]",
-        required=True,
+        required=False,
     )
     agent_type = fields.Selection(related="agent_id.agent_type")
     settlement_type = fields.Selection(
@@ -101,7 +101,7 @@ class SettlementLine(models.Model):
         compute="_compute_date",
         readonly=False,
         store=True,
-        required=True,
+        required=False,
     )
     agent_id = fields.Many2one(
         comodel_name="res.partner",
