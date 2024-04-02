@@ -1,0 +1,41 @@
+.btn-top{
+  position: fixed;
+  right: 35px;
+  z-index: 10000;
+  bottom: 25px;
+
+  i {
+      border: 8px solid transparent;
+      border-bottom-color: #ffffff;
+      position: absolute;
+      margin-left: -8px;
+      margin-top: -12px;
+      height: 0;
+      width: 0;
+      top: 50%;
+      left: 50%;
+
+    }
+
+    a {
+      height: 50px;
+      line-height: 40px;
+      width: 50px;
+      display: block;
+      color: #FFF;
+      text-align: center;
+      background: $o-brand-primary;
+      font-size: 13px;
+      font-weight: 500;
+    }
+}
+
+@media(max-width: 767px){
+    .btn-top{
+        bottom: 0px;
+    }
+}
+
+
+
+
