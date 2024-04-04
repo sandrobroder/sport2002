@@ -7,7 +7,8 @@ class LabelQtyWizard(models.TransientModel):
     _name = "label.qty.wizard"
 
     qty = fields.Integer(default=1)
-    order_id = fields.Many2one("sale.order")
+    order_id = no_of_packages
+    # order_id = fields.Many2one("sale.order")
 
     def print_label(self):
         self.ensure_one()
