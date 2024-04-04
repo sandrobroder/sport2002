@@ -19,7 +19,7 @@ class ProductTemplate(models.Model):
 class ProductBrand(models.Model):
     _name = "product.brand"
 
-    name = fields.Char('Brand Name')
+    name = fields.Char('Brand Name', translate=True)
 
 
 class FacebookField(models.Model):
@@ -72,7 +72,7 @@ class FieldMapping(models.Model):
                             default_value = 'new'
                         elif fb_field.name == 'price':
                             model_field = self.env['ir.model.fields'].search(
-                                [('model', '=', 'product.template'), ('name', '=', 'lst_price')])
+                                [('model', '=', 'product.template'), ('name', '=', 'list_price')])
                         elif fb_field.name == 'brand':
                             model_field = self.env['ir.model.fields'].search(
                                 [('model', '=', 'product.template'), ('name', '=', 'brand_id')])
@@ -219,7 +219,7 @@ class FacebookCatalogue(models.Model):
                                 url = self.shop_url[:-1]
                             else:
                                 url = self.shop_url
-                            if 'lst_price' in result[0]:
+                            if 'list_price' in result[0]:
                                 obj = self.env['product.template'].browse(result[0]['id'])
                                 price_list_app = obj._get_combination_info(pricelist=self.price_list_id,
                                                                            only_template=True)

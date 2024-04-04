@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" xml:space="preserve">
+    <t t-name="ActionpadWidget" t-inherit="point_of_sale.ActionpadWidget" t-inherit-mode="extension" owl="1">
+        <xpath expr="//button[hasclass('button') and hasclass('set-partner')]" position="replace">
+            <button class="button set-partner" t-att-class="{'decentered': isLongName}"
+                    t-on-click="() => this.trigger('click-partner')">
+                <t t-if="!env.isMobile"><i class="fa fa-user" role="img" aria-label="Customer" title="Customer" /></t>
+                <t t-if="props.partner">
+                    <t t-if="props.partner.name">
+                        <t t-esc="props.partner.name or ''" />
+                    </t>
+                    <t t-else="">
+                        <t t-esc="props.partner.parent_name or ''" />
+                    </t>
+                </t>
+                <t t-else="">
+                    Customer
+                </t>
+            </button>
+        </xpath>
+    </t>
+</templates>

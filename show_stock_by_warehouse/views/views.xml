@@ -5,13 +5,13 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_product_tree_view"/>
             <field name="arch" type="xml">
-                <field name="price" position="after">
+                <field name="type" position="after">
                     <field name="on_hand_qty_wh_one" attrs="{'invisible':[('type', '!=', 'product')] }" optional="show"
-                           decoration-bf="1" />
-                    <field name="allowed_warehouse_one_id" string="Warehouse One" invisible="1"/>
+                           string="Stock Sport" decoration-bf="1" />
+                    <field name="allowed_warehouse_one_id" string="Stock Sport" invisible="1"/>
                     <field name="on_hand_qty_wh_two" attrs="{'invisible':[('type', '!=', 'product')]}" decoration-bf="1"
-                           string="WH Two On-Hand Qty" optional="show"/>
-                    <field name="allowed_warehouse_two_id" string="Warehouse Two" invisible="1"/>
+                           string="Stock Roots" optional="show"/>
+                    <field name="allowed_warehouse_two_id" string="Stock Roots" invisible="1"/>
                 </field>
             </field>
         </record>
@@ -23,11 +23,11 @@
             <field name="arch" type="xml">
                 <field name="standard_price" position="after">
                     <field name="on_hand_qty_wh_one" attrs="{'invisible':[('type', '!=', 'product')] }" optional="show"
-                           decoration-bf="1" />
-                    <field name="allowed_warehouse_one_id" string="Warehouse One" invisible="1"/>
+                           string="Stock Sport" decoration-bf="1" />
+                    <field name="allowed_warehouse_one_id" string="Stock Sport" invisible="1"/>
                     <field name="on_hand_qty_wh_two" attrs="{'invisible':[('type', '!=', 'product')]}" decoration-bf="1"
-                            optional="show"/>
-                    <field name="allowed_warehouse_two_id" string="Warehouse Two" invisible="1"/>
+                            string="Stock Roots" optional="show"/>
+                    <field name="allowed_warehouse_two_id" string="Stock Roots" invisible="1"/>
                 </field>
             </field>
         </record>
@@ -67,62 +67,5 @@
                 </field>
             </field>
         </record>
-
-        <!-- explicit list view definition -->
-        <!--
-            <record model="ir.ui.view" id="show_stock_by_warehouse.list">
-              <field name="name">show_stock_by_warehouse list</field>
-              <field name="model">show_stock_by_warehouse.show_stock_by_warehouse</field>
-              <field name="arch" type="xml">
-                <tree>
-                  <field name="name"/>
-                  <field name="value"/>
-                  <field name="value2"/>
-                </tree>
-              </field>
-            </record>
-        -->
-
-        <!-- actions opening views on models -->
-        <!--
-            <record model="ir.actions.act_window" id="show_stock_by_warehouse.action_window">
-              <field name="name">show_stock_by_warehouse window</field>
-              <field name="res_model">show_stock_by_warehouse.show_stock_by_warehouse</field>
-              <field name="view_mode">tree,form</field>
-            </record>
-        -->
-
-        <!-- server action to the one above -->
-        <!--
-            <record model="ir.actions.server" id="show_stock_by_warehouse.action_server">
-              <field name="name">show_stock_by_warehouse server</field>
-              <field name="model_id" ref="model_show_stock_by_warehouse_show_stock_by_warehouse"/>
-              <field name="state">code</field>
-              <field name="code">
-                action = {
-                  "type": "ir.actions.act_window",
-                  "view_mode": "tree,form",
-                  "res_model": model._name,
-                }
-              </field>
-            </record>
-        -->
-
-        <!-- Top menu item -->
-        <!--
-            <menuitem name="show_stock_by_warehouse" id="show_stock_by_warehouse.menu_root"/>
-        -->
-        <!-- menu categories -->
-        <!--
-            <menuitem name="Menu 1" id="show_stock_by_warehouse.menu_1" parent="show_stock_by_warehouse.menu_root"/>
-            <menuitem name="Menu 2" id="show_stock_by_warehouse.menu_2" parent="show_stock_by_warehouse.menu_root"/>
-        -->
-        <!-- actions -->
-        <!--
-            <menuitem name="List" id="show_stock_by_warehouse.menu_1_list" parent="show_stock_by_warehouse.menu_1"
-                      action="show_stock_by_warehouse.action_window"/>
-            <menuitem name="Server to list" id="show_stock_by_warehouse" parent="show_stock_by_warehouse.menu_2"
-                      action="show_stock_by_warehouse.action_server"/>
-        -->
     </data>
 </odoo>

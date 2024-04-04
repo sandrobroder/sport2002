@@ -18,6 +18,7 @@
 	"sequence"     : 1,
 	"author"       : "Webkul Software Pvt. Ltd.",
 	"website"      : "https://store.webkul.com/Odoo.html",
+	"license"              :  "Other proprietary",
 	"description"  : """""",
 	"live_test_url": "http://odoodemo.webkul.com/?module=wk_wizard_messages&version=12.0",
 	"data"         : [

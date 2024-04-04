@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="view_partner_form">
+            <field name="name">view_partner_form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sale']" position="inside">
+                    <field name="credito_y_caucion"/>
+                    <field name="cesce_credito"/>
+                    <field name="solunion_credito"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_move_form">
+            <field name="name">view_move_form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="credito_y_caucion"/>
+                    <field name="cesce_credito"/>
+                    <field name="solunion_credito"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- actions opening views on models -->
+        <!--
+            <record model="ir.actions.act_window" id="show_customer_extra_fields.action_window">
+              <field name="name">show_customer_extra_fields window</field>
+              <field name="res_model">show_customer_extra_fields.show_customer_extra_fields</field>
+              <field name="view_mode">tree,form</field>
+            </record>
+        -->
+
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="show_customer_extra_fields.action_server">
+              <field name="name">show_customer_extra_fields server</field>
+              <field name="model_id" ref="model_show_customer_extra_fields_show_customer_extra_fields"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "tree,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
+
+        <!-- Top menu item -->
+        <!--
+            <menuitem name="show_customer_extra_fields" id="show_customer_extra_fields.menu_root"/>
+        -->
+        <!-- menu categories -->
+        <!--
+            <menuitem name="Menu 1" id="show_customer_extra_fields.menu_1" parent="show_customer_extra_fields.menu_root"/>
+            <menuitem name="Menu 2" id="show_customer_extra_fields.menu_2" parent="show_customer_extra_fields.menu_root"/>
+        -->
+        <!-- actions -->
+        <!--
+            <menuitem name="List" id="show_customer_extra_fields.menu_1_list" parent="show_customer_extra_fields.menu_1"
+                      action="show_customer_extra_fields.action_window"/>
+            <menuitem name="Server to list" id="show_customer_extra_fields" parent="show_customer_extra_fields.menu_2"
+                      action="show_customer_extra_fields.action_server"/>
+        -->
+    </data>
+</odoo>

@@ -1,10 +1,10 @@
 <odoo>
     <data>
-        <template id="assets" inherit_id="point_of_sale.assets">
-          <xpath expr="." position="inside">
-              <script type="text/javascript" src="/customer_ref_unique_code/static/src/js/pos.js"></script>
-          </xpath>
-        </template>
+<!--        <template id="assets" inherit_id="point_of_sale.assets">-->
+<!--          <xpath expr="." position="inside">-->
+<!--              <script type="text/javascript" src="/customer_ref_unique_code/static/src/js/pos.js"></script>-->
+<!--          </xpath>-->
+<!--        </template>-->
         <record id="view_res_partner_form" model="ir.ui.view">
             <field name="name">res.partner.form.inherit</field>
             <field name="model">res.partner</field>
@@ -22,7 +22,7 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_tree"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='display_name']" position="after">
+                <xpath expr="//field[@name='display_name']" position="before">
                     <field name="ref_unique_code" readonly="1"/>
                 </xpath>
             </field>
@@ -33,7 +33,7 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_res_partner_filter"/>
             <field name="arch" type="xml">
-                <field name="name" position="after">
+                <field name="name" position="before">
                     <field name="ref_unique_code" filter_domain="[('ref_unique_code', 'ilike', self)]"/>
                 </field>
             </field>

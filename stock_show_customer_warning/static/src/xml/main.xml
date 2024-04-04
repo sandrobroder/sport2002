@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template">
+
+    <t t-inherit="stock_barcode.MainComponent" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_barcode_lines_header')]" position="after">
+            <div t-if="info.customer_warning" class="bg-warning row alert m-0 px-1 justify-content-between">
+                <div  class="d-flex align-items-center justify-content-center w-100">
+                    <span t-if="info.icon" class="fa fa-3x me-3 fa-exclamation-triangle"/>
+                    <span class="o_scan_message o_scan_validate">
+                        <span style="font-size:16px;" t-out="info.customer_warning"/>
+                    </span>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,86 @@
+<odoo>
+    <data>
+        <record id="view_order_form_with_carrier" model="ir.ui.view">
+            <field name="name">delivery.sale.order.form.view.with_carrier</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="shipping_carrier_id"/>
+                    <field name="no_of_packages"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_partner_valued_picking">
+            <field name="name">Partner view (Valued picking)</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath
+                        expr="//page[@name='sales_purchases']//field[@name='user_id']"
+                        position="after"
+                >
+                    <field name="valued_picking"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- explicit list view definition -->
+        <!--
+            <record model="ir.ui.view" id="custom_delivery_slips.list">
+              <field name="name">custom_delivery_slips list</field>
+              <field name="model">custom_delivery_slips.custom_delivery_slips</field>
+              <field name="arch" type="xml">
+                <tree>
+                  <field name="name"/>
+                  <field name="value"/>
+                  <field name="value2"/>
+                </tree>
+              </field>
+            </record>
+        -->
+
+        <!-- actions opening views on models -->
+        <!--
+            <record model="ir.actions.act_window" id="custom_delivery_slips.action_window">
+              <field name="name">custom_delivery_slips window</field>
+              <field name="res_model">custom_delivery_slips.custom_delivery_slips</field>
+              <field name="view_mode">tree,form</field>
+            </record>
+        -->
+
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="custom_delivery_slips.action_server">
+              <field name="name">custom_delivery_slips server</field>
+              <field name="model_id" ref="model_custom_delivery_slips_custom_delivery_slips"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "tree,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
+
+        <!-- Top menu item -->
+        <!--
+            <menuitem name="custom_delivery_slips" id="custom_delivery_slips.menu_root"/>
+        -->
+        <!-- menu categories -->
+        <!--
+            <menuitem name="Menu 1" id="custom_delivery_slips.menu_1" parent="custom_delivery_slips.menu_root"/>
+            <menuitem name="Menu 2" id="custom_delivery_slips.menu_2" parent="custom_delivery_slips.menu_root"/>
+        -->
+        <!-- actions -->
+        <!--
+            <menuitem name="List" id="custom_delivery_slips.menu_1_list" parent="custom_delivery_slips.menu_1"
+                      action="custom_delivery_slips.action_window"/>
+            <menuitem name="Server to list" id="custom_delivery_slips" parent="custom_delivery_slips.menu_2"
+                      action="custom_delivery_slips.action_server"/>
+        -->
+    </data>
+</odoo>

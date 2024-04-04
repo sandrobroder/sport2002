@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import base64
+import logging
 import mimetypes
 import os
 import tempfile
@@ -10,15 +11,16 @@ from os.path import join as opj
 import xlrd
 
 from odoo import models, fields, _
-from odoo.exceptions import ValidationError, UserError, _logger
+from odoo.exceptions import ValidationError, UserError
 from odoo.loglevels import exception_to_unicode
+_logger = logging.getLogger(__name__)
 
 CUSTOMER_NAME_ROW = 7
-CUSTOMER_NAME_COL = 2
+CUSTOMER_NAME_COL = 1
 ROW_START = 9
-PRODUCT_IDENTIFIER_COL = 1
+PRODUCT_IDENTIFIER_COL = 0
 ATTR_START = 5
-ATTR_END = 10
+ATTR_END = 11
 
 
 def chunks(lst, n):
