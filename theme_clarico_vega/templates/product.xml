@@ -590,9 +590,12 @@
 
     <!--=============== Add Discount line ================-->
     <template id="product_price_ept" inherit_id="website_sale.product_price">
-        <xpath expr="//div[@itemprop='offers']" position="replace">
+        <xpath expr="//div[@itemprop='offers']" position="attributes">
+            <attribute name="t-attf-class" remove="mb-3" separator=" "/>
+        </xpath>
+        <xpath expr="//div" position="replace">
             <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer"
-                 t-attf-class="product_price mt16 te_prod_bottom_margin {{'d-none' if combination_info['prevent_zero_price_sale'] else 'd-inline-block'}}">
+                 class="product_price mt16 te_prod_bottom_margin">
                 <t t-set="difference"
                    t-value="round(combination_info['list_price'] - combination_info['price'],2) "/>
                 <t t-set="discount"
@@ -602,22 +605,20 @@
                        t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
                     <span itemprop="price" style="display:none;" t-esc="combination_info['price']"/>
                     <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name"/>
-                    <span t-attf-class="text-danger oe_default_price ms-1 h5 {{'' if combination_info['has_discounted_price'] and not combination_info['compare_list_price'] else 'd-none'}}"
+                    <span t-attf-class="text-danger oe_default_price ms-1 h5 {{'' if combination_info['has_discounted_price'] else 'd-none'}}"
                           style="text-decoration: line-through; white-space: nowrap;"
                           t-esc="combination_info['list_price']"
                           t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"
                           itemprop="listPrice"
                     />
                     <t t-if="is_view_active('website_sale.tax_indication')" t-call="website_sale.tax_indication"/>
-                    <del t-if="combination_info['compare_list_price'] and (combination_info['compare_list_price'] &gt; combination_info['price'])">
-                        <bdi dir="inherit">
-                        <span t-esc="combination_info['compare_list_price']"
-                            groups="website_sale.group_product_price_comparison"
-                            t-options='{
-                               "widget": "monetary",
-                               "display_currency": website.currency_id,
-                           }'/>
-                        </bdi>
+                    <del t-if="product.compare_list_price">
+                        <span t-field="product.compare_list_price"
+                              groups="website_sale.group_product_price_comparison"
+                              t-options='{
+                           "widget": "monetary",
+                           "display_currency": product.currency_id,
+                       }'/>
                     </del>
                 </h3>
                 <h3 class="css_non_editable_mode_hidden decimal_precision"
@@ -628,15 +629,13 @@
                        "display_currency": product.currency_id,
                 }'/>
                     <t t-if="is_view_active('website_sale.tax_indication')" t-call="website_sale.tax_indication"/>
-                    <del t-if="combination_info['compare_list_price'] and (combination_info['compare_list_price'] &gt; combination_info['price'])">
-                        <bdi dir="inherit">
+                    <del t-if="product.compare_list_price">
                         <span t-field="product.compare_list_price"
-                            groups="website_sale.group_product_price_comparison"
-                            t-options='{
-                                "widget": "monetary",
-                                "display_currency": website.currency_id,
-                            }'/>
-                        </bdi>
+                              groups="website_sale.group_product_price_comparison"
+                              t-options='{
+                            "widget": "monetary",
+                            "display_currency": product.currency_id,
+                        }'/>
                     </del>
                 </h3>
                 <div t-attf-class="te_discount {{'' if combination_info['has_discounted_price'] else 'd-none'}}">
@@ -647,10 +646,6 @@
                 </div>
             </div>
         </xpath>
-    </template>
-
-    <template id="product_compare_ept" inherit_id="website_sale_comparison.product_add_to_compare">
-        <xpath expr="//button[@t-if='product_variant_id and categories']" position="replace"/>
     </template>
 
     <!--=================== Product sticky details =====================-->

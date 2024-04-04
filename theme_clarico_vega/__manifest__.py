@@ -4,7 +4,7 @@
     'name': 'Theme Clarico Vega',
     'category': 'Theme/eCommerce',
     'summary': 'An Odoo eCommerce Solution with a lot of well-analized features. Suitable for all kind of eCommerce Businesses like Furniture, Fashion, Electronics, Beauty, Fitness, Jewelry, etc.',
-    'version': '16.3.0',
+    'version': '16.2.10',
     'license': 'OPL-1',
     'depends': [
         'emipro_theme_base','website_mass_mailing'
@@ -71,7 +71,6 @@
             'theme_clarico_vega/static/src/scss/header.scss',
             'theme_clarico_vega/static/src/scss/footer.scss',
             'theme_clarico_vega/static/src/js/frontend/cart_popup.js',
-            'theme_clarico_vega/static/src/js/frontend/website_signup_ept.js',
             'theme_clarico_vega/static/src/xml/search.xml',
         ],
         'website.assets_wysiwyg': [
