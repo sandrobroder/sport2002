@@ -53,8 +53,10 @@ odoo.define('theme_clarico_vega.dynamic_menu', function(require) {
             'click #top_menu .dropdown': '_onClickDynamicMenu',
         },
         _onMouseEnter: function(ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
+            if ($(window).width() < 992) {
+                ev.preventDefault();
+                ev.stopPropagation();
+            }
             var self = $(ev.currentTarget);
             var temp_child_menu_length = self.find('.dynamic_mega_menu_child').length;
             if ($(window).width() > 992) {

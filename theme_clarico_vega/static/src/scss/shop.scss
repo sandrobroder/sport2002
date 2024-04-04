@@ -174,10 +174,7 @@
 }
 .o_wsale_products_main_row #products_grid_before {
     .o_wsale_products_grid_before_rail {
-        @include o-wsale-scrollbar-subdle();
-        &:hover{
-            @include o-wsale-scrollbar-firefox();
-        }
+        @include o-wsale-scrollbar-subdles();
         .form-check{
             .form-check-label{
                 max-width: 175px;
@@ -857,18 +854,12 @@ span.attr_value {
         .attribute_filter_scroll, .attribute_filter_canvas_scroll{
             max-height: 165px;
             overflow: auto;
-            @include o-wsale-scrollbar-subdle();
+            @include o-wsale-scrollbar-subdles();
         }
         .brand_filter_scroll, .brand_filter_canvas_scroll{
             max-height: 200px;
             overflow: auto;
-            @include o-wsale-scrollbar-subdle();
-        }
-        .attribute_filter_scroll, .brand_filter_scroll, .attribute_filter_canvas_scroll, .brand_filter_canvas_scroll{
-            &:hover{
-                @include o-wsale-scrollbar-firefox();
-                @include o-wsale-scrollbar-subdle();
-            }
+            @include o-wsale-scrollbar-subdles();
         }
     }
 }

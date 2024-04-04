@@ -926,9 +926,6 @@ form.checkout_autoformat {
         @include media-breakpoint-down(md){
             max-height: calc(100vh - 280px);
         }
-        &:hover{
-            @include o-wsale-scrollbar-firefox();
-        }
 }
 
 .te_header_search {
@@ -1053,6 +1050,9 @@ form.checkout_autoformat {
     a.dropdown-item {
         padding: 4px 10px !important;
         position:unset;
+        .o_image_40_cover{
+            height: unset;
+        }
         &:focus{
             .media{
                 background-color:#f2f2f2;
@@ -1130,7 +1130,10 @@ form.checkout_autoformat {
         }
     }
 
-.o_wsale_filmstip_wrapper{
+.oe_website_sale .o_wsale_filmstip_wrapper{
+    @include o-wsale-scrollbar-subdles();
+    scroll-snap-type: unset;
+    scrollbar-color: unset;
     ul li{
         .fw-normal{
             background: unset !important;

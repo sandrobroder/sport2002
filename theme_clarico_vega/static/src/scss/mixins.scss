@@ -14,6 +14,23 @@
     scrollbar-color: currentColor #eee;
     scrollbar-width: thin;
 }
+@mixin o-wsale-scrollbar-subdles($-vertical: true) {
+    scrollbar#{if($-vertical, -width, -height)}: 3px;
+    cursor: grab;
+
+    &::-webkit-scrollbar {
+        #{if($-vertical, width, height)}: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: $btn-border-radius-sm;
+        background: currentColor;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $light;
+    }
+}
 
 @mixin width($width,$max-width)
 {
