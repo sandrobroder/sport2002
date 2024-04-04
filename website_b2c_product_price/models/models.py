@@ -9,9 +9,9 @@ from odoo.exceptions import UserError, ValidationError
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    customer_list_price = fields.Float(string="Precio Roots", digits='Product Price')
+    customer_list_price = fields.Float(string="Customer Sales Price(Tax Inc.)", digits='Product Price')
     product_price_to_show = fields.Selection(
-        [("sales_price", "Precio Sport"), ("price_with_tax", "Precio Roots")],
+        [("sales_price", "Sales Price"), ("price_with_tax", "Sales Price(Tax Inc.)")],
         compute="compute_which_price_to_show")
     description_product = fields.Text()
 
@@ -237,6 +237,7 @@ class ProductPricelist(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    @api.depends('product_id', 'company_id')
     def _compute_tax_id(self):
         super(SaleOrderLine, self)._compute_tax_id()
         for line in self:
@@ -245,6 +246,7 @@ class SaleOrderLine(models.Model):
                 if tax_id:
                     line.tax_id = tax_id[0].ids
     #
+
     # @api.depends('product_id', 'company_id')
     # def _compute_tax_id(self):
     #     taxes_by_product_company = defaultdict(lambda: self.env['account.tax'])

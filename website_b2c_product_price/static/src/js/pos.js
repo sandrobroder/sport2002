@@ -2,6 +2,8 @@ odoo.define('website_b2c_product_price.Product', function (require) {
     "use strict";
 
     const { Product } = require('point_of_sale.models');
+    const { PosGlobalState } = require('point_of_sale.models');
+
     const Registries = require('point_of_sale.Registries');
 
     const ProductPriceUpdate = (Product) =>
@@ -82,10 +84,86 @@ odoo.define('website_b2c_product_price.Product', function (require) {
                 // pricelist that have base == 'pricelist'.
                 return price;
             }
-
         };
 
+
+    const PosGlobalStateUpdate = (PosGlobalState) =>
+        class extends PosGlobalState {
+            computePriceAfterFp(price, taxes) {
+                const order = this.get_order();
+                var pricelist = order.pricelist
+                if (order && pricelist && pricelist.use_b2c_price) {
+                    return price;
+                }
+                if (order && order.fiscal_position) {
+                    let mapped_included_taxes = [];
+                    let new_included_taxes = [];
+                    const self = this;
+                    _(taxes).each(function (tax) {
+                        const line_taxes = self.get_taxes_after_fp([tax.id], order.fiscal_position);
+                        if (line_taxes.length && line_taxes[0].price_include) {
+                            new_included_taxes = new_included_taxes.concat(line_taxes);
+                        }
+                        if (tax.price_include && !_.contains(line_taxes, tax)) {
+                            mapped_included_taxes.push(tax);
+                        }
+                    });
+
+                    if (mapped_included_taxes.length > 0) {
+                        if (new_included_taxes.length > 0) {
+                            const price_without_taxes = this.compute_all(mapped_included_taxes, price, 1, this.currency.rounding, true).total_excluded
+                            return this.compute_all(new_included_taxes, price_without_taxes, 1, this.currency.rounding, false).total_included
+                        }
+                        else {
+                            return this.compute_all(mapped_included_taxes, price, 1, this.currency.rounding, true).total_excluded;
+                        }
+                    }
+                }
+                return price;
+            }
+
+            get_taxes_after_fp(taxIds, fpos) {
+                const order = this.get_order();
+                if (order) {
+                    var pricelist = order.pricelist
+                    if (order && pricelist && pricelist.use_b2c_price) {
+                        return [];
+                    }
+                }
+                else {
+                    if (this.default_pricelist && this.default_pricelist.use_b2c_price) {
+                        return [];
+                    }
+                }
+                if (!fpos) {
+                    return taxIds.map((taxId) => this.taxes_by_id[taxId]);
+                }
+                let mappedTaxes = [];
+                for (const taxId of taxIds) {
+                    const tax = this.taxes_by_id[taxId];
+                    if (tax) {
+                        const taxMaps = Object.values(fpos.fiscal_position_taxes_by_id).filter(
+                            (fposTax) => fposTax.tax_src_id[0] === tax.id
+                        );
+                        if (taxMaps.length) {
+                            for (const taxMap of taxMaps) {
+                                if (taxMap.tax_dest_id) {
+                                    const mappedTax = this.taxes_by_id[taxMap.tax_dest_id[0]];
+                                    if (mappedTax) {
+                                        mappedTaxes.push(mappedTax);
+                                    }
+                                }
+                            }
+                        } else {
+                            mappedTaxes.push(tax);
+                        }
+                    }
+                }
+                return _.uniq(mappedTaxes, (tax) => tax.id);
+            }
+        };
     Registries.Model.extend(Product, ProductPriceUpdate);
+    Registries.Model.extend(PosGlobalState, PosGlobalStateUpdate);
 
     return Product;
 });
