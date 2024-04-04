@@ -234,16 +234,16 @@ class ProductPricelist(models.Model):
     #     return results
 
 
-# class SaleOrderLine(models.Model):
-#     _inherit = 'sale.order.line'
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
 
-    # def _compute_tax_id(self):
-    #     super(SaleOrderLine, self)._compute_tax_id()
-    #     for line in self:
-    #         if line.tax_id and line.order_id.pricelist_id.use_b2c_price:
-    #             tax_id = self.env["account.tax"].search([("is_b2c_tax", "=", True), ("type_tax_use", "=", "sale")])
-    #             if tax_id:
-    #                 line.tax_id = tax_id[0].ids
+    def _compute_tax_id(self):
+        super(SaleOrderLine, self)._compute_tax_id()
+        for line in self:
+            if line.tax_id and line.order_id.pricelist_id.use_b2c_price:
+                tax_id = self.env["account.tax"].search([("is_b2c_tax", "=", True), ("type_tax_use", "=", "sale")])
+                if tax_id:
+                    line.tax_id = tax_id[0].ids
     #
     # @api.depends('product_id', 'company_id')
     # def _compute_tax_id(self):
