@@ -444,22 +444,22 @@ class AuthSignupHome(Home):
                     return json.dumps({'redirect': '1', 'login_success': True})
         return response
 
-    @http.route(auth='public', website=True, sitemap=False, csrf=False)
-    def web_auth_reset_password(self, *args, **kw):
-        """
-            Reset password from popup and redirect to the same page
-            Returns formatted data required by login popup in a JSON compatible format
-        """
-        reset_form_ept = kw.get('reset_form_ept', False)
-        if 'reset_form_ept' in kw.keys():
-            kw.pop('reset_form_ept')
-        response = super(AuthSignupHome, self).web_auth_reset_password(*args, **kw)
-        if reset_form_ept:
-            if response.is_qweb and response.qcontext.get('error', False):
-                return json.dumps({'error': response.qcontext.get('error', False)})
-            elif response.is_qweb and response.qcontext.get('message', False):
-                return json.dumps({'message': response.qcontext.get('message', False)})
-        return response
+    # @http.route(auth='public', website=True, sitemap=False, csrf=False)
+    # def web_auth_reset_password(self, *args, **kw):
+    #     """
+    #         Reset password from popup and redirect to the same page
+    #         Returns formatted data required by login popup in a JSON compatible format
+    #     """
+    #     reset_form_ept = kw.get('reset_form_ept', False)
+    #     if 'reset_form_ept' in kw.keys():
+    #         kw.pop('reset_form_ept')
+    #     response = super(AuthSignupHome, self).web_auth_reset_password(*args, **kw)
+    #     if reset_form_ept:
+    #         if response.is_qweb and response.qcontext.get('error', False):
+    #             return json.dumps({'error': response.qcontext.get('error', False)})
+    #         elif response.is_qweb and response.qcontext.get('message', False):
+    #             return json.dumps({'message': response.qcontext.get('message', False)})
+    #     return response
 
 
 class VariantControllerExt(VariantController):
