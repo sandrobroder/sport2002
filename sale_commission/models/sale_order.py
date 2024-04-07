@@ -98,3 +98,5 @@ class SaleOrderLineAgent(models.Model):
                 order_line.product_id,
                 order_line.product_uom_qty,
             )
+            commission_percent = order_line.product_id.categ_id.get_categ_commission()
+            line.commission_percent = "%s %%" % commission_percent
