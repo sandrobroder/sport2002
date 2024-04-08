@@ -164,7 +164,7 @@ class AccountMoveLine(models.Model):
                 and record.product_id
             ):
                 record.agent_ids = record._prepare_agents_vals_partner(
-                    record.move_id.partner_id, settlement_type="sale_invoice"
+                    record.move_id.partner_id, settlement_type="sale_invoice", product_categ_id=record.product_id.categ_id
                 )
 
     def _copy_data_extend_business_fields(self, values):
