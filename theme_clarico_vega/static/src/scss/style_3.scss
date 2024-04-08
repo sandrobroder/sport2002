@@ -821,9 +821,6 @@ header#top > .product_details_sticky {
 }
 
 .o_wsale_filmstip_wrapper{
-    &:hover{
-        @include o-wsale-scrollbar-firefox();
-    }
     .o_wsale_filmstip{
         .fw-normal{
             span{
@@ -839,6 +836,11 @@ header#top > .product_details_sticky {
             font-weight: normal !important;
         }
     }
+    }
+}
+#o-carousel-product .carousel-outer .carousel-inner{
+    img{
+        max-height: 100%;
     }
 }
 

@@ -18,6 +18,15 @@
     ul{
         list-style: none;
         padding: 0;
+        @include media-breakpoint-down(sm) {
+            display: flex;
+            flex-wrap: wrap;
+            .te_category-heading-center{
+                flex: 0 0 auto;
+                width: 50%;
+                padding-right: 1rem;
+            }
+        }
         a{
             margin: 0 1rem;
             @include media-breakpoint-down(sm) {
@@ -234,8 +243,8 @@
             max-width: 25%;
         }
         @include media-breakpoint-down(sm) {
-            flex: 50%;
-            max-width: 50%;
+            flex: 33.33%;
+            max-width: 33.33%;
         }
     img {
       max-height: 65px;
@@ -256,6 +265,7 @@
       word-break: break-word;
       padding: 0px !important;
       white-space: unset;
+      margin: 0;
 
       &:after {
         content: "";
@@ -516,12 +526,7 @@ li.nav-item.dropdown.o_extra_menu_items:not(.show) .dropdown-menu.show {
         max-width: 300px;
         box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
         border-right: 1px solid #ededed;
-        @include o-wsale-scrollbar-subdle();
-        @include o-wsale-scrollbar-firefox();
-        &:hover{
-            @include o-wsale-scrollbar-subdle();
-            @include o-wsale-scrollbar-firefox();
-        }
+        @include o-wsale-scrollbar-subdles();
         @include media-breakpoint-down(lg) {
           max-width: 100%;
         }
@@ -599,12 +604,7 @@ li.nav-item.dropdown.o_extra_menu_items:not(.show) .dropdown-menu.show {
             overflow-y: auto;
             width: calc(100% - 301px);
             z-index: 9;
-            @include o-wsale-scrollbar-subdle();
-            @include o-wsale-scrollbar-firefox();
-            &:hover{
-                @include o-wsale-scrollbar-subdle();
-                @include o-wsale-scrollbar-firefox();
-            }
+            @include o-wsale-scrollbar-subdles();
             @media (max-width: 991px) {
               width: 100%;
               position: relative;
@@ -663,12 +663,7 @@ li.nav-item.dropdown.o_extra_menu_items:not(.show) .dropdown-menu.show {
                 > ul {
                   max-height: 154px;
                   overflow-y: auto;
-                  @include o-wsale-scrollbar-subdle();
-                  @include o-wsale-scrollbar-firefox();
-                  &:hover{
-                    @include o-wsale-scrollbar-subdle();
-                    @include o-wsale-scrollbar-firefox();
-                  }
+                  @include o-wsale-scrollbar-subdles();
                 }
               }
               .demo-icon {
@@ -868,11 +863,14 @@ li.nav-item.dropdown.o_extra_menu_items:not(.show) .dropdown-menu.show {
   }
   @include media-breakpoint-down(lg) {
     .ctg_arrow {
-      margin: 6px 15px;
-      z-index: 99;
+      margin: 6px 0px;
+      z-index: 1003;
       float: none;
       position: absolute;
       right: 0px;
+      width: 45px;
+      padding-right: 0;
+      height: 20px;
       &.te_down_ctg_icon::before {
         content: "\f107";
       }
@@ -895,6 +893,7 @@ li.nav-item.dropdown.o_extra_menu_items:not(.show) .dropdown-menu.show {
       box-shadow: unset;
       max-width: 99% !important;
       margin-bottom: 1px;
+      overflow-x: hidden;
       li {
         padding: 0;
       }
