@@ -4,6 +4,7 @@ from itertools import chain
 
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError, ValidationError
+import inspect
 
 
 class ProductTemplate(models.Model):
@@ -300,3 +301,18 @@ class PosSession(models.Model):
         result = super()._loader_params_product_pricelist()
         result['search_params']['fields'].append('use_b2c_price')
         return result
+
+
+class PosOrderLine(models.Model):
+    _inherit = "pos.order.line"
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        print("vals_list", vals_list)
+        lines = super().create(vals_list)
+
+        for line in lines:
+            if line.tax_ids and line.order_id.pricelist_id.use_b2c_price:
+                line.tax_ids = False
+            # if "order_id" in vals and "tax_ids" in vals:
+        return lines
