@@ -6,7 +6,7 @@
             <td t-att-style="make_invisible and 'visibility:hidden;'">
                 <div class="o_label_full" t-att-style="table_style">
                     <div class="text-center" style="height: 4em;line-height: 1;font-size: 11px;">
-                        <strong t-field="product.name" style="font-size: 14px;"/>
+                        <strong t-field="product.name" style="font-size: 12px;"/>
                         <br/>
                         <strong t-if="product._name == 'product.product'" t-field="product.product_template_variant_value_ids"/>
                     </div>
