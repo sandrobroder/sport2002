@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-inherit="web.ImageField" t-inherit-mode="extension" owl="1">
+        <xpath expr="//button[hasclass('o_clear_file_button')]" position="before">
+            <button class=" btn btn-light border-0 rounded-circle m-1 p-1"
+                    data-tooltip="Preview"
+                    aria-label="Preview"
+                    t-on-click="onPreview">
+                <i class="fa fa-eye fa-fw"/>
+            </button>
+        </xpath>
+    </t>
+
+    <t t-name="image_preview_widget.ImagePreviewDialog" owl="1">
+        <Dialog title="'Preview'" size="'xl'" fullscreen="true" withBodyPadding="false" header="false">
+            <div class="o_viewer_img_wrapper">
+                <div class="o_viewer_zoomer text-center">
+                    <img alt="Viewer" class="o_viewer_img w-100" t-att-src="props.src"/>
+                </div>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary" t-on-click.stop="props.close">Close</button>
+            </t>
+        </Dialog>
+    </t>
+</templates>
+
