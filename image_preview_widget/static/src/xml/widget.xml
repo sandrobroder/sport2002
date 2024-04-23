@@ -13,15 +13,15 @@
     </t>
 
     <t t-name="image_preview_widget.ImagePreviewDialog" owl="1">
-        <Dialog title="'Preview'" size="'xl'" fullscreen="true" withBodyPadding="false" header="false">
+        <Dialog title="'Preview'" size="'xl'" fullscreen="false" footer="false" withBodyPadding="false" header="true">
             <div class="o_viewer_img_wrapper">
                 <div class="o_viewer_zoomer text-center">
-                    <img alt="Viewer" class="o_viewer_img w-100" t-att-src="props.src"/>
+                    <img alt="Viewer" class="o_viewer_img mw-100" t-att-src="props.src"/>
                 </div>
             </div>
-            <t t-set-slot="footer">
-                <button class="btn btn-primary" t-on-click.stop="props.close">Close</button>
-            </t>
+<!--            <t t-set-slot="footer">-->
+<!--                <button class="btn btn-primary" t-on-click.stop="props.close">Close</button>-->
+<!--            </t>-->
         </Dialog>
     </t>
 </templates>
