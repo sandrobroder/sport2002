@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <template id="product" inherit_id="website_sale.product">
+            <xpath expr="//div[@id='product_details']/p[last()]" position="after">
+                <t t-if="request.website.show_product_barcode">
+                    <div>
+                        Barcode:
+                        <span style="display: inline-block;font-size: 0.875rem;color: rgba(33, 37, 41, 0.7) !important;"
+                              id="product_internal_ref"/>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

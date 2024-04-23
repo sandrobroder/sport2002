@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_website_form">
+            <field name="name">view_website_form</field>
+            <field name="model">website</field>
+            <field name="inherit_id" ref="website.view_website_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='default_lang_id']" position="after">
+                    <field name="show_product_barcode"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--        <record id="view_website_settings_form" model="ir.ui.view">-->
+        <!--            <field name="name">website.settings.form.inherit</field>-->
+        <!--            <field name="model">res.config.settings</field>-->
+        <!--            <field name="inherit_id" ref="website_sale.res_config_settings_view_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//block[@id='sale_product_catalog_settings']" position="inside">-->
+        <!--                    <setting>-->
+        <!--                        <field name="show_product_default_code"/>-->
+        <!--                        <div class="text-muted">-->
+        <!--                            Allow you to show or hide the product internal reference code in the website product-->
+        <!--                            page.(It-->
+        <!--                            gives better experience with the variant products)-->
+        <!--                        </div>-->
+        <!--                    </setting>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+    </data>
+</odoo>
