@@ -11,3 +11,4 @@ access_product_brand,product.brand,model_product_brand,,1,1,1,1
 access_product_brand_config,product.brand.config,model_product_brand_config,,1,1,1,1
 access_product_label,product.label,model_product_label,,1,1,1,1
 access_menu_label,menu.label,model_menu_label,,1,1,1,1
+access_product_label_config,product.label.config,model_product_label_config,,1,1,1,1

@@ -15,4 +15,5 @@ from . import website_snippet_filter
 from . import menu_label
 from . import proudct_pricelist
 from . import base_language_install
+from . import product_ribbon
 # from . import sale_order

@@ -598,17 +598,13 @@
     width:100%;
     overflow-x: auto;
     overflow-y: hidden;
-    @include o-wsale-scrollbar-subdle();
+    @include o-wsale-scrollbar-subdles();
     @include media-breakpoint-down(md){
         position:relative;
         opacity: 1;
         padding: 0;
         min-height: 40px;
         z-index: 1;
-
-    }
-    &:hover{
-        @include o-wsale-scrollbar-firefox();
     }
   span {
     height: 25px;
@@ -1478,10 +1474,7 @@ div.quick_view_content {
 	    }
 		.scrollbar {
 			overflow-y: auto;
-			@include o-wsale-scrollbar-subdle();
-			&:hover {
-			    @include o-wsale-scrollbar-firefox();
-			}
+			@include o-wsale-scrollbar-subdles();
 		}
 		.te_qty_name
 		{

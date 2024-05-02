@@ -120,6 +120,9 @@ publicWidget.registry.dynamic_snippet_products_cta.include({
             if (combination.sku_details) {
                 $(".js_sku_div").html(combination.sku_details);
             }
+            if (combination.price_table_details) {
+                $('.te_price_table').removeClass('d-none').html(combination.price_table_details)
+            }
             $(".js_product .te_discount, .js_product .te_discount_before").addClass('d-none');
             $(".js_product .te_discount, .js_product .te_percentage").hide()
             if (combination.has_discounted_price) {

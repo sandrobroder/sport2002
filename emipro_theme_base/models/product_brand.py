@@ -7,7 +7,7 @@ from odoo import api, fields, models
 
 class ProductBrandEpt(models.Model):
     _name = 'product.brand'
-    _inherit = ['product.brand','website.published.multi.mixin']
+    _inherit = ['website.published.multi.mixin']
     _order = 'name'
     _description = 'Product Brand'
 

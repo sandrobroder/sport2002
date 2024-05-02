@@ -27,9 +27,11 @@
         <field name="arch" type="xml">
             <field name="text_color" position="attributes">
                 <attribute name="widget">color</attribute>
+                <attribute name="required">1</attribute>
             </field>
             <field name="bg_color" position="attributes">
                 <attribute name="widget">color</attribute>
+                <attribute name="required">1</attribute>
             </field>
         </field>
     </record>

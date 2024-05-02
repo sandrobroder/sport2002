@@ -63,17 +63,15 @@ const dynamicSnippetProdTempOptions = dynamicSnippetOptions.extend({
     },
 
     _setOptionsDefaultValues: function () {
+        this._super.apply(this, arguments);
         this._setOptionValue('productCategoryId', 'all');
-        this._super.apply(this, arguments);
-    },
-
-    _setOptionsDefaultValues: function () {
         this._setOptionValue('productBrandId', 'all');
-        this._super.apply(this, arguments);
-    }
-
-
-
+        this._setOptionValue('add2cart', true);
+        this._setOptionValue('wishlist', true);
+        this._setOptionValue('quickview', true);
+        this._setOptionValue('rating', true);
+        this._setOptionValue('product_label', true);
+    },
 });
 
 options.registry.dynamic_snippet_prod_temp = dynamicSnippetProdTempOptions;

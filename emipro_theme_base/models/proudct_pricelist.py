@@ -9,6 +9,8 @@ class Pricelist(models.Model):
                                              string="Display Product Prices on Website",
                                              help='Display Product Prices on Website',
                                              default='system_setting')
+    enable_price_table = fields.Boolean('Price Table?',
+                                        help='Display Price table for more than one minimum quantity rule')
 
 
 class PricelistItem(models.Model):
