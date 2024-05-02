@@ -73,3 +73,7 @@ class ProductTabLine(models.Model):
         elif len(vals) == 1 and (vals.get('sequence', False) or vals.get('tab_content', False)):
             return super(ProductTabLine, self).write(vals)
         return True
+
+    def unlink(self):
+        self.clear_caches()
+        return super(ProductTabLine, self).unlink()

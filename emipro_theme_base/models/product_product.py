@@ -25,14 +25,3 @@ class ProductProduct(models.Model):
                 warehouse=request.website._get_warehouse_available()).free_qty < 1:
             return True
         return False
-
-
-class ProductRibbon(models.Model):
-    _inherit = "product.ribbon"
-
-    html = fields.Html(string='Ribbon html', translate=True, sanitize=False, default='')
-
-    def write(self, vals):
-        self.clear_caches()
-        res = super(ProductRibbon, self).write(vals)
-        return res

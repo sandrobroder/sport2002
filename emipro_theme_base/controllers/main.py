@@ -5,7 +5,7 @@ import logging
 import json
 import ast
 from collections import defaultdict
-from odoo import http, fields
+from odoo import http, fields, _
 from odoo.http import request
 from werkzeug.exceptions import NotFound
 from odoo.addons.website.controllers.main import Website
@@ -431,17 +431,53 @@ class AuthSignupHome(Home):
             Signup from popup and redirect to the same page
             Returns formatted data required by login popup in a JSON compatible format
         """
-        signup_form_ept = kw.get('signup_form_ept', False)
+        qcontext = self.get_auth_signup_qcontext()
+
         if 'signup_form_ept' in kw.keys():
             kw.pop('signup_form_ept')
+
+        login_email = kw.get('login', False)
+
+        def recaptcha_token_verification(token=None):
+            ip_addr = request.httprequest.remote_addr
+            recaptcha_result = request.env['ir.http']._verify_recaptcha_token(ip_addr, token)
+            if recaptcha_result in ['is_human', 'no_secret', 'is_bot']:
+                return [True, 'Validation Successful']
+            if recaptcha_result == 'wrong_secret':
+                return [False, 'The reCaptcha private key is invalid.']
+            elif recaptcha_result == 'wrong_token':
+                return [False, 'The reCaptcha token is invalid.']
+            elif recaptcha_result == 'timeout':
+                return [False, 'Your request has timed out, please retry.']
+            elif recaptcha_result == 'bad_request':
+                return [False, 'The request is invalid or malformed.']
+            else:
+                return [False, "Form didn't submitted, Try again"]
+
+        # Check google recaptcha if available
+        if login_email and 'error' not in qcontext and request.httprequest.method == 'POST':
+            if request.website.signup_captcha_option:
+                token = ''
+                if 'recaptcha_token_response' in kw.keys():
+                    token = kw.pop('recaptcha_token_response')
+                if 'recaptcha_token_response' in request.params:
+                    request.params.pop('recaptcha_token_response')
+                verification = recaptcha_token_verification(token)
+                if not verification[0]:
+                    qcontext['captcha_error'] = _(verification[1])
+
+        if 'captcha_error' in qcontext:
+            return json.dumps(
+                {'error': qcontext.get('captcha_error', False), 'login_success': False})
+
         response = super(AuthSignupHome, self).web_auth_signup(*args, **kw)
-        if signup_form_ept:
+        if request.httprequest.method == 'POST':
             if response.is_qweb and response.qcontext.get('error', False):
                 return json.dumps(
                     {'error': response.qcontext.get('error', False), 'login_success': False})
             else:
-                if request.params.get('login_success', False):
-                    return json.dumps({'redirect': '1', 'login_success': True})
+                return json.dumps({'redirect': '1', 'login_success': True})
+
         return response
 
     @http.route(auth='public', website=True, sitemap=False, csrf=False)
@@ -474,10 +510,12 @@ class VariantControllerExt(VariantController):
             combination=combination,
             add_qty=add_qty, **kw)
         product = request.env['product.product'].sudo().search([('id', '=', res.get('product_id'))])
-        product_temp = request.env['product.template'].sudo().search([('id', '=', product_template_id)])
+        product_tempate = request.env['product.template'].sudo().search([('id', '=', product_template_id)])
         res.update({
-                       'sku_details': product.default_code if product_temp.product_variant_count > 1 else product_temp.default_code})
+            'sku_details': product.default_code if product_tempate.product_variant_count > 1 else product_tempate.default_code})
         pricelist = request.website.get_current_pricelist()
+        if request.website._display_product_price():
+            res['price_table_details'] = pricelist.enable_price_table and self.get_price_table(pricelist, product, product_tempate)
         res.update({'is_offer': False})
         try:
             if pricelist and product:
@@ -503,6 +541,36 @@ class VariantControllerExt(VariantController):
         except Exception as e:
             return res
         return res
+
+    def get_price_table(self, pricelist, product, product_tempate):
+        current_date = datetime.datetime.now()
+        items = pricelist._get_applicable_rules(product, current_date)
+        # Get the rules based on the priority based on condition
+        updated_rules = (items.filtered(
+            lambda rule: rule.applied_on == '0_product_variant' and rule.product_id.id == product.id)
+                         or items.filtered(
+                    lambda rule: rule.applied_on == '1_product' and rule.product_tmpl_id.id == product_tempate.id)
+                         or items.filtered(lambda
+                                               rule: rule.applied_on == '2_product_category' and rule.categ_id.id in product_tempate.categ_id.search(
+                    [('id', 'parent_of', product_tempate.categ_id.ids)]).ids)
+                         or items.filtered(lambda rule: rule.applied_on == '3_global'))
+        price_list_items = []
+        minimum_qtys = set(updated_rules.mapped('min_quantity'))
+        minimum_qtys.add(1)
+        minimum_qtys.discard(0)
+        minimum_qtys = list(minimum_qtys)
+        minimum_qtys.sort()
+        for qty in minimum_qtys:
+            price = pricelist._get_product_price(product=product, quantity=qty, target_currency=pricelist.currency_id)
+            data = {'qty': int(qty), 'price': price}
+            price_list_items.append(data)
+        price_list_vals = {
+            'pricelist_items': price_list_items,
+            'currency_id': pricelist.currency_id,
+        }
+        price_table_details = http.Response(template="emipro_theme_base.product_price_table",
+                                            qcontext=price_list_vals).render()
+        return price_table_details
 
 
 class ProductHotspot(WebsiteSale):
@@ -573,3 +641,20 @@ class WebsiteSaleExtended(WebsiteSale):
                                                    'domain_qs': domain_qs})
 
         return response.render()
+
+
+class WebsiteSnippetFilterEpt(Website):
+
+    @http.route('/website/snippet/filters', type='json', auth='public', website=True)
+    def get_dynamic_filter(self, filter_id, template_key, limit=None, search_domain=None, with_sample=False, **post):
+        dynamic_filter = request.env['website.snippet.filter'].sudo().search(
+            [('id', '=', filter_id)] + request.website.website_domain()
+        )
+        add2cart = post.get('product_context', {}).get('add2cart') == 'true'
+        wishlist = post.get('product_context', {}).get('wishlist') == 'true'
+        rating = post.get('product_context', {}).get('rating') == 'true'
+        quickview = post.get('product_context', {}).get('quickview') == 'true'
+        product_label = post.get('product_context', {}).get('product_label') == 'true'
+        count = post.get('brand_context', {}).get('count') or post.get('category_context', {}).get('count') == 'true'
+        return dynamic_filter and dynamic_filter.with_context(add2cart=add2cart, wishlist=wishlist, rating=rating, quickview=quickview, product_label=product_label, count=count)._render(template_key, limit, search_domain, with_sample) or []
+

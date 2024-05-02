@@ -8,6 +8,7 @@ from odoo.http import request
 from odoo.addons.emipro_theme_base.controllers.main import EmiproThemeBaseExtended
 from odoo.addons.auth_oauth.controllers.main import OAuthLogin
 from odoo.modules.module import get_resource_path
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -67,6 +68,13 @@ class Website(models.Model):
     cart_confirmation = fields.Selection([('notification', 'Show Cart Notification'), ('sidebar', 'Show Cart Sidebar'), ('confirmation_popup', 'Show Confirmation PopUp')],
                                          string="After adding product to cart", default='notification')
     collapse_filter = fields.Boolean(string='Collapse Filter', help="Collapse will be enabled")
+    signup_captcha_option = fields.Boolean('Captcha in SignUp', help='Enable Captcha for the signup')
+
+    @api.onchange('signup_captcha_option')
+    def _onchange_signup_captcha_option(self):
+        if self.signup_captcha_option:
+            if not (self.env['ir.config_parameter'].sudo().get_param('recaptcha_private_key') and self.env['ir.config_parameter'].sudo().get_param('recaptcha_public_key')):
+                raise ValidationError(_('Please add appropriate captcha in settings.'))
 
     @api.onchange('is_lazy_load')
     def get_value_icon_lazy_load(self):
@@ -226,3 +234,12 @@ class Website(models.Model):
             )
             provider['auth_link'] = "%s?%s" % (provider['auth_endpoint'], werkzeug.urls.url_encode(params))
         return providers
+
+    def get_all_product_template_filter(self):
+        return self.env.ref('emipro_theme_base.dynamic_filter_prod_temp').id
+
+    def get_all_product_public_category_template_filter(self):
+        return self.env.ref('emipro_theme_base.dynamic_filter_category').id
+
+    def get_all_product_brand_template_filter(self):
+        return self.env.ref('emipro_theme_base.dynamic_filter_brand').id

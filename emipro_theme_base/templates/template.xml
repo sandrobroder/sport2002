@@ -143,6 +143,18 @@
                 <we-input string="Product names" class="o_we_large" data-name="product_names_opt"
                     data-attribute-name="productNames" data-no-preview="true" data-select-data-attribute=""
                     placeholder="e.g. lamp,bin" title="Comma-separated list of parts of product names, barcodes or internal reference"/>
+                <we-row string="Buttons" class="o_we_full_row">
+                    <we-button title="Cart" class="fa fa-fw fa-shopping-cart o_we_add_to_cart_btn"
+                           data-select-data-attribute="false|true" data-attribute-name="add2cart" data-no-preview="true"/>
+                    <we-button title="Wishlist" class="fa fa-fw fa-heart"
+                            data-select-data-attribute="false|true" data-attribute-name="wishlist" data-no-preview="true"/>
+                    <we-button title="Quick View" class="fa fa-fw fa-eye"
+                            data-select-data-attribute="false|true" data-attribute-name="quickview" data-no-preview="true"/>
+                    <we-button title="Rating" class="fa fa-fw fa-star"
+                            data-select-data-attribute="false|true" data-attribute-name="rating" data-no-preview="true"/>
+                    <we-button title="Product Label" class="fa fa-fw fa-tag"
+                            data-select-data-attribute="false|true" data-attribute-name="product_label" data-no-preview="true"/>
+                </we-row>
             </t>
         </xpath>
     </template>

@@ -17,7 +17,7 @@
                     <field name="dynamic_mega_menu" attrs="{'invisible': [('is_mega_menu', '!=', True)]}"/>
                     <field name="category_selection"
                        attrs="{'invisible': ['|', ('is_mega_menu', '!=', True), ('dynamic_mega_menu', '!=', True)], 'required':[('dynamic_mega_menu', '=', True)]}"/>
-                    <field name="ecom_category" groups="website.group_multi_website"
+                    <field name="ecom_category"
                            attrs="{'invisible': ['|','|', ('is_mega_menu', '!=', True), ('dynamic_mega_menu', '!=', True), ('category_selection', '=', 'all')], 'required':[('dynamic_mega_menu', '=', True), ('category_selection', '=', 'specific')]}"/>
                     <field name="category_menu_styles"
                            attrs="{'invisible': ['|', ('is_mega_menu', '!=', True), ('dynamic_mega_menu', '!=', True)], 'required':[('dynamic_mega_menu','!=',False)]}"/>

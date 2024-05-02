@@ -1153,4 +1153,24 @@ odoo.define('theme_clarico_vega.theme_script', function(require) {
             }, 1000);
         },
     });
+
+    /* Apply custom loader for top menu */
+    publicWidget.registry.MenuCategoriesLinks = publicWidget.Widget.extend({
+        selector: '#top_menu_collapse',
+        events: {
+            'click #top_menu li a': '_openMenuLink',
+        },
+
+        _openMenuLink: function (ev) {
+            if ($(ev.currentTarget).attr('href').indexOf('#') == -1 && $(ev.currentTarget).attr
+            ('href').indexOf('javascript:') == -1) {
+                const productsDiv = this.el.querySelector('.o_wsale_products_grid_table_wrapper');
+                if (productsDiv) {
+                    productsDiv.classList.add('opacity-50');
+                }
+                $('.cus_theme_loader_layout').removeClass('d-none');
+                window.location.href = ev.currentTarget.getAttribute('href');
+            }
+        },
+    });
 });

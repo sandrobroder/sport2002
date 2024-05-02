@@ -52,6 +52,9 @@
                             <field name="pwa_start_url" attrs="{'required': [('is_pwa', '=', True)], 'invisible': [('is_pwa', '=', False)]}"/>
                             <field name="app_image_512" options="{'size': [50, 50]}" class="w-25 mt-2" widget="image" attrs="{'required': [('is_pwa', '=', True)], 'invisible': [('is_pwa', '=', False)]}"/>
                         </group>
+                        <group string="Signup Settings">
+                            <field name="signup_captcha_option"/>
+                        </group>
                         <group string="Cart Confirmation" name="Cart Confimation">
                             <field name="cart_confirmation" widget="radio"/>
                         </group>

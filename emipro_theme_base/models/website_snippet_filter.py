@@ -88,3 +88,21 @@ class WebsiteSnippetFilter(models.Model):
                                                         search_domain=search_domain,
                                                         with_sample=with_sample)
         return res
+
+    def _filter_records_to_values(self, records, is_sample=False):
+        res_products = super()._filter_records_to_values(records, is_sample)
+        if self.model_name == 'product.template':
+            if self.env.context.get('add2cart'):
+                res_products = [{**d, 'add2cart': True} for d in res_products]
+            if self.env.context.get('wishlist'):
+                res_products = [{**d, 'wishlist': True} for d in res_products]
+            if self.env.context.get('rating'):
+                res_products = [{**d, 'rating': True} for d in res_products]
+            if self.env.context.get('quickview'):
+                res_products = [{**d, 'quickview': True} for d in res_products]
+            if self.env.context.get('product_label'):
+                res_products = [{**d, 'product_label': True} for d in res_products]
+        if self.model_name in ['product.public.category', 'product.brand']:
+            if self.env.context.get('count'):
+                res_products = [{**d, 'count': True} for d in res_products]
+        return res_products
