@@ -39,6 +39,7 @@ class ProductProduct(models.Model):
                     price, uom_model.browse(self.env.context["uom"])
                 )
             product.lst_price = price
+        self._inverse_product_lst_price()
 
     def _compute_list_price(self):
         uom_model = self.env["uom.uom"]
