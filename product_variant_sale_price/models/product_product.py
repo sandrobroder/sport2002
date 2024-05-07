@@ -40,7 +40,8 @@ class ProductProduct(models.Model):
                 )
             product.lst_price = price
         self._inverse_product_lst_price()
-
+        
+    @api.depends("fix_price")
     def _compute_list_price(self):
         uom_model = self.env["uom.uom"]
         for product in self:
