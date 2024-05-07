@@ -52,6 +52,10 @@ class ProductProduct(models.Model):
             product.list_price = price
 
     def _inverse_product_lst_price(self):
+        def check_min(num):
+            if num in [1, 0]:
+                return 99999999
+            return num
         uom_model = self.env["uom.uom"]
         for product in self:
             vals = {}
@@ -70,7 +74,7 @@ class ProductProduct(models.Model):
                 # for consistency with price shown in the shop
                 product.product_tmpl_id.with_context(
                     skip_update_fix_price=True
-                ).list_price = min(fix_prices)
+                ).list_price = min(fix_prices,key=check_min)
             product.write(vals)
 
     lst_price = fields.Float(
