@@ -21,7 +21,7 @@ odoo.define('theme_clarico_vega.theme_script', function(require) {
     const { OptionalProductsModal } = require('@sale_product_configurator/js/product_configurator_modal');
 
     // 01. Search in Header
-    publicWidget.registry.searchBar.include ({
+    /*publicWidget.registry.searchBar.include ({
         xmlDependencies: (publicWidget.registry.searchBar.prototype.xmlDependencies || []).concat(['/theme_clarico_vega/static/src/xml/search.xml']),
         _render: function (res) {
             if (this._scrollingParentEl) {
@@ -93,7 +93,7 @@ odoo.define('theme_clarico_vega.theme_script', function(require) {
             }
             this._super.apply(this, arguments);
         },
-    })
+    })*/
     sAnimations.registry.themeSearch = sAnimations.Class.extend({
         selector: '#wrapwrap',
         read_events: {

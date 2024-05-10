@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates id="template" xml:space="preserve">
-    <t t-extend="website.s_searchbar.autocomplete">
+    <!--<t t-extend="website.s_searchbar.autocomplete">
         <t t-jquery="t[t-elif='!results.length']" t-operation="attributes">
             <attribute name="t-elif">!results.length and !categories.length</attribute>
         </t>
@@ -49,7 +49,7 @@
                 <button type="submit" class="dropdown-item text-primary search-all"><i class="fa fa-search ml-2 mr-2"/>View all products</button>
             </t>
         </t>
-    </t>
+    </t>-->
     <t t-extend="web.DialogWidget">
         <t t-jquery="footer" t-operation="replace">
            <footer t-if="renderFooter" class="modal-footer justify-content-around justify-content-sm-end flex-wrap gap-1"/>

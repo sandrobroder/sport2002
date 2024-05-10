@@ -265,45 +265,45 @@ class WebsiteExt(Website):
                         {'redirect': redirect, 'login_success': True, 'hide_msg': False})
         return response
 
-    def autocomplete(self, search_type=None, term=None, order=None, limit=5, max_nb_chars=999,
-                     options=None):
-        """ to explicitly render products and categories in result,
-         and provide quick navigation of searched brand or attribute value """
-        res = super(WebsiteExt, self).autocomplete(search_type=search_type, term=term,
-                                                   order=order, limit=limit,
-                                                   max_nb_chars=max_nb_chars, options=options)
-        website = request.website.get_current_website()
-        categories = request.env['product.public.category'].sudo().search(
-            [('website_id', 'in', (False, website.id))]) \
-            .filtered(lambda catg: term.strip().lower() in catg.name.strip().lower())
-        search_categories = []
-        for categ in categories:
-            search_categories.append({'_fa': 'fa-folder-o', 'name': categ.name,
-                                      'website_url': '/shop/category/%s' % categ.id})
-        res['categories'] = search_categories[:10]
-        if term and website and website.enable_smart_search:
-            is_quick_link = {'status': False}
-            brand = request.env['product.brand'].sudo().search([('website_id', 'in', (False, website.id))]).filtered(
-                lambda b: term.strip().lower() in b.name.strip().lower())
-
-            if brand:
-                is_quick_link.update({'status': True,
-                                      'navigate_type': 'brand',
-                                      'name': brand[0].name,
-                                      'url': '/shop/brands/%s' % brand[0].id})
-            else:
-                prod_att_value = request.env['product.attribute.value'].sudo().search([]).filtered(
-                    lambda value: term.strip().lower() in value.name.strip().lower())
-                if prod_att_value:
-                    is_quick_link.update({'status': True,
-                                          'navigate_type': 'attr_value',
-                                          'name': prod_att_value[0].name,
-                                          'attribute_name': prod_att_value[0].attribute_id.name,
-                                          'url': '/shop?search=&attrib=%s-%s' % (
-                                              prod_att_value[0].attribute_id.id,
-                                              prod_att_value[0].id)})
-            res['is_quick_link'] = is_quick_link
-        return res
+    # def autocomplete(self, search_type=None, term=None, order=None, limit=5, max_nb_chars=999,
+    #                  options=None):
+    #     """ to explicitly render products and categories in result,
+    #      and provide quick navigation of searched brand or attribute value """
+    #     res = super(WebsiteExt, self).autocomplete(search_type=search_type, term=term,
+    #                                                order=order, limit=limit,
+    #                                                max_nb_chars=max_nb_chars, options=options)
+    #     website = request.website.get_current_website()
+    #     categories = request.env['product.public.category'].sudo().search(
+    #         [('website_id', 'in', (False, website.id))]) \
+    #         .filtered(lambda catg: term.strip().lower() in catg.name.strip().lower())
+    #     search_categories = []
+    #     for categ in categories:
+    #         search_categories.append({'_fa': 'fa-folder-o', 'name': categ.name,
+    #                                   'website_url': '/shop/category/%s' % categ.id})
+    #     res['categories'] = search_categories[:10]
+    #     if term and website and website.enable_smart_search:
+    #         is_quick_link = {'status': False}
+    #         brand = request.env['product.brand'].sudo().search([('website_id', 'in', (False, website.id))]).filtered(
+    #             lambda b: term.strip().lower() in b.name.strip().lower())
+    #
+    #         if brand:
+    #             is_quick_link.update({'status': True,
+    #                                   'navigate_type': 'brand',
+    #                                   'name': brand[0].name,
+    #                                   'url': '/shop/brands/%s' % brand[0].id})
+    #         else:
+    #             prod_att_value = request.env['product.attribute.value'].sudo().search([]).filtered(
+    #                 lambda value: term.strip().lower() in value.name.strip().lower())
+    #             if prod_att_value:
+    #                 is_quick_link.update({'status': True,
+    #                                       'navigate_type': 'attr_value',
+    #                                       'name': prod_att_value[0].name,
+    #                                       'attribute_name': prod_att_value[0].attribute_id.name,
+    #                                       'url': '/shop?search=&attrib=%s-%s' % (
+    #                                           prod_att_value[0].attribute_id.id,
+    #                                           prod_att_value[0].id)})
+    #         res['is_quick_link'] = is_quick_link
+    #     return res
 
 
 class EmiproThemeBaseExtended(WebsiteSaleWishlist):
