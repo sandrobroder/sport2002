@@ -162,56 +162,56 @@ class Website(models.Model):
 
         return result_dict
 
-    # def _search_with_fuzzy(self, search_type, search, limit, order, options):
-    #     """ to search with all the available synonyms of `search` term,
-    #     only if configuration of search synonyms in website is on.
-    #     """
-    #     curr_website = request.website.get_current_website()
-    #     search_synonyms = False
-    #     count, results, fuzzy_term = 0, [], False
-    #     if search and curr_website.enable_smart_search:
-    #         synonym_groups = request.env['synonym.group'].sudo().search(
-    #             [('website_id', 'in', [curr_website.id, False])])
-    #         if synonym_groups:
-    #             for synonym_group in synonym_groups:
-    #                 synonym_names = synonym_group.name.split(',')
-    #                 synonyms = [synm.strip().lower() for synm in synonym_names]
-    #                 if search.strip().lower() in synonyms:
-    #                     search_synonyms = synonyms
-    #                     break
-    #         if search_synonyms:
-    #             for search_synm in search_synonyms:
-    #                 fuzzy_term = False
-    #                 search_details = self._search_get_details(search_type, order, options)
-    #                 if search_synm and options.get('allowFuzzy', True):
-    #                     fuzzy_term = self._search_find_fuzzy_term(search_details, search_synm)
-    #                     if fuzzy_term:
-    #                         new_count, new_results = self._search_exact(search_details, fuzzy_term, limit, order)
-    #                         if fuzzy_term.lower() == search_synm.lower():
-    #                             fuzzy_term = False
-    #                     else:
-    #                         new_count, new_results = self._search_exact(search_details, search_synm, limit, order)
-    #                 else:
-    #                     new_count, new_results = self._search_exact(search_details, search_synm, limit, order)
-    #                 for new_res in new_results:
-    #                     if new_res not in results:
-    #                         res = [res for res in results if res['model'] == new_res['model']]
-    #                         if res:
-    #                             for prod in new_res['results']:
-    #                                 if prod not in res[0]['results']:
-    #                                     res[0]['results'] += prod
-    #                                     res[0]['count'] += 1
-    #                                     count += 1
-    #                         else:
-    #                             results.append(new_res)
-    #                             count += new_res['count']
-    #         else:
-    #             count, results, fuzzy_term = super(Website, self)._search_with_fuzzy(search_type,
-    #                                                                                  search, limit, order, options)
-    #     else:
-    #         count, results, fuzzy_term = super(Website, self)._search_with_fuzzy(search_type,
-    #                                                                              search, limit, order, options)
-    #     return count, results, fuzzy_term
+    def _search_with_fuzzy(self, search_type, search, limit, order, options):
+        """ to search with all the available synonyms of `search` term,
+        only if configuration of search synonyms in website is on.
+        """
+        curr_website = request.website.get_current_website()
+        search_synonyms = False
+        count, results, fuzzy_term = 0, [], False
+        if search and curr_website.enable_smart_search:
+            synonym_groups = request.env['synonym.group'].sudo().search(
+                [('website_id', 'in', [curr_website.id, False])])
+            if synonym_groups:
+                for synonym_group in synonym_groups:
+                    synonym_names = synonym_group.name.split(',')
+                    synonyms = [synm.strip().lower() for synm in synonym_names]
+                    if search.strip().lower() in synonyms:
+                        search_synonyms = synonyms
+                        break
+            if search_synonyms:
+                for search_synm in search_synonyms:
+                    fuzzy_term = False
+                    search_details = self._search_get_details(search_type, order, options)
+                    if search_synm and options.get('allowFuzzy', True):
+                        fuzzy_term = self._search_find_fuzzy_term(search_details, search_synm)
+                        if fuzzy_term:
+                            new_count, new_results = self._search_exact(search_details, fuzzy_term, limit, order)
+                            if fuzzy_term.lower() == search_synm.lower():
+                                fuzzy_term = False
+                        else:
+                            new_count, new_results = self._search_exact(search_details, search_synm, limit, order)
+                    else:
+                        new_count, new_results = self._search_exact(search_details, search_synm, limit, order)
+                    for new_res in new_results:
+                        if new_res not in results:
+                            res = [res for res in results if res['model'] == new_res['model']]
+                            if res:
+                                for prod in new_res['results']:
+                                    if prod not in res[0]['results']:
+                                        res[0]['results'] += prod
+                                        res[0]['count'] += 1
+                                        count += 1
+                            else:
+                                results.append(new_res)
+                                count += new_res['count']
+            else:
+                count, results, fuzzy_term = super(Website, self)._search_with_fuzzy(search_type,
+                                                                                     search, limit, order, options)
+        else:
+            count, results, fuzzy_term = super(Website, self)._search_with_fuzzy(search_type,
+                                                                                 search, limit, order, options)
+        return count, results, fuzzy_term
 
     def list_providers_ept(self):
         """
