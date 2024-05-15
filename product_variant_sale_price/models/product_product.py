@@ -72,9 +72,10 @@ class ProductProduct(models.Model):
                     "product_variant_ids.fix_price"
                 )
                 # for consistency with price shown in the shop
-                product.product_tmpl_id.with_context(
+                if fix_prices:
+                    product.product_tmpl_id.with_context(
                     skip_update_fix_price=True
-                ).list_price = min(fix_prices,key=check_min)
+                    ).list_price = min(fix_prices,key=check_min)
             product.write(vals)
 
     lst_price = fields.Float(
