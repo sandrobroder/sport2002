@@ -258,8 +258,7 @@
                         <t t-set="product_variant_id" t-value="product._get_first_possible_variant_id()"/>
                         <input name="product_id" t-att-value="product_variant_id" type="hidden"/>
                         <t t-if="product_variant_id and template_price_vals['price_reduce'] or not website.prevent_zero_price_sale">
-                            <a t-if="product._website_show_quick_add() and not product.remove_cart_button()"
-                               href="#" role="button" class="btn btn-primary card_hover_btn ajax_cart_popup" aria-label="Shopping cart"
+                            <a href="#" role="button" class="btn btn-primary card_hover_btn ajax_cart_popup" aria-label="Shopping cart"
                                title="Shopping cart" t-att-data-id="product.id">
                                 <span class="fa fa-shopping-cart"/>
                             </a>

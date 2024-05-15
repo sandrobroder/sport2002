@@ -22,7 +22,7 @@ odoo.define('theme_clarico_vega.theme_script', function(require) {
 
     // 01. Search in Header
     publicWidget.registry.searchBar.include ({
-        xmlDependencies: (publicWidget.registry.searchBar.prototype.xmlDependencies || []).concat(['/theme_clarico_vega/static/src/xml/search.xml']),
+//        xmlDependencies: (publicWidget.registry.searchBar.prototype.xmlDependencies || []).concat(['/theme_clarico_vega/static/src/xml/search.xml']),
         _render: function (res) {
             if (this._scrollingParentEl) {
                 this._scrollingParentEl.removeEventListener('scroll', this._menuScrollAndResizeHandler);
@@ -1160,10 +1160,19 @@ odoo.define('theme_clarico_vega.theme_script', function(require) {
         events: {
             'click #top_menu li a': '_openMenuLink',
         },
-
         _openMenuLink: function (ev) {
-            if ($(ev.currentTarget).attr('href').indexOf('#') == -1 && $(ev.currentTarget).attr
-            ('href').indexOf('javascript:') == -1) {
+            if(!$('header').hasClass('o_hoverable_dropdown') && !$(ev.currentTarget).hasClass('o_mega_menu_toggle')){
+            //  for onclick submenu with mega menu
+                this._load_page(ev);
+            }
+            else if($('header').hasClass('o_hoverable_dropdown')){
+            //  for onhover submenu with mega menu
+                this._load_page(ev);
+            }
+            else{}
+        },
+        _load_page: function(ev){
+            if ($(ev.currentTarget).attr('href').indexOf('#') == -1 && $(ev.currentTarget).attr('href').indexOf('javascript:') == -1) {
                 const productsDiv = this.el.querySelector('.o_wsale_products_grid_table_wrapper');
                 if (productsDiv) {
                     productsDiv.classList.add('opacity-50');

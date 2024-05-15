@@ -193,6 +193,7 @@
         <t t-call="website.website_search_box_input">
             <t t-set="action" t-value="'/shop'"/>
             <t t-set="search_type" t-value="'products_only'"/>
+            <t t-set="search" t-value="search or searches and searches['search']"/>
             <t t-set="display_image" t-valuef="true"/>
             <t t-set="display_description" t-valuef="false"/>
             <t t-set="display_extra_link" t-valuef="true"/>
