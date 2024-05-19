@@ -5,7 +5,7 @@
 
 {
     'name': 'Custom Product Labels',
-    'version': '16.0.2.7.0',
+    'version': '16.0.2.7.1',
     'category': 'Extra Tools',
     'author': 'Garazd Creation',
     'website': 'https://garazd.biz/en/shop/category/odoo-product-labels-15',

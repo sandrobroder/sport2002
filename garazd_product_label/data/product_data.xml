@@ -3,6 +3,7 @@
 
     <record id="product_blank" model="product.product">
         <field name="name">Blank Product</field>
+        <field name="detailed_type">consu</field>
         <field name="description">This product has been created by Garazd Product Label solution for technical purposes.</field>
         <field name="active" eval="False"/>
     </record>

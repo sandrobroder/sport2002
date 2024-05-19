@@ -3,6 +3,11 @@
 Changelog
 =========
 
+`16.0.2.7.1`
+------------
+
+- Fix the blank product data record.
+
 `16.0.2.7.0`
 ------------
 
