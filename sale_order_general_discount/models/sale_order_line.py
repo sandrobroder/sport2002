@@ -6,11 +6,11 @@ from odoo import api, fields, models
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    discount = fields.Float(
-        compute="_compute_discount",
-        store=True,
-        readonly=False,
-    )
+    # discount = fields.Float(
+    #     compute="_compute_discount",
+    #     store=True,
+    #     readonly=False,
+    # )
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -28,6 +28,8 @@ class SaleOrderLine(models.Model):
     def _compute_discount(self):
         if hasattr(super(), "_compute_discount"):
             super()._compute_discount()
+
         for line in self:
-            line.discount = line.order_id.general_discount
+            if line.order_id.general_discount:
+                line.discount = line.order_id.general_discount
         return
