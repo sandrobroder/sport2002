@@ -313,6 +313,10 @@ class PosOrderLine(models.Model):
 
         for line in lines:
             if line.tax_ids and line.order_id.pricelist_id.use_b2c_price:
-                line.tax_ids = False
+                tax_id = self.env["account.tax"].search([("is_b2c_tax", "=", True), ("type_tax_use", "=", "sale")])
+                if tax_id:
+                    line.tax_ids = tax_id[0].ids
+                # line.tax_ids = False
             # if "order_id" in vals and "tax_ids" in vals:
+        lines._onchange_amount_line_all()
         return lines
