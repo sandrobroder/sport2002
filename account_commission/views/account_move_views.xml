@@ -68,9 +68,7 @@
                     title="Edit agents"
                     icon="fa-users"
                     attrs="{'invisible': [
-                        '|',
-                        ('commission_free', '=', True),
-                        ('any_settled', '=', True),
+                        ('commission_free', '=', True)
                     ],
                     'column_invisible': [
                         ('parent.move_type', 'not in', ['out_invoice', 'out_refund'])
