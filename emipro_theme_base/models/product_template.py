@@ -22,9 +22,8 @@ class ProductTemplate(models.Model):
 
     product_brand_id = fields.Many2one('product.brand', string='Brand',
                                        help='Select a brand for this product')
-    free_qty = fields.Float(
-        'Free To Use Quantity', compute='_compute_quantities', search='_search_free_qty',
-        compute_sudo=True, digits='Product Unit of Measure')
+    free_qty = fields.Float('Free To Use Quantity', compute='_compute_quantities',
+                            compute_sudo=False, digits='Product Unit of Measure')
 
     @api.depends(
         'product_variant_ids.free_qty',
@@ -49,11 +48,6 @@ class ProductTemplate(models.Model):
                 free_qty += variants_available[p.id]["free_qty"]
             prod_available[template.id].update({"free_qty": free_qty, })
         return prod_available
-
-    def _search_free_qty(self, operator, value):
-        domain = [('free_qty', operator, value)]
-        product_variant_query = self.env['product.product'].sudo()._search(domain)
-        return [('product_variant_ids', 'in', product_variant_query)]
 
     def _get_product_tabs(self):
         """
