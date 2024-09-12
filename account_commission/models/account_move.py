@@ -225,6 +225,8 @@ class AccountInvoiceLineAgent(models.Model):
                 inv_line.product_id,
                 inv_line.quantity,
             )
+            commission_percent = inv_line.product_id.categ_id.get_categ_commission()
+            line.commission_percent = "%s %%" % commission_percent
             # Refunds commissions are negative
             if line.invoice_id.move_type and "refund" in line.invoice_id.move_type:
                 line.amount = -line.amount
